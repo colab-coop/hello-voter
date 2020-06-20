@@ -23,8 +23,9 @@
     /ambassador/home
     /ambassador/triplers/invite
     /ambassador/triplers/confirm
-    /ambassador/triplers/invite/search - Do we need this ? It makes more sense to do it inline    /payments
+    /ambassador/triplers/invite/search - Do we need this ? It makes more sense to do it inline    
     
+    /payments
     /payments/add
     /payments/edit    /profile
     /profile/edit    /help
