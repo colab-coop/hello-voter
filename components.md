@@ -1,4 +1,6 @@
-## GOTV react components### Common
+## GOTV react components
+
+### Common
     <Menu> (Top menu)
     
 ### Training
