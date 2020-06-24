@@ -1,30 +1,26 @@
 import React from 'react'
 import { Menu } from './Menu'
-import { Grid, Row } from 'carbon-components-react/lib/components/Grid'
+import { Grid, Column, Row } from 'carbon-components-react/lib/components/Grid'
 import { Content } from 'carbon-components-react/lib/components/UIShell'
 import Button from 'carbon-components-react/lib/components/Button'
 
 export const PageLayout = ({ title, children, submitButtonTitle, onClickSubmit }) => (
   <>
     <Menu />
-    <Content>
-      <Grid>
-        <Row>
-          <h3>{ title }</h3>
+    <Grid className="content-container">
+      <Column lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
+        <Row className="title-container">
+          <h3>{title}</h3>
         </Row>
         <Row>
-          { children }
+          {children}
         </Row>
-        <Row className="bottom">
-          { submitButtonTitle &&
-            <Button
-              onClick={onClickSubmit}
-            >
-              { submitButtonTitle }
-            </Button>
-          }
+        <Row>
+          {submitButtonTitle && (
+            <Button className="button" onClick={onClickSubmit}>{submitButtonTitle}</Button>
+          )}
         </Row>
-      </Grid>
-    </Content>
+      </Column>
+    </Grid>
   </>
 )
