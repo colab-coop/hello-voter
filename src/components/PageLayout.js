@@ -1,25 +1,46 @@
 import React from 'react'
-import { Menu } from './Menu'
 import { Grid, Column, Row } from 'carbon-components-react/lib/components/Grid'
 import Button from 'carbon-components-react/lib/components/Button'
+import styled from 'styled-components'
+import { spacing } from '../theme'
+import { Menu } from './Menu'
+
+const ContentContainer = styled(Grid)`
+  padding: ${ spacing[3] };
+  padding-top: ${ spacing[9] };
+  height: 100vh;
+  margin-top: 0;
+  overflow-y: scroll;
+`
+const TitleContainer = styled(Row)`
+  margin-top: ${ spacing[7] };
+  margin-bottom: ${ spacing[7] };
+`
+
+const CtaButton = styled(Button)`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: ${ spacing[3] };
+`
 
 export const PageLayout = ({ title, children, submitButtonTitle, onClickSubmit }) => (
   <>
     <Menu />
-    <Grid className="layout--content-container">
+    <ContentContainer>
       <Column lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
-        <Row className="layout--title-container">
+        <TitleContainer>
           <h3>{ title }</h3>
-        </Row>
+        </TitleContainer>
         <Row>
           { children }
         </Row>
         <Row>
           {submitButtonTitle && (
-            <Button className="layout--cta-button" onClick={onClickSubmit}>{submitButtonTitle}</Button>
+            <CtaButton onClick={onClickSubmit}>{submitButtonTitle}</CtaButton>
           )}
         </Row>
       </Column>
-    </Grid>
+    </ContentContainer>
   </>
 )
