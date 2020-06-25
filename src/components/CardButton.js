@@ -16,6 +16,7 @@ const CardContainer = styled.button`
 const CardTitleContainer = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: ${ spacing[5] }
 `
 
 const CardTitle = styled.h5`
