@@ -1,5 +1,5 @@
 import React from 'react'
-import { PageLayout } from '../PageLayout'
+import PageLayout from '../PageLayout'
 import Form from 'carbon-components-react/lib/components/Form'
 import FormGroup from 'carbon-components-react/lib/components/FormGroup'
 import TextInput from 'carbon-components-react/lib/components/TextInput'

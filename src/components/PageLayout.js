@@ -12,6 +12,7 @@ const ContentContainer = styled(Grid)`
   margin-top: 0;
   overflow-y: scroll;
 `
+
 const TitleContainer = styled(Row)`
   margin-top: ${ spacing[7] };
   margin-bottom: ${ spacing[7] };
@@ -24,7 +25,7 @@ const CtaButton = styled(Button)`
   margin-bottom: ${ spacing[3] };
 `
 
-export const PageLayout = ({ title, children, submitButtonTitle, onClickSubmit }) => (
+export default ({ title, children, submitButtonTitle, onClickSubmit }) => (
   <>
     <Menu />
     <ContentContainer>
