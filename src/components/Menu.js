@@ -1,7 +1,5 @@
 import React from 'react'
-import Search20 from '@carbon/icons-react/lib/search/20'
-import Notification20 from '@carbon/icons-react/lib/notification/20'
-import AppSwitcher20 from '@carbon/icons-react/lib/app-switcher/20'
+import { Help20, UserAvatar20 } from '@carbon/icons-react';
 import {
   Header,
   HeaderName,
@@ -18,17 +16,11 @@ export const Menu = () => {
           <Header aria-label="IBM Platform Name">
             <HeaderName href="#" prefix="HELLO VOTER"></HeaderName>
             <HeaderGlobalBar>
-              <HeaderGlobalAction aria-label="Search" onClick={() => {
-              }}>
-                <Search20/>
+              <HeaderGlobalAction aria-label="Help" onClick={() => {}}>
+                <Help20/>
               </HeaderGlobalAction>
-              <HeaderGlobalAction aria-label="Notifications" onClick={() => {
-              }}>
-                <Notification20/>
-              </HeaderGlobalAction>
-              <HeaderGlobalAction aria-label="App Switcher" onClick={() => {
-              }}>
-                <AppSwitcher20/>
+              <HeaderGlobalAction aria-label="Profile" onClick={() => {}}>
+                <UserAvatar20/>
               </HeaderGlobalAction>
             </HeaderGlobalBar>
           </Header>
