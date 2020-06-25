@@ -1,5 +1,5 @@
 import React from 'react'
-import { LogIn } from './Login'
+import { LogIn } from '../components/Login'
 
 export default {
   title: 'Login',
