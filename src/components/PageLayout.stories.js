@@ -1,15 +1,13 @@
 import React from 'react'
 import { PageLayout } from './PageLayout'
-import { LoginButton } from './LoginButton'
 
 export default {
   title: 'PageLayout',
   component: PageLayout,
 }
 
-export const Layout = () => (
+export const LoremIpsum = () => (
   <PageLayout title="Log In" submitButtonTitle="Continue">
-    <LoginButton type='FB' />
     Donec id elit non mi porta gravida at eget metus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Sed posuere consectetur est at lobortis.
     <br />
     <br />
