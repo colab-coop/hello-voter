@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
+import AddressForm from '../AddressForm'
 import { 
   Form, 
   FormGroup, 
@@ -58,47 +59,7 @@ export const ContactInfoPage = () => (
         </DatePicker>
       </FormGroup>
       <SectionTitle>Address</SectionTitle>
-      <FormGroup>
-        <TextInput
-          id="street"
-          invalidText="Invalid error message."
-          labelText="Street Address"
-          placeholder="1234 Ambassador Lane"
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextInput
-          id="city"
-          invalidText="Invalid error message."
-          labelText="City"
-          placeholder="San Francisco"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Row>
-          <Column>
-            <Select id="state" defaultValue="placeholder-item" labelText="State" style={{ width: "100%" }}>
-              <SelectItem
-                disabled
-                hidden
-                value="placeholder-item"
-                text=" "
-              />
-              <SelectItem value="option-1" text="Option 1" />
-              <SelectItem value="option-2" text="Option 2" />
-              <SelectItem value="option-3" text="Option 3" />
-            </Select>
-          </Column>
-          <Column>
-            <TextInput
-              id="last_name"
-              invalidText="Invalid error message."
-              labelText="Zip Code"
-              placeholder="12345"
-            />
-          </Column>
-        </Row>
-      </FormGroup>
+      <AddressForm />
       <SectionTitle>Contact</SectionTitle>
       <FormGroup>
         <TextInput
