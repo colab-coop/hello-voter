@@ -1,4 +1,4 @@
-const { REACT_APP_OAUTH_HEADER, REACT_APP_TOKEN_KEY, REACT_APP_AUDIANCE, REACT_APP_REDIRECT_URL } = process.env
+const { REACT_APP_OAUTH_HEADER, REACT_APP_TOKEN_KEY, REACT_APP_AUDIANCE, REACT_APP_REDIRECT_URL, REACT_APP_DEVELOPMENT } = process.env
 
 export const SERVER_URL =
   `https://${process.env.REACT_APP_API_DOMAIN}/HelloVoterHQ/${process.env.REACT_APP_ORGID}/api/v1`
@@ -30,7 +30,7 @@ export const logIn = async (sm) => {
       headers: addAuth()
     })
     let data = await res.json()
-    let smOauthUrl = `${res.headers.get(REACT_APP_OAUTH_HEADER)}/${sm}/?aud=${REACT_APP_AUDIANCE}&app=${REACT_APP_REDIRECT_URL}&local=true`
+    let smOauthUrl = `${res.headers.get(REACT_APP_OAUTH_HEADER)}/${sm}/?aud=${REACT_APP_AUDIANCE}&app=${REACT_APP_REDIRECT_URL}&local=${REACT_APP_DEVELOPMENT}`
     return {
       data,
       smOauthUrl
