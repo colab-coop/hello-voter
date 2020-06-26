@@ -20,15 +20,19 @@
     /signup/mobile/[phoneNumber] - phone number signup    
     
     /ambassador/training/[pageId]#[carouselPageNumber]
+
     /ambassador/home
+    /profile
+    /profile/edit    
+    /help
+
     /ambassador/triplers/invite
     /ambassador/triplers/confirm
     /ambassador/triplers/invite/search - Do we need this ? It makes more sense to do it inline    
     
     /payments
     /payments/add
-    /payments/edit    /profile
-    /profile/edit    /help
+    /payments/edit    
     
     /help/scheduleCall - Outside link ?
     /help/faq - Outside link ?

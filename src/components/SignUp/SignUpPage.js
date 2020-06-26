@@ -1,8 +1,6 @@
 import React from 'react'
-import { PageLayout } from '../PageLayout'
-import Form from 'carbon-components-react/lib/components/Form'
-import FormGroup from 'carbon-components-react/lib/components/FormGroup'
-import TextInput from 'carbon-components-react/lib/components/TextInput'
+import PageLayout from '../PageLayout'
+import { Form, FormGroup, TextInput } from 'carbon-components-react'
 
 export const SignUpPage = () => (
   <PageLayout title="Sign Up" submitButtonTitle="Continue">

@@ -1,4 +1,5 @@
 import React from 'react'
+import { LogIn } from '../components/Login'
 import { BecomeAmbassadorPage } from '../components/SignUp/BecomeAmbassadorPage'
 import { SignUpPage } from '../components/SignUp/SignUpPage'
 import { PersonalInfoPage } from '../components/SignUp/PersonalInfoPage'
@@ -9,6 +10,10 @@ import { ContactInfoPage } from '../components/SignUp/ContactInfoPage'
 export default {
   title: 'SignUp'
 }
+
+export const LoginPage = () => (
+  <LogIn />
+)
 
 export const BecomeAmbassador = () => (
   <BecomeAmbassadorPage />
