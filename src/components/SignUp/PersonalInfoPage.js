@@ -1,6 +1,6 @@
 import React from 'react'
 import PageLayout from '../PageLayout'
-import { Form, FormGroup, TextInput, Grid, Column, Row, } from 'carbon-components-react'
+import { Form, FormGroup, TextInput, DatePicker, DatePickerInput } from 'carbon-components-react'
 
 export const PersonalInfoPage = () => (
   <PageLayout title="Personal Info" submitButtonTitle="Continue">
@@ -21,14 +21,14 @@ export const PersonalInfoPage = () => (
           placeholder="Ambassador"
         />
       </FormGroup>
-      <FormGroup style={{ width: "50%" }}>
-        <TextInput
+      <DatePicker dateFormat="m/d/Y" datePickerType="single">
+        <DatePickerInput
           id="dob"
-          invalidText="Invalid error message."
-          labelText="Date of Birth"
           placeholder="mm/dd/yyyy"
+          labelText="Date of Birth"
+          type="text"
         />
-      </FormGroup>
+      </DatePicker>
     </Form>
   </PageLayout>
 )

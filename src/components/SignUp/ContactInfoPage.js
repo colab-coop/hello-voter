@@ -2,7 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
-import { Form, FormGroup, TextInput, Select, SelectItem } from 'carbon-components-react'
+import { 
+  Form, 
+  FormGroup, 
+  TextInput, 
+  Select, 
+  SelectItem, 
+  DatePicker, 
+  DatePickerInput 
+} from 'carbon-components-react'
 
 const SectionTitle = styled.h5`
   margin-bottom: ${ spacing[5] };
@@ -40,12 +48,14 @@ export const ContactInfoPage = () => (
         />
       </FormGroup>
       <FormGroup style={{ width: "50%" }}>
-        <TextInput
-          id="dob"
-          invalidText="Invalid error message."
-          labelText="Date of Birth"
-          placeholder="mm/dd/yyyy"
-        />
+        <DatePicker dateFormat="m/d/Y" datePickerType="single">
+          <DatePickerInput
+            id="dob"
+            placeholder="mm/dd/yyyy"
+            labelText="Date of Birth"
+            type="text"
+          />
+        </DatePicker>
       </FormGroup>
       <SectionTitle>Address</SectionTitle>
       <FormGroup>
