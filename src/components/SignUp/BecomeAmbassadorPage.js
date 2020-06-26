@@ -38,7 +38,6 @@ const Title = styled.h5`
 `
 
 const Description = styled.p`
-  font-size: 14px;
   margin-left: ${ spacing[7]};
 `
 
