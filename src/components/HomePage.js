@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { spacing } from '../theme'
 import PageLayout from './PageLayout'
 import CardButton from './CardButton'
-import { Events24, Wallet24 } from '@carbon/icons-react';
+import { Events24, Wallet24 } from '@carbon/icons-react'
 
 const TopParagraph = styled.p`
   margin-bottom: ${ spacing[5] };

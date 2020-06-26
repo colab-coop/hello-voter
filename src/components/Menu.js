@@ -1,5 +1,5 @@
 import React from 'react'
-import { Help20, UserAvatar20 } from '@carbon/icons-react';
+import { Help20, UserAvatar20 } from '@carbon/icons-react'
 import {
   Header,
   HeaderName,
