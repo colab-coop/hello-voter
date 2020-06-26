@@ -1,13 +1,13 @@
 import React from 'react'
 import { ChevronRight24 } from '@carbon/icons-react'
 import styled from 'styled-components'
-import { spacing } from '../theme'
+import { spacing, colors } from '../theme'
 
 const CardContainer = styled.button`
 	border: none;
   cursor: pointer;
   text-align: left;
-  background-color: #f4f4f4;
+  background-color: ${ colors.gray[10] };
   padding: ${ spacing[5] };
   width: 100%;
   margin-top: ${ spacing[5] };
