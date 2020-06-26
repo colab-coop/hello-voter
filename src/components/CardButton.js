@@ -25,10 +25,6 @@ const CardTitle = styled.h5`
   margin-left: ${ spacing[3] };
 `
 
-const CardDescription = styled.p`
-  font-size: 14px;
-`
-
 export default ({ icon, title, description, onClick }) => {
   return (
     <CardContainer onClick={ onClick }>
@@ -37,7 +33,7 @@ export default ({ icon, title, description, onClick }) => {
         <CardTitle>{ title }</CardTitle>
         <ChevronRight24 />
       </CardTitleContainer>
-      <CardDescription>{ description }</CardDescription>
+      <p>{ description }</p>
     </CardContainer>
   )
 }

@@ -16,7 +16,6 @@ const Header = styled.div`
 `
 
 const Credit = styled.p`
-  font-size: 12px;
   color: ${ colors.white};
   padding-right: ${ spacing[3]};
 `
