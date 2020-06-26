@@ -6,7 +6,8 @@ import CardButton from '../CardButton'
 import { Catalog24, Help24 } from '@carbon/icons-react';
 
 const TopParagraph = styled.p`
-  margin-bottom: ${ spacing[5]};
+  margin-bottom: ${ spacing[7]};
+  font-size: 14px;
 `
 
 export default () => (
