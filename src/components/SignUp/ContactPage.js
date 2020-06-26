@@ -1,9 +1,19 @@
 import React from 'react'
 import PageLayout from '../PageLayout'
+import Breadcrumbs from '../Breadcrumbs'
 import { Form, FormGroup, TextInput } from 'carbon-components-react'
 
 export const ContactPage = () => (
-  <PageLayout title="Contact" submitButtonTitle="Continue">
+  <PageLayout 
+    title="Contact" 
+    submitButtonTitle="Continue"
+    header={<Breadcrumbs items={
+      [{
+        name: "Back",
+        route: "/"
+      }]
+    } />}
+  >
     <Form style={{ width: "100%" }}>
       <FormGroup>
         <TextInput

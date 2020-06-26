@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
+import Breadcrumbs from '../Breadcrumbs'
 import AddressForm from '../AddressForm'
 import { 
   Form, 
@@ -17,19 +18,17 @@ const SectionTitle = styled.h5`
   margin-bottom: ${ spacing[5] };
 `
 
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-`
-
-const Column = styled.div`
-  display: block;
-  flex: 0 0 50%;
-  max-width: 50%;
-`
-
 export const ContactInfoPage = () => (
-  <PageLayout title="Confirm Info" submitButtonTitle="Submit">
+  <PageLayout 
+    title="Confirm Info" 
+    submitButtonTitle="Submit"
+    header={<Breadcrumbs items={
+      [{
+        name: "Back",
+        route: "/"
+      }]
+    } />}
+  >
     <Form style={{ width: "100%" }}>
       <SectionTitle>Personal Info</SectionTitle>
       <FormGroup>

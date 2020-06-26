@@ -1,9 +1,19 @@
 import React from 'react'
 import PageLayout from '../PageLayout'
+import Breadcrumbs from '../Breadcrumbs'
 import { Form, FormGroup, TextInput, DatePicker, DatePickerInput } from 'carbon-components-react'
 
 export const PersonalInfoPage = () => (
-  <PageLayout title="Personal Info" submitButtonTitle="Continue">
+  <PageLayout 
+    title="Personal Info" 
+    submitButtonTitle="Continue"
+    header={ <Breadcrumbs items={
+      [{
+        name: "Back",
+        route: "/"
+      }]
+    }/> }
+  >
     <Form style={{ width: "100%" }}>
       <FormGroup>
         <TextInput

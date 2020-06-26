@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { RadioButton16 } from '@carbon/icons-react'
 import PageLayout from '../PageLayout'
+import Breadcrumbs from '../Breadcrumbs'
 import { spacing, colors } from '../../theme'
 
 const List = styled.ol`
@@ -26,7 +27,16 @@ const ListItem = ({ text }) => (
 )
 
 export const SignUpPage = () => (
-  <PageLayout title="Sign Up" submitButtonTitle="Continue">
+  <PageLayout 
+    title="Sign Up" 
+    submitButtonTitle="Continue"
+    header={<Breadcrumbs items={
+      [{
+        name: "Back",
+        route: "/"
+      }]
+    } />}
+  >
     <p>Becoming an ambassador is an easy way to better your community.</p>
     <List>
       <ListItem text="Tell us about you" />
