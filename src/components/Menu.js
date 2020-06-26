@@ -8,7 +8,7 @@ import {
   HeaderContainer,
 } from "carbon-components-react";
 
-export const Menu = () => {
+export default () => {
   return (
     <HeaderContainer
       render={() =>

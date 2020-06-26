@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Column, Row, Button } from 'carbon-components-react'
 import styled from 'styled-components'
 import { spacing } from '../theme'
-import { Menu } from './Menu'
+import Menu from './Menu'
 
 const ContentContainer = styled(Grid)`
   padding: ${ spacing[3] };
