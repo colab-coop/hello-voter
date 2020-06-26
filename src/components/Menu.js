@@ -5,8 +5,8 @@ import {
   HeaderName,
   HeaderGlobalAction,
   HeaderGlobalBar,
-  HeaderContainer
-} from 'carbon-components-react/lib/components/UIShell'
+  HeaderContainer,
+} from "carbon-components-react";
 
 export const Menu = () => {
   return (

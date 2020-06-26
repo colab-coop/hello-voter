@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { spacing } from '../theme'
 import PageLayout from './PageLayout'
 import CardButton from './CardButton'
+import { Link } from 'carbon-components-react'
 import { Events24, Wallet24 } from '@carbon/icons-react'
 
 const TopParagraph = styled.p`
@@ -28,6 +29,6 @@ export default () => (
       description="Set up and view your payments from your organizing efforts"
       onClick={() => {}}
     />
-    <BottomParagraph>Have questions? Schedule a meeting with your community organizers.</BottomParagraph>
+    <BottomParagraph>Have questions? <Link href="">Schedule a meeting</Link> with your community organizers.</BottomParagraph>
   </PageLayout>
 )

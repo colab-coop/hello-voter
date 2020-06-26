@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import Button from 'carbon-components-react/lib/components/Button'
+import { Button } from 'carbon-components-react'
 import {
   TYPES, BUTTON_TEXTS, OAUTH_TYPES
 } from '../variables'

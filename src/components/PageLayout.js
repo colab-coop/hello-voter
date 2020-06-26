@@ -1,6 +1,5 @@
 import React from 'react'
-import { Grid, Column, Row } from 'carbon-components-react/lib/components/Grid'
-import Button from 'carbon-components-react/lib/components/Button'
+import { Grid, Column, Row, Button } from 'carbon-components-react'
 import styled from 'styled-components'
 import { spacing } from '../theme'
 import { Menu } from './Menu'
