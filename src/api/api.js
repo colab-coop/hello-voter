@@ -1,24 +1,24 @@
+const { REACT_APP_OAUTH_HEADER, REACT_APP_TOKEN_KEY, REACT_APP_AUDIANCE, REACT_APP_REDIRECT_URL } = process.env
 
-const API_URL = 'https://localhost:321'
-const LOGIN_URL = `${API_URL}/hello`
-const USER_API_URL = `${API_URL}/user`
-const OAUTH_HEADER = 'x-sm-oauth-url'
-const TOKEN_KEY = 'token'
-const MOCK = true
+export const SERVER_URL =
+  `https://${process.env.REACT_APP_API_DOMAIN}/HelloVoterHQ/${process.env.REACT_APP_ORGID}/api/v1`
+
+const LOGIN_URL = `${SERVER_URL}/hello`
+const USER_API_URL = `${SERVER_URL}/user`
 
 const errorHandler = (e) => {
   console.warn(e)
 }
 
 export const getToken = () => {
-  return localStorage.getItem(TOKEN_KEY)
+  return localStorage.getItem(REACT_APP_TOKEN_KEY)
 }
 
 const addAuth = (headers) => {
   const token = getToken()
   return {
     ...(headers ? headers : null),
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${token ? token : 'of the one ring'}`,
     'Content-Type': 'application/json'
   }
 }
@@ -30,13 +30,14 @@ export const logIn = async (sm) => {
       headers: addAuth()
     })
     let data = await res.json()
-    let smOauthUrl = res.headers.get(OAUTH_HEADER)
+    let smOauthUrl = `${res.headers.get(REACT_APP_OAUTH_HEADER)}/${sm}/?aud=${REACT_APP_AUDIANCE}&app=${REACT_APP_REDIRECT_URL}&local=true`
     return {
       data,
       smOauthUrl
     }
   } catch(e) {
-    return errorHandler(e)
+    errorHandler(e)
+    return false
   }
 }
 
@@ -53,9 +54,4 @@ export const getUser = async () => {
   } catch(e) {
     return errorHandler(e)
   }
-}
-
-export const setToken = (token) => {
-  localStorage.setItem('token', token)
-  return true
 }

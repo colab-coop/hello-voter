@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
-import { useQuery } from '../hooks/useQuery'
 import { AppContext } from '../api/AppContext'
 
 export const Main = () => {
   const { setToken, authenticated } = React.useContext(AppContext)
-  const query = useQuery()
-  const token = query.get('jwt')
+  const token = window.location.href.split('#/jwt/')[1]
   useEffect(() => {
-    setToken(token)
+    if (token) setToken(token)
   }, [token, setToken])
   return (
     <>

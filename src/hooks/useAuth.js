@@ -6,13 +6,15 @@ export const useAuth = (token) => {
   const [user, setUser] = useState(null)
   useEffect( () => {
     const fetchUser = async () => {
-      const fetched = await getUser()
-      if (fetched) setUser(fetched)
-      setAuthenticated(Boolean(fetched))
-      return true
+      if (token && !authenticated) {
+        const fetched = await getUser()
+        if (fetched) setUser(fetched)
+        setAuthenticated(Boolean(fetched))
+        return true
+      }
     }
     fetchUser()
-  }, [token, setAuthenticated])
+  }, [token, setAuthenticated, authenticated])
   return {
     authenticated,
     user

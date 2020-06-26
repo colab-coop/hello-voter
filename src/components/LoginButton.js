@@ -1,5 +1,4 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 import Button from 'carbon-components-react/lib/components/Button'
 import {
   TYPES, BUTTON_TEXTS, OAUTH_TYPES
@@ -8,10 +7,9 @@ import { AppContext } from '../api/AppContext'
 
 export const LoginButton = ({ type }) => {
   const { api } = React.useContext(AppContext)
-  const history = useHistory()
-  const login = async (e) => {
+  const login = async () => {
     const data = await api.logIn(OAUTH_TYPES[type])
-    history.push(data.smOauthUrl)
+    if (data) window.location.href = data.smOauthUrl
   }
   return (
     <Button
