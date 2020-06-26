@@ -6,7 +6,8 @@ import Menu from './Menu'
 
 const ContentContainer = styled(Grid)`
   padding: ${ spacing[3] };
-  padding-top: ${ spacing[9] };
+  padding-top: ${ spacing[8] };
+  padding-bottom: ${ spacing[10] };
   height: 100vh;
   margin-top: 0;
   overflow-y: scroll;

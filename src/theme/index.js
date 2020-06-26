@@ -14,8 +14,9 @@ export const spacing = [
   '16px', // 5
   '24px', // 6
   '32px', // 7
-  '40px', // 8
-  '48px', // 9
+  '48px', // 8
+  '64px', // 9
+  '96px', // 10
 ]
 
 const black = "#000000";
