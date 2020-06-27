@@ -8,12 +8,10 @@ import { Events24, Wallet24 } from '@carbon/icons-react'
 
 const TopParagraph = styled.p`
   margin-bottom: ${ spacing[7] };
-  font-size: 14px;
 `
 
 const BottomParagraph = styled.p`
   margin-top: ${ spacing[7] };
-  font-size: 14px;
 `
 
 export default () => (

@@ -26,6 +26,7 @@
     /profile/edit    
     /help
 
+    /ambassador/triplers
     /ambassador/triplers/invite
     /ambassador/triplers/confirm
     /ambassador/triplers/invite/search - Do we need this ? It makes more sense to do it inline    

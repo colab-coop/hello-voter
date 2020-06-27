@@ -14,8 +14,9 @@ export const spacing = [
   '16px', // 5
   '24px', // 6
   '32px', // 7
-  '40px', // 8
-  '48px', // 9
+  '48px', // 8
+  '64px', // 9
+  '96px', // 10
 ]
 
 const black = "#000000";
@@ -261,26 +262,18 @@ const warmGray = {
 };
 
 export const colors = {
-  black: {
-    100: black,
-  },
+  black,
   blue,
   coolGray,
   cyan,
   gray,
   green,
   magenta,
-  orange: {
-    40: orange40,
-  },
+  orange: orange40,
   purple,
   red,
   teal,
   warmGray,
-  white: {
-    0: white,
-  },
-  yellow: {
-    20: yellow20,
-  },
+  white,
+  yellow: yellow20,
 };

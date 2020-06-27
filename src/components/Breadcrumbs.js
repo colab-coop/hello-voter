@@ -1,8 +1,14 @@
 import React from 'react'
 import { Breadcrumb, BreadcrumbItem } from "carbon-components-react";
+import styled from 'styled-components'
+import { spacing } from '../theme'
+
+const BreadcrumbStyled = styled(Breadcrumb)`
+  margin-top: ${ spacing[7] };
+`
 
 export default ({ items }) => (
-  <Breadcrumb noTrailingSlash>
+  <BreadcrumbStyled noTrailingSlash>
     {items.length > 1 ? 
       items.map((item, i) => (
         <BreadcrumbItem isCurrentPage={i === items.length - 1} href={item.route}>
@@ -11,8 +17,8 @@ export default ({ items }) => (
       ))
       :
       <BreadcrumbItem href={items[0].route}>
-        Back
+        {items[0].name}
       </BreadcrumbItem>
     }
-  </Breadcrumb>
+  </BreadcrumbStyled>
 )
