@@ -4,7 +4,6 @@ export const SERVER_URL =
   `https://${process.env.REACT_APP_API_DOMAIN}/HelloVoterHQ/${process.env.REACT_APP_ORGID}/api/v1`
 
 const LOGIN_URL = `${SERVER_URL}/hello`
-const USER_API_URL = `${SERVER_URL}/user`
 
 const errorHandler = (e) => {
   console.warn(e)
@@ -38,20 +37,5 @@ export const logIn = async (sm) => {
   } catch(e) {
     errorHandler(e)
     return false
-  }
-}
-
-export const getUser = async () => {
-  try {
-    let res = await fetch(USER_API_URL, {
-      method: 'GET',
-      headers: addAuth()
-    })
-    let data = await res.json()
-    return {
-      data
-    }
-  } catch(e) {
-    return errorHandler(e)
   }
 }
