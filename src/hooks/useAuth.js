@@ -7,7 +7,6 @@ const addDummyData = (user) => {
     approved: false,
     signupCompleted: false
   }
-
   return Object.assign(user, dummyData)
 }
 
