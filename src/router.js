@@ -6,6 +6,9 @@ import { AppProvider, AppContext } from './api/AppContext'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
 import { BecomeAmbassadorPage } from './components/SignUp/BecomeAmbassadorPage'
+import TriplersPage from './components/Triplers/TriplersPage'
+import TriplersAdd from './components/Triplers/AddTripler'
+import ConfirmPage from './components/Triplers/ConfirmPage'
 
 const AuthRoute = ({component: Component, authenticated}) => (
   <Route
@@ -22,6 +25,9 @@ const AppRouter = () => {
     <BrowserRouter>
       <Switch>
         <AuthRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated}/>
+        <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated}/>
+        <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated}/>
+        <AuthRoute path="/triplers/confirm" component={ConfirmPage} exact={true} authenticated={authenticated}/>
         <Route path="/login" component={LogIn}/>
         <Route component={Main}/>
       </Switch>

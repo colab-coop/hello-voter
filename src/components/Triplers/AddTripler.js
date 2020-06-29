@@ -5,7 +5,8 @@ import Button from '../Button'
 
 export default () => (
   <PageLayout
-    title="My Vote Triplers"
+    submitButtonTitle="Add these Triplers to my list"
+    title="Add Triplers to my list"
     header={<Breadcrumbs items={
       [
         {
@@ -15,13 +16,15 @@ export default () => (
         {
           name: "Triplers",
           route: "/"
+        },
+        {
+          name: "Add",
+          route: "/"
         }
       ]
     } />}
   >
-    <p>These are your contacts that will each help 3 others vote. Confirm each Tripler by adding their information below</p>
-    <Button href='/triplers/add'>
-      Find new Triplers +
-    </Button>
+    <p>This is someone who agrees to help three others vote in the next election.</p>
+
   </PageLayout>
 )
