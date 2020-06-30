@@ -1,8 +1,9 @@
 import React from 'react'
-import { Grid, Column, Row, Button } from 'carbon-components-react'
+import { Grid, Column, Row } from 'carbon-components-react'
 import styled from 'styled-components'
 import { spacing, colors } from '../theme'
 import Menu from './Menu'
+import Button from './Button'
 
 const ContentContainer = styled(Grid)`
   padding: ${ spacing[3] };
@@ -23,11 +24,13 @@ const CtaButtonContainer = styled(Column)`
   bottom: 0;
   left: 0;
   background-color: ${ colors.white };
+  z-index: 1;
 `
 
 const CtaButton = styled(Button)`
   width: 100%;
   max-width: 100%;
+  margin-top: 0;
   margin-bottom: ${ spacing[3] };
 `
 
