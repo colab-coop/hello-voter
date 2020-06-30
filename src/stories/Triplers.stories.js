@@ -32,7 +32,32 @@ export const TriplersPage = () => (
 )
 
 export const InvitePage = () => (
-  <Invite />
+  <Invite 
+    triplers={
+      [
+        {
+          id: 'a',
+          name: 'Judy Blume',
+          address: '1 Really Good Address Ln asdasdsa as das dasd '
+        },
+        {
+          id: 'b',
+          name: 'Edison Shepherd',
+          address: '1 Good Boy Rd'
+        },
+        {
+          id: 'd',
+          name: 'Lauren Ralph',
+          address: '1 Road Rd'
+        },
+        {
+          id: 'e',
+          name: 'Pamela Jones',
+          address: '1 Jones Road Rd'
+        },
+      ]
+    } 
+  />
 )
 
 export const ConfirmPage = () => (
