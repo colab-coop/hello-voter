@@ -27,6 +27,7 @@ const approveUser = (user) => {
 export const useAuth = (token) => {
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
   useEffect( () => {
     const fetchUser = () => {
       if (token && !authenticated) {
@@ -35,6 +36,8 @@ export const useAuth = (token) => {
         setAuthenticated(Boolean(fetched))
         return true
       }
+
+      setLoading(false)
     }
     fetchUser()
   }, [token, setAuthenticated, authenticated])
@@ -42,6 +45,7 @@ export const useAuth = (token) => {
     authenticated,
     user,
     completeSignup,
-    approveUser
+    approveUser,
+    loading
   }
 }

@@ -14,13 +14,13 @@ const AuthRoute = ({component: Component, authenticated}) => (
   <Route
     render={(props) => authenticated === true
       ? <Component {...props} />
-      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+      : <Redirect to={{pathname:  '/login', state: {from: props.location}}} />}
     />
 )
 
 const AppRouter = () => {
-  const { authenticated, user } = React.useContext(AppContext)
-  if (!user) return <div> Loading ... </div>
+  const { authenticated, user, loading } = React.useContext(AppContext)
+  if (loading) return <div> Loading ... </div>
   return (
     <BrowserRouter>
       <Switch>
