@@ -7,18 +7,22 @@ const BreadcrumbStyled = styled(Breadcrumb)`
   margin-top: ${ spacing[7] };
 `
 
+const BreadcrumbItemStyled = styled(BreadcrumbItem)`
+  display: inline;
+`
+
 export default ({ items }) => (
   <BreadcrumbStyled noTrailingSlash>
     {items.length > 1 ? 
       items.map((item, i) => (
-        <BreadcrumbItem isCurrentPage={i === items.length - 1} href={item.route}>
+        <BreadcrumbItemStyled isCurrentPage={i === items.length - 1} href={item.route}>
           {item.name}
-        </BreadcrumbItem>
+        </BreadcrumbItemStyled>
       ))
       :
-      <BreadcrumbItem href={items[0].route}>
+      <BreadcrumbItemStyled href={items[0].route}>
         {items[0].name}
-      </BreadcrumbItem>
+      </BreadcrumbItemStyled>
     }
   </BreadcrumbStyled>
 )
