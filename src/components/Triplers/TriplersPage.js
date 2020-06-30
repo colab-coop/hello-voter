@@ -7,15 +7,6 @@ import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import Button from '../Button'
 
-const ButtonStyled = styled(Button)`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 100%;
-  padding-right: ${ spacing[4] };
-  margin-top: ${ spacing[5] };
-`
-
 const SectionTitle = styled.h5`
   margin-top: ${ spacing[7] };
   margin-bottom: ${ spacing[2] };
@@ -56,7 +47,7 @@ const TriplersEmpty = () => (
     <p>
       Confirm that these people will ask 3 friends to vote and earn 50 dollars
     </p>
-    <ButtonStyled href='/triplers/add'>Find new Triplers<Add16 /></ButtonStyled>
+    <Button href='/triplers/add'>Find new Triplers<Add16 /></Button>
   </>
 )
 
@@ -66,7 +57,7 @@ const Triplers = ({ unconfirmed, pending, confirmed }) => (
       These are your contacts that will each help 3 others vote. Confirm each
       Tripler by adding their information below
     </p>
-    <ButtonStyled href='/triplers/add'>Find new Triplers<Add16 /></ButtonStyled>
+    <Button href='/triplers/add'>Find new Triplers<Add16 /></Button>
     <SectionTitle>Your unconfirmed Triplers</SectionTitle>
     <Paragraph>Add information for a Tripler. We’ll send them a text message to confirm.</Paragraph>
     {
