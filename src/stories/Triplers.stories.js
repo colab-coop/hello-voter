@@ -1,5 +1,4 @@
 import React from 'react'
-import TriplersEmpty from '../components/Triplers/TriplersEmptyPage'
 import Triplers from '../components/Triplers/TriplersPage'
 import Invite from '../components/Triplers/InvitePage'
 import Confirm from '../components/Triplers/ConfirmPage'
@@ -9,11 +8,27 @@ export default {
 }
 
 export const TriplersEmptyPage = () => (
-  <TriplersEmpty />
+  <Triplers empty />
 )
 
 export const TriplersPage = () => (
-  <Triplers />
+  <Triplers 
+    triplers={{ 
+      unconfirmed: [
+        { name: "Lauren R", address: "200 Address lane" },
+        { name: "Edison Shepherd", address: "1 Good Boy Rd" }
+      ],
+      pending: [
+        { name: "Michael Marsh", address: "200 Address lane" },
+        { name: "Edison Shepherd", address: "1 Good Boy Rd" },
+        { name: "Lauren Ralph", address: "1 Road Rd" }
+      ],
+      confirmed: [
+        { name: "Michael Marsh", address: "200 Address lane" },
+        { name: "Edison Shepherd", address: "1 Good Boy Rd" }
+      ]
+    }}
+  />
 )
 
 export const InvitePage = () => (
