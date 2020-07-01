@@ -22,9 +22,9 @@ export default () => {
     }
     fetchData()
   }, [])
-  const claimTriplers = async (selectedTriplers) => {
+  const claimTriplers = (selectedTriplers) => async () => {
     setIsLoading(true)
-    await api.claimTriplers(selectedTriplers)
+    await api.claimTriplers(selectedTriplers.map((c) => c.id))
     setIsLoading(false)
     history.push('/triplers')
   }
@@ -34,16 +34,8 @@ export default () => {
 }
 
 const AddTriplersPage = ({ triplers, claimTriplers, loading }) => {
-  const [rows, setRows] = useState(null)
-  const clickHandler = (selectedTriplers) => {
-    setRows(selectedTriplers)
-  }
   return (
     <PageLayout
-      submitButtonTitle="Add these Triplers to my list"
-      onClickSubmit={() => {
-        claimTriplers(rows.map((c) => c.id))
-      }}
       title="Add Triplers to my list"
       header={<Breadcrumbs items={
         [
@@ -75,7 +67,8 @@ const AddTriplersPage = ({ triplers, claimTriplers, loading }) => {
           },
         ]}
         rows={triplers}
-        onSelected={(selectedRows) => clickHandler(selectedRows)} />
+        handleSelected={claimTriplers} 
+      />
     </PageLayout>
   )
 }
