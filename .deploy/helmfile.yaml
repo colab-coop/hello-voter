@@ -9,26 +9,3 @@ releases:
         image:
           tag: {{ requiredEnv "DOCKER_TAG" }}
           port: 80
-          env:
-            - name: REACT_APP_ORGID
-              value: VT6WX8A
-            - name: REACT_APP_AUDIANCE
-              value: blockpower.us
-            - name: REACT_APP_BASEURI
-              value: /voterambassador/staging
-            - name: REACT_APP_APPPATH
-              value: voterambassador/staging
-            - name: REACT_APP_API_DOMAIN
-              value: gotv-vt.ourvoiceusa.org
-            - name: REACT_APP_API_SSL
-              value: "true"
-            - name: REACT_APP_OAUTH_HEADER
-              value: x-sm-oauth-url
-            - name: REACT_APP_TOKEN_KEY
-              value: token
-            - name: REACT_APP_REDIRECT_URL
-              value: https://hello-voter.coopernetes.colab.coop
-            - name: REACT_APP_DEVELOPMENT
-              value: "true"
-            - name: REACT_APP_API_URL
-              value: https://hellovoter.api.stage.colab.coop
