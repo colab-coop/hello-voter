@@ -1,0 +1,11 @@
+releases:
+  - name: hello-voter
+    namespace: hello-voter
+    chart: ./chart
+    values:
+      - issuer: "letsencrypt-prod"
+      - host: hello-voter.coopernetes.colab.coop
+      - image: {{ requiredEnv "DOCKER_TAG" }}
+      - containerPort: 80
+      - name: hello-voter
+      - appVersion: {{ requiredEnv "DOCKER_TAG" }}
