@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { DataTable, Pagination } from 'carbon-components-react'
 import { AddAlt16 } from '@carbon/icons-react'
 import { spacing } from '../theme'
@@ -33,6 +33,13 @@ const TableCellStyled = styled(TableCell)`
   vertical-align: middle !important;
 `
 
+// FIXME: Hide `x Selected` summary in data table when counting row selection
+const TableBatchActionsHack = createGlobalStyle`
+  #data-table .bx--batch-summary {
+    visibility: hidden;
+  }
+`
+
 const renderTable = (batchActionClick) => (
   {
     rows,
@@ -49,13 +56,14 @@ const renderTable = (batchActionClick) => (
   }) => (
     <TableContainerStyled {...getTableContainerProps()}>
       <TableToolbar {...getToolbarProps()}>
-        <TableBatchActions {...getBatchActionProps()}>
+        <TableBatchActionsHack />
+        <TableBatchActions id="data-table" {...getBatchActionProps()}>
           <TableBatchAction
             renderIcon={AddAlt16}
             iconDescription="Download the selected rows"
             onClick={batchActionClick(selectedRows)}
           >
-            Add
+            Add {selectedRows.length} Tripler(s) to my list
         </TableBatchAction>
         </TableBatchActions>
         {/* <TableToolbarContent>
