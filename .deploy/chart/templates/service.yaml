@@ -5,7 +5,7 @@ metadata:
 spec:
   ports:
   - port: 80
-    targetPort: {{ .Values.containerPort }}
+    targetPort: {{ .Values.image.port }}
     protocol: TCP
   selector:
     app: {{ .Values.name }}
