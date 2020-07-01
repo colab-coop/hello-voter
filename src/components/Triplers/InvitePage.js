@@ -3,6 +3,10 @@ import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import DataTable from '../DataTable'
 
+const handleSelected = (selectedRows) => () => {
+  console.log(selectedRows);
+}
+
 export default ({ triplers }) => (
   <PageLayout
     title="My Vote Triplers"
@@ -36,7 +40,7 @@ export default ({ triplers }) => (
         },
       ]}
       rows={triplers}
-      // onSelected={handleSelected}
+      onSelected={handleSelected}
     />
   </PageLayout>
 )

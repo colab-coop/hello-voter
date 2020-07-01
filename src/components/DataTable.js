@@ -24,7 +24,7 @@ const {
 const TableContainerStyled = styled(TableContainer)`
   min-width: 0;
   width: 100%;
-  margin-top: 32px;
+  margin-top: ${ spacing[7] };
 `
 
 // FIXME: Hacked styling to make text centered in cell
@@ -33,10 +33,7 @@ const TableCellStyled = styled(TableCell)`
   vertical-align: middle !important;
 `
 
-const batchActionClick = (selectedRows) => () =>
-  console.log(selectedRows);
-
-const renderTable = (
+const renderTable = (batchActionClick) => (
   {
     rows,
     headers,
@@ -58,7 +55,7 @@ const renderTable = (
             iconDescription="Download the selected rows"
             onClick={batchActionClick(selectedRows)}
           >
-            Add these Triplers to my list
+            Add
         </TableBatchAction>
         </TableBatchActions>
         <TableToolbarContent>
@@ -108,11 +105,11 @@ const renderTable = (
     </TableContainerStyled>
   );
 
-export default ({ headers, rows }) => {
+export default ({ headers, rows, onSelected }) => {
   return (
     <DataTable
       headers={headers}
-      render={renderTable}
+      render={renderTable(onSelected)}
       rows={rows}
     />
   )
