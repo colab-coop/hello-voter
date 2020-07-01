@@ -53,7 +53,6 @@ const renderTable = (batchActionClick) => (
           <TableBatchAction
             renderIcon={AddAlt16}
             iconDescription="Download the selected rows"
-            onClick={batchActionClick(selectedRows)}
           >
             Add
         </TableBatchAction>
@@ -76,7 +75,9 @@ const renderTable = (batchActionClick) => (
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id} {...getRowProps({ row })}>
-              <TableSelectRow {...getSelectionProps({ row })} />
+              <TableSelectRow {...getSelectionProps({ row, onClick: () => {
+                  batchActionClick(selectedRows)
+                }})} />
               <TableCellStyled colSpan={100}>
                 {row.cells.map((cell) => (
                   <p key={cell.id}>{cell.value}</p>

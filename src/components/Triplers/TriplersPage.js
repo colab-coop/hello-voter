@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'carbon-components-react'
 import { Add16 } from '@carbon/icons-react'
 import styled from 'styled-components'
@@ -6,6 +6,8 @@ import { colors, spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import Button from '../Button'
+
+import { AppProvider, AppContext } from '../../api/AppContext'
 
 const SectionTitle = styled.h5`
   margin-top: ${ spacing[7] };
@@ -64,8 +66,8 @@ const Triplers = ({ unconfirmed, pending, confirmed }) => (
       unconfirmed &&
         unconfirmed.map((tripler) => (
           <TriplerRow
-            name={tripler.name}
-            address={tripler.address}
+            name={`${tripler.first_name} ${tripler.last_name}`}
+            address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
             onClick={() => { }}
           />
         ))
@@ -76,8 +78,8 @@ const Triplers = ({ unconfirmed, pending, confirmed }) => (
       pending &&
         pending.map((tripler) => (
           <TriplerRow
-            name={tripler.name}
-            address={tripler.address}
+            name={`${tripler.first_name} ${tripler.last_name}`}
+            address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
             onClick={() => { }}
           />
         ))
@@ -88,8 +90,8 @@ const Triplers = ({ unconfirmed, pending, confirmed }) => (
       confirmed &&
         confirmed.map((tripler) => (
           <TriplerRow
-            name={tripler.name}
-            address={tripler.address}
+            name={`${tripler.first_name} ${tripler.last_name}`}
+            address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
             onClick={() => { }}
           />
         ))
@@ -97,30 +99,50 @@ const Triplers = ({ unconfirmed, pending, confirmed }) => (
   </>
 )
 
-export default ({ empty, triplers }) => (
-  <PageLayout
-    title="My Vote Triplers"
-    header={<Breadcrumbs items={
-      [
-        {
-          name: "Home",
-          route: "/"
-        },
-        {
-          name: "Triplers",
-          route: "/"
-        }
-      ]
-    } />}
-  >
-    {
-      empty ? 
-        <TriplersEmpty /> : 
-        <Triplers 
-          unconfirmed={triplers.unconfirmed} 
-          pending={triplers.pending} 
-          confirmed={triplers.confirmed} 
-        />
+export default () => {
+  const [triplers, setTriplers] = useState(null)
+  const { api } = React.useContext(AppContext)
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await api.fetchTriplers()
+      setTriplers(data.data)
     }
-  </PageLayout>
-)
+    fetchData()
+  }, [])
+  return (
+    triplers ? <TriplersPage triplers={triplers} /> : 'Loading...'
+  )
+}
+
+const TriplersPage = ({ triplers }) => {
+  const confirmed = triplers.filter((tripler) => tripler.status === 'confirmed')
+  const pending = triplers.filter((tripler) => tripler.status === 'pending')
+  const unconfirmed = triplers.filter((tripler) => tripler.status === 'unconfirmed')
+  return (
+    <PageLayout
+      title="My Vote Triplers"
+      header={<Breadcrumbs items={
+        [
+          {
+            name: "Home",
+            route: "/"
+          },
+          {
+            name: "Triplers",
+            route: "/"
+          }
+        ]
+      }/>}
+    >
+      {
+        !triplers ?
+          <TriplersEmpty/> :
+          <Triplers
+            unconfirmed={unconfirmed}
+            pending={pending}
+            confirmed={confirmed}
+          />
+      }
+    </PageLayout>
+  )
+}

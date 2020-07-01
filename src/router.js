@@ -19,7 +19,7 @@ const AuthRoute = ({component: Component, authenticated}) => (
 )
 
 const AppRouter = () => {
-  const { authenticated, user, loading } = React.useContext(AppContext)
+  const { authenticated, loading } = React.useContext(AppContext)
   if (loading) return <div> Loading ... </div>
   return (
     <BrowserRouter>

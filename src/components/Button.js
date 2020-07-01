@@ -13,7 +13,7 @@ const ButtonStyled = styled(Button)`
   margin-top: ${ spacing[5]};
 `
 
-export default ({ href, children, className, small, kind }) => {
+export default ({ href, children, className, small, kind, onClick }) => {
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
@@ -23,7 +23,10 @@ export default ({ href, children, className, small, kind }) => {
       small={small}
       kind={kind}
       className={className}
-      onClick={() => redirect(href)}
+      onClick={() => {
+        onClick && onClick()
+        redirect(href)
+      }}
     >
       {children}
     </ButtonStyled>
