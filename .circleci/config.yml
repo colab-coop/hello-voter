@@ -10,8 +10,7 @@ jobs:
           password: $DOCKER_PASSWORD
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - run: /deploy.sh
 
 workflows:
@@ -19,3 +18,6 @@ workflows:
      jobs:
        - deploy-to-coopernetes:
            context: coopernetes-staging
+           filters:
+             branches:
+               only: develop
