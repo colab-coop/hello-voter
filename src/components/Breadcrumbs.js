@@ -15,7 +15,7 @@ export default ({ items }) => (
   <BreadcrumbStyled noTrailingSlash>
     {items.length > 1 ? 
       items.map((item, i) => (
-        <BreadcrumbItemStyled isCurrentPage={i === items.length - 1} href={item.route}>
+        <BreadcrumbItemStyled key={i} isCurrentPage={i === items.length - 1} href={item.route}>
           {item.name}
         </BreadcrumbItemStyled>
       ))
