@@ -27,7 +27,7 @@ releases:
             - name: REACT_APP_TOKEN_KEY
               value: token
             - name: REACT_APP_REDIRECT_URL
-              value: hello-voter.coopernetes.colab.coop
+              value: https://hello-voter.coopernetes.colab.coop
             - name: REACT_APP_DEVELOPMENT
               value: true
             - name: REACT_APP_API_URL
