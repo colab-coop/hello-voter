@@ -3,4 +3,3 @@ name: coopernetes-chart
 description: A simple helm chart for deploying simple apps to coopernetes.
 type: application
 version: 0.1.0
-appVersion: {{ .Values.appVersion }}
