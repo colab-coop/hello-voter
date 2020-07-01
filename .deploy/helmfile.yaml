@@ -21,7 +21,7 @@ releases:
             - name: REACT_APP_API_DOMAIN
               value: gotv-vt.ourvoiceusa.org
             - name: REACT_APP_API_SSL
-              value: true
+              value: "true"
             - name: REACT_APP_OAUTH_HEADER
               value: x-sm-oauth-url
             - name: REACT_APP_TOKEN_KEY
@@ -29,6 +29,6 @@ releases:
             - name: REACT_APP_REDIRECT_URL
               value: https://hello-voter.coopernetes.colab.coop
             - name: REACT_APP_DEVELOPMENT
-              value: true
+              value: "true"
             - name: REACT_APP_API_URL
               value: https://hellovoter.api.stage.colab.coop
