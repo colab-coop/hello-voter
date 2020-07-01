@@ -18,6 +18,7 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.image.port }}
-        env:{{- range .Values.image.env }}
-        - {{.}}{{- end }}
-
+        {{- with .Values.image.env}}
+        env:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
