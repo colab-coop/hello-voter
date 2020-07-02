@@ -8,7 +8,7 @@ RUN npm ci --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 COPY . ./
 RUN REACT_APP_ORGID=VT6WX8A \
-    REACT_APP_AUDIANCE= \
+    REACT_APP_AUDIANCE=hello-voter.coopernetes.colab.coop \
     REACT_APP_BASEURI=/voterambassador/staging \
     REACT_APP_APPPATH=voterambassador/staging \
     REACT_APP_API_DOMAIN=gotv-vt.ourvoiceusa.org \
