@@ -8,14 +8,14 @@ RUN npm ci --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 COPY . ./
 RUN REACT_APP_ORGID=VT6WX8A \
-    REACT_APP_AUDIANCE=blockpower.us \
+    REACT_APP_AUDIANCE= \
     REACT_APP_BASEURI=/voterambassador/staging \
     REACT_APP_APPPATH=voterambassador/staging \
     REACT_APP_API_DOMAIN=gotv-vt.ourvoiceusa.org \
     REACT_APP_API_SSL=true \
     REACT_APP_OAUTH_HEADER=x-sm-oauth-url \
     REACT_APP_TOKEN_KEY=token \
-    REACT_APP_REDIRECT_URL=https://hello-voter.coopernetes.colab.coop \
+    REACT_APP_KEY=auth \
     REACT_APP_DEVELOPMENT=false \
     REACT_APP_API_URL=https://hellovoter.api.stage.colab.coop \
     npm run build
