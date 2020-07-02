@@ -16,7 +16,7 @@ RUN REACT_APP_ORGID=VT6WX8A \
     REACT_APP_OAUTH_HEADER=x-sm-oauth-url \
     REACT_APP_TOKEN_KEY=token \
     REACT_APP_REDIRECT_URL=https://hello-voter.coopernetes.colab.coop \
-    REACT_APP_DEVELOPMENT=true \
+    REACT_APP_DEVELOPMENT=false \
     REACT_APP_API_URL=https://hellovoter.api.stage.colab.coop \
     npm run build
 
