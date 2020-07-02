@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 import { AppProvider, AppContext } from './api/AppContext'
 
+import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
 import { BecomeAmbassadorPage } from './components/SignUp/BecomeAmbassadorPage'
@@ -19,9 +20,18 @@ const AuthRoute = ({component: Component, authenticated, path}) => (
     />
 )
 
+const NoMatch = ({ authenticated, path }) => (
+  <Route
+    path={path}
+    render={(props) => authenticated === true
+      ? <Redirect to={{pathname:  '/triplers', state: {from: props.location}}} />
+      : <Redirect to={{pathname:  '/login', state: {from: props.location}}} />}
+  />
+)
+
 const AppRouter = () => {
   const { authenticated, loading } = React.useContext(AppContext)
-  if (loading) return <div> Loading ... </div>
+  if (loading) return <Loading />
   return (
     <BrowserRouter>
       <Switch>
@@ -31,6 +41,7 @@ const AppRouter = () => {
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated}/>
         <Route path="/login" component={LogIn}/>
         <Route path="/auth" component={Main}/>
+        <NoMatch authenticated={authenticated} />
       </Switch>
     </BrowserRouter>
   )
