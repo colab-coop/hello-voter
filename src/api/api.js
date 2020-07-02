@@ -31,7 +31,8 @@ export const logIn = async (sm) => {
       headers: addAuth()
     })
     let data = await res.json()
-    let smOauthUrl = `${res.headers.get(REACT_APP_OAUTH_HEADER)}/${sm}/?aud=${REACT_APP_AUDIANCE}&app=${REACT_APP_KEY}&local=${REACT_APP_DEVELOPMENT}`
+    let smOauthUrl = `${res.headers.get(REACT_APP_OAUTH_HEADER)}/${sm}/?aud=${REACT_APP_AUDIANCE}&app=${REACT_APP_KEY}`
+    if (REACT_APP_DEVELOPMENT) smOauthUrl += ['&local=', REACT_APP_DEVELOPMENT].join('')
     return {
       data,
       smOauthUrl
