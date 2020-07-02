@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 import { AppProvider, AppContext } from './api/AppContext'
 
@@ -33,17 +33,17 @@ const AppRouter = () => {
   const { authenticated, loading } = React.useContext(AppContext)
   if (loading) return <Loading />
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <AuthRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated}/>
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated}/>
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated}/>
         <Route path="/login" component={LogIn}/>
-        <Route path="/auth" component={Main}/>
+        <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

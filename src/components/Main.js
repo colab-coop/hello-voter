@@ -18,8 +18,7 @@ export const Main = () => {
       setLoading(true)
       signup()
     }
-    console.log(authenticated, token)
-  }, [token])
+  }, [token, authenticated, setToken])
   return (
     <>
       {!authenticated ? 'Logging you in!' : ''}
