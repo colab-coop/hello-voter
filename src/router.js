@@ -10,8 +10,9 @@ import TriplersPage from './components/Triplers/TriplersPage'
 import TriplersAdd from './components/Triplers/AddTripler'
 import ConfirmPage from './components/Triplers/ConfirmPage'
 
-const AuthRoute = ({component: Component, authenticated}) => (
+const AuthRoute = ({component: Component, authenticated, path}) => (
   <Route
+    path={path}
     render={(props) => authenticated === true
       ? <Component {...props} />
       : <Redirect to={{pathname:  '/login', state: {from: props.location}}} />}
@@ -27,9 +28,9 @@ const AppRouter = () => {
         <AuthRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated}/>
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated}/>
-        <AuthRoute path="/triplers/confirm" component={ConfirmPage} exact={true} authenticated={authenticated}/>
+        <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated}/>
         <Route path="/login" component={LogIn}/>
-        <Route component={Main}/>
+        <Route path="/auth" component={Main}/>
       </Switch>
     </BrowserRouter>
   )

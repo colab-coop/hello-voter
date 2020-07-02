@@ -118,6 +118,7 @@ const TriplersPage = ({ triplers }) => {
   const confirmed = triplers.filter((tripler) => tripler.status === 'confirmed')
   const pending = triplers.filter((tripler) => tripler.status === 'pending')
   const unconfirmed = triplers.filter((tripler) => tripler.status === 'unconfirmed')
+  console.log(confirmed)
   return (
     <PageLayout
       title="My Vote Triplers"
