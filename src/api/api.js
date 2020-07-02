@@ -7,6 +7,7 @@ const LOGIN_URL = `${SERVER_URL}/hello`
 const TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
 const PUT_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
 const FREE_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
+const SIGNUP_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/signup`
 
 const errorHandler = (e) => {
   console.warn(e)
@@ -100,6 +101,27 @@ export const fetchFreeTriplers = async () => {
     let res = await fetch(`${FREE_TRIPLERS_URL}`, {
       method: 'GET',
       headers: addAuth()
+    })
+    let data = await res.json()
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const signup = async () => {
+  try {
+    let res = await fetch(`${SIGNUP_URL}`, {
+      method: 'POST',
+      headers: addAuth(),
+      body: JSON.stringify({
+        first_name: 'DUMMY DATA',
+        address: {"address1": "1665 Logan St", "city": "Denver", "state": "CO", "zip": 80203},
+        phone: (Math.random() * 1000).toString()
+      })
     })
     let data = await res.json()
     return {
