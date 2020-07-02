@@ -4,6 +4,7 @@ import Breadcrumbs from '../Breadcrumbs'
 import DataTable from '../DataTable'
 import { AppContext } from '../../api/AppContext'
 import { useHistory } from 'react-router-dom'
+import Loading from '../Loading'
 
 export default () => {
   const history = useHistory()
@@ -12,7 +13,7 @@ export default () => {
   const { api } = React.useContext(AppContext)
   useEffect(() => {
     const fetchData = async () => {
-      const data = await api.fetchTriplers()
+      const data = await api.fetchFreeTriplers()
       const triplersWithAddress = data.data.map((p) => ({
         id: p.id,
         name: p.first_name + ' ' + p.last_name,
@@ -29,7 +30,7 @@ export default () => {
     history.push('/triplers')
   }
   return (
-    triplers ? <AddTriplersPage triplers={triplers} claimTriplers={claimTriplers} loading={isLoading} /> : 'Loading...'
+    triplers ? <AddTriplersPage triplers={triplers} claimTriplers={claimTriplers} loading={isLoading} /> : <Loading />
   )
 }
 

@@ -6,6 +6,7 @@ import { colors, spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import Button from '../Button'
+import Loading from '../Loading'
 
 import { AppProvider, AppContext } from '../../api/AppContext'
 
@@ -110,7 +111,7 @@ export default () => {
     fetchData()
   }, [])
   return (
-    triplers ? <TriplersPage triplers={triplers} /> : 'Loading...'
+    triplers ? <TriplersPage triplers={triplers} /> : <Loading />
   )
 }
 

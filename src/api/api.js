@@ -4,8 +4,9 @@ export const SERVER_URL =
   `https://${process.env.REACT_APP_API_DOMAIN}/HelloVoterHQ/${process.env.REACT_APP_ORGID}/api/v1`
 
 const LOGIN_URL = `${SERVER_URL}/hello`
-const TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
+const TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
 const PUT_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
+const FREE_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
 
 const errorHandler = (e) => {
   console.warn(e)
@@ -81,6 +82,22 @@ export const claimTriplers = async (selectedTriplers) => {
 export const fetchTripler = async (triplerId) => {
   try {
     let res = await fetch(`${TRIPLERS_URL}/${triplerId}`, {
+      method: 'GET',
+      headers: addAuth()
+    })
+    let data = await res.json()
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const fetchFreeTriplers = async () => {
+  try {
+    let res = await fetch(`${FREE_TRIPLERS_URL}`, {
       method: 'GET',
       headers: addAuth()
     })

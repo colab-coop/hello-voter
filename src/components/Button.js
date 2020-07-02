@@ -19,45 +19,27 @@ const InlineLoadingStyled = styled(InlineLoading)`
   height: ${ spacing[5] };
 ` 
 
-export default ({ href, children, className, small, kind, onClick }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [ariaLive, setAriaLive] = useState('off');
-
+export default ({ href, children, className, small, kind, loading, onClick }) => {
   const history = useHistory()
   const redirect = async (href) => {
-    setIsSubmitting(true);
-    setAriaLive('assertive');
-
-    // Instead of making a real request, we mock it with a timer
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSuccess(true);
-
-      // To make submittable again, we reset the state after a bit so the user gets completion feedback
-      setTimeout(() => {
-        setSuccess(false);
-        setAriaLive('off');
-      }, 1500);
-    }, 2000);
     history.push(href)
   }
 
   return (
     <ButtonStyled
       small={small}
-      kind={isSubmitting || success ? "ghost" : kind}
+      kind={loading ? "ghost" : kind}
       className={className}
       onClick={() => {
         onClick && onClick()
-        redirect(href)
+        href && redirect(href)
       }}
     >
-      {isSubmitting || success ? (
+      {loading ? (
         <InlineLoadingStyled
           description=""
-          status={success ? 'finished' : 'active'}
-          aria-live={ariaLive}
+          status={!loading ? 'finished' : 'active'}
+          aria-live={'off'}
         />
       ) : children}
     </ButtonStyled>
