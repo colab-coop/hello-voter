@@ -14,31 +14,29 @@ export const PersonalInfoPage = () => (
       }]
     }/> }
   >
-    <Form style={{ width: "100%" }}>
-      <FormGroup>
-        <TextInput
-          id="first_name"
-          invalidText="Invalid error message."
-          labelText="First Name"
-          placeholder="Joan"
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextInput
-          id="last_name"
-          invalidText="Invalid error message."
-          labelText="Last Name"
-          placeholder="Ambassador"
-        />
-      </FormGroup>
-      <DatePicker dateFormat="m/d/Y" datePickerType="single">
-        <DatePickerInput
-          id="dob"
-          placeholder="mm/dd/yyyy"
-          labelText="Date of Birth"
-          type="text"
-        />
-      </DatePicker>
-    </Form>
+    <FormGroup>
+      <TextInput
+        id="first_name"
+        invalidText="Invalid error message."
+        labelText="First Name"
+        placeholder="Joan"
+      />
+    </FormGroup>
+    <FormGroup>
+      <TextInput
+        id="last_name"
+        invalidText="Invalid error message."
+        labelText="Last Name"
+        placeholder="Ambassador"
+      />
+    </FormGroup>
+    <DatePicker dateFormat="m/d/Y" datePickerType="single">
+      <DatePickerInput
+        id="dob"
+        placeholder="mm/dd/yyyy"
+        labelText="Date of Birth"
+        type="text"
+      />
+    </DatePicker>
   </PageLayout>
 )

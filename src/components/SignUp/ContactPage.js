@@ -14,23 +14,21 @@ export const ContactPage = () => (
       }]
     } />}
   >
-    <Form style={{ width: "100%" }}>
-      <FormGroup>
-        <TextInput
-          id="email"
-          invalidText="Invalid error message."
-          labelText="Email"
-          placeholder="joanambassador@email.co"
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextInput
-          id="phone"
-          invalidText="Invalid error message."
-          labelText="Phone number"
-          placeholder="(123) 456-7890"
-        />
-      </FormGroup>
-    </Form>
+    <FormGroup>
+      <TextInput
+        id="email"
+        invalidText="Invalid error message."
+        labelText="Email"
+        placeholder="joanambassador@email.co"
+      />
+    </FormGroup>
+    <FormGroup>
+      <TextInput
+        id="phone"
+        invalidText="Invalid error message."
+        labelText="Phone number"
+        placeholder="(123) 456-7890"
+      />
+    </FormGroup>
   </PageLayout>
 )

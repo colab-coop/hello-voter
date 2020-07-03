@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Column, Row } from 'carbon-components-react'
+import { Grid, Column, Row, Form } from 'carbon-components-react'
 import styled from 'styled-components'
 import { spacing, colors } from '../theme'
 import Menu from './Menu'
@@ -34,28 +34,30 @@ const CtaButton = styled(Button)`
   margin-bottom: ${ spacing[3] };
 `
 
-export default ({ header, title, children, submitButtonTitle, onClickSubmit }) => (
+export default ({ header, title, children, submitButtonTitle, onClickSubmit, formId }) => (
   <>
     <Menu />
     <ContentContainer>
-      <Column lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
-        <Row>
-          { header }
-        </Row>
-        <TitleContainer>
-          <h3>{ title }</h3>
-        </TitleContainer>
-        <Row>
-          { children }
-        </Row>
-      </Column>
-      <CtaButtonContainer lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
-        <Row>
-          {submitButtonTitle && (
-            <CtaButton onClick={onClickSubmit}>{submitButtonTitle}</CtaButton>
-          )}
-        </Row>
-      </CtaButtonContainer>
+      <Form id={formId}>
+        <Column lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
+          <Row>
+            { header }
+          </Row>
+          <TitleContainer>
+            <h3>{ title }</h3>
+          </TitleContainer>
+          <Row style={{display: "block"}}>
+            { children }
+          </Row>
+        </Column>
+        <CtaButtonContainer lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
+          <Row>
+            {submitButtonTitle && (
+              <CtaButton onClick={onClickSubmit} type="submit" id={formId}>{submitButtonTitle}</CtaButton>
+            )}
+          </Row>
+        </CtaButtonContainer>
+      </Form>
     </ContentContainer>
   </>
 )

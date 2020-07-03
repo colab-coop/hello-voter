@@ -64,48 +64,46 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         />
       }
     >
-      <Form style={{width: "100%"}}>
-        <p>Add {tripler.first_name}’s phone number so we can confirm her identity, and then we’ll send you your payment! </p>
-        <FormGroup>
-          <TextInput
-            id="phone"
-            invalidText="Invalid error message."
-            labelText="Melody’s Phone Number"
-            placeholder="123-456-7890"
-            {...bindPhoneNumber}
-          />
-        </FormGroup>
-        <p>Add the names of three people that Melody will remind to vote</p>
-        <FormGroup>
-          <TextInput
-            id="name-1"
-            invalidText="Invalid error message."
-            labelText="Name 1"
-            placeholder="Name"
-            {...bindTriplee1}
-          />
-        </FormGroup>
-        <FormGroup>
-          <TextInput
-            id="name-2"
-            invalidText="Invalid error message."
-            labelText="Name 2"
-            placeholder="Name"
-            {...bindTriplee2}
-          />
-        </FormGroup>
-        <FormGroup>
-          <TextInput
-            id="name-3"
-            invalidText="Invalid error message."
-            labelText="Name 3"
-            placeholder="Name"
-            {...bindTriplee3}
-          />
-        </FormGroup>
-        <Button onClick={submit} loading={loading}>Update Info</Button>
-        <Button small kind="tertiary" href={'/triplers'}>Go back to My Vote Triplers</Button>
-      </Form>
+      <p>Add {tripler.first_name}’s phone number so we can confirm her identity, and then we’ll send you your payment! </p>
+      <FormGroup>
+        <TextInput
+          id="phone"
+          invalidText="Invalid error message."
+          labelText="Melody’s Phone Number"
+          placeholder="123-456-7890"
+          {...bindPhoneNumber}
+        />
+      </FormGroup>
+      <p>Add the names of three people that Melody will remind to vote</p>
+      <FormGroup>
+        <TextInput
+          id="name-1"
+          invalidText="Invalid error message."
+          labelText="Name 1"
+          placeholder="Name"
+          {...bindTriplee1}
+        />
+      </FormGroup>
+      <FormGroup>
+        <TextInput
+          id="name-2"
+          invalidText="Invalid error message."
+          labelText="Name 2"
+          placeholder="Name"
+          {...bindTriplee2}
+        />
+      </FormGroup>
+      <FormGroup>
+        <TextInput
+          id="name-3"
+          invalidText="Invalid error message."
+          labelText="Name 3"
+          placeholder="Name"
+          {...bindTriplee3}
+        />
+      </FormGroup>
+      <Button onClick={submit} loading={loading}>Update Info</Button>
+      <Button small kind="tertiary" href={'/triplers'}>Go back to My Vote Triplers</Button>
     </PageLayout>
   )
 }

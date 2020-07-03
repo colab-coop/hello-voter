@@ -26,7 +26,7 @@ const RowRight = styled.div`
 `
 
 export default () => (
-  <Form style={{ width: "100%" }}>
+  <>
     <FormGroup>
       <TextInput
         id="street"
@@ -68,5 +68,5 @@ export default () => (
         </RowRight>
       </Row>
     </FormGroup>
-  </Form>
+  </>
 )
