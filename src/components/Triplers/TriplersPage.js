@@ -8,7 +8,7 @@ import Breadcrumbs from '../Breadcrumbs'
 import Button from '../Button'
 import Loading from '../Loading'
 
-import { AppProvider, AppContext } from '../../api/AppContext'
+import { AppContext } from '../../api/AppContext'
 
 const SectionTitle = styled.h5`
   margin-top: ${ spacing[7] };
@@ -20,6 +20,7 @@ const Paragraph = styled.p`
 `
 
 const TriplerRowStyled = styled.div`
+  display: flex;
   width: 100%;
   padding: ${ spacing[4] };
   background-color: ${ colors.gray[10] };
@@ -38,10 +39,29 @@ const TriplerRowAddress = styled.p`
   font-size: 12px;
 `
 
-const TriplerRow = ({ name, address }) => (
+const TriplerColumn = styled.div`
+  flex: 1;
+  justify-content: 'center';
+`
+
+const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler }) => (
   <TriplerRowStyled>
-    <TriplerRowName>{ name }</TriplerRowName>
-    <TriplerRowAddress>{ address }</TriplerRowAddress>
+    <TriplerColumn>
+      <TriplerRowName>{ name }</TriplerRowName>
+      <TriplerRowAddress>{ address }</TriplerRowAddress>
+    </TriplerColumn>
+    <TriplerColumn>
+      {unconfirmed &&
+        <Button micro small href={`/triplers/confirm/${id}`}>
+          Add Info
+        </Button>
+      }
+      {pending &&
+      <Button micro small onClick={() => remindTripler(id)}>
+        Remind
+      </Button>
+      }
+    </TriplerColumn>
   </TriplerRowStyled>
 )
 
@@ -54,7 +74,7 @@ const TriplersEmpty = () => (
   </>
 )
 
-const Triplers = ({ unconfirmed, pending, confirmed }) => (
+const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
   <>
     <p>
       These are your contacts that will each help 3 others vote. Confirm each
@@ -67,8 +87,10 @@ const Triplers = ({ unconfirmed, pending, confirmed }) => (
       unconfirmed &&
         unconfirmed.map((tripler) => (
           <TriplerRow
+            id={tripler.id}
             name={`${tripler.first_name} ${tripler.last_name}`}
             address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+            unconfirmed
             onClick={() => { }}
           />
         ))
@@ -79,9 +101,12 @@ const Triplers = ({ unconfirmed, pending, confirmed }) => (
       pending &&
         pending.map((tripler) => (
           <TriplerRow
+            id={tripler.id}
             name={`${tripler.first_name} ${tripler.last_name}`}
             address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
             onClick={() => { }}
+            pending
+            remindTripler={remindTripler}
           />
         ))
     }
@@ -110,16 +135,18 @@ export default () => {
     }
     fetchData()
   }, [])
+  const sendReminder = async (id) => {
+    api.sendReminder(id)
+  }
   return (
-    triplers ? <TriplersPage triplers={triplers} /> : <Loading />
+    triplers ? <TriplersPage triplers={triplers} remindTripler={sendReminder} /> : <Loading />
   )
 }
 
-const TriplersPage = ({ triplers }) => {
+const TriplersPage = ({ triplers, remindTripler }) => {
   const confirmed = triplers.filter((tripler) => tripler.status === 'confirmed')
   const pending = triplers.filter((tripler) => tripler.status === 'pending')
   const unconfirmed = triplers.filter((tripler) => tripler.status === 'unconfirmed')
-  console.log(confirmed)
   return (
     <PageLayout
       title="My Vote Triplers"
@@ -143,6 +170,7 @@ const TriplersPage = ({ triplers }) => {
             unconfirmed={unconfirmed}
             pending={pending}
             confirmed={confirmed}
+            remindTripler={remindTripler}
           />
       }
     </PageLayout>

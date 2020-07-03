@@ -8,6 +8,8 @@ const TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/tripler
 const PUT_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
 const FREE_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
 const SIGNUP_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/signup`
+const TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
+const CONFIRM_TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
 
 const errorHandler = (e) => {
   console.warn(e)
@@ -82,7 +84,7 @@ export const claimTriplers = async (selectedTriplers) => {
 
 export const fetchTripler = async (triplerId) => {
   try {
-    let res = await fetch(`${TRIPLERS_URL}/${triplerId}`, {
+    let res = await fetch(`${TRIPLER_URL}/${triplerId}`, {
       method: 'GET',
       headers: addAuth()
     })
@@ -132,3 +134,38 @@ export const signup = async () => {
     return false
   }
 }
+
+export const confirmTriplers = async (triplerId, json) => {
+  try {
+    let res = await fetch(`${CONFIRM_TRIPLER_URL}/${triplerId}/start-confirm`, {
+      method: 'PUT',
+      headers: addAuth(),
+      body: JSON.stringify(json)
+    })
+    let data = await res.json()
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const sendReminder = async (id) => {
+  try {
+    let res = await fetch(`${TRIPLER_URL}/${id}/remind`, {
+      method: 'PUT',
+      headers: addAuth()
+    })
+    let data = await res.json()
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+
