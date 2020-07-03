@@ -1,6 +1,6 @@
 import React from 'react'
 import Triplers from '../components/Triplers/TriplersPage'
-import Invite from '../components/Triplers/InvitePage'
+import Add from '../components/Triplers/AddTripler'
 import Confirm from '../components/Triplers/ConfirmPage'
 
 export default {
@@ -31,8 +31,8 @@ export const TriplersPage = () => (
   />
 )
 
-export const InvitePage = () => (
-  <Invite 
+export const AddPage = () => (
+  <Add 
     triplers={
       [
         {

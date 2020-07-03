@@ -19,7 +19,7 @@ const InlineLoadingStyled = styled(InlineLoading)`
   height: ${ spacing[5] };
 ` 
 
-export default ({ href, children, className, small, kind, loading, onClick, micro }) => {
+export default ({ href, children, kind, loading, onClick, ...props }) => {
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
@@ -27,14 +27,12 @@ export default ({ href, children, className, small, kind, loading, onClick, micr
 
   return (
     <ButtonStyled
-      small={small}
       kind={loading ? "ghost" : kind}
-      className={className}
       onClick={() => {
         onClick && onClick()
         href && redirect(href)
       }}
-      micro={micro}
+      {...props}
     >
       {loading ? (
         <InlineLoadingStyled
