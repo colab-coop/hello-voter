@@ -28,7 +28,7 @@ const TriplerRowStyled = styled.div`
   &:hover {
     background-color: #e5e5e5;
     cursor: pointer;
-  } 
+  }
 `
 
 const TriplerRowName = styled.h6`

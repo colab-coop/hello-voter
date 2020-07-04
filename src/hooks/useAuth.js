@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react'
-import jwt_decode from 'jwt-decode'
 
-export const useAuth = (token) => {
+export const useAuth = (token, api) => {
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   useEffect( () => {
-    const fetchUser = () => {
+    const fetchUser = async () => {
       if (token && !authenticated) {
-        const fetched = jwt_decode(token)
-        if (fetched) setUser(fetched)
+        const fetched = await api.fetchAmbassador()
+        if (fetched) setUser(fetched.data)
         setAuthenticated(Boolean(fetched))
-        return true
       }
 
       setLoading(false)

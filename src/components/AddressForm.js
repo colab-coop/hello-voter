@@ -29,18 +29,20 @@ export default () => (
   <>
     <FormGroup>
       <TextInput
-        id="street"
+        name="address1"
         invalidText="Invalid error message."
         labelText="Street Address"
         placeholder="1234 Ambassador Lane"
+        required
       />
     </FormGroup>
     <FormGroup>
       <TextInput
-        id="city"
+        name="city"
         invalidText="Invalid error message."
         labelText="City"
         placeholder="San Francisco"
+        required
       />
     </FormGroup>
     <FormGroup>
@@ -48,7 +50,7 @@ export default () => (
         <RowLeft>
           <ComboBox
             ariaLabel="Choose an item"
-            id="state"
+            name="state"
             invalidText="A valid value is required"
             itemToString={(item) => (item ? item.text : '')}
             items={states}
@@ -56,14 +58,16 @@ export default () => (
             placeholder=" "
             titleText="State"
             type="default"
+            required
           />
         </RowLeft>
         <RowRight>
           <TextInput
-            id="last_name"
+            name="zip"
             invalidText="Invalid error message."
             labelText="Zip Code"
             placeholder="12345"
+            required
           />
         </RowRight>
       </Row>

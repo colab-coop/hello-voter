@@ -16,16 +16,7 @@ import TriplersPage from './components/Triplers/TriplersPage'
 import TriplersAdd from './components/Triplers/AddTripler'
 import ConfirmPage from './components/Triplers/ConfirmPage'
 
-const AuthRoute = ({component: Component, authenticated, path}) => (
-  <Route
-    path={path}
-    render={(props) => authenticated === true
-      ? <Component {...props} />
-      : <Redirect to={{pathname:  '/login', state: {from: props.location}}} />}
-    />
-)
-
-const NoMatch = ({ authenticated, path, signupCompleted }) => (
+const NoMatch = ({authenticated, path, signupCompleted }) => (
   <Route
     path={path}
     render={(props) => authenticated === true
@@ -37,24 +28,45 @@ const NoMatch = ({ authenticated, path, signupCompleted }) => (
   />
 )
 
+const AuthRoute = ({component: Component, authenticated, path, signupCompleted }) => (
+  <Route
+    path={path}
+    render={(props) => authenticated === true
+      ? signupCompleted ?
+        <Component {...props} />
+        :
+        <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
+      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+  />
+)
+
+const AuthPublicRoute = ({component: Component, authenticated, path }) => (
+  <Route
+    path={path}
+    render={(props) => authenticated === true
+      ? <Component {...props} />
+      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+  />
+)
+
 const AppRouter = () => {
-  const { authenticated, loading } = React.useContext(AppContext)
+  const { authenticated, loading, user } = React.useContext(AppContext)
   if (loading) return <Loading />
   return (
     <HashRouter>
       <Switch>
-        <AuthRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated}/>
-        <AuthRoute path="/ambassador/signup" component={SignUpPage} exact={true} authenticated={authenticated}/>
-        <AuthRoute path="/ambassador/personal_info" component={PersonalInfoPage} exact={true} authenticated={authenticated}/>
-        <AuthRoute path="/ambassador/address" component={AddressPage} exact={true} authenticated={authenticated}/>
-        <AuthRoute path="/ambassador/contact" component={ContactPage} exact={true} authenticated={authenticated}/>
-        <AuthRoute path="/ambassador/confirm" component={ContactInfoPage} exact={true} authenticated={authenticated}/>
-        <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated}/>
-        <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated}/>
-        <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated}/>
+        <AuthPublicRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/ambassador/signup" component={SignUpPage} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/ambassador/personal_info" component={PersonalInfoPage} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/ambassador/address" component={AddressPage} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/ambassador/contact" component={ContactPage} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/ambassador/confirm" component={ContactInfoPage} exact={true} authenticated={authenticated} />
+        <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} signupCompleted={user.signup_completed}/>
+        <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} signupCompleted={user.signup_completed}/>
+        <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} signupCompleted={user.signup_completed}/>
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>
-        <NoMatch authenticated={authenticated} signupCompleted={false}/>
+        <NoMatch authenticated={authenticated} signupCompleted={user.signup_completed}/>
       </Switch>
     </HashRouter>
   )

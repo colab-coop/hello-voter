@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import * as api from './api'
@@ -9,9 +9,10 @@ export const AppContext = React.createContext(initialState)
 
 export const AppProvider = ({ children }) => {
   const [ token, setToken ] = useLocalStorage('token', null)
-  const { user, authenticated, completeSignup, approveUser, loading } = useAuth(token)
+  const [ ambassador, setAmbassador ] = useState({})
+  const { user, authenticated, loading } = useAuth(token, api)
   return (
-    <AppContext.Provider value={{ user, authenticated, setToken, api, completeSignup, approveUser, loading }}>
+    <AppContext.Provider value={{ user, authenticated, setToken, api, loading, ambassador, setAmbassador }}>
       {children}
     </AppContext.Provider>
   )

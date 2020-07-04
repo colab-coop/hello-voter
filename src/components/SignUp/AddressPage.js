@@ -3,12 +3,37 @@ import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import AddressForm from '../AddressForm'
 import { useHistory } from 'react-router-dom'
+import { AppContext } from '../../api/AppContext'
+
+/*
+  {"address1": "1665 Logan St", "city": "Denver", "state": "CO", "zip": 80203}
+ */
 
 export const AddressPage = () => {
   const history = useHistory()
+  const { setAmbassador } = React.useContext(AppContext)
   return (
     <PageLayout
-      onClickSubmit={() => {
+      onClickSubmit={(e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+
+        const userData = {
+          address: {
+            address1: formData.get('address1'),
+            state: formData.get('state'),
+            zip: formData.get('zip'),
+            city: formData.get('city')
+          },
+        }
+
+        setAmbassador((data) => {
+          return {
+            ...data,
+            ...userData
+          }
+        })
+
         history.push('/ambassador/contact')
       }}
       title="Address"
