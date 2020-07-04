@@ -9,16 +9,8 @@ export const Main = () => {
   const token = window.location.href.split('#/jwt/')[1]
   const history = useHistory()
   useEffect(() => {
-    const signup = async () => {
-      await api.signup()
-      history.push('/triplers')
-    }
     if (token) setToken(token)
-    if(authenticated) {
-      setLoading(true)
-      signup()
-    }
-  }, [token, authenticated, setToken])
+  }, [token])
   return (
     <>
       {!authenticated ? 'Logging you in!' : ''}

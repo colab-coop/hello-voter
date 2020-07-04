@@ -10,9 +10,8 @@ export const useAuth = (token, api) => {
         const fetched = await api.fetchAmbassador()
         if (fetched) setUser(fetched.data)
         setAuthenticated(Boolean(fetched))
+        setLoading(false)
       }
-
-      setLoading(false)
     }
     fetchUser()
   }, [token, setAuthenticated, authenticated])

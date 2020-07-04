@@ -66,7 +66,7 @@ const AppRouter = () => {
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} user={user}/>
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>
-        <NoMatch authenticated={authenticated} signupCompleted={user}/>
+        <NoMatch authenticated={authenticated} user={user}/>
       </Switch>
     </HashRouter>
   )
