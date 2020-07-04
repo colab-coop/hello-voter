@@ -10,6 +10,7 @@ export const Main = () => {
   const history = useHistory()
   useEffect(() => {
     if (token) setToken(token)
+    history.push('/triplers')
   }, [token])
   return (
     <>

@@ -6,7 +6,7 @@ export const useAuth = (token, api) => {
   const [loading, setLoading] = useState(true)
   useEffect( () => {
     const fetchUser = async () => {
-      if (token && !authenticated) {
+      if (!authenticated) {
         const fetched = await api.fetchAmbassador()
         if (fetched) setUser(fetched.data)
         setAuthenticated(Boolean(fetched))
