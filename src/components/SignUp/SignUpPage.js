@@ -4,6 +4,7 @@ import { RadioButton16 } from '@carbon/icons-react'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import { spacing, colors } from '../../theme'
+import { useHistory } from 'react-router-dom'
 
 const List = styled.ol`
   width: 100%;
@@ -26,23 +27,29 @@ const ListItem = ({ text }) => (
   </Item>
 )
 
-export const SignUpPage = () => (
-  <PageLayout 
-    title="Sign Up" 
-    submitButtonTitle="Continue"
-    header={<Breadcrumbs items={
-      [{
-        name: "Back",
-        route: "/"
-      }]
-    } />}
-  >
-    <p>Becoming an ambassador is an easy way to better your community.</p>
-    <List>
-      <ListItem text="Tell us about you" />
-      <ListItem text="Complete 10 minute training" />
-      <ListItem text="We’ll review your application" />
-      <ListItem text="Start recruiting and earning" />
-    </List>
-  </PageLayout>
-)
+export const SignUpPage = () => {
+  const history = useHistory()
+  return (
+    <PageLayout
+      onClickSubmit={() => {
+        history.push('/ambassador/personal_info')
+      }}
+      title="Sign Up"
+      submitButtonTitle="Continue"
+      header={<Breadcrumbs items={
+        [{
+          name: "Back",
+          route: "/"
+        }]
+      }/>}
+    >
+      <p>Becoming an ambassador is an easy way to better your community.</p>
+      <List>
+        <ListItem text="Tell us about you"/>
+        <ListItem text="Complete 10 minute training"/>
+        <ListItem text="We’ll review your application"/>
+        <ListItem text="Start recruiting and earning"/>
+      </List>
+    </PageLayout>
+  )
+}

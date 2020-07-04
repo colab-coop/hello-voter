@@ -6,7 +6,12 @@ import { AppProvider, AppContext } from './api/AppContext'
 import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
+import { SignUpPage } from './components/SignUp/SignUpPage'
 import { BecomeAmbassadorPage } from './components/SignUp/BecomeAmbassadorPage'
+import { PersonalInfoPage } from './components/SignUp/PersonalInfoPage'
+import { AddressPage } from './components/SignUp/AddressPage'
+import { ContactPage } from './components/SignUp/ContactPage'
+import { ContactInfoPage } from './components/SignUp/ContactInfoPage'
 import TriplersPage from './components/Triplers/TriplersPage'
 import TriplersAdd from './components/Triplers/AddTripler'
 import ConfirmPage from './components/Triplers/ConfirmPage'
@@ -20,12 +25,15 @@ const AuthRoute = ({component: Component, authenticated, path}) => (
     />
 )
 
-const NoMatch = ({ authenticated, path }) => (
+const NoMatch = ({ authenticated, path, signupCompleted }) => (
   <Route
     path={path}
     render={(props) => authenticated === true
-      ? <Redirect to={{pathname:  '/triplers', state: {from: props.location}}} />
-      : <Redirect to={{pathname:  '/login', state: {from: props.location}}} />}
+      ? signupCompleted ?
+        <Redirect to={{pathname: '/triplers', state: {from: props.location}}} />
+        :
+        <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
+      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
   />
 )
 
@@ -36,12 +44,17 @@ const AppRouter = () => {
     <HashRouter>
       <Switch>
         <AuthRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated}/>
+        <AuthRoute path="/ambassador/signup" component={SignUpPage} exact={true} authenticated={authenticated}/>
+        <AuthRoute path="/ambassador/personal_info" component={PersonalInfoPage} exact={true} authenticated={authenticated}/>
+        <AuthRoute path="/ambassador/address" component={AddressPage} exact={true} authenticated={authenticated}/>
+        <AuthRoute path="/ambassador/contact" component={ContactPage} exact={true} authenticated={authenticated}/>
+        <AuthRoute path="/ambassador/confirm" component={ContactInfoPage} exact={true} authenticated={authenticated}/>
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated}/>
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated}/>
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>
-        <NoMatch authenticated={authenticated} />
+        <NoMatch authenticated={authenticated} signupCompleted={false}/>
       </Switch>
     </HashRouter>
   )

@@ -28,8 +28,8 @@ export default ({ href, children, kind, loading, onClick, ...props }) => {
   return (
     <ButtonStyled
       kind={loading ? "ghost" : kind}
-      onClick={() => {
-        onClick && onClick()
+      onClick={(e) => {
+        onClick && onClick(e)
         href && redirect(href)
       }}
       {...props}

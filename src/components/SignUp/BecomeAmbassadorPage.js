@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { CheckboxCheckedFilled24 } from '@carbon/icons-react'
 import PageLayout from '../PageLayout'
 import { spacing, colors } from '../../theme'
+import { useHistory } from 'react-router-dom'
 
 const Header = styled.div`
   width: 100%;
@@ -51,19 +52,25 @@ const CheckboxComponent = ({ title, description }) => (
   </CheckboxContainer>
 )
 
-export const BecomeAmbassadorPage = () => (
-  <PageLayout
-    title="Become an ambassador"
-    submitButtonTitle="Get Started"
-    header={<Header><Credit>Photo by Perry Grone</Credit></Header>}
-  >
-    <CheckboxComponent
-      title="Make a difference"
-      description="Help increase voter turnout to better your community and the country"
-    />
-    <CheckboxComponent
-      title="Get paid for your impact"
-      description="You’ll get $50 for every vote tripler you sign up and a $25 bonus if they also become an ambassador"
-    />
-  </PageLayout>
-)
+export const BecomeAmbassadorPage = () => {
+  const history = useHistory()
+  return (
+    <PageLayout
+      onClickSubmit={() => {
+        history.push('/ambassador/signup')
+      }}
+      title="Become an ambassador"
+      submitButtonTitle="Get Started"
+      header={<Header><Credit>Photo by Perry Grone</Credit></Header>}
+    >
+      <CheckboxComponent
+        title="Make a difference"
+        description="Help increase voter turnout to better your community and the country"
+      />
+      <CheckboxComponent
+        title="Get paid for your impact"
+        description="You’ll get $50 for every vote tripler you sign up and a $25 bonus if they also become an ambassador"
+      />
+    </PageLayout>
+  )
+}

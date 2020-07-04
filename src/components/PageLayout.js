@@ -38,7 +38,7 @@ export default ({ header, title, children, submitButtonTitle, onClickSubmit, for
   <>
     <Menu />
     <ContentContainer>
-      <Form id={formId}>
+      <Form id={formId} onSubmit={onClickSubmit}>
         <Column lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
           <Row>
             { header }
@@ -53,7 +53,7 @@ export default ({ header, title, children, submitButtonTitle, onClickSubmit, for
         <CtaButtonContainer lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
           <Row>
             {submitButtonTitle && (
-              <CtaButton onClick={onClickSubmit} type="submit" id={formId}>{submitButtonTitle}</CtaButton>
+              <CtaButton type="submit" id={formId}>{submitButtonTitle}</CtaButton>
             )}
           </Row>
         </CtaButtonContainer>
