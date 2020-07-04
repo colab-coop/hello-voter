@@ -4,18 +4,16 @@ import {useHistory} from 'react-router-dom'
 import Loading from './Loading'
 
 export const Main = () => {
-  const [loading, setLoading] = useState(false)
   const { setToken, authenticated, api } = React.useContext(AppContext)
   const token = window.location.href.split('#/jwt/')[1]
   const history = useHistory()
   useEffect(() => {
     if (token) setToken(token)
-    history.push('/triplers')
-  }, [token])
+    if (authenticated) history.push('/triplers')
+  }, [token, authenticated])
   return (
     <>
-      {!authenticated ? 'Logging you in!' : ''}
-      {loading && <Loading />}
+      {!authenticated ? <Loading /> : ''}
     </>
   )
 }

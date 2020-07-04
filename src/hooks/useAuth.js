@@ -8,8 +8,10 @@ export const useAuth = (token, api) => {
     const fetchUser = async () => {
       if (!authenticated) {
         const fetched = await api.fetchAmbassador()
-        if (fetched) setUser(fetched.data)
-        setAuthenticated(Boolean(fetched))
+        if (fetched && fetched.data.code !== 401) {
+          setUser(fetched.data)
+          setAuthenticated(true)
+        }
         setLoading(false)
       }
     }
