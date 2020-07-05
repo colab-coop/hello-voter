@@ -6,9 +6,13 @@ export const useAuth = (token, api) => {
   const [loading, setLoading] = useState(true)
   const fetchUser = async () => {
     const { error, data } = await api.fetchAmbassador()
-    if (error) return {
-      completed: false,
-      error
+    if (error) {
+      setAuthenticated(true)
+      setLoading(false)
+      return {
+        completed: false,
+        error
+      }
     }
     setUser(data)
     setAuthenticated(true)
