@@ -17,7 +17,7 @@ export const PersonalInfoPage = () => {
 
         const userData = {
           first_name: formData.get('first_name'),
-          last_name: formData.get('first_name'),
+          last_name: formData.get('last_name'),
           date_of_birth: formData.get('dob')
         }
 
@@ -28,7 +28,7 @@ export const PersonalInfoPage = () => {
       header={<Breadcrumbs items={
         [{
           name: "Back",
-          route: "/"
+          route: "/ambassador/signup"
         }]
       }/>}
     >

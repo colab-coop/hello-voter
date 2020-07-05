@@ -11,24 +11,27 @@ export default () => {
   const [triplers, setTriplers] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { api } = React.useContext(AppContext)
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await api.fetchFreeTriplers()
       const triplersWithAddress = data.data.map((p) => ({
         id: p.id,
         name: p.first_name + ' ' + p.last_name,
-        address: p.first_name + ' ' + p.last_name
+        address: p.address.address1 + ' ' + p.address.city + ' ' + p.address.state
       }))
       setTriplers(triplersWithAddress)
     }
     fetchData()
   }, [])
+
   const claimTriplers = (selectedTriplers) => async () => {
     setIsLoading(true)
     await api.claimTriplers(selectedTriplers.map((c) => c.id))
     setIsLoading(false)
     history.push('/triplers')
   }
+
   return (
     triplers ? <AddTriplersPage triplers={triplers} claimTriplers={claimTriplers} loading={isLoading} /> : <Loading />
   )
@@ -68,7 +71,7 @@ const AddTriplersPage = ({ triplers, claimTriplers, loading }) => {
           },
         ]}
         rows={triplers}
-        handleSelected={claimTriplers} 
+        handleSelected={claimTriplers}
       />
     </PageLayout>
   )

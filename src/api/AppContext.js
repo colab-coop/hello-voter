@@ -10,9 +10,9 @@ export const AppContext = React.createContext(initialState)
 export const AppProvider = ({ children }) => {
   const [ token, setToken ] = useLocalStorage('token', null)
   const [ ambassador, setAmbassador ] = useState({})
-  const { user, authenticated, loading } = useAuth(token, api)
+  const { user, authenticated, loading, fetchUser } = useAuth(token, api)
   return (
-    <AppContext.Provider value={{ user, authenticated, setToken, api, loading, ambassador, setAmbassador }}>
+    <AppContext.Provider value={{ user, authenticated, setToken, api, loading, ambassador, setAmbassador, fetchUser }}>
       {children}
     </AppContext.Provider>
   )

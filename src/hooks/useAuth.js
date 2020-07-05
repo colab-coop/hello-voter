@@ -4,22 +4,27 @@ export const useAuth = (token, api) => {
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  useEffect( () => {
-    const fetchUser = async () => {
-      if (!authenticated) {
-        const fetched = await api.fetchAmbassador()
-        if (fetched && fetched.data.code !== 401) {
-          setUser(fetched.data)
-          setAuthenticated(true)
-        }
-        setLoading(false)
-      }
+  const fetchUser = async () => {
+    const { error, data } = await api.fetchAmbassador()
+    if (error) return {
+      completed: false,
+      error
     }
-    fetchUser()
-  }, [token, setAuthenticated, authenticated])
+    setUser(data)
+    setAuthenticated(true)
+    setLoading(false)
+    return {
+      completed: true,
+      data: data.data
+    }
+  }
+  useEffect( () => {
+    !authenticated && fetchUser()
+  }, [authenticated, fetchUser])
   return {
     authenticated,
     user,
-    loading
+    loading,
+    fetchUser
   }
 }

@@ -41,7 +41,7 @@ export const AddressPage = () => {
       header={<Breadcrumbs items={
         [{
           name: "Back",
-          route: "/"
+          route: "/ambassador/personal_info"
         }]
       }/>}
     >

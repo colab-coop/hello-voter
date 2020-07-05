@@ -39,7 +39,7 @@ export const SignUpPage = () => {
       header={<Breadcrumbs items={
         [{
           name: "Back",
-          route: "/"
+          route: "/ambassador"
         }]
       }/>}
     >

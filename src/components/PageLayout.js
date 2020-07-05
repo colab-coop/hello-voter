@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { spacing, colors } from '../theme'
 import Menu from './Menu'
 import Button from './Button'
+import { InlineNotification } from 'carbon-components-react'
 
 const ContentContainer = styled(Grid)`
   padding: ${ spacing[3] };
@@ -34,7 +35,7 @@ const CtaButton = styled(Button)`
   margin-bottom: ${ spacing[3] };
 `
 
-export default ({ header, title, children, submitButtonTitle, onClickSubmit, formId }) => (
+export default ({ header, title, children, submitButtonTitle, onClickSubmit, formId, error }) => (
   <>
     <Menu />
     <ContentContainer>
@@ -52,6 +53,14 @@ export default ({ header, title, children, submitButtonTitle, onClickSubmit, for
         </Column>
         <CtaButtonContainer lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
           <Row>
+            {error &&
+              <InlineNotification
+                kind="error"
+                icondescription="Dismiss notification"
+                subtitle={error}
+                title="Oops!"
+              />
+            }
             {submitButtonTitle && (
               <CtaButton type="submit" id={formId}>{submitButtonTitle}</CtaButton>
             )}

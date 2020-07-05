@@ -6,23 +6,24 @@ import { useHistory } from 'react-router-dom'
 import { AppContext } from '../../api/AppContext'
 
 export const ContactPage = () => {
+  const [err, setErr] = useState(false)
   const history = useHistory()
-  const [isSaving, setIsSaving] = useState(false)
-  const { ambassador, setAmbassador, api } = React.useContext(AppContext)
+  const { ambassador, setAmbassador, api, fetchUser } = React.useContext(AppContext)
   useEffect(() => {
     const signup = async () => {
-      setIsSaving(true)
-      const res = await api.signup(ambassador)
-      setIsSaving(false)
+      const { error } = await api.signup(ambassador)
+      if (error) return setErr(error.msg)
+      const { userError } = await fetchUser()
+      if (userError) return setErr(userError.msg)
       history.push('/triplers')
     }
-
-    if (ambassador.email) {
+    if (ambassador.signupComplete) {
       signup()
     }
   }, [ ambassador ])
   return (
     <PageLayout
+      error={err}
       title="Contact"
       onClickSubmit={(e) => {
         e.preventDefault()
@@ -30,7 +31,8 @@ export const ContactPage = () => {
 
         const userData = {
           email: formData.get('email'),
-          phone: formData.get('phone').toString()
+          phone: formData.get('phone').toString(),
+          signupComplete: true
         }
 
         setAmbassador((data) => {
@@ -44,7 +46,7 @@ export const ContactPage = () => {
       header={<Breadcrumbs items={
         [{
           name: "Back",
-          route: "/"
+          route: "/ambassador/address"
         }]
       }/>}
     >

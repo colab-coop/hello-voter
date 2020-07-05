@@ -16,6 +16,10 @@ const errorHandler = (e) => {
   console.warn(e)
 }
 
+const isFailStatusCode = (status) => {
+  return [401, 400, 500].includes(status)
+}
+
 export const getToken = () => {
   return localStorage.getItem(REACT_APP_TOKEN_KEY)
 }
@@ -74,6 +78,13 @@ export const claimTriplers = async (selectedTriplers) => {
       })
     })
     let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
     return {
       data
     }
@@ -117,12 +128,19 @@ export const fetchFreeTriplers = async () => {
 
 export const signup = async (tripler) => {
   try {
-    let res = await fetch(`${SIGNUP_URL}`, {
+    let res = await fetch(SIGNUP_URL, {
       method: 'POST',
       headers: addAuth(),
       body: JSON.stringify(tripler)
     })
     let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
     return {
       data
     }
@@ -140,6 +158,13 @@ export const confirmTriplers = async (triplerId, json) => {
       body: JSON.stringify(json)
     })
     let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
     return {
       data
     }
@@ -156,6 +181,13 @@ export const sendReminder = async (id) => {
       headers: addAuth()
     })
     let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
     return {
       data
     }
@@ -171,7 +203,15 @@ export const fetchAmbassador = async () => {
       method: 'GET',
       headers: addAuth()
     })
+
     let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
     return {
       data
     }
