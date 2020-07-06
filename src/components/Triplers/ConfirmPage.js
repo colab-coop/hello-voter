@@ -85,7 +85,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       <p>Add the names of three people that Melody will remind to vote</p>
       <FormGroup>
         <TextInput
-          name="name-1"
+          name="triplee1"
           invalidText="Invalid error message."
           labelText="Name 1"
           placeholder="Name"
@@ -94,7 +94,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       </FormGroup>
       <FormGroup>
         <TextInput
-          name="name-2"
+          name="triplee2"
           invalidText="Invalid error message."
           labelText="Name 2"
           placeholder="Name"
@@ -103,7 +103,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       </FormGroup>
       <FormGroup>
         <TextInput
-          name="name-3"
+          name="triplee3"
           invalidText="Invalid error message."
           labelText="Name 3"
           placeholder="Name"
