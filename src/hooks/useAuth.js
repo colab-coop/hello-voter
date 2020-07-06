@@ -8,7 +8,9 @@ export const useAuth = (token, api) => {
     const { error, data } = await api.fetchAmbassador()
     if (error) {
       setLoading(false)
-      console.log(error)
+      if (error.msg === 'No current ambassador') {
+        setAuthenticated(true)
+      }
       return {
         completed: false,
         error
@@ -19,7 +21,7 @@ export const useAuth = (token, api) => {
     setLoading(false)
     return {
       completed: true,
-      data: data.data
+      data: data
     }
   }
   useEffect( () => {
