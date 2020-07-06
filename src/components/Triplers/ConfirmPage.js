@@ -42,7 +42,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
     e.preventDefault()
     const formData = new FormData(e.target)
     const { error } = await confirmTriplers(tripler.id, {
-      phone: formData.get('phoneNumber'),
+      phone: formData.get('phone'),
       triplees: [formData.get('triplee1'), formData.get('triplee2'), formData.get('triplee3')],
       address: tripler.address
     })

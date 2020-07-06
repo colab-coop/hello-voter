@@ -8,6 +8,7 @@ export const useAuth = (token, api) => {
     const { error, data } = await api.fetchAmbassador()
     if (error) {
       setLoading(false)
+      // TODO: Change authenticated to "in_signup_process"
       if (error.msg === 'No current ambassador') {
         setAuthenticated(true)
       }

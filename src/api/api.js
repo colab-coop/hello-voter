@@ -7,7 +7,7 @@ const LOGIN_URL = `${SERVER_URL}/hello`
 const TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
 const PUT_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
 const AMBASSADOR_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current`
-const FREE_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
+const FREE_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/suggest-triplers`
 const SIGNUP_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/signup`
 const TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
 const CONFIRM_TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
@@ -32,6 +32,8 @@ const addAuth = (headers) => {
     'Content-Type': 'application/json'
   }
 }
+
+// TODO: De-duplicate the requests and create a wrapper around it
 
 export const logIn = async (sm) => {
   try {

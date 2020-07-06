@@ -57,7 +57,7 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler }) 
         </Button>
       }
       {pending &&
-      <Button micro small onClick={() => remindTripler(id)}>
+      <Button micro small data-id={id} onClick={remindTripler}>
         Remind
       </Button>
       }
@@ -135,8 +135,8 @@ export default () => {
     }
     fetchData()
   }, [])
-  const sendReminder = async (id) => {
-    api.sendReminder(id)
+  const sendReminder = async (el) => {
+    api.sendReminder(el.target.dataset.id)
   }
   return (
     triplers ? <TriplersPage triplers={triplers} remindTripler={sendReminder} /> : <Loading />

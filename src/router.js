@@ -52,7 +52,6 @@ const AuthPublicRoute = ({component: Component, authenticated, path }) => (
 const AppRouter = () => {
   const { authenticated, loading, user } = React.useContext(AppContext)
   if (loading) return <Loading />
-  console.log(user)
   return (
     <HashRouter>
       <Switch>
