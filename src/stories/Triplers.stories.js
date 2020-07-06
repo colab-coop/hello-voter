@@ -7,27 +7,23 @@ export default {
   title: 'Triplers'
 }
 
-export const TriplersEmptyPage = () => (
-  <Triplers empty />
-)
+// export const TriplersEmptyPage = () => (
+//   <Triplers empty />
+// )
 
 export const TriplersPage = () => (
   <Triplers 
-    triplers={{ 
-      unconfirmed: [
-        { name: "Lauren R", address: "200 Address lane" },
-        { name: "Edison Shepherd", address: "1 Good Boy Rd" }
-      ],
-      pending: [
-        { name: "Michael Marsh", address: "200 Address lane" },
-        { name: "Edison Shepherd", address: "1 Good Boy Rd" },
-        { name: "Lauren Ralph", address: "1 Road Rd" }
-      ],
-      confirmed: [
-        { name: "Michael Marsh", address: "200 Address lane" },
-        { name: "Edison Shepherd", address: "1 Good Boy Rd" }
+    triplers={
+      [
+        { status: 'unconfirmed', name: "Lauren R", address: "200 Address lane" },
+        { status: 'unconfirmed', name: "Edison Shepherd", address: "1 Good Boy Rd" },
+        { status: 'pending', name: "Michael Marsh", address: "200 Address lane" },
+        { status: 'pending', name: "Edison Shepherd", address: "1 Good Boy Rd" },
+        { status: 'pending', name: "Lauren Ralph", address: "1 Road Rd" },
+        { status: 'confirmed', name: "Michael Marsh", address: "200 Address lane" },
+        { status: 'confirmed', name: "Edison Shepherd", address: "1 Good Boy Rd" }
       ]
-    }}
+    }
   />
 )
 

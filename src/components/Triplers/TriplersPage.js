@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'carbon-components-react'
-import { Add16 } from '@carbon/icons-react'
+import { Add16, ChevronRight16 } from '@carbon/icons-react'
 import styled from 'styled-components'
 import { colors, spacing } from '../../theme'
 import PageLayout from '../PageLayout'
@@ -40,26 +40,41 @@ const TriplerRowAddress = styled.p`
 `
 
 const TriplerColumn = styled.div`
-  flex: 1;
-  justify-content: 'center';
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  align-items: center;
+`
+
+const PillButton = styled.div`
+  border-radius: 32px;
+  font-size: 12px;
+  padding: ${ spacing[2] } ${ spacing[3] };
+  background-color: ${ colors.gray[20] };
+  border: 2px solid ${ colors.gray[20] };
+  display: flex;
+  align-items: center;
+  &:hover {
+    border: 2px solid ${ colors.blue[60] };
+  }
 `
 
 const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler }) => (
   <TriplerRowStyled>
-    <TriplerColumn>
+    <div>
       <TriplerRowName>{ name }</TriplerRowName>
       <TriplerRowAddress>{ address }</TriplerRowAddress>
-    </TriplerColumn>
+    </div>
     <TriplerColumn>
       {unconfirmed &&
-        <Button micro small href={`/triplers/confirm/${id}`}>
-          Add Info
-        </Button>
+        <PillButton href={`/triplers/confirm/${id}`}>
+          Add Info <ChevronRight16 />
+        </PillButton>
       }
       {pending &&
       <Button micro small data-id={id} onClick={remindTripler}>
         Remind
-      </Button>
+      </PillButton>
       }
     </TriplerColumn>
   </TriplerRowStyled>
