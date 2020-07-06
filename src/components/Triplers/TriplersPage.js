@@ -59,7 +59,6 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler }) 
         </Button>
       }
       {pending &&
-
       <Button pill data-id={id} onClick={remindTripler}>
         Remind
       </Button>

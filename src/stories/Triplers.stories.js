@@ -12,18 +12,63 @@ export default {
 // )
 
 export const TriplersPage = () => (
-  <Triplers 
-    triplers={
-      [
-        { status: 'unconfirmed', name: "Lauren R", address: "200 Address lane" },
-        { status: 'unconfirmed', name: "Edison Shepherd", address: "1 Good Boy Rd" },
-        { status: 'pending', name: "Michael Marsh", address: "200 Address lane" },
-        { status: 'pending', name: "Edison Shepherd", address: "1 Good Boy Rd" },
-        { status: 'pending', name: "Lauren Ralph", address: "1 Road Rd" },
-        { status: 'confirmed', name: "Michael Marsh", address: "200 Address lane" },
-        { status: 'confirmed', name: "Edison Shepherd", address: "1 Good Boy Rd" }
-      ]
-    }
+  <Triplers
+    triplers={[
+      {
+        status: "unconfirmed",
+        first_name: "Lauren",
+        last_name: "R",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+      {
+        status: "unconfirmed",
+        first_name: "Edison",
+        last_name: "Shepherd",
+        address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+      },
+      {
+        status: "pending",
+        first_name: "Michael",
+        last_name: "Marsh",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+      {
+        status: "pending",
+        first_name: "Edison",
+        last_name: "Shepherd",
+        address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+      },
+      {
+        status: "pending",
+        first_name: "Lauren",
+        last_name: "Ralph",
+        address: { address1: "1 Road Rd", city: "Denver", state: "CO" },
+      },
+      {
+        status: "confirmed",
+        first_name: "Michael",
+        last_name: "Marsh",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+      {
+        status: "confirmed",
+        first_name: "Edison",
+        last_name: "Shepherd",
+        address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+      },
+    ]}
   />
 )
 
