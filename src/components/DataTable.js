@@ -58,9 +58,9 @@ const renderTable = (batchActionClick) => (
             Add
         </TableBatchAction>
         </TableBatchActions>
-        <TableToolbarContent>
+        {/* <TableToolbarContent>
           <TableToolbarSearch onChange={onInputChange} />
-        </TableToolbarContent>
+        </TableToolbarContent> */}
       </TableToolbar>
       <Table {...getTableProps()} size='tall'>
         <TableHead>
