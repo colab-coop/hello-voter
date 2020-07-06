@@ -78,11 +78,13 @@ const TriplersEmpty = () => (
 const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
   <>
     <p>
-      These are your contacts that will each help 3 others vote. Confirm each
-      Tripler by adding their information below
+      As a Voting Ambasssador, your task is to recruit “Vote Triplers” from a list of family members and neighbors. A Vote Tripler is someone who agrees to remind three other people to vote in the next election.
+    </p>
+    <p>
+      You will receive $X for each Vote Tripler you recruit and a $Y bonus for each Vote Tripler who goes on to become a Voting Ambassador.
     </p>
     <Button href='/triplers/add'>Find new Triplers<Add16 /></Button>
-    <SectionTitle>Your unconfirmed Triplers</SectionTitle>
+    <SectionTitle>Your possible Vote Triplers</SectionTitle>
     <Paragraph>Add information for a Tripler. We’ll send them a text message to confirm.</Paragraph>
     {
       unconfirmed &&
@@ -96,8 +98,8 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
           />
         ))
     }
-    <SectionTitle>Your Triplers who haven’t replied yet</SectionTitle>
-    <Paragraph>Once the Tripler confirms “YES” to our text message, you will get your reward.</Paragraph>
+    <SectionTitle>Your unconfirmed Vote Triplers</SectionTitle>
+    <Paragraph>These possible Vote Triplers have not yet confirmed their identity.</Paragraph>
     {
       pending &&
         pending.map((tripler) => (
@@ -111,8 +113,10 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
           />
         ))
     }
-    <SectionTitle>Your confirmed Triplers</SectionTitle>
-    <Paragraph>Once your <Link href="#">payment method is set up</Link>, you’ll receive your reward for these Triplers.</Paragraph>
+    <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
+    <Paragraph>
+      Once your <Link href="#">payment method is set up</Link>, you’ll receive payment for these Vote Triplers
+    </Paragraph>
     {
       confirmed &&
         confirmed.map((tripler) => (

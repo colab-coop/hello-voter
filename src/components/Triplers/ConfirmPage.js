@@ -72,17 +72,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         />
       }
     >
-      <p>Add {tripler.first_name}’s phone number so we can confirm her identity, and then we’ll send you your payment! </p>
-      <FormGroup>
-        <TextInput
-          name="phone"
-          invalidText="Invalid error message."
-          labelText="Melody’s Phone Number"
-          placeholder="123-456-7890"
-          required
-        />
-      </FormGroup>
-      <p>Add the names of three people that Melody will remind to vote</p>
+      <p>Add the names of three Voters the Vote Tripler will remind to vote:</p>
       <FormGroup>
         <TextInput
           name="triplee1"
@@ -110,6 +100,16 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           required
         />
       </FormGroup>
+      <p>Add the Vote Tripler's phone number so we can confirm his or her identity and send you your payment!</p>
+      <FormGroup>
+        <TextInput
+          name="phone"
+          invalidText="Invalid error message."
+          labelText="Melody’s Phone Number"
+          placeholder="123-456-7890"
+          required
+        />
+      </FormGroup>
       {err &&
       <InlineNotification
         kind="error"
@@ -118,7 +118,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         title="Oops!"
       />
       }
-      <Button type="submit" loading={loading}>Update Info</Button>
+      <Button type="submit" loading={loading}>Add</Button>
       <Button small kind="tertiary" href={'/triplers'}>Go back to My Vote Triplers</Button>
     </PageLayout>
   )

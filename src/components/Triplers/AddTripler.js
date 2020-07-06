@@ -40,7 +40,7 @@ export default () => {
 const AddTriplersPage = ({ triplers, claimTriplers, loading }) => {
   return (
     <PageLayout
-      title="Add Triplers to my list"
+      title="Add Vote Triplers"
       header={<Breadcrumbs items={
         [
           {
@@ -58,7 +58,7 @@ const AddTriplersPage = ({ triplers, claimTriplers, loading }) => {
         ]
       }/>}
     >
-      <p>This is someone who agrees to help three others vote in the next election.</p>
+      <p>Here's a list of people you may know. Put a check next to anyone you'd be willing to ask to be a Vote Tripler.</p>
       <DataTable
         headers={[
           {

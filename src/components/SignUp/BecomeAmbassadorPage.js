@@ -59,17 +59,17 @@ export const BecomeAmbassadorPage = () => {
       onClickSubmit={() => {
         history.push('/ambassador/signup')
       }}
-      title="Become an ambassador"
+      title="Become a Voting Ambassador"
       submitButtonTitle="Get Started"
       header={<Header><Credit>Photo by Perry Grone</Credit></Header>}
     >
       <CheckboxComponent
-        title="Make a difference"
-        description="Help increase voter turnout to better your community and the country"
+        title="Make a difference!"
+        description="Talk to your housemates, friends, and neighbors about voting in the next election to bring positive change to your community and the country."
       />
       <CheckboxComponent
-        title="Get paid for your impact"
-        description="You’ll get $50 for every vote tripler you sign up and a $25 bonus if they also become an ambassador"
+        title="Make money!"
+        description='Receive $X for every "Vote Tripler" you sign up — and a $Y bonus for each Vote Tripler who goes on to become a Voting Ambassador.'
       />
     </PageLayout>
   )

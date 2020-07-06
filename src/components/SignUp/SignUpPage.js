@@ -20,9 +20,13 @@ const Item = styled.li`
   padding: ${ spacing[4] } ${ spacing[5] };
 `
 
-const ListItem = ({ text }) => (
+const ListItem = ({ text, bold }) => (
   <Item>
-    { text }
+    { 
+      bold ? 
+      <strong>{text}</strong> :
+      text 
+    }
     <RadioButton16 />
   </Item>
 )
@@ -43,12 +47,12 @@ export const SignUpPage = () => {
         }]
       }/>}
     >
-      <p>Becoming an ambassador is an easy way to better your community.</p>
+      <p>Being a Voting Ambassador is an easy and rewarding way to bring positive change to your community. To sign up:</p>
       <List>
-        <ListItem text="Tell us about you"/>
-        <ListItem text="Complete 10 minute training"/>
-        <ListItem text="We’ll review your application"/>
-        <ListItem text="Start recruiting and earning"/>
+        <ListItem text="Complete a brief application" />
+        <ListItem text="Take a 15-minute training" />
+        <ListItem text="Have a 10-minute phone interview" />
+        <ListItem bold text="Start working and earning!" />
       </List>
     </PageLayout>
   )
