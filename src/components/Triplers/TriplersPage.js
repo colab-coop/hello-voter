@@ -46,19 +46,6 @@ const TriplerColumn = styled.div`
   align-items: center;
 `
 
-const PillButton = styled.div`
-  border-radius: 32px;
-  font-size: 12px;
-  padding: ${ spacing[2] } ${ spacing[3] };
-  background-color: ${ colors.gray[20] };
-  border: 2px solid ${ colors.gray[20] };
-  display: flex;
-  align-items: center;
-  &:hover {
-    border: 2px solid ${ colors.blue[60] };
-  }
-`
-
 const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler }) => (
   <TriplerRowStyled>
     <div>
@@ -67,14 +54,15 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler }) 
     </div>
     <TriplerColumn>
       {unconfirmed &&
-        <PillButton href={`/triplers/confirm/${id}`}>
+        <Button pill href={`/triplers/confirm/${id}`}>
           Add Info <ChevronRight16 />
-        </PillButton>
+        </Button>
       }
       {pending &&
-      <Button micro small data-id={id} onClick={remindTripler}>
+
+      <Button pill data-id={id} onClick={remindTripler}>
         Remind
-      </PillButton>
+      </Button>
       }
     </TriplerColumn>
   </TriplerRowStyled>
@@ -88,7 +76,6 @@ const TriplersEmpty = () => (
     <Button href='/triplers/add'>Find new Triplers<Add16 /></Button>
   </>
 )
-
 const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
   <>
     <p>
