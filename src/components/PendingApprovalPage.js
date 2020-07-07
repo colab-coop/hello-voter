@@ -12,10 +12,12 @@ export default () => {
   return (
     <>
       <PageLayout
-        title='Pending Approval'
+        title='Training Complete!'
       >
-        <div>Your request is being processed!</div>
-        <div>In the meantime, please schedule a call with us!</div>
+        <div>
+          A program administrator will review your application and be in touch with you soon.
+          In the meantime, please choose a convenient date and time below: 
+        </div>
         <a href={REACT_APP_CALENDLY_LINK} target='_blank'>Click here!</a>
       </PageLayout>
     </>
