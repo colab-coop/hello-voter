@@ -83,7 +83,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
     <p>
       You will receive $X for each Vote Tripler you recruit and a $Y bonus for each Vote Tripler who goes on to become a Voting Ambassador.
     </p>
-    <Button href='/triplers/add'>Find new Triplers<Add16 /></Button>
+    <Button href='/triplers/add' disabled={unconfirmed.length + confirmed.length + pending.length >= 12}>Find new Triplers<Add16 /></Button>
     <SectionTitle>Your possible Vote Triplers</SectionTitle>
     <Paragraph>Add information for a Tripler. We’ll send them a text message to confirm.</Paragraph>
     {

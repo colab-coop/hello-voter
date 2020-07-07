@@ -26,6 +26,7 @@ export default () => {
   }, [])
 
   const claimTriplers = (selectedTriplers) => async () => {
+    if (selectedTriplers.length > 12) return alert('You can select max 12 triplers.')
     setIsLoading(true)
     await api.claimTriplers(selectedTriplers.map((c) => c.id))
     setIsLoading(false)
@@ -37,7 +38,7 @@ export default () => {
   )
 }
 
-const AddTriplersPage = ({ triplers, claimTriplers, loading }) => {
+const AddTriplersPage = ({ triplers, claimTriplers }) => {
   return (
     <PageLayout
       title="Add Vote Triplers"
@@ -58,7 +59,7 @@ const AddTriplersPage = ({ triplers, claimTriplers, loading }) => {
         ]
       }/>}
     >
-      <p>Here's a list of people you may know. Put a check next to anyone you'd be willing to ask to be a Vote Tripler.</p>
+      <p>Here's a list of people you may know. Put a check next to anyone you'd be willing to ask to be a Vote Tripler. Please select no more than 12 people.</p>
       <DataTable
         headers={[
           {
