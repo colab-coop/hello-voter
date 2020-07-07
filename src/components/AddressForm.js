@@ -31,7 +31,7 @@ export default ({ ambassador }) => (
       <TextInput
         name="address1"
         invalidText="Invalid error message."
-        labelText="Street Address"
+        labelText="Street Address*"
         placeholder="1234 Ambassador Lane"
         value={ambassador.address.address1}
         required
@@ -41,7 +41,7 @@ export default ({ ambassador }) => (
       <TextInput
         name="city"
         invalidText="Invalid error message."
-        labelText="City"
+        labelText="City*"
         placeholder="San Francisco"
         value={ambassador.address.city}
         required
@@ -58,7 +58,7 @@ export default ({ ambassador }) => (
             items={states}
             onChange={(value) => console.log(value)}
             placeholder=" "
-            titleText="State"
+            titleText="State*"
             type="default"
             value={ambassador.address.state}
             required
@@ -68,7 +68,7 @@ export default ({ ambassador }) => (
           <TextInput
             name="zip"
             invalidText="Invalid error message."
-            labelText="Zip Code"
+            labelText="Zip Code*"
             placeholder="12345"
             value={ambassador.address.zip}
             required

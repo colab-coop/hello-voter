@@ -77,7 +77,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         <TextInput
           name="triplee1"
           invalidText="Invalid error message."
-          labelText="Name 1"
+          labelText="Name 1*"
           placeholder="Name"
           required
         />
@@ -86,7 +86,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         <TextInput
           name="triplee2"
           invalidText="Invalid error message."
-          labelText="Name 2"
+          labelText="Name 2*"
           placeholder="Name"
           required
         />
@@ -95,7 +95,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         <TextInput
           name="triplee3"
           invalidText="Invalid error message."
-          labelText="Name 3"
+          labelText="Name 3*"
           placeholder="Name"
           required
         />
@@ -105,7 +105,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         <TextInput
           name="phone"
           invalidText="Invalid error message."
-          labelText={`${tripler.first_name}s Phone Number`}
+          labelText={`${tripler.first_name}s Phone Number*`}
           placeholder="123-456-7890"
           required
         />

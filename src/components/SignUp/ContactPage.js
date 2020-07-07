@@ -41,7 +41,7 @@ export const ContactPage = () => {
         <TextInput
           name="email"
           invalidText="Invalid error message."
-          labelText="Email"
+          labelText="Email*"
           placeholder="joanambassador@email.co"
           required
         />
@@ -50,7 +50,7 @@ export const ContactPage = () => {
         <TextInput
           name="phone"
           invalidText="Invalid error message."
-          labelText="Phone number"
+          labelText="Phone number*"
           placeholder="(123) 456-7890"
           required
         />

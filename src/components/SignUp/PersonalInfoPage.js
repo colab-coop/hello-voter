@@ -36,7 +36,7 @@ export const PersonalInfoPage = () => {
         <TextInput
           name="first_name"
           invalidText="Invalid error message."
-          labelText="First Name"
+          labelText="First Name*"
           placeholder="Joan"
           required
         />
@@ -45,7 +45,7 @@ export const PersonalInfoPage = () => {
         <TextInput
           name="last_name"
           invalidText="Invalid error message."
-          labelText="Last Name"
+          labelText="Last Name*"
           placeholder="Ambassador"
           required
         />
