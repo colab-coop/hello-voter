@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { ReactComponent as IconFacebook } from './Icons/Facebook.svg';
-import { ReactComponent as IconGoogle } from './Icons/Google.svg';
+import { ReactComponent as IconFacebook } from '../assets/icons/Facebook.svg';
+import { ReactComponent as IconGoogle } from '../assets/icons/Google.svg';
 import Button from './Button'
 import {
   TYPES, BUTTON_TEXTS, OAUTH_TYPES
