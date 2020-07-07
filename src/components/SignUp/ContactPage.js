@@ -41,9 +41,8 @@ export const ContactPage = () => {
         <TextInput
           name="email"
           invalidText="Invalid error message."
-          labelText="Email*"
+          labelText="Email"
           placeholder="joanambassador@email.co"
-          required
         />
       </FormGroup>
       <FormGroup>
