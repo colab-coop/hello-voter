@@ -17,7 +17,7 @@ const InlineLoadingStyled = styled(InlineLoading)`
   width: 100%;
   justify-content: center;
   height: ${ spacing[5] };
-` 
+`
 
 const PillButton = styled.div`
   border-radius: 32px;
@@ -44,6 +44,7 @@ export default ({ href, children, kind, loading, onClick, pill, ...props }) => {
         onClick && onClick(e);
         href && redirect(href);
       }}
+      {...props}
     >
       {children}
     </PillButton>
