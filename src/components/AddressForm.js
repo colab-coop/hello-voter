@@ -25,7 +25,7 @@ const RowRight = styled.div`
   grid-column-end: span 5;
 `
 
-export default () => (
+export default ({ ambassador }) => (
   <>
     <FormGroup>
       <TextInput
@@ -33,6 +33,7 @@ export default () => (
         invalidText="Invalid error message."
         labelText="Street Address"
         placeholder="1234 Ambassador Lane"
+        value={ambassador.address.address1}
         required
       />
     </FormGroup>
@@ -42,6 +43,7 @@ export default () => (
         invalidText="Invalid error message."
         labelText="City"
         placeholder="San Francisco"
+        value={ambassador.address.city}
         required
       />
     </FormGroup>
@@ -58,6 +60,7 @@ export default () => (
             placeholder=" "
             titleText="State"
             type="default"
+            value={ambassador.address.state}
             required
           />
         </RowLeft>
@@ -67,6 +70,7 @@ export default () => (
             invalidText="Invalid error message."
             labelText="Zip Code"
             placeholder="12345"
+            value={ambassador.address.zip}
             required
           />
         </RowRight>

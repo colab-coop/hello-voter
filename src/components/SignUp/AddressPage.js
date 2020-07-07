@@ -45,7 +45,7 @@ export const AddressPage = () => {
         }]
       }/>}
     >
-      <AddressForm/>
+      <AddressForm ambassador={{address: {}}} />
     </PageLayout>
   )
 }

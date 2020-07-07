@@ -1,29 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
-import { Form, FormGroup, TextInput } from 'carbon-components-react'
-import { useHistory } from 'react-router-dom'
+import { FormGroup, TextInput } from 'carbon-components-react'
 import { AppContext } from '../../api/AppContext'
+import { useHistory } from 'react-router-dom'
 
 export const ContactPage = () => {
-  const [err, setErr] = useState(false)
   const history = useHistory()
-  const { ambassador, setAmbassador, api, fetchUser } = React.useContext(AppContext)
-  useEffect(() => {
-    const signup = async () => {
-      const { error } = await api.signup(ambassador)
-      if (error) return setErr(error.msg)
-      const { userError } = await fetchUser()
-      if (userError) return setErr(userError.msg)
-      history.push('/triplers')
-    }
-    if (ambassador.signupComplete) {
-      signup()
-    }
-  }, [ ambassador ])
+  const { setAmbassador } = React.useContext(AppContext)
   return (
     <PageLayout
-      error={err}
       title="Contact"
       onClickSubmit={(e) => {
         e.preventDefault()
@@ -31,8 +17,7 @@ export const ContactPage = () => {
 
         const userData = {
           email: formData.get('email'),
-          phone: formData.get('phone').toString(),
-          signupComplete: true
+          phone: formData.get('phone').toString()
         }
 
         setAmbassador((data) => {
@@ -41,6 +26,8 @@ export const ContactPage = () => {
             ...userData
           }
         })
+
+        history.push('/ambassador/confirm')
       }}
       submitButtonTitle="Continue"
       header={<Breadcrumbs items={
