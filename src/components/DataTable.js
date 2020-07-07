@@ -100,7 +100,7 @@ const renderTable = (batchActionClick) => (
           40,
           50
         ]}
-        totalItems={103}
+        totalItems={rows.length}
       />
     </TableContainerStyled>
   );

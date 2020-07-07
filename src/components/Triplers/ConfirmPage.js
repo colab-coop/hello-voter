@@ -100,12 +100,12 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           required
         />
       </FormGroup>
-      <p>Add the Vote Tripler's phone number so we can confirm his or her identity and send you your payment!</p>
+      <p>Add the Vote Tripler's phone number so we can confirm their identity and send you your payment!</p>
       <FormGroup>
         <TextInput
           name="phone"
           invalidText="Invalid error message."
-          labelText="Melody’s Phone Number"
+          labelText={`${tripler.first_name}s Phone Number`}
           placeholder="123-456-7890"
           required
         />
