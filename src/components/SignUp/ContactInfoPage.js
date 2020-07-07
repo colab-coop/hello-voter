@@ -30,7 +30,7 @@ export const ContactInfoPage = () => {
       if (error) return setErr(error.msg)
       const { userError } = await fetchUser()
       if (userError) return setErr(userError.msg)
-      history.push('/triplers')
+      history.push('/onboarding/02')
     }
     if (ambassador.signupComplete) {
       signup()
