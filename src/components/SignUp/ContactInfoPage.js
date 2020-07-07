@@ -79,7 +79,7 @@ export const ContactInfoPage = () => {
         <TextInput
           name="first_name"
           invalidText="Invalid error message."
-          labelText="First Name"
+          labelText="First Name*"
           placeholder="Joan"
           value={ambassador.first_name}
           required
@@ -89,7 +89,7 @@ export const ContactInfoPage = () => {
         <TextInput
           name="last_name"
           invalidText="Invalid error message."
-          labelText="Last Name"
+          labelText="Last Name*"
           placeholder="Ambassador"
           value={ambassador.last_name}
           required
@@ -100,7 +100,7 @@ export const ContactInfoPage = () => {
           <DatePickerInput
             name="date_of_birth"
             placeholder="mm/dd/yyyy"
-            labelText="Date of Birth"
+            labelText="Date of Birth*"
             type="text"
             value={ambassador.date_of_birth}
             required
@@ -114,7 +114,7 @@ export const ContactInfoPage = () => {
         <TextInput
           name="email"
           invalidText="Invalid error message."
-          labelText="Email"
+          labelText="Email*"
           placeholder="joanambassador@email.co"
           value={ambassador.email}
           required
@@ -124,7 +124,7 @@ export const ContactInfoPage = () => {
         <TextInput
           name="phone"
           invalidText="Invalid error message."
-          labelText="Phone number"
+          labelText="Phone number*"
           placeholder="(123) 456-7890"
           value={ambassador.phone}
           required
