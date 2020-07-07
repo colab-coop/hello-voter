@@ -8,13 +8,14 @@ import {
   HeaderContainer,
 } from "carbon-components-react";
 import styled from 'styled-components'
+import logo from '../assets/images/logo.png';
 import { spacing } from '../theme'
 
 const Logo = styled.div`
   width: ${ spacing[10] };
   height: ${ spacing[7] };
   margin-left: ${ spacing[3] };
-  background-image: url("./logo.png");
+  background-image: url(${ logo });
   background-size: contain;
   background-repeat: no-repeat;
   &:hover {

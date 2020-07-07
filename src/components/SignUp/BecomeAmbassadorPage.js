@@ -4,11 +4,12 @@ import { CheckboxCheckedFilled24 } from '@carbon/icons-react'
 import PageLayout from '../PageLayout'
 import { spacing, colors } from '../../theme'
 import { useHistory } from 'react-router-dom'
+import placeholder from '../../assets/images/placeholder.png';
 
 const Header = styled.div`
   width: 100%;
   height: 240px;
-  background-image: url("./placeholder.png");
+  background-image: url(${ placeholder });
   background-size: cover;
   display: flex;
   align-items: flex-end;
