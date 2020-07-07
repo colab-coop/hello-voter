@@ -81,7 +81,7 @@ export const ContactInfoPage = () => {
           invalidText="Invalid error message."
           labelText="First Name*"
           placeholder="Joan"
-          value={ambassador.first_name}
+          defaultValue={ambassador.first_name}
           required
         />
       </FormGroup>
@@ -91,7 +91,7 @@ export const ContactInfoPage = () => {
           invalidText="Invalid error message."
           labelText="Last Name*"
           placeholder="Ambassador"
-          value={ambassador.last_name}
+          defaultValue={ambassador.last_name}
           required
         />
       </FormGroup>
@@ -102,7 +102,7 @@ export const ContactInfoPage = () => {
             placeholder="mm/dd/yyyy"
             labelText="Date of Birth"
             type="text"
-            value={ambassador.date_of_birth}
+            defaultValue={ambassador.date_of_birth}
           />
         </DatePicker>
       </FormGroup>
@@ -115,7 +115,7 @@ export const ContactInfoPage = () => {
           invalidText="Invalid error message."
           labelText="Email"
           placeholder="joanambassador@email.co"
-          value={ambassador.email}
+          defaultValue={ambassador.email}
         />
       </FormGroup>
       <FormGroup>
@@ -124,7 +124,7 @@ export const ContactInfoPage = () => {
           invalidText="Invalid error message."
           labelText="Phone number*"
           placeholder="(123) 456-7890"
-          value={ambassador.phone}
+          defaultValue={ambassador.phone}
           required
         />
       </FormGroup>

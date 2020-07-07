@@ -33,7 +33,7 @@ export default ({ ambassador }) => (
         invalidText="Invalid error message."
         labelText="Street Address*"
         placeholder="1234 Ambassador Lane"
-        value={ambassador.address.address1}
+        defaultValue={ambassador.address.address1}
         required
       />
     </FormGroup>
@@ -43,7 +43,7 @@ export default ({ ambassador }) => (
         invalidText="Invalid error message."
         labelText="City*"
         placeholder="San Francisco"
-        value={ambassador.address.city}
+        defaultValue={ambassador.address.city}
         required
       />
     </FormGroup>
@@ -72,7 +72,7 @@ export default ({ ambassador }) => (
             invalidText="Invalid error message."
             labelText="Zip Code*"
             placeholder="12345"
-            value={ambassador.address.zip}
+            defaultValue={ambassador.address.zip}
             required
           />
         </RowRight>
