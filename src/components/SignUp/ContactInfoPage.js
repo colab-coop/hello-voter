@@ -100,10 +100,9 @@ export const ContactInfoPage = () => {
           <DatePickerInput
             name="date_of_birth"
             placeholder="mm/dd/yyyy"
-            labelText="Date of Birth*"
+            labelText="Date of Birth"
             type="text"
             value={ambassador.date_of_birth}
-            required
           />
         </DatePicker>
       </FormGroup>
@@ -114,10 +113,9 @@ export const ContactInfoPage = () => {
         <TextInput
           name="email"
           invalidText="Invalid error message."
-          labelText="Email*"
+          labelText="Email"
           placeholder="joanambassador@email.co"
           value={ambassador.email}
-          required
         />
       </FormGroup>
       <FormGroup>

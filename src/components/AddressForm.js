@@ -60,7 +60,9 @@ export default ({ ambassador }) => (
             placeholder=" "
             titleText="State*"
             type="default"
-            value={ambassador.address.state}
+            selectedItem={states.find(item => {
+              return item.text === ambassador.address.state
+            })}
             required
           />
         </RowLeft>
