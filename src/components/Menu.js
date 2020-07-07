@@ -14,7 +14,7 @@ const Logo = styled.div`
   width: ${ spacing[10] };
   height: ${ spacing[7] };
   margin-left: ${ spacing[3] };
-  background-image: url("./logo.png");
+  background-image: url(${process.env.PUBLIC_URL + '/logo.png'});
   background-size: contain;
   background-repeat: no-repeat;
   &:hover {

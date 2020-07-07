@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom'
 const Header = styled.div`
   width: 100%;
   height: 240px;
-  background-image: url("./placeholder.png");
+  background-image: url(${process.env.PUBLIC_URL + '/placeholder.png'});
   background-size: cover;
   display: flex;
   align-items: flex-end;
