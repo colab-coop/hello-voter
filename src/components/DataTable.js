@@ -65,7 +65,9 @@ const renderTable = (batchActionClick) => (
       <Table {...getTableProps()} size='tall'>
         <TableHead>
           <TableRow>
-            <TableSelectAll {...getSelectionProps()} />
+            <div style={{ visibility: "hidden" }}>
+              <TableSelectAll {...getSelectionProps()} />
+            </div>
             {headers.map((header) => (
               <TableHeader {...getHeaderProps({ header })}>
                 {header.header}
