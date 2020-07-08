@@ -86,7 +86,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
       As a Voting Ambassador, your task is to recruit “Vote Triplers” from a list of family members and neighbors. A Vote Tripler is someone who agrees to remind three other people to vote in the next election.
     </p>
     <p>
-      You will receive $50 for each Vote Tripler you recruit and a $Y bonus for each Vote Tripler who goes on to become a Voting Ambassador.
+      You will receive $50 for each Vote Tripler you recruit.
     </p>
     <Button href='/triplers/add' disabled={unconfirmed.length + confirmed.length + pending.length >= 12}>Find new Triplers<Add16 /></Button>
     <SectionTitle>Your possible Vote Triplers</SectionTitle>
