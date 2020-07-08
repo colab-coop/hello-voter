@@ -59,11 +59,11 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
         ]
       }/>}
     >
-      <p>Here's a list of people you may know. Put a check next to anyone you'd be willing to ask to be a Vote Tripler. Please select no more than 12 people.</p>
+      <p>Check the folks you know!</p>
       <DataTable
         headers={[
           {
-            header: 'Eligible neighbors',
+            header: 'Eligible people',
             key: 'name'
           },
           {

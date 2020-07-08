@@ -70,7 +70,7 @@ export const BecomeAmbassadorPage = () => {
       />
       <CheckboxComponent
         title="Make money!"
-        description='Receive $X for every "Vote Tripler" you sign up — and a $Y bonus for each Vote Tripler who goes on to become a Voting Ambassador.'
+        description='Receive $50 for every "Vote Tripler" you sign up — and a $Y bonus for each Vote Tripler who goes on to become a Voting Ambassador.'
       />
     </PageLayout>
   )
