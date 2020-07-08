@@ -36,11 +36,11 @@ export default () => {
       } />}
     >
       <VideoContainer>
-        <Video src="https://www.youtube.com/embed/RRWsKMjASQ0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+        <Video src="https://youtube.com/embed/lmY7pkOLjRs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
       </VideoContainer>
       <br />
       <br />
-      <p>Two years ago, former President Barack Obama spoke <strong>at a college graduation</strong> about the importance of voting. His message is even more important today.</p>
+      <p>Two years ago, former President Barack Obama spoke at a college graduation about the importance of voting. His message is even more important today.</p>
     </PageLayout>
   )
 }

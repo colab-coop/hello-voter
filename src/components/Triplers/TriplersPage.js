@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'carbon-components-react'
+import { Link, Tag } from 'carbon-components-react'
 import { Add16, ChevronRight16 } from '@carbon/icons-react'
 import styled from 'styled-components'
 import { colors, spacing } from '../../theme'
@@ -46,7 +46,7 @@ const TriplerColumn = styled.div`
   align-items: center;
 `
 
-const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler }) => (
+const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, confirmed, tagText }) => (
   <TriplerRowStyled>
     <div>
       <TriplerRowName>{ name }</TriplerRowName>
@@ -59,9 +59,14 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler }) 
         </Button>
       }
       {pending &&
-      <Button pill data-id={id} onClick={remindTripler}>
-        Remind
-      </Button>
+        <Button pill data-id={id} onClick={remindTripler}>
+          Remind
+        </Button>
+      }
+      {confirmed &&
+        <Tag type="green">
+          {tagText}
+        </Tag>
       }
     </TriplerColumn>
   </TriplerRowStyled>
@@ -78,7 +83,7 @@ const TriplersEmpty = () => (
 const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
   <>
     <p>
-      As a Voting Ambasssador, your task is to recruit “Vote Triplers” from a list of family members and neighbors. A Vote Tripler is someone who agrees to remind three other people to vote in the next election.
+      As a Voting Ambassador, your task is to recruit “Vote Triplers” from a list of family members and neighbors. A Vote Tripler is someone who agrees to remind three other people to vote in the next election.
     </p>
     <p>
       You will receive $X for each Vote Tripler you recruit and a $Y bonus for each Vote Tripler who goes on to become a Voting Ambassador.
@@ -119,11 +124,14 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
     </Paragraph>
     {
       confirmed &&
-        confirmed.map((tripler) => (
+        confirmed.map((tripler, i) => (
           <TriplerRow
             name={`${tripler.first_name} ${tripler.last_name}`}
             address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
             onClick={() => { }}
+            confirmed
+            // FIXME: Hardcode fake confirmation
+            tagText={i === 0 ? "$50 In Transit" : "$50 Collected"}
           />
         ))
     }
