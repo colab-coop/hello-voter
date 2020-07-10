@@ -1,0 +1,80 @@
+---
+- name: Create symbolic links for Node and NPM
+  file:
+    state: link
+    src: "{{ node_bin }}/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+  with_items:
+    - "npm"
+    - "node"
+
+- name: Ensure repository is cloned and set to desired version
+  become: True
+  become_user: "{{ user }}"
+  git:
+    repo: "{{ repository }}"
+    dest: "{{ app_folder }}/{{ item.slug }}"
+    version: "{{ branch }}"
+    force: True
+    accept_hostkey: True
+  with_items: "{{ organizations }}"
+
+- name: Ensure Dotenv files are ready
+  become: True
+  become_user: "{{ user }}"
+  template:
+    src: "env.j2"
+    dest: "{{ app_folder }}/{{ item.slug }}/.env"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644
+  with_items: "{{ organizations }}"
+
+- name: Install NPM modules
+  become: True
+  become_user: "{{ user }}"
+  npm:
+    path: "{{ app_folder }}/{{ item.slug }}"
+    executable: "{{ npm_exe }}"
+  with_items: "{{ organizations }}"
+
+- name: Build static clients
+  become: True
+  become_user: "{{ user }}"
+  shell: >
+    cd {{ app_folder }}/{{ item.slug }} && \
+    {{ npm_exe }} run build
+  with_items: "{{ organizations }}"
+
+- name: Ensure main deploy directory
+  become: True
+  become_user: "{{ user }}"
+  file:
+    path: "{{ home_folder }}/clients"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    state: directory
+    mode: 0755
+
+- name: Ensure organizations deploy directories
+  become: True
+  become_user: "{{ user }}"
+  file:
+    path: "{{ home_folder }}/clients/{{ item.slug }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    state: directory
+    mode: 0755
+  with_items: "{{ organizations }}"
+
+- name: Sync each build directory with exposed
+  become: True
+  become_user: "{{ user }}"
+  synchronize:
+    src: "{{ app_folder }}/{{ item.slug }}/build/"
+    dest: "{{ home_folder }}/clients/{{ item.slug }}/"
+  with_items: "{{ organizations }}"
+  delegate_to: "{{ inventory_hostname }}"

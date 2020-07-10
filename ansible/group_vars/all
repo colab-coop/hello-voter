@@ -1,0 +1,23 @@
+### General
+name: "hellovoter"
+home_folder: "/opt/www/{{ name }}"
+app_folder: "{{ home_folder }}/ui"
+user: "{{ name }}"
+group: "{{ name }}"
+
+### Organizations
+organizations:
+  - name: "Stage"
+    slug: "stage"
+  - name: "Prod"
+    slug: "prod"
+  - name: "Stress"
+    slug: "stress"
+
+### Repository
+repository: "git@github.com:colab-coop/hello-voter.git"
+
+### NPM
+npm_version: "v12.18.2"
+node_bin: "{{ home_folder }}/.nvm/versions/node/{{ npm_version }}/bin"
+npm_exe: "{{ node_bin }}/npm"
