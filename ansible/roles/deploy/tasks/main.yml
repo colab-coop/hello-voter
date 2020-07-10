@@ -1,4 +1,15 @@
 ---
+- name: Install global NPM modules
+  become: True
+  become_user: "{{ user }}"
+  npm:
+    name: "{{ item }}"
+    state: present
+    global: True
+    executable: "{{ npm_exe }}"
+  with_items:
+    - "env-cmd"
+
 - name: Create symbolic links for Node and NPM
   file:
     state: link
@@ -10,6 +21,7 @@
   with_items:
     - "npm"
     - "node"
+    - "env-cmd"
 
 - name: Ensure repository is cloned and set to desired version
   become: True
@@ -46,7 +58,7 @@
   become_user: "{{ user }}"
   shell: >
     cd {{ app_folder }}/{{ item.slug }} && \
-    PUBLIC_URL=https://{{ domain }}/{{ item.slug }}/ {{ npm_exe }} run build
+    env-cmd -f .env {{ npm_exe }} run build
   with_items: "{{ organizations }}"
 
 - name: Ensure main deploy directory
