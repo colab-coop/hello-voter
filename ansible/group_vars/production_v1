@@ -6,8 +6,8 @@ branch: "ambassador"
 ### Dotenv
 dotenv:
   REACT_APP_ORGID: "VT6WX8A"
-  REACT_APP_AUDIANCE: ""
-  REACT_APP_BASEURI: "voterambassador/staging"
+  REACT_APP_AUDIANCE: "{{ domain }}"
+  REACT_APP_BASEURI: "/voterambassador/staging"
   REACT_APP_APPPATH: "voterambassador/staging"
   REACT_APP_API_DOMAIN: "gotv-vt.ourvoiceusa.org"
   REACT_APP_API_SSL: "true"
@@ -16,3 +16,4 @@ dotenv:
   REACT_APP_KEY: "auth"
   REACT_APP_DEVELOPMENT: "false"
   REACT_APP_API_URL: "https://hellovoter.api.prod.colab.coop"
+  REACT_APP_CALENDLY_LINK: "https://calendly.com/ambassador-screening/10"
