@@ -7,14 +7,29 @@ import {
   HeaderGlobalBar,
   HeaderContainer,
 } from "carbon-components-react";
+import styled from 'styled-components'
+import logo from '../assets/images/logo.png';
+import { spacing } from '../theme'
+
+const Logo = styled.div`
+  width: ${ spacing[10] };
+  height: ${ spacing[7] };
+  margin-left: ${ spacing[3] };
+  background-image: url(${ logo });
+  background-size: contain;
+  background-repeat: no-repeat;
+  &:hover {
+    cursor: pointer;
+  }
+`
 
 export default () => {
   return (
     <HeaderContainer
       render={() =>
         <>
-          <Header aria-label="IBM Platform Name">
-            <HeaderName href="#" prefix="HELLO VOTER"></HeaderName>
+          <Header aria-label="Hello Voter">
+            <Logo onClick={() => { }} />
             <HeaderGlobalBar>
               <HeaderGlobalAction aria-label="Help" onClick={() => {}}>
                 <Help20/>

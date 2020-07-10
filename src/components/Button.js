@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Button, InlineLoading } from 'carbon-components-react'
 import { useHistory } from 'react-router-dom'
-import { spacing } from '../theme'
+import { spacing, colors } from '../theme'
 
 const ButtonStyled = styled(Button)`
   display: flex;
@@ -17,15 +17,38 @@ const InlineLoadingStyled = styled(InlineLoading)`
   width: 100%;
   justify-content: center;
   height: ${ spacing[5] };
-` 
+`
 
-export default ({ href, children, kind, loading, onClick, ...props }) => {
+const PillButton = styled.div`
+  border-radius: 32px;
+  font-size: 12px;
+  padding: ${ spacing[2]} ${spacing[3]};
+  background-color: ${ colors.gray[20]};
+  border: 2px solid ${ colors.gray[20]};
+  display: flex;
+  align-items: center;
+  &:hover {
+    border: 2px solid ${ colors.blue[60]};
+  }
+`
+
+export default ({ href, children, kind, loading, onClick, pill, ...props }) => {
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
   }
 
-  return (
+  return pill ? (
+    <PillButton
+      onClick={(e) => {
+        onClick && onClick(e);
+        href && redirect(href);
+      }}
+      {...props}
+    >
+      {children}
+    </PillButton>
+  ) : (
     <ButtonStyled
       kind={loading ? "ghost" : kind}
       onClick={(e) => {

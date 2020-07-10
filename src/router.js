@@ -15,12 +15,17 @@ import { ContactInfoPage } from './components/SignUp/ContactInfoPage'
 import TriplersPage from './components/Triplers/TriplersPage'
 import TriplersAdd from './components/Triplers/AddTripler'
 import ConfirmPage from './components/Triplers/ConfirmPage'
+import OnBoarding01 from './components/Onboarding/01'
+import OnBoarding02 from './components/Onboarding/02'
+import OnBoarding03 from './components/Onboarding/03'
+import PendingApprovalPage from './components/PendingApprovalPage'
 
-const NoMatch = ({authenticated, path, signupCompleted }) => (
+
+const NoMatch = ({authenticated, path, user }) => (
   <Route
     path={path}
     render={(props) => authenticated === true
-      ? signupCompleted ?
+      ? (user && user.signup_completed) ?
         <Redirect to={{pathname: '/triplers', state: {from: props.location}}} />
         :
         <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
@@ -28,14 +33,17 @@ const NoMatch = ({authenticated, path, signupCompleted }) => (
   />
 )
 
-const AuthRoute = ({component: Component, authenticated, path, signupCompleted }) => (
+const AuthRoute = ({component: Component, authenticated, path, user }) => (
   <Route
     path={path}
     render={(props) => authenticated === true
-      ? signupCompleted ?
+      ? (user && user.approved) ?
         <Component {...props} />
         :
-        <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
+        (user && user.signup_completed && !user.approved) ?
+          <Redirect to={{pathname: '/approval', state: {from: props.location}}} />
+          :
+          <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
       : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
   />
 )
@@ -61,12 +69,16 @@ const AppRouter = () => {
         <AuthPublicRoute path="/ambassador/address" component={AddressPage} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/ambassador/contact" component={ContactPage} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/ambassador/confirm" component={ContactInfoPage} exact={true} authenticated={authenticated} />
-        <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} signupCompleted={user.signup_completed}/>
-        <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} signupCompleted={user.signup_completed}/>
-        <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} signupCompleted={user.signup_completed}/>
+        <AuthPublicRoute path="/onboarding/01" component={OnBoarding01} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/02" component={OnBoarding02} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/03" component={OnBoarding03} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/approval" component={PendingApprovalPage} exact={true} authenticated={authenticated} />
+        <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
+        <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} user={user}/>
+        <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} user={user}/>
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>
-        <NoMatch authenticated={authenticated} signupCompleted={user.signup_completed}/>
+        <NoMatch authenticated={authenticated} user={user}/>
       </Switch>
     </HashRouter>
   )

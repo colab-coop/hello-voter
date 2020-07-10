@@ -7,7 +7,7 @@ import { AppContext } from '../../api/AppContext'
 
 /*
   {"address1": "1665 Logan St", "city": "Denver", "state": "CO", "zip": 80203}
- */
+*/
 
 export const AddressPage = () => {
   const history = useHistory()
@@ -41,11 +41,11 @@ export const AddressPage = () => {
       header={<Breadcrumbs items={
         [{
           name: "Back",
-          route: "/"
+          route: "/ambassador/personal_info"
         }]
       }/>}
     >
-      <AddressForm/>
+      <AddressForm ambassador={{address: {}}} />
     </PageLayout>
   )
 }

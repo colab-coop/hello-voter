@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { ReactComponent as IconFacebook } from '../assets/icons/Facebook.svg';
+import { ReactComponent as IconGoogle } from '../assets/icons/Google.svg';
 import Button from './Button'
 import {
   TYPES, BUTTON_TEXTS, OAUTH_TYPES
@@ -19,6 +21,8 @@ export const LoginButton = ({ type }) => {
       onClick={login}
       loading={loading}
     >
+      {type === TYPES.FB && <IconFacebook width={32} height={32} fill="#fff" />}
+      {type === TYPES.GOOGLE && <IconGoogle width={32} height={32} fill="#fff" />}
       Log in with
       {' '}
       { type === TYPES.FB && BUTTON_TEXTS['FB'] }

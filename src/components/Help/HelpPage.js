@@ -11,17 +11,17 @@ const TopParagraph = styled.p`
 
 export default () => (
   <PageLayout title="Help">
-    <TopParagraph>Have questions? Here’s how you can get in touch to get answers.</TopParagraph>
+    <TopParagraph>Have questions? Here’s how to get answers.</TopParagraph>
     <CardButton
       icon={ <Catalog24 /> }
       title="Schedule a call"
-      description="Schedule a call with your local organizar to get help"
+      description="Schedule a call to discuss your questions with an Organizer"
       onClick={() => { }}
     />
     <CardButton
       icon={ <Help24 /> }
       title="FAQ"
-      description="Frequently asked questions from our ambassadors"
+      description="See answers to common questions asked by other Voting Ambassadors"
       onClick={() => { }}
     />
   </PageLayout>

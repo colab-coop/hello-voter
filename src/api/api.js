@@ -7,13 +7,17 @@ const LOGIN_URL = `${SERVER_URL}/hello`
 const TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
 const PUT_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
 const AMBASSADOR_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current`
-const FREE_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
+const FREE_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/suggest-triplers`
 const SIGNUP_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/signup`
 const TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
 const CONFIRM_TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
 
 const errorHandler = (e) => {
   console.warn(e)
+}
+
+const isFailStatusCode = (status) => {
+  return [401, 400, 500].includes(status)
 }
 
 export const getToken = () => {
@@ -28,6 +32,8 @@ const addAuth = (headers) => {
     'Content-Type': 'application/json'
   }
 }
+
+// TODO: De-duplicate the requests and create a wrapper around it
 
 export const logIn = async (sm) => {
   try {
@@ -74,6 +80,13 @@ export const claimTriplers = async (selectedTriplers) => {
       })
     })
     let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
     return {
       data
     }
@@ -117,12 +130,19 @@ export const fetchFreeTriplers = async () => {
 
 export const signup = async (tripler) => {
   try {
-    let res = await fetch(`${SIGNUP_URL}`, {
+    let res = await fetch(SIGNUP_URL, {
       method: 'POST',
       headers: addAuth(),
       body: JSON.stringify(tripler)
     })
     let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
     return {
       data
     }
@@ -140,6 +160,13 @@ export const confirmTriplers = async (triplerId, json) => {
       body: JSON.stringify(json)
     })
     let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
     return {
       data
     }
@@ -156,6 +183,13 @@ export const sendReminder = async (id) => {
       headers: addAuth()
     })
     let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
     return {
       data
     }
@@ -171,7 +205,15 @@ export const fetchAmbassador = async () => {
       method: 'GET',
       headers: addAuth()
     })
+
     let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
     return {
       data
     }

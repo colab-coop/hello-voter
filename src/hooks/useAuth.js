@@ -4,21 +4,34 @@ export const useAuth = (token, api) => {
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  useEffect( () => {
-    const fetchUser = async () => {
-      if (token && !authenticated) {
-        const fetched = await api.fetchAmbassador()
-        if (fetched) setUser(fetched.data)
-        setAuthenticated(Boolean(fetched))
+  const fetchUser = async () => {
+    const { error, data } = await api.fetchAmbassador()
+    if (error) {
+      // TODO: Change authenticated to "in_signup_process"
+      if (error.msg === 'No current ambassador') {
+        setAuthenticated(true)
       }
-
       setLoading(false)
+      return {
+        completed: false,
+        error
+      }
     }
-    fetchUser()
-  }, [token, setAuthenticated, authenticated])
+    setUser(data)
+    setAuthenticated(true)
+    setLoading(false)
+    return {
+      completed: true,
+      data: data
+    }
+  }
+  useEffect( () => {
+    !authenticated && fetchUser()
+  }, [authenticated, fetchUser])
   return {
     authenticated,
     user,
-    loading
+    loading,
+    fetchUser
   }
 }

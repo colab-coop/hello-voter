@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'carbon-components-react'
-import { Add16 } from '@carbon/icons-react'
+import { Link, Tag } from 'carbon-components-react'
+import { Add16, ChevronRight16 } from '@carbon/icons-react'
 import styled from 'styled-components'
 import { colors, spacing } from '../../theme'
 import PageLayout from '../PageLayout'
@@ -40,26 +40,33 @@ const TriplerRowAddress = styled.p`
 `
 
 const TriplerColumn = styled.div`
-  flex: 1;
-  justify-content: 'center';
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  align-items: center;
 `
 
-const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler }) => (
+const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, confirmed, tagText }) => (
   <TriplerRowStyled>
-    <TriplerColumn>
+    <div>
       <TriplerRowName>{ name }</TriplerRowName>
       <TriplerRowAddress>{ address }</TriplerRowAddress>
-    </TriplerColumn>
+    </div>
     <TriplerColumn>
       {unconfirmed &&
-        <Button micro small href={`/triplers/confirm/${id}`}>
-          Add Info
+        <Button pill href={`/triplers/confirm/${id}`}>
+          Add Info <ChevronRight16 />
         </Button>
       }
       {pending &&
-      <Button micro small onClick={() => remindTripler(id)}>
-        Remind
-      </Button>
+        <Button pill data-id={id} onClick={remindTripler}>
+          Remind
+        </Button>
+      }
+      {confirmed &&
+        <Tag type="green">
+          {tagText}
+        </Tag>
       }
     </TriplerColumn>
   </TriplerRowStyled>
@@ -73,15 +80,16 @@ const TriplersEmpty = () => (
     <Button href='/triplers/add'>Find new Triplers<Add16 /></Button>
   </>
 )
-
 const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
   <>
     <p>
-      These are your contacts that will each help 3 others vote. Confirm each
-      Tripler by adding their information below
+      As a Voting Ambassador, your task is to recruit “Vote Triplers” from a list of family members and neighbors. A Vote Tripler is someone who agrees to remind three other people to vote in the next election.
     </p>
-    <Button href='/triplers/add'>Find new Triplers<Add16 /></Button>
-    <SectionTitle>Your unconfirmed Triplers</SectionTitle>
+    <p>
+      You will receive $50 for each Vote Tripler you recruit.
+    </p>
+    <Button href='/triplers/add' disabled={unconfirmed.length + confirmed.length + pending.length >= 12}>Find new Triplers<Add16 /></Button>
+    <SectionTitle>Your possible Vote Triplers</SectionTitle>
     <Paragraph>Add information for a Tripler. We’ll send them a text message to confirm.</Paragraph>
     {
       unconfirmed &&
@@ -95,8 +103,8 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
           />
         ))
     }
-    <SectionTitle>Your Triplers who haven’t replied yet</SectionTitle>
-    <Paragraph>Once the Tripler confirms “YES” to our text message, you will get your reward.</Paragraph>
+    <SectionTitle>Your unconfirmed Vote Triplers</SectionTitle>
+    <Paragraph>These possible Vote Triplers have not yet confirmed their identity.</Paragraph>
     {
       pending &&
         pending.map((tripler) => (
@@ -110,15 +118,20 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
           />
         ))
     }
-    <SectionTitle>Your confirmed Triplers</SectionTitle>
-    <Paragraph>Once your <Link href="#">payment method is set up</Link>, you’ll receive your reward for these Triplers.</Paragraph>
+    <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
+    <Paragraph>
+      Once your <Link href="#">payment method is set up</Link>, you’ll receive payment for these Vote Triplers
+    </Paragraph>
     {
       confirmed &&
-        confirmed.map((tripler) => (
+        confirmed.map((tripler, i) => (
           <TriplerRow
             name={`${tripler.first_name} ${tripler.last_name}`}
             address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
             onClick={() => { }}
+            confirmed
+            // FIXME: Hardcode fake confirmation
+            tagText={i === 0 ? "$50 In Transit" : "$50 Collected"}
           />
         ))
     }
@@ -135,8 +148,8 @@ export default () => {
     }
     fetchData()
   }, [])
-  const sendReminder = async (id) => {
-    api.sendReminder(id)
+  const sendReminder = async (el) => {
+    api.sendReminder(el.target.dataset.id)
   }
   return (
     triplers ? <TriplersPage triplers={triplers} remindTripler={sendReminder} /> : <Loading />
