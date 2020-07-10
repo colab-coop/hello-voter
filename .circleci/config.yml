@@ -71,13 +71,13 @@ jobs:
             cd ~/repo/client/ansible
             ansible-playbook -i hosts deploy.yml --limit production_v1 --vault-password-file ~/repo/ansible/.vault-pass
 workflows:
-   deploy:
-     jobs:
-       - deploy-to-coopernetes:
-           context: coopernetes-staging
-           filters:
-             branches:
-               only: develop
+  deploy:
+    jobs:
+      - deploy-to-coopernetes:
+          context: coopernetes-staging
+          filters:
+            branches:
+              only: develop
       - staging_ui:
           filters:
             branches:
