@@ -1,0 +1,13 @@
+### Evnironment
+env: "production"
+domain: "hellovoter.prod.colab.coop"
+branch: "ambassador"
+
+### Dotenv
+dotenv:
+  REACT_APP_OAUTH_HEADER: ""
+  REACT_APP_TOKEN_KEY: ""
+  REACT_APP_AUDIANCE: ""
+  REACT_APP_KEY: ""
+  REACT_APP_DEVELOPMENT: ""
+  REACT_APP_API_URL: ""
