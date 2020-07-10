@@ -39,7 +39,7 @@ jobs:
           name: Deploy with Ansible
           command: |
             . env/bin/activate
-            cd ~/repo/client/ansible
+            cd ~/repo/ansible
             ansible-playbook -i hosts deploy.yml --limit staging_v1 --vault-password-file ~/repo/ansible/.vault-pass
   production_ui:
     docker:
@@ -68,7 +68,7 @@ jobs:
           name: Deploy with Ansible
           command: |
             . env/bin/activate
-            cd ~/repo/client/ansible
+            cd ~/repo/ansible
             ansible-playbook -i hosts deploy.yml --limit production_v1 --vault-password-file ~/repo/ansible/.vault-pass
 workflows:
   deploy:
