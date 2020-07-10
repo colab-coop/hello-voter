@@ -1,7 +1,7 @@
 ### Evnironment
 env: "staging"
 domain: "hellovoter.stage.colab.coop"
-branch: "ambassador"
+branch: "ambassador-stage"
 
 ### Dotenv
 dotenv:

@@ -46,7 +46,7 @@
   become_user: "{{ user }}"
   shell: >
     cd {{ app_folder }}/{{ item.slug }} && \
-    {{ npm_exe }} run build
+    PUBLIC_URL=https://{{ domain }}/{{ item.slug }}/ {{ npm_exe }} run build
   with_items: "{{ organizations }}"
 
 - name: Ensure main deploy directory
