@@ -25,14 +25,15 @@ const RowRight = styled.div`
   grid-column-end: span 5;
 `
 
-export default () => (
+export default ({ ambassador }) => (
   <>
     <FormGroup>
       <TextInput
         name="address1"
         invalidText="Invalid error message."
-        labelText="Street Address"
+        labelText="Street Address*"
         placeholder="1234 Ambassador Lane"
+        defaultValue={ambassador.address.address1}
         required
       />
     </FormGroup>
@@ -40,8 +41,9 @@ export default () => (
       <TextInput
         name="city"
         invalidText="Invalid error message."
-        labelText="City"
+        labelText="City*"
         placeholder="San Francisco"
+        defaultValue={ambassador.address.city}
         required
       />
     </FormGroup>
@@ -56,8 +58,11 @@ export default () => (
             items={states}
             onChange={(value) => console.log(value)}
             placeholder=" "
-            titleText="State"
+            titleText="State*"
             type="default"
+            selectedItem={states.find(item => {
+              return item.text === ambassador.address.state
+            })}
             required
           />
         </RowLeft>
@@ -65,8 +70,9 @@ export default () => (
           <TextInput
             name="zip"
             invalidText="Invalid error message."
-            labelText="Zip Code"
+            labelText="Zip Code*"
             placeholder="12345"
+            defaultValue={ambassador.address.zip}
             required
           />
         </RowRight>

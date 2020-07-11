@@ -58,14 +58,16 @@ const renderTable = (batchActionClick) => (
             Add
         </TableBatchAction>
         </TableBatchActions>
-        <TableToolbarContent>
+        {/* <TableToolbarContent>
           <TableToolbarSearch onChange={onInputChange} />
-        </TableToolbarContent>
+        </TableToolbarContent> */}
       </TableToolbar>
       <Table {...getTableProps()} size='tall'>
         <TableHead>
           <TableRow>
-            <TableSelectAll {...getSelectionProps()} />
+            <div style={{ visibility: "hidden" }}>
+              <TableSelectAll {...getSelectionProps()} />
+            </div>
             {headers.map((header) => (
               <TableHeader {...getHeaderProps({ header })}>
                 {header.header}
@@ -100,7 +102,7 @@ const renderTable = (batchActionClick) => (
           40,
           50
         ]}
-        totalItems={103}
+        totalItems={rows.length}
       />
     </TableContainerStyled>
   );

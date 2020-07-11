@@ -1,26 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
-import { Form, FormGroup, TextInput } from 'carbon-components-react'
-import { useHistory } from 'react-router-dom'
+import { FormGroup, TextInput } from 'carbon-components-react'
 import { AppContext } from '../../api/AppContext'
+import { useHistory } from 'react-router-dom'
 
 export const ContactPage = () => {
   const history = useHistory()
-  const [isSaving, setIsSaving] = useState(false)
-  const { ambassador, setAmbassador, api } = React.useContext(AppContext)
-  useEffect(() => {
-    const signup = async () => {
-      setIsSaving(true)
-      const res = await api.signup(ambassador)
-      setIsSaving(false)
-      history.push('/triplers')
-    }
-
-    if (ambassador.email) {
-      signup()
-    }
-  }, [ ambassador ])
+  const { setAmbassador } = React.useContext(AppContext)
   return (
     <PageLayout
       title="Contact"
@@ -39,12 +26,14 @@ export const ContactPage = () => {
             ...userData
           }
         })
+
+        history.push('/ambassador/confirm')
       }}
       submitButtonTitle="Continue"
       header={<Breadcrumbs items={
         [{
           name: "Back",
-          route: "/"
+          route: "/ambassador/address"
         }]
       }/>}
     >
@@ -54,14 +43,13 @@ export const ContactPage = () => {
           invalidText="Invalid error message."
           labelText="Email"
           placeholder="joanambassador@email.co"
-          required
         />
       </FormGroup>
       <FormGroup>
         <TextInput
           name="phone"
           invalidText="Invalid error message."
-          labelText="Phone number"
+          labelText="Phone number*"
           placeholder="(123) 456-7890"
           required
         />
