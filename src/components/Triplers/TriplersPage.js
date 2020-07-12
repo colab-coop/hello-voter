@@ -177,14 +177,12 @@ const TriplersPage = ({ triplers, remindTripler }) => {
       }/>}
     >
       {
-        !triplers ?
-          <TriplersEmpty/> :
-          <Triplers
-            unconfirmed={unconfirmed}
-            pending={pending}
-            confirmed={confirmed}
-            remindTripler={remindTripler}
-          />
+        <Triplers
+          unconfirmed={unconfirmed}
+          pending={pending}
+          confirmed={confirmed}
+          remindTripler={remindTripler}
+        />
       }
     </PageLayout>
   )
