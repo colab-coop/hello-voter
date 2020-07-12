@@ -49,7 +49,7 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
             route: "/"
           },
           {
-            name: "Triplers",
+            name: "Vote Triplers",
             route: "/"
           },
           {

@@ -7,9 +7,60 @@ export default {
   title: 'Triplers'
 }
 
-// export const TriplersEmptyPage = () => (
-//   <Triplers empty />
-// )
+export const TriplersEmptyPage = () => (
+  <Triplers triplers={[]} />
+)
+
+export const UnconfirmedTriplers = () => (
+  <Triplers
+    triplers={[
+      {
+        status: "unconfirmed",
+        first_name: "Lauren",
+        last_name: "R",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+    ]}
+  />
+);
+
+export const PendingTriplers = () => (
+  <Triplers
+    triplers={[
+      {
+        status: "pending",
+        first_name: "Lauren",
+        last_name: "R",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+    ]}
+  />
+);
+
+export const ConfirmedTriplers = () => (
+  <Triplers
+    triplers={[
+      {
+        status: "confirmed",
+        first_name: "Lauren",
+        last_name: "R",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+    ]}
+  />
+);
 
 export const TriplersPage = () => (
   <Triplers
