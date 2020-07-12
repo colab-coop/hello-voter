@@ -88,8 +88,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
       </p>
       <br />
       <p>
-        You will receive $50 for each Vote Tripler you recruit and a $Y bonus
-        for each Vote Tripler who goes on to become a Voting Ambassador.
+        You will receive $50 for each Vote Tripler you recruit.
       </p>
       <Button
         href="/triplers/add"
