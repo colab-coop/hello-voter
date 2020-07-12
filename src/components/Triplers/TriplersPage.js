@@ -63,7 +63,8 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
           Remind
         </Button>
       }
-      {confirmed &&
+      {/* FIXME: Hardcode fake confirmation */}
+      {confirmed && tagText &&
         <Tag type="green">
           {tagText}
         </Tag>
