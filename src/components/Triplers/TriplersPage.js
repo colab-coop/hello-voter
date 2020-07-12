@@ -95,7 +95,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
         href="/triplers/add"
         disabled={hasMaxTriplers}
       >
-        Find new Triplers
+        Find new Vote Triplers
         <Add16 />
       </Button>
       
@@ -182,7 +182,7 @@ const TriplersPage = ({ triplers, remindTripler }) => {
             route: "/"
           },
           {
-            name: "Triplers",
+            name: "Vote Triplers",
             route: "/"
           }
         ]

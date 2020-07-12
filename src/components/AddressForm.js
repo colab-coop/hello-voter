@@ -67,7 +67,7 @@ export default ({ ambassador }) => (
           <TextInput
             name="zip"
             invalidText="Invalid error message."
-            labelText="Zip Code*"
+            labelText="ZIP Code*"
             defaultValue={ambassador.address.zip}
             required
           />

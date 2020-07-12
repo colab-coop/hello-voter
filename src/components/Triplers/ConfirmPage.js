@@ -61,7 +61,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
               route: "/",
             },
             {
-              name: "Triplers",
+              name: "Vote Triplers",
               route: "/",
             },
             {
