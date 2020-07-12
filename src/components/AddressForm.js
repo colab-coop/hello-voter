@@ -32,7 +32,6 @@ export default ({ ambassador }) => (
         name="address1"
         invalidText="Invalid error message."
         labelText="Street Address*"
-        placeholder="1234 Ambassador Lane"
         defaultValue={ambassador.address.address1}
         required
       />
@@ -42,7 +41,6 @@ export default ({ ambassador }) => (
         name="city"
         invalidText="Invalid error message."
         labelText="City*"
-        placeholder="San Francisco"
         defaultValue={ambassador.address.city}
         required
       />
@@ -57,7 +55,6 @@ export default ({ ambassador }) => (
             itemToString={(item) => (item ? item.text : '')}
             items={states}
             onChange={(value) => console.log(value)}
-            placeholder=" "
             titleText="State*"
             type="default"
             selectedItem={states.find(item => {
@@ -71,7 +68,6 @@ export default ({ ambassador }) => (
             name="zip"
             invalidText="Invalid error message."
             labelText="Zip Code*"
-            placeholder="12345"
             defaultValue={ambassador.address.zip}
             required
           />
