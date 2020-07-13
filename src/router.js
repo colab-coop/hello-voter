@@ -3,6 +3,8 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 import { AppProvider, AppContext } from './api/AppContext'
 
+import { initAnalytics, useAnalytics } from './hooks/useAnalytics'
+
 import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
@@ -57,11 +59,11 @@ const AuthPublicRoute = ({component: Component, authenticated, path }) => (
   />
 )
 
-const AppRouter = () => {
+const AppRoutes = () => {
   const { authenticated, loading, user } = React.useContext(AppContext)
+  useAnalytics()
   if (loading) return <Loading />
   return (
-    <HashRouter>
       <Switch>
         <AuthPublicRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/ambassador/signup" component={SignUpPage} exact={true} authenticated={authenticated} />
@@ -80,15 +82,17 @@ const AppRouter = () => {
         <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} user={user}/>
       </Switch>
-    </HashRouter>
   )
 }
 
 
 export const RouterC = () => {
+  initAnalytics()
   return (
     <AppProvider>
-      <AppRouter />
+      <HashRouter>
+        <AppRoutes />
+      </HashRouter>
     </AppProvider>
   )
 }
