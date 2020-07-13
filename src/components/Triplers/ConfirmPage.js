@@ -61,7 +61,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
               route: "/",
             },
             {
-              name: "Triplers",
+              name: "Vote Triplers",
               route: "/",
             },
             {
@@ -78,7 +78,6 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           name="triplee1"
           invalidText="Invalid error message."
           labelText="Name 1*"
-          placeholder="Name"
           required
         />
       </FormGroup>
@@ -87,7 +86,6 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           name="triplee2"
           invalidText="Invalid error message."
           labelText="Name 2*"
-          placeholder="Name"
           required
         />
       </FormGroup>
@@ -96,7 +94,6 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           name="triplee3"
           invalidText="Invalid error message."
           labelText="Name 3*"
-          placeholder="Name"
           required
         />
       </FormGroup>
@@ -106,7 +103,6 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           name="phone"
           invalidText="Invalid error message."
           labelText={`${tripler.first_name}'s Phone Number*`}
-          placeholder="123-456-7890"
           required
         />
       </FormGroup>

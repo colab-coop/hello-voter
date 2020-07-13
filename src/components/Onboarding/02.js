@@ -31,7 +31,7 @@ export default () => {
       header={<Breadcrumbs items={
         [{
           name: "Back",
-          route: "/components/01"
+          route: "/onboarding/01"
         }]
       } />}
     >

@@ -1,7 +1,7 @@
 import React from 'react'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
-import { FormGroup, TextInput, DatePicker, DatePickerInput } from 'carbon-components-react'
+import { FormGroup, TextInput } from 'carbon-components-react'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../../api/AppContext'
 
@@ -37,7 +37,6 @@ export const PersonalInfoPage = () => {
           name="first_name"
           invalidText="Invalid error message."
           labelText="First Name*"
-          placeholder="Joan"
           required
         />
       </FormGroup>
@@ -46,18 +45,9 @@ export const PersonalInfoPage = () => {
           name="last_name"
           invalidText="Invalid error message."
           labelText="Last Name*"
-          placeholder="Ambassador"
           required
         />
       </FormGroup>
-      <DatePicker dateFormat="m/d/Y" datePickerType="single">
-        <DatePickerInput
-          name="dob"
-          placeholder="mm/dd/yyyy"
-          labelText="Date of Birth"
-          type="text"
-        />
-      </DatePicker>
     </PageLayout>
   )
 }
