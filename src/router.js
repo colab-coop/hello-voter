@@ -57,11 +57,10 @@ const AuthPublicRoute = ({component: Component, authenticated, path }) => (
   />
 )
 
-const AppRouter = () => {
+const AppRoutes = () => {
   const { authenticated, loading, user } = React.useContext(AppContext)
   if (loading) return <Loading />
   return (
-    <HashRouter>
       <Switch>
         <AuthPublicRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/ambassador/signup" component={SignUpPage} exact={true} authenticated={authenticated} />
@@ -80,7 +79,6 @@ const AppRouter = () => {
         <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} user={user}/>
       </Switch>
-    </HashRouter>
   )
 }
 
@@ -88,7 +86,9 @@ const AppRouter = () => {
 export const RouterC = () => {
   return (
     <AppProvider>
-      <AppRouter />
+      <HashRouter>
+        <AppRoutes />
+      </HashRouter>
     </AppProvider>
   )
 }
