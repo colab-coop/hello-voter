@@ -137,11 +137,17 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
             You'll receive payment for these Vote Triplers.
           </Paragraph>
           {confirmed.map((tripler, i) => (
-            <TriplerRow
+              <TriplerRow
               name={`${tripler.first_name} ${tripler.last_name}`}
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
               onClick={() => {}}
               confirmed
+              // FIXME: Hardcode fake confirmation
+              tagText={
+                i === 0
+                  ? `$${REACT_APP_TRIPLER_PAYMENT_AMT} Sent`
+                  : `$${REACT_APP_TRIPLER_PAYMENT_AMT} Collected`
+              }
             />
           ))}
         </>
