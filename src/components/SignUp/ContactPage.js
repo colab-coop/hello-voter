@@ -42,7 +42,6 @@ export const ContactPage = () => {
           name="email"
           invalidText="Invalid error message."
           labelText="Email"
-          placeholder="joanambassador@email.co"
         />
       </FormGroup>
       <FormGroup>
@@ -50,7 +49,6 @@ export const ContactPage = () => {
           name="phone"
           invalidText="Invalid error message."
           labelText="Phone number*"
-          placeholder="(123) 456-7890"
           required
         />
       </FormGroup>
