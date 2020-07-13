@@ -3,6 +3,8 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 import { AppProvider, AppContext } from './api/AppContext'
 
+import { initAnalytics, useAnalytics } from './hooks/useAnalytics'
+
 import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
@@ -59,6 +61,7 @@ const AuthPublicRoute = ({component: Component, authenticated, path }) => (
 
 const AppRoutes = () => {
   const { authenticated, loading, user } = React.useContext(AppContext)
+  useAnalytics()
   if (loading) return <Loading />
   return (
       <Switch>
@@ -84,6 +87,7 @@ const AppRoutes = () => {
 
 
 export const RouterC = () => {
+  initAnalytics({ trackingId: 'UA-98115457-1', options: { debug: true, 'cookieDomain': 'none' } } )
   return (
     <AppProvider>
       <HashRouter>
