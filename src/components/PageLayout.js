@@ -1,47 +1,45 @@
 import React from 'react'
-import { Column, Row, Form, Content } from 'carbon-components-react'
+import { Grid, Column, Row, Form } from 'carbon-components-react'
 import styled from 'styled-components'
-import { spacing } from '../theme'
+import { spacing, colors } from '../theme'
 import Menu from './Menu'
 import Button from './Button'
 import { InlineNotification } from 'carbon-components-react'
 
-const FormStyled = styled(Form)`
-  margin-top: ${ spacing[8] };
-`
-
-const ContentContainer = styled(Content)`
+const ContentContainer = styled(Grid)`
   padding: ${ spacing[3] };
+  padding-top: ${ spacing[8] };
   padding-bottom: ${ spacing[10] };
+  height: 100vh;
+  margin-top: 0;
+  overflow-y: scroll;
 `
 
 const TitleContainer = styled(Row)`
-  margin-top: ${ spacing[5] };
+  margin-top: ${ spacing[7] };
   margin-bottom: ${ spacing[7] };
 `
 
 const CtaButtonContainer = styled(Column)`
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
+  background-color: ${ colors.white };
   z-index: 1;
 `
 
-const InlineNotificationStyled = styled(InlineNotification)`
+const CtaButton = styled(Button)`
   width: 100%;
   max-width: 100%;
+  margin-top: 0;
   margin-bottom: ${ spacing[3] };
 `
 
-const CtaButton = styled(Button)`
-  margin-top: 0;
-`
-
-export default ({ header, title, children, submitButtonTitle, onClickSubmit, error }) => (
+export default ({ header, title, children, submitButtonTitle, onClickSubmit, formId, error }) => (
   <>
     <Menu />
-    <FormStyled onSubmit={onClickSubmit}>
-      <ContentContainer>
+    <ContentContainer>
+      <Form id={formId} onSubmit={onClickSubmit}>
         <Column lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
           <Row>
             { header }
@@ -53,25 +51,22 @@ export default ({ header, title, children, submitButtonTitle, onClickSubmit, err
             { children }
           </Row>
         </Column>
-      </ContentContainer>
-      <CtaButtonContainer lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
-        <Row>
-          {error && (
-            <InlineNotificationStyled
-              hideCloseButton
-              kind="error"
-              icondescription="Dismiss notification"
-              subtitle={error}
-              title="Oops!"
-            />
-          )}
-          {submitButtonTitle && (
-            <CtaButton type="submit">
-              {submitButtonTitle}
-            </CtaButton>
-          )}
-        </Row>
-      </CtaButtonContainer>
-    </FormStyled>
+        <CtaButtonContainer lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
+          <Row>
+            {error &&
+              <InlineNotification
+                kind="error"
+                icondescription="Dismiss notification"
+                subtitle={error}
+                title="Oops!"
+              />
+            }
+            {submitButtonTitle && (
+              <CtaButton type="submit" id={formId}>{submitButtonTitle}</CtaButton>
+            )}
+          </Row>
+        </CtaButtonContainer>
+      </Form>
+    </ContentContainer>
   </>
 )

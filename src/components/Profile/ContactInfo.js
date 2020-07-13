@@ -32,6 +32,7 @@ export default () => (
           id="first_name"
           invalidText="Invalid error message."
           labelText="First Name"
+          placeholder="Joan"
         />
       </FormGroup>
       <FormGroup>
@@ -39,6 +40,7 @@ export default () => (
           id="last_name"
           invalidText="Invalid error message."
           labelText="Last Name"
+          placeholder="Ambassador"
         />
       </FormGroup>
       <FormGroup>
@@ -46,6 +48,7 @@ export default () => (
           id="email"
           invalidText="Invalid error message."
           labelText="Email"
+          placeholder="joanambassador@email.co"
         />
       </FormGroup>
       <FormGroup>
@@ -53,6 +56,7 @@ export default () => (
           id="phone"
           invalidText="Invalid error message."
           labelText="Phone number"
+          placeholder="(123) 456-7890"
         />
       </FormGroup>
       <SectionTitle>Address</SectionTitle>

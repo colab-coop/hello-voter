@@ -4,7 +4,15 @@ import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import AddressForm from '../AddressForm'
-import { FormGroup, TextInput } from 'carbon-components-react'
+import {
+  Form,
+  FormGroup,
+  TextInput,
+  Select,
+  SelectItem,
+  DatePicker,
+  DatePickerInput
+} from 'carbon-components-react'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../../api/AppContext'
 
@@ -72,6 +80,7 @@ export const ContactInfoPage = () => {
           name="first_name"
           invalidText="Invalid error message."
           labelText="First Name*"
+          placeholder="Joan"
           defaultValue={ambassador.first_name}
           required
         />
@@ -81,9 +90,21 @@ export const ContactInfoPage = () => {
           name="last_name"
           invalidText="Invalid error message."
           labelText="Last Name*"
+          placeholder="Ambassador"
           defaultValue={ambassador.last_name}
           required
         />
+      </FormGroup>
+      <FormGroup style={{width: "50%"}}>
+        <DatePicker dateFormat="m/d/Y" datePickerType="single">
+          <DatePickerInput
+            name="date_of_birth"
+            placeholder="mm/dd/yyyy"
+            labelText="Date of Birth"
+            type="text"
+            defaultValue={ambassador.date_of_birth}
+          />
+        </DatePicker>
       </FormGroup>
       <SectionTitle>Address</SectionTitle>
       <AddressForm ambassador={ambassador}/>
@@ -93,6 +114,7 @@ export const ContactInfoPage = () => {
           name="email"
           invalidText="Invalid error message."
           labelText="Email"
+          placeholder="joanambassador@email.co"
           defaultValue={ambassador.email}
         />
       </FormGroup>
@@ -101,6 +123,7 @@ export const ContactInfoPage = () => {
           name="phone"
           invalidText="Invalid error message."
           labelText="Phone number*"
+          placeholder="(123) 456-7890"
           defaultValue={ambassador.phone}
           required
         />
