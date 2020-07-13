@@ -10,6 +10,8 @@ import Loading from '../Loading'
 
 import { AppContext } from '../../api/AppContext'
 
+const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
+
 const SectionTitle = styled.h5`
   margin-top: ${ spacing[7] };
   margin-bottom: ${ spacing[2] };
@@ -88,7 +90,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
       </p>
       <br />
       <p>
-        You will receive $50 for each Vote Tripler you recruit.
+        You will receive ${REACT_APP_TRIPLER_PAYMENT_AMT} for each Vote Tripler you recruit.
       </p>
       <Button
         href="/triplers/add"
@@ -132,15 +134,20 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
 
           <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
           <Paragraph>
-            Once your <Link href="#">payment method is set up</Link>, you’ll
-            receive payment for these Vote Triplers
+            You'll receive payment for these Vote Triplers.
           </Paragraph>
           {confirmed.map((tripler, i) => (
-            <TriplerRow
+              <TriplerRow
               name={`${tripler.first_name} ${tripler.last_name}`}
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
               onClick={() => {}}
               confirmed
+              // FIXME: Hardcode fake confirmation
+              tagText={
+                i === 0
+                  ? `$${REACT_APP_TRIPLER_PAYMENT_AMT} Sent`
+                  : `$${REACT_APP_TRIPLER_PAYMENT_AMT} Collected`
+              }
             />
           ))}
         </>
