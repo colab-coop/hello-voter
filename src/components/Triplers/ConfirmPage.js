@@ -111,7 +111,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         kind="error"
         icondescription="Dismiss notification"
         subtitle={err}
-        title="Oops!"
+        title={null}
       />
       }
       <Button type="submit" loading={loading}>Add</Button>

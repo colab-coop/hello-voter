@@ -62,7 +62,7 @@ export default ({ header, title, children, submitButtonTitle, onClickSubmit, err
               kind="error"
               icondescription="Dismiss notification"
               subtitle={error}
-              title="Oops!"
+              title={null}
             />
           )}
           {submitButtonTitle && (
