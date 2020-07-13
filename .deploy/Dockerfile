@@ -20,8 +20,8 @@ RUN REACT_APP_ORGID=VT6WX8A \
     REACT_APP_API_URL=https://hellovoter.api.stage.colab.coop \
     REACT_APP_CALENDLY_LINK=https://calendly.com/ambassador-screening/10 \
     REACT_APP_TRIPLER_PAYMENT_AMT=50 \
-    REACT_APP_HEADER=dark \
-    REACT_APP_LOGO=block-power \
+    REACT_APP_HEADER=light \
+    REACT_APP_LOGO=new-georgia \
     npm run build
 
 # production environment
