@@ -1,10 +1,11 @@
 import React from 'react'
 import { Help20, UserAvatar20 } from '@carbon/icons-react'
 import styled, { ThemeProvider } from 'styled-components'
-import logo from '../assets/images/logo.png';
+import BlockPower from '../assets/logos/block-power.png'
+import NewGeorgia from '../assets/logos/new-georgia.png'
 import { spacing, colors } from '../theme'
 
-const { REACT_APP_HEADER } = process.env
+const { REACT_APP_HEADER, REACT_APP_LOGO } = process.env
 
 const theme = {
   dark: {
@@ -18,6 +19,17 @@ const theme = {
     iconBgHover: colors.gray[20]
   }
 };
+
+// FIXME: Bring in logo thru .env file and host somewhere else instead?
+let logo;
+switch (REACT_APP_LOGO) {
+  case 'block-power':
+    logo = BlockPower;
+    break;
+  case 'new-georgia':
+    logo = NewGeorgia;
+    break;
+}
 
 const Header = styled.header`
   display: flex;
