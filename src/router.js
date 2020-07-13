@@ -87,7 +87,7 @@ const AppRoutes = () => {
 
 
 export const RouterC = () => {
-  initAnalytics({ trackingId: 'UA-98115457-1', options: { debug: true, 'cookieDomain': 'none' } } )
+  initAnalytics()
   return (
     <AppProvider>
       <HashRouter>
