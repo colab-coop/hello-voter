@@ -1,5 +1,5 @@
 import React from 'react'
-import { Help20, UserAvatar20 } from '@carbon/icons-react'
+import { Help20, UserAvatar20, Logout20 } from '@carbon/icons-react'
 import {
   Header,
   HeaderName,
@@ -36,6 +36,9 @@ export default () => {
               </HeaderGlobalAction>
               <HeaderGlobalAction aria-label="Profile" onClick={() => {}}>
                 <UserAvatar20/>
+              </HeaderGlobalAction>
+              <HeaderGlobalAction aria-label="Log Out" onClick={() => {}}>
+                <Logout20/>
               </HeaderGlobalAction>
             </HeaderGlobalBar>
           </Header>

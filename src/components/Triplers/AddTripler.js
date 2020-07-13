@@ -15,9 +15,10 @@ export default () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await api.fetchFreeTriplers()
-      const triplersWithAddress = data.data.map((p) => ({
+      const triplersWithAddress = data.data
+        .map((p) => ({
         id: p.id,
-        name: p.first_name + ' ' + p.last_name,
+        name: p.first_name,
         address: p.address.address1 + ' ' + p.address.city + ' ' + p.address.state
       }))
       setTriplers(triplersWithAddress)

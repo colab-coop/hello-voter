@@ -96,7 +96,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
         unconfirmed.map((tripler) => (
           <TriplerRow
             id={tripler.id}
-            name={`${tripler.first_name} ${tripler.last_name}`}
+            name={`${tripler.first_name} ${tripler.last_name || ''}`}
             address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
             unconfirmed
             onClick={() => { }}
@@ -110,7 +110,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
         pending.map((tripler) => (
           <TriplerRow
             id={tripler.id}
-            name={`${tripler.first_name} ${tripler.last_name}`}
+            name={`${tripler.first_name} ${tripler.last_name || ''}`}
             address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
             onClick={() => { }}
             pending
@@ -126,7 +126,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
       confirmed &&
         confirmed.map((tripler, i) => (
           <TriplerRow
-            name={`${tripler.first_name} ${tripler.last_name}`}
+            name={`${tripler.first_name} ${tripler.last_name || ''}`}
             address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
             onClick={() => { }}
             confirmed
