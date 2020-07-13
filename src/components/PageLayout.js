@@ -1,10 +1,14 @@
 import React from 'react'
-import { Grid, Column, Row, Form, Content } from 'carbon-components-react'
+import { Column, Row, Form, Content } from 'carbon-components-react'
 import styled from 'styled-components'
-import { spacing, colors } from '../theme'
+import { spacing } from '../theme'
 import Menu from './Menu'
 import Button from './Button'
 import { InlineNotification } from 'carbon-components-react'
+
+const FormStyled = styled(Form)`
+  margin-top: ${ spacing[8] };
+`
 
 const ContentContainer = styled(Content)`
   padding: ${ spacing[3] };
@@ -33,11 +37,11 @@ const CtaButton = styled(Button)`
   margin-top: 0;
 `
 
-export default ({ header, title, children, submitButtonTitle, onClickSubmit, formId, error }) => (
+export default ({ header, title, children, submitButtonTitle, onClickSubmit, error }) => (
   <>
     <Menu />
-    <ContentContainer>
-      <Form id={formId} onSubmit={onClickSubmit}>
+    <FormStyled onSubmit={onClickSubmit}>
+      <ContentContainer>
         <Column lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
           <Row>
             { header }
@@ -49,25 +53,25 @@ export default ({ header, title, children, submitButtonTitle, onClickSubmit, for
             { children }
           </Row>
         </Column>
-      </Form>
-    </ContentContainer>
-    <CtaButtonContainer lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
-      <Row>
-        {error && (
-          <InlineNotification
-            hideCloseButton
-            kind="error"
-            icondescription="Dismiss notification"
-            subtitle={error}
-            title="Oops!"
-          />
-        )}
-        {submitButtonTitle && (
-          <CtaButton type="submit" id={formId}>
-            {submitButtonTitle}
-          </CtaButton>
-        )}
-      </Row>
-    </CtaButtonContainer>
+      </ContentContainer>
+      <CtaButtonContainer lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>
+        <Row>
+          {error && (
+            <InlineNotificationStyled
+              hideCloseButton
+              kind="error"
+              icondescription="Dismiss notification"
+              subtitle={error}
+              title="Oops!"
+            />
+          )}
+          {submitButtonTitle && (
+            <CtaButton type="submit">
+              {submitButtonTitle}
+            </CtaButton>
+          )}
+        </Row>
+      </CtaButtonContainer>
+    </FormStyled>
   </>
 )
