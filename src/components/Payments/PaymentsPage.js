@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { DataTable } from 'carbon-components-react'
+import { DataTable, Link } from 'carbon-components-react'
 import { Add16 } from '@carbon/icons-react'
 import styled from 'styled-components'
 import { colors, spacing } from '../../theme'
@@ -91,18 +91,18 @@ const PaymentTable = ({ data }) => (
   <DataTable render={renderTable} headers={headers} rows={data} />
 );
 
-const Payments = ({ pending, completed, stripeAcct }) => {
+const Payments = ({ pending, completed, plaidAcct }) => {
   const hasPending = pending && pending.length > 0;
   const hasCompleted = completed && completed.length > 0;
 
   return (
     <>
       <SectionTitle>Your payment account</SectionTitle>
-      {stripeAcct ? (
+      {plaidAcct ? (
         <AcctTable>
           <div>Account #:</div>
-          <AcctNumber>adfsdfsdf</AcctNumber>
-          <div>Link</div>
+          <AcctNumber>**** **** **** {plaidAcct.accounts[0].mask}</AcctNumber>
+          <Link href="/payments/add">Link</Link>
         </AcctTable>
       ) : (
         <Button href="/payments/add">
@@ -120,7 +120,7 @@ const Payments = ({ pending, completed, stripeAcct }) => {
   );
 };
 
-const PaymentsPage = ({ payments, stripeAcct }) => {
+const PaymentsPage = ({ payments, plaidAcct }) => {
   const pending = payments.filter((payment) => payment.status === 'pending')
   const completed = payments.filter((payment) => payment.status === 'completed')
   
@@ -141,7 +141,7 @@ const PaymentsPage = ({ payments, stripeAcct }) => {
       }/>}
     >
       <Payments
-        stripeAcct={stripeAcct}
+        plaidAcct={plaidAcct}
         pending={pending}
         completed={completed}
       />
@@ -160,6 +160,6 @@ export default () => {
   //   fetchData()
   // }, [])
   return (
-    payments ? <PaymentsPage payments={payments} stripeAcct={stripeAcct} /> : <Loading />
+    payments ? <PaymentsPage payments={payments} plaidAcct={plaidAcct} /> : <Loading />
   )
 }

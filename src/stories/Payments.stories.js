@@ -8,7 +8,7 @@ export default {
 }
 
 export const PaymentsEmptyPage = () => (
-  <Payments payments={[]} stripeAcct />
+  <Payments payments={[]} />
 )
 
 export const PendingPayments = () => (
@@ -29,6 +29,49 @@ export const PendingPayments = () => (
         status: 'pending'
       },
     ]}
+    plaidAcct={{
+      "accounts": [{
+        "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+        "balances": {
+          "available": 100,
+          "current": 110,
+          "limit": null,
+          "iso_currency_code": "USD",
+          "unofficial_currency_code": null,
+        },
+        "mask": "9606",
+        "name": "Plaid Checking",
+        "official_name": "Plaid Gold Checking",
+        "subtype": "checking",
+        "type": "depository"
+      }],
+      "numbers": {
+        "ach": [{
+          "account": "9900009606",
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "routing": "011401533",
+          "wire_routing": "021000021"
+        }],
+        "eft":[{
+          "account": "111122223333",
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "institution": "021",
+          "branch": "01140"
+        }],
+        "international":[{
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "bic": "NWBKGB21",
+          "iban": "GB29NWBK60161331926819",
+        }],
+        "bacs":[{
+          "account": "31926819",
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "sort_code": "601613"
+        }]
+      },
+      // "item": {Object},
+      "request_id": "m8MDnv9okwxFNBV"
+    }}
   />
 );
 
@@ -50,6 +93,49 @@ export const CompletedPayments = () => (
         status: "completed",
       },
     ]}
+    plaidAcct={{
+      "accounts": [{
+        "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+        "balances": {
+          "available": 100,
+          "current": 110,
+          "limit": null,
+          "iso_currency_code": "USD",
+          "unofficial_currency_code": null,
+        },
+        "mask": "9606",
+        "name": "Plaid Checking",
+        "official_name": "Plaid Gold Checking",
+        "subtype": "checking",
+        "type": "depository"
+      }],
+      "numbers": {
+        "ach": [{
+          "account": "9900009606",
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "routing": "011401533",
+          "wire_routing": "021000021"
+        }],
+        "eft":[{
+          "account": "111122223333",
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "institution": "021",
+          "branch": "01140"
+        }],
+        "international":[{
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "bic": "NWBKGB21",
+          "iban": "GB29NWBK60161331926819",
+        }],
+        "bacs":[{
+          "account": "31926819",
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "sort_code": "601613"
+        }]
+      },
+      // "item": {Object},
+      "request_id": "m8MDnv9okwxFNBV"
+    }}
   />
 );
 
@@ -85,6 +171,49 @@ export const PaymentsFilled = () => (
         status: "completed",
       },
     ]}
+    plaidAcct={{
+      "accounts": [{
+        "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+        "balances": {
+          "available": 100,
+          "current": 110,
+          "limit": null,
+          "iso_currency_code": "USD",
+          "unofficial_currency_code": null,
+        },
+        "mask": "9606",
+        "name": "Plaid Checking",
+        "official_name": "Plaid Gold Checking",
+        "subtype": "checking",
+        "type": "depository"
+      }],
+      "numbers": {
+        "ach": [{
+          "account": "9900009606",
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "routing": "011401533",
+          "wire_routing": "021000021"
+        }],
+        "eft":[{
+          "account": "111122223333",
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "institution": "021",
+          "branch": "01140"
+        }],
+        "international":[{
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "bic": "NWBKGB21",
+          "iban": "GB29NWBK60161331926819",
+        }],
+        "bacs":[{
+          "account": "31926819",
+          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
+          "sort_code": "601613"
+        }]
+      },
+      // "item": {Object},
+      "request_id": "m8MDnv9okwxFNBV"
+    }}
   />
 );
 
