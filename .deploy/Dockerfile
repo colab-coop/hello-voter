@@ -22,7 +22,7 @@ RUN REACT_APP_ORGID=VT6WX8A \
     REACT_APP_TRIPLER_PAYMENT_AMT=50 \
     REACT_APP_HEADER=dark \
     REACT_APP_LOGO=block-power \
-    REACT_APP_GA_TRACKING_ID=UA-172413485-2 \
+    REACT_APP_GA_TRACKING_ID=UA-172693622-1 \
     npm run build
 
 # production environment
