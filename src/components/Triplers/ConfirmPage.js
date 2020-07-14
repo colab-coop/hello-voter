@@ -51,7 +51,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
   }
   return (
     <PageLayout
-      title={`Tripler: ${tripler.first_name}`}
+      title={`Vote Tripler: ${tripler.first_name}`}
       onClickSubmit={submit}
       header={
         <Breadcrumbs

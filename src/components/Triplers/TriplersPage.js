@@ -109,7 +109,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
         <>
           <SectionTitle>Your possible Vote Triplers</SectionTitle>
           <Paragraph>
-            Add information for a Tripler. We’ll send them a text message to
+            Add information for a Vote Tripler. We’ll send them a text message to
             confirm.
           </Paragraph>
           {unconfirmed.map((tripler) => (
