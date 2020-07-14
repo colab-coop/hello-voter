@@ -2,6 +2,7 @@ import React from 'react'
 import Payments from '../components/Payments/PaymentsPage'
 import Add from '../components/Payments/AddPage'
 import Edit from '../components/Payments/EditPage'
+import Chime from '../components/Payments/ChimePage'
 
 const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
 
@@ -227,6 +228,6 @@ export const EditPage = () => (
   <Edit />
 )
 
-// export const ConfirmPage = () => (
-//   <Confirm />
-// )
+export const ChimePage = () => (
+  <Chime />
+)
