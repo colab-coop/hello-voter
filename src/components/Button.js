@@ -42,6 +42,7 @@ export default ({ href, children, kind, loading, onClick, pill, trackingEvent, .
   const track = async (trackingEvent) => {
     if (window.ga) {
       trackingEvent.action = trackingEvent.action || history.location.pathname
+      trackingEvent.category = `ButtonClick_${trackingEvent.category}`
       ReactGA.event(trackingEvent);
     }
   }
