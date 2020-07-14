@@ -22,7 +22,15 @@ export default () => {
         </p>
         <br />
         <br />
-        <Button href={REACT_APP_CALENDLY_LINK} target='_blank'>Choose a date and time <Launch16 style={{marginLeft:8}} /></Button>
+        <Button 
+          href={REACT_APP_CALENDLY_LINK} 
+          trackingEvent={{
+            category: 'CalendlyLink',
+            label: 'Choose a date and time'
+          }}
+          target='_blank'>
+            Choose a date and time <Launch16 style={{marginLeft:8}} />
+        </Button>
       </PageLayout>
     </>
   )
