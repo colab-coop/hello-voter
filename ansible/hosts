@@ -1,0 +1,7 @@
+[production_v1]
+hellovoter.prod.colab.coop
+# 54.173.191.8
+
+[staging_v1]
+hellovoter.stage.colab.coop
+# 3.93.147.197
