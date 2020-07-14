@@ -5,15 +5,6 @@ app_folder: "{{ home_folder }}/ui"
 user: "{{ name }}"
 group: "{{ name }}"
 
-### Organizations
-organizations:
-  - name: "Stage"
-    slug: "stage"
-  - name: "Prod"
-    slug: "prod"
-  - name: "Stress"
-    slug: "stress"
-
 ### Repository
 repository: "git@github.com:colab-coop/hello-voter.git"
 
