@@ -10,6 +10,8 @@ import Loading from '../Loading'
 
 import { AppContext } from '../../api/AppContext'
 
+const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
+
 const SectionTitle = styled.h5`
   margin-top: ${ spacing[7] };
   margin-bottom: ${ spacing[2] };
@@ -67,7 +69,8 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
           Remind
         </Button>
       }
-      {confirmed &&
+      {/* FIXME: Hardcode fake confirmation */}
+      {confirmed && tagText &&
         <Tag type="green">
           {tagText}
         </Tag>
@@ -76,79 +79,87 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
   </TriplerRowStyled>
 )
 
-const TriplersEmpty = () => (
-  <>
-    <p>
-      Confirm that these people will ask 3 friends to vote and earn 50 dollars
-    </p>
-    <Button href='/triplers/add'
-      trackingEvent={{ category: 'FindNewTriplersEmpty', label: 'Find new Triplers'}}
+const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
+  const hasTriplers =
+    unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
+  const hasMaxTriplers = 
+    unconfirmed.length + confirmed.length + pending.length >= 12
+
+  return (
+    <>
+      <p>
+        As a Voting Ambassador, your task is to recruit “Vote Triplers” from a
+        list of family members and neighbors. A Vote Tripler is someone who
+        agrees to remind three other people to vote in the next election.
+      </p>
+      <br />
+      <p>
+        You will receive ${REACT_APP_TRIPLER_PAYMENT_AMT} for each Vote Tripler you recruit.
+      </p>
+      <Button
+        href="/triplers/add"
+        trackingEvent={{ category: 'FindNewVoteTriplers', label: 'Find new Vote Triplers'}}
+        disabled={hasMaxTriplers}
       >
-      Find new Triplers<Add16 />
-    </Button>
-  </>
-)
-const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
-  <>
-    <p>
-      As a Voting Ambassador, your task is to recruit “Vote Triplers” from a list of family members and neighbors. A Vote Tripler is someone who agrees to remind three other people to vote in the next election.
-    </p>
-    <p>
-      You will receive $50 for each Vote Tripler you recruit.
-    </p>
-    <Button href='/triplers/add' disabled={unconfirmed.length + confirmed.length + pending.length >= 12}
-      trackingEvent={{ category: 'FindNewTriplers', label: 'Find new Triplers'}}
-      >
-      Find new Triplers<Add16 />
-    </Button>
-    <SectionTitle>Your possible Vote Triplers</SectionTitle>
-    <Paragraph>Add information for a Tripler. We’ll send them a text message to confirm.</Paragraph>
-    {
-      unconfirmed &&
-        unconfirmed.map((tripler) => (
-          <TriplerRow
-            id={tripler.id}
-            name={`${tripler.first_name} ${tripler.last_name}`}
-            address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-            unconfirmed
-            onClick={() => { }}
-          />
-        ))
-    }
-    <SectionTitle>Your unconfirmed Vote Triplers</SectionTitle>
-    <Paragraph>These possible Vote Triplers have not yet confirmed their identity.</Paragraph>
-    {
-      pending &&
-        pending.map((tripler) => (
-          <TriplerRow
-            id={tripler.id}
-            name={`${tripler.first_name} ${tripler.last_name}`}
-            address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-            onClick={() => { }}
-            pending
-            remindTripler={remindTripler}
-          />
-        ))
-    }
-    <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
-    <Paragraph>
-      Once your <Link href="#">payment method is set up</Link>, you’ll receive payment for these Vote Triplers
-    </Paragraph>
-    {
-      confirmed &&
-        confirmed.map((tripler, i) => (
-          <TriplerRow
-            name={`${tripler.first_name} ${tripler.last_name}`}
-            address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-            onClick={() => { }}
-            confirmed
-            // FIXME: Hardcode fake confirmation
-            tagText={i === 0 ? "$50 In Transit" : "$50 Collected"}
-          />
-        ))
-    }
-  </>
-)
+        Find new Vote Triplers
+        <Add16 />
+      </Button>
+      
+      {hasTriplers && (
+        <>
+          <SectionTitle>Your possible Vote Triplers</SectionTitle>
+          <Paragraph>
+            Add information for a Tripler. We’ll send them a text message to
+            confirm.
+          </Paragraph>
+          {unconfirmed.map((tripler) => (
+            <TriplerRow
+              id={tripler.id}
+              name={`${tripler.first_name} ${tripler.last_name}`}
+              address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+              unconfirmed
+              onClick={() => {}}
+            />
+          ))}
+
+          <SectionTitle>Your unconfirmed Vote Triplers</SectionTitle>
+          <Paragraph>
+            These possible Vote Triplers have not yet confirmed their identity.
+          </Paragraph>
+          {pending.map((tripler) => (
+            <TriplerRow
+              id={tripler.id}
+              name={`${tripler.first_name} ${tripler.last_name}`}
+              address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+              onClick={() => {}}
+              pending
+              remindTripler={remindTripler}
+            />
+          ))}
+
+          <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
+          <Paragraph>
+            You'll receive payment for these Vote Triplers.
+          </Paragraph>
+          {confirmed.map((tripler, i) => (
+              <TriplerRow
+              name={`${tripler.first_name} ${tripler.last_name}`}
+              address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+              onClick={() => {}}
+              confirmed
+              // FIXME: Hardcode fake confirmation
+              tagText={
+                i === 0
+                  ? `$${REACT_APP_TRIPLER_PAYMENT_AMT} Sent`
+                  : `$${REACT_APP_TRIPLER_PAYMENT_AMT} Collected`
+              }
+            />
+          ))}
+        </>
+      )}
+    </>
+  );
+};
 
 export default () => {
   const [triplers, setTriplers] = useState(null)
@@ -182,22 +193,18 @@ const TriplersPage = ({ triplers, remindTripler }) => {
             route: "/"
           },
           {
-            name: "Triplers",
+            name: "Vote Triplers",
             route: "/"
           }
         ]
       }/>}
     >
-      {
-        !triplers ?
-          <TriplersEmpty/> :
-          <Triplers
-            unconfirmed={unconfirmed}
-            pending={pending}
-            confirmed={confirmed}
-            remindTripler={remindTripler}
-          />
-      }
+      <Triplers
+        unconfirmed={unconfirmed}
+        pending={pending}
+        confirmed={confirmed}
+        remindTripler={remindTripler}
+      />
     </PageLayout>
   )
 }

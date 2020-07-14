@@ -17,8 +17,9 @@ export default () => {
         title='Training Complete!'
       >
         <p>
-          A program administrator will review your application and be in touch with you soon.
-          In the meantime, please choose a convenient date and time below: 
+          Thank you for completing the training. The final step in the
+          application process is a ten-minute phone interview. Please choose a
+          convenient date and time.
         </p>
         <br />
         <br />
