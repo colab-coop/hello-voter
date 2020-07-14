@@ -54,12 +54,16 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
     </div>
     <TriplerColumn>
       {unconfirmed &&
-        <Button pill href={`/triplers/confirm/${id}`}>
+        <Button pill href={`/triplers/confirm/${id}`}
+          trackingEvent={{ category: 'TriplerAddInfo', label: 'Add Info'}}
+          >
           Add Info <ChevronRight16 />
         </Button>
       }
       {pending &&
-        <Button pill data-id={id} onClick={remindTripler}>
+        <Button pill data-id={id} onClick={remindTripler}
+          trackingEvent={{ category: 'TriplerRemind', label: 'Remind'}}
+          >
           Remind
         </Button>
       }
@@ -77,7 +81,11 @@ const TriplersEmpty = () => (
     <p>
       Confirm that these people will ask 3 friends to vote and earn 50 dollars
     </p>
-    <Button href='/triplers/add'>Find new Triplers<Add16 /></Button>
+    <Button href='/triplers/add'
+      trackingEvent={{ category: 'FindNewTriplersEmpty', label: 'Find new Triplers'}}
+      >
+      Find new Triplers<Add16 />
+    </Button>
   </>
 )
 const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
@@ -88,7 +96,11 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => (
     <p>
       You will receive $50 for each Vote Tripler you recruit.
     </p>
-    <Button href='/triplers/add' disabled={unconfirmed.length + confirmed.length + pending.length >= 12}>Find new Triplers<Add16 /></Button>
+    <Button href='/triplers/add' disabled={unconfirmed.length + confirmed.length + pending.length >= 12}
+      trackingEvent={{ category: 'FindNewTriplers', label: 'Find new Triplers'}}
+      >
+      Find new Triplers<Add16 />
+    </Button>
     <SectionTitle>Your possible Vote Triplers</SectionTitle>
     <Paragraph>Add information for a Tripler. We’ll send them a text message to confirm.</Paragraph>
     {
