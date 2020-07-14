@@ -6,6 +6,8 @@ import { spacing, colors } from '../../theme'
 import { useHistory } from 'react-router-dom'
 import placeholder from '../../assets/images/placeholder.png';
 
+const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
+
 const Header = styled.div`
   width: 100%;
   height: 240px;
@@ -70,7 +72,7 @@ export const BecomeAmbassadorPage = () => {
       />
       <CheckboxComponent
         title="Make money!"
-        description='Receive $50 for every "Vote Tripler" you sign up!'
+        description={`Receive $${REACT_APP_TRIPLER_PAYMENT_AMT} for every "Vote Tripler" you sign up!`}
       />
     </PageLayout>
   )
