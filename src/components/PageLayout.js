@@ -62,7 +62,12 @@ export default ({ header, title, children, submitButtonTitle, onClickSubmit, for
               />
             }
             {submitButtonTitle && (
-              <CtaButton type="submit" id={formId}>{submitButtonTitle}</CtaButton>
+              <CtaButton 
+                type="submit"
+                id={formId}
+                trackingEvent={{ category: `Submit${title.replace(' ','')}`, label: submitButtonTitle }}>
+                  {submitButtonTitle}
+               </CtaButton>
             )}
           </Row>
         </CtaButtonContainer>
