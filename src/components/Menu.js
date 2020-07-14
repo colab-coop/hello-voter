@@ -40,7 +40,7 @@ const Header = styled.header`
   right: 0;
   height: 3rem;
   background-color: ${props => props.theme[REACT_APP_HEADER].bgColor};
-  border-bottom: 1px solid ${ colors.gray[80] };
+  border-bottom: 1px solid ${ colors.gray[20] };
   z-index: 6000;
 `;
 
@@ -72,7 +72,7 @@ const HeaderGlobalAction = styled.button`
   width: 3rem;
   height: 3rem;
   border: 0.125rem solid transparent;
-  border-bottom: 1px solid ${ colors.gray[80] };
+  border-bottom: 1px solid ${ colors.gray[20] };
   transition: background-color 0.11s, border-color 0.11s;
   & > svg {
     fill: ${props => props.theme[REACT_APP_HEADER].iconColor}
