@@ -20,6 +20,10 @@ export const LoginButton = ({ type }) => {
     <Button
       onClick={login}
       loading={loading}
+      trackingEvent={{
+        category: `Login${type}`,
+        label: (type === TYPES.FB && BUTTON_TEXTS['FB']) || (type === TYPES.GOOGLE && BUTTON_TEXTS['GOOGLE'])
+      }}
     >
       {type === TYPES.FB && <IconFacebook width={32} height={32} fill="#fff" />}
       {type === TYPES.GOOGLE && <IconGoogle width={32} height={32} fill="#fff" />}
