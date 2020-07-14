@@ -1,5 +1,7 @@
 import React from 'react'
 import Payments from '../components/Payments/PaymentsPage'
+import Add from '../components/Payments/AddPage'
+import Edit from '../components/Payments/EditPage'
 
 const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
 
@@ -217,13 +219,13 @@ export const PaymentsFilled = () => (
   />
 );
 
-// export const AddPage = () => (
-//   <Add 
-//     triplers={
-      
-//     } 
-//   />
-// )
+export const AddPage = () => (
+  <Add />
+)
+
+export const EditPage = () => (
+  <Edit />
+)
 
 // export const ConfirmPage = () => (
 //   <Confirm />
