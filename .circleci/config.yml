@@ -12,8 +12,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: |
-         cd .deploy
-         helmfile --log-level debug apply
+          /deploy.sh
+          cd .deploy
+          helmfile --log-level debug apply
 
 workflows:
    deploy:
