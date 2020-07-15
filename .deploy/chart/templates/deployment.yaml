@@ -22,3 +22,5 @@ spec:
         env:
           {{- toYaml . | nindent 10 }}
         {{- end }}
+      imagePullSecrets:
+      - name: {{ .Values.name }}-image-pull-secret
