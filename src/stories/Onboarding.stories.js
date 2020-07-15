@@ -5,6 +5,9 @@ import Onboarding03 from '../components/Onboarding/03'
 import Onboarding04 from '../components/Onboarding/04'
 import Onboarding05 from '../components/Onboarding/05'
 import Onboarding06 from '../components/Onboarding/06'
+import Onboarding07 from '../components/Onboarding/07'
+import Onboarding08 from '../components/Onboarding/08'
+import Onboarding09 from '../components/Onboarding/09'
 import PendingApprovalPage from '../components/PendingApprovalPage'
 
 export default {
@@ -33,6 +36,18 @@ export const Onboarding05Page = () => (
 
 export const Onboarding06Page = () => (
   <Onboarding06 />
+)
+
+export const Onboarding07Page = () => (
+  <Onboarding07 />
+)
+
+export const Onboarding08Page = () => (
+  <Onboarding08 />
+)
+
+export const Onboarding09Page = () => (
+  <Onboarding09 />
 )
 
 export const PendingApproval = () => (
