@@ -56,12 +56,16 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
     </div>
     <TriplerColumn>
       {unconfirmed &&
-        <Button pill href={`/triplers/confirm/${id}`}>
+        <Button pill href={`/triplers/confirm/${id}`}
+          trackingEvent={{ category: 'TriplerAddInfo', label: 'Add Info'}}
+          >
           Add Info <ChevronRight16 />
         </Button>
       }
       {pending &&
-        <Button pill data-id={id} onClick={remindTripler}>
+        <Button pill data-id={id} onClick={remindTripler}
+          trackingEvent={{ category: 'TriplerRemind', label: 'Remind'}}
+          >
           Remind
         </Button>
       }
@@ -94,6 +98,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
       </p>
       <Button
         href="/triplers/add"
+        trackingEvent={{ category: 'FindNewVoteTriplers', label: 'Find new Vote Triplers'}}
         disabled={hasMaxTriplers}
       >
         Find new Vote Triplers

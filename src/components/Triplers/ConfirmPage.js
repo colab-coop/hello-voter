@@ -114,8 +114,12 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         title={null}
       />
       }
-      <Button type="submit" loading={loading}>Add</Button>
-      <Button small kind="tertiary" href={'/triplers'}>Go back to My Vote Triplers</Button>
+      <Button type="submit" loading={loading}
+        trackingEvent={{ category: 'SubmitTriplerConfirm', label: 'Add'}}
+        >Add</Button>
+      <Button small kind="tertiary" href={'/triplers'}
+        trackingEvent={{ category: 'BackFromTriplerConfirm', label: 'Go back to My Vote Triplers'}}
+        >Go back to My Vote Triplers</Button>
     </PageLayout>
   )
 }
