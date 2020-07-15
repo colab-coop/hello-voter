@@ -1,0 +1,30 @@
+@startuml
+
+actor Client
+
+group Plaid account setup
+
+Client -> Plaid: Account setup initiation
+Plaid -> Stripe: Bank Account token
+Stripe -> API_Server: Customer Object
+
+end
+
+group Individual payment
+
+SMS -> API_Server: Confirm tripler
+API_Server -> Stripe: Initiate payment request
+Stripe -> API_Server: Payment status update
+
+end
+
+group See payment log for user
+
+Client -> API_Server: Request payments log
+API_Server -> Stripe: Proxy transactions request
+Stripe -> API_Server: Transactions log entries
+API_Server -> Client: Response to payments log request
+
+end
+
+@enduml
