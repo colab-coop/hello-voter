@@ -10,7 +10,7 @@ releases:
           tag: {{ requiredEnv "DOCKER_TAG" }}
           port: 80
         imageCredentials:
-          registry: index.docker.io/v1/
+          registry: https://index.docker.io/v1/
           username: {{ requiredEnv "DOCKER_USER" }}
           password: {{ requiredEnv "DOCKER_PASSWORD" }}
           email: devops+dockerhub@colab.coop
