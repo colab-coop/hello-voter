@@ -7,7 +7,7 @@ export default () => {
     <TrainingLayout
       prevPage="/onboarding/07"
       nextPage="/onboarding/09"
-      title=""
+      title="Reasons to vote"
     >
       <p>What three reasons to vote are most important to you?</p>
       <br />

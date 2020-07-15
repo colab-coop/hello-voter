@@ -8,6 +8,11 @@ import Onboarding06 from '../components/Onboarding/06'
 import Onboarding07 from '../components/Onboarding/07'
 import Onboarding08 from '../components/Onboarding/08'
 import Onboarding09 from '../components/Onboarding/09'
+import Onboarding10 from '../components/Onboarding/10'
+import Onboarding11 from '../components/Onboarding/11'
+import Onboarding12 from '../components/Onboarding/12'
+import Onboarding13 from '../components/Onboarding/13'
+import Onboarding14 from '../components/Onboarding/14'
 import PendingApprovalPage from '../components/PendingApprovalPage'
 
 export default {
@@ -48,6 +53,26 @@ export const Onboarding08Page = () => (
 
 export const Onboarding09Page = () => (
   <Onboarding09 />
+)
+
+export const Onboarding10Page = () => (
+  <Onboarding10 />
+)
+
+export const Onboarding11Page = () => (
+  <Onboarding11 />
+)
+
+export const Onboarding12Page = () => (
+  <Onboarding12 />
+)
+
+export const Onboarding13Page = () => (
+  <Onboarding13 />
+)
+
+export const Onboarding14Page = () => (
+  <Onboarding14 />
 )
 
 export const PendingApproval = () => (
