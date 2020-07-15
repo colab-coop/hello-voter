@@ -22,8 +22,6 @@ end
 group See payment log for user
 
 Client -> API_Server: Request payments log
-API_Server -> Stripe: Proxy transactions request
-Stripe -> API_Server: Transactions log entries
 API_Server -> Client: Response to payments log request
 
 end
