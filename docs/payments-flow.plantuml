@@ -1,12 +1,13 @@
-@startuml
-
 actor Client
 
 group Plaid account setup
 
-Client -> Plaid: Account setup initiation
-Plaid -> Stripe: Bank Account token
-Stripe -> API_Server: Customer Object
+Client -> API_Server: Account setup initiation
+API_Server -> Plaid: Request Stripe token
+Plaid -> API_Server: Get Stripe token
+API_Server -> Stripe: Request Customer Object
+Stripe -> API_Server: Get Customer Object
+API_Server -> Client: Return OK
 
 end
 
@@ -26,5 +27,3 @@ Stripe -> API_Server: Transactions log entries
 API_Server -> Client: Response to payments log request
 
 end
-
-@enduml
