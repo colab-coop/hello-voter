@@ -63,6 +63,7 @@ export const BecomeAmbassadorPage = () => {
         history.push('/ambassador/signup')
       }}
       title="Become a Voting Ambassador"
+      formId="BecomeAVotingAmbassador"
       submitButtonTitle="Get Started"
       header={<Header><Credit>Photo by Perry Grone</Credit></Header>}
     >

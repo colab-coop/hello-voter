@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Button, InlineLoading } from 'carbon-components-react'
 import { useHistory } from 'react-router-dom'
 import { spacing, colors } from '../theme'
+import ReactGA from 'react-ga';
 
 const ButtonStyled = styled(Button)`
   display: flex;
@@ -32,15 +33,24 @@ const PillButton = styled.div`
   }
 `
 
-export default ({ href, children, kind, loading, onClick, pill, ...props }) => {
+export default ({ href, children, kind, loading, onClick, pill, trackingEvent, ...props }) => {
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
   }
 
+  const track = async (trackingEvent) => {
+    if (window.ga) {
+      trackingEvent.action = trackingEvent.action || history.location.pathname
+      trackingEvent.category = `ButtonClick_${trackingEvent.category}`
+      ReactGA.event(trackingEvent);
+    }
+  }
+
   return pill ? (
     <PillButton
       onClick={(e) => {
+        trackingEvent && track(trackingEvent)
         onClick && onClick(e);
         href && redirect(href);
       }}
@@ -52,6 +62,7 @@ export default ({ href, children, kind, loading, onClick, pill, ...props }) => {
     <ButtonStyled
       kind={loading ? "ghost" : kind}
       onClick={(e) => {
+        trackingEvent && track(trackingEvent)
         onClick && onClick(e)
         href && redirect(href)
       }}
