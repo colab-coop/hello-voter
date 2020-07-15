@@ -11,7 +11,6 @@ export default () => {
     >
       <p>What three reasons to vote are most important to you?</p>
       <br />
-      <br />
       <FormGroup>
         <TextInput id="response_01" invalidText="A valid value is required" placeholder="1." />
       </FormGroup>

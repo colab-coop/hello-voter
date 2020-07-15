@@ -9,10 +9,11 @@ export default () => {
       nextPage='/onboarding/04'
       title="The importance of voting"
     >
+      <p>What did you think about President Obama’s speech?</p>
+      <br />
       <TextArea
         id="response_01"
         invalidText="A valid value is required"
-        labelText="What did you think about President Obama’s speech?"
         placeholder="I thought..."
         rows={4}
       />

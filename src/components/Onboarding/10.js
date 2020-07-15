@@ -11,12 +11,10 @@ export default () => {
     >
       <p>True or false:</p>
       <br />
-      <br />
       <p>
         A person who is unable to vote in person on Election Day is not allowed
         to vote in either a Primary or General Election.
       </p>
-      <br />
       <br />
       <FormGroup>
         <RadioButtonGroup

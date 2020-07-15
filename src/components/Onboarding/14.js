@@ -2,6 +2,8 @@ import React from 'react'
 import TrainingLayout from './TrainingLayout'
 import { Checkbox, FormGroup } from "carbon-components-react";
 
+const { REACT_APP_ORG } = process.env;
+
 export default () => {
   return (
     <TrainingLayout
@@ -18,14 +20,14 @@ export default () => {
       <FormGroup>
         <Checkbox
           id="response-1"
-          labelText="I am acting as an independent contractor, and not as an employee or agent of [organization]."
+          labelText={`I am acting as an independent contractor, and not as an employee or agent of ${REACT_APP_ORG}.`}
           // onChange={function noRefCheck() {}}
         />
       </FormGroup>
       <FormGroup>
         <Checkbox
           id="response-2"
-          labelText="I do not have the power or authority to speak for [organization] or to legally bind it by anything I say or do."
+          labelText={`I do not have the power or authority to speak for ${REACT_APP_ORG} or to legally bind it by anything I say or do.`}
           // onChange={function noRefCheck() {}}
         />
       </FormGroup>
