@@ -1,7 +1,11 @@
+repositories:
+- name: coopernetes
+  url: https://colab-coop.github.io/coopernetes/charts
+
 releases:
   - name: hello-voter
     namespace: hello-voter
-    chart: ./chart
+    chart: coopernetes/basic-http-server
     values:
       - name: hello-voter
         issuer: "letsencrypt-prod"
