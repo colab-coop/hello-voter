@@ -6,6 +6,7 @@ releases:
   - name: hello-voter
     namespace: hello-voter
     chart: coopernetes/basic-http-server
+    version: 0.1.2
     values:
       - name: hello-voter
         issuer: "letsencrypt-prod"
