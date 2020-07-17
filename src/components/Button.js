@@ -1,13 +1,14 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Button, InlineLoading } from 'carbon-components-react'
 import { useHistory } from 'react-router-dom'
-import { spacing } from '../theme'
+import { spacing, colors } from '../theme'
+import ReactGA from 'react-ga';
 
 const ButtonStyled = styled(Button)`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: ${props => props.micro ? '50%' : '100%'};
   max-width: 100%;
   padding-right: ${ spacing[4] };
   margin-top: ${ spacing[5] };
@@ -17,47 +18,61 @@ const InlineLoadingStyled = styled(InlineLoading)`
   width: 100%;
   justify-content: center;
   height: ${ spacing[5] };
-` 
+`
 
-export default ({ href, children, className, small, kind, onClick }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [ariaLive, setAriaLive] = useState('off');
+const PillButton = styled.div`
+  border-radius: 32px;
+  font-size: 12px;
+  padding: ${ spacing[2]} ${spacing[3]};
+  background-color: ${ colors.gray[20]};
+  border: 2px solid ${ colors.gray[20]};
+  display: flex;
+  align-items: center;
+  &:hover {
+    border: 2px solid ${ colors.blue[60]};
+  }
+`
 
+export default ({ href, children, kind, loading, onClick, pill, trackingEvent, ...props }) => {
   const history = useHistory()
   const redirect = async (href) => {
-    setIsSubmitting(true);
-    setAriaLive('assertive');
-
-    // Instead of making a real request, we mock it with a timer
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSuccess(true);
-
-      // To make submittable again, we reset the state after a bit so the user gets completion feedback
-      setTimeout(() => {
-        setSuccess(false);
-        setAriaLive('off');
-      }, 1500);
-    }, 2000);
     history.push(href)
   }
 
-  return (
-    <ButtonStyled
-      small={small}
-      kind={isSubmitting || success ? "ghost" : kind}
-      className={className}
-      onClick={() => {
-        onClick && onClick()
-        redirect(href)
+  const track = async (trackingEvent) => {
+    if (window.ga) {
+      trackingEvent.action = trackingEvent.action || history.location.pathname
+      trackingEvent.category = `ButtonClick_${trackingEvent.category}`
+      ReactGA.event(trackingEvent);
+    }
+  }
+
+  return pill ? (
+    <PillButton
+      onClick={(e) => {
+        trackingEvent && track(trackingEvent)
+        onClick && onClick(e);
+        href && redirect(href);
       }}
+      {...props}
     >
-      {isSubmitting || success ? (
+      {children}
+    </PillButton>
+  ) : (
+    <ButtonStyled
+      kind={loading ? "ghost" : kind}
+      onClick={(e) => {
+        trackingEvent && track(trackingEvent)
+        onClick && onClick(e)
+        href && redirect(href)
+      }}
+      {...props}
+    >
+      {loading ? (
         <InlineLoadingStyled
           description=""
-          status={success ? 'finished' : 'active'}
-          aria-live={ariaLive}
+          status={!loading ? 'finished' : 'active'}
+          aria-live={'off'}
         />
       ) : children}
     </ButtonStyled>

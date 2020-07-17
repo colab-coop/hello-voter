@@ -1,51 +1,37 @@
 import { useEffect, useState } from 'react'
-import jwt_decode from 'jwt-decode'
 
-const addDummyData = (user) => {
-  const dummyData = {
-    type: 'user', // ambassador, tripler
-    approved: false,
-    signupCompleted: false
-  }
-  return Object.assign(user, dummyData)
-}
-
-const completeSignup = (user) => {
-  const data = {
-    signupCompleted: true
-  }
-  return Object.assign(user, data)
-}
-
-const approveUser = (user) => {
-  const data = {
-    approved: true
-  }
-  return Object.assign(user, data)
-}
-
-export const useAuth = (token) => {
+export const useAuth = (token, api) => {
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  useEffect( () => {
-    const fetchUser = () => {
-      if (token && !authenticated) {
-        const fetched = addDummyData(jwt_decode(token))
-        if (fetched) setUser(fetched)
-        setAuthenticated(Boolean(fetched))
-        return true
+  const fetchUser = async () => {
+    const { error, data } = await api.fetchAmbassador()
+    if (error) {
+      // TODO: Change authenticated to "in_signup_process"
+      if (error.msg === 'No current ambassador') {
+        setAuthenticated(true)
       }
-
       setLoading(false)
+      return {
+        completed: false,
+        error
+      }
     }
-    fetchUser()
-  }, [token, setAuthenticated, authenticated])
+    setUser(data)
+    setAuthenticated(true)
+    setLoading(false)
+    return {
+      completed: true,
+      data: data
+    }
+  }
+  useEffect( () => {
+    !authenticated && fetchUser()
+  }, [authenticated, fetchUser])
   return {
     authenticated,
     user,
-    completeSignup,
-    approveUser,
-    loading
+    loading,
+    fetchUser
   }
 }

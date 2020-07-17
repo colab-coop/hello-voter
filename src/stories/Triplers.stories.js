@@ -1,6 +1,6 @@
 import React from 'react'
 import Triplers from '../components/Triplers/TriplersPage'
-import Invite from '../components/Triplers/InvitePage'
+import Add from '../components/Triplers/AddTripler'
 import Confirm from '../components/Triplers/ConfirmPage'
 
 export default {
@@ -8,31 +8,123 @@ export default {
 }
 
 export const TriplersEmptyPage = () => (
-  <Triplers empty />
+  <Triplers triplers={[]} />
 )
 
+export const UnconfirmedTriplers = () => (
+  <Triplers
+    triplers={[
+      {
+        status: "unconfirmed",
+        first_name: "Lauren",
+        last_name: "R",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+    ]}
+  />
+);
+
+export const PendingTriplers = () => (
+  <Triplers
+    triplers={[
+      {
+        status: "pending",
+        first_name: "Lauren",
+        last_name: "R",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+    ]}
+  />
+);
+
+export const ConfirmedTriplers = () => (
+  <Triplers
+    triplers={[
+      {
+        status: "confirmed",
+        first_name: "Lauren",
+        last_name: "R",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+    ]}
+  />
+);
+
 export const TriplersPage = () => (
-  <Triplers 
-    triplers={{ 
-      unconfirmed: [
-        { name: "Lauren R", address: "200 Address lane" },
-        { name: "Edison Shepherd", address: "1 Good Boy Rd" }
-      ],
-      pending: [
-        { name: "Michael Marsh", address: "200 Address lane" },
-        { name: "Edison Shepherd", address: "1 Good Boy Rd" },
-        { name: "Lauren Ralph", address: "1 Road Rd" }
-      ],
-      confirmed: [
-        { name: "Michael Marsh", address: "200 Address lane" },
-        { name: "Edison Shepherd", address: "1 Good Boy Rd" }
-      ]
-    }}
+  <Triplers
+    triplers={[
+      {
+        status: "unconfirmed",
+        first_name: "Lauren",
+        last_name: "R",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+      {
+        status: "unconfirmed",
+        first_name: "Edison",
+        last_name: "Shepherd",
+        address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+      },
+      {
+        status: "pending",
+        first_name: "Michael",
+        last_name: "Marsh",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+      {
+        status: "pending",
+        first_name: "Edison",
+        last_name: "Shepherd",
+        address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+      },
+      {
+        status: "pending",
+        first_name: "Lauren",
+        last_name: "Ralph",
+        address: { address1: "1 Road Rd", city: "Denver", state: "CO" },
+      },
+      {
+        status: "confirmed",
+        first_name: "Michael",
+        last_name: "Marsh",
+        address: {
+          address1: "200 Address lane",
+          city: "Denver",
+          state: "CO",
+        },
+      },
+      {
+        status: "confirmed",
+        first_name: "Edison",
+        last_name: "Shepherd",
+        address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+      },
+    ]}
   />
 )
 
-export const InvitePage = () => (
-  <Invite 
+export const AddPage = () => (
+  <Add 
     triplers={
       [
         {

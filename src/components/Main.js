@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AppContext } from '../api/AppContext'
+import {useHistory} from 'react-router-dom'
+import Loading from './Loading'
 
 export const Main = () => {
-  const { setToken, authenticated, user } = React.useContext(AppContext)
+  const { setToken, authenticated } = React.useContext(AppContext)
   const token = window.location.href.split('#/jwt/')[1]
+  const history = useHistory()
   useEffect(() => {
     if (token) setToken(token)
-  }, [token, setToken])
+    if (authenticated) history.push('/triplers')
+  }, [token, authenticated])
   return (
     <>
-      {!authenticated ? 'Hello Voter!' : `Hello, ${user.name}`}
+      {!authenticated ? <Loading /> : ''}
     </>
   )
 }

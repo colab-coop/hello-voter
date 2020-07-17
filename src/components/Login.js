@@ -7,6 +7,7 @@ export const LogIn = () => {
   return (
     <PageLayout title="Log In">
       <LoginButton type={TYPES.FB} />
+      <LoginButton type={TYPES.GOOGLE} />
     </PageLayout>
   )
 }

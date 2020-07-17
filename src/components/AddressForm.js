@@ -25,22 +25,24 @@ const RowRight = styled.div`
   grid-column-end: span 5;
 `
 
-export default () => (
-  <Form style={{ width: "100%" }}>
+export default ({ ambassador }) => (
+  <>
     <FormGroup>
       <TextInput
-        id="street"
+        name="address1"
         invalidText="Invalid error message."
-        labelText="Street Address"
-        placeholder="1234 Ambassador Lane"
+        labelText="Street Address*"
+        defaultValue={ambassador.address.address1}
+        required
       />
     </FormGroup>
     <FormGroup>
       <TextInput
-        id="city"
+        name="city"
         invalidText="Invalid error message."
-        labelText="City"
-        placeholder="San Francisco"
+        labelText="City*"
+        defaultValue={ambassador.address.city}
+        required
       />
     </FormGroup>
     <FormGroup>
@@ -48,25 +50,29 @@ export default () => (
         <RowLeft>
           <ComboBox
             ariaLabel="Choose an item"
-            id="state"
+            name="state"
             invalidText="A valid value is required"
             itemToString={(item) => (item ? item.text : '')}
             items={states}
             onChange={(value) => console.log(value)}
-            placeholder=" "
-            titleText="State"
+            titleText="State*"
             type="default"
+            selectedItem={states.find(item => {
+              return item.text === ambassador.address.state
+            })}
+            required
           />
         </RowLeft>
         <RowRight>
           <TextInput
-            id="last_name"
+            name="zip"
             invalidText="Invalid error message."
-            labelText="Zip Code"
-            placeholder="12345"
+            labelText="ZIP Code*"
+            defaultValue={ambassador.address.zip}
+            required
           />
         </RowRight>
       </Row>
     </FormGroup>
-  </Form>
+  </>
 )

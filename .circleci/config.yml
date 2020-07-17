@@ -12,12 +12,77 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: /deploy.sh
-
+  staging_ui:
+    docker:
+      - image: circleci/python:3.6
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - deps-{{ checksum "~/repo/ansible/requirements.txt" }}
+      - run:
+          name: Install PIP Dependencies
+          command: |
+            python3 -m venv env
+            . env/bin/activate
+            pip install -r ~/repo/ansible/requirements.txt
+      - save_cache:
+          key: deps-{{ checksum "~/repo/ansible/requirements.txt" }}
+          paths:
+            - "env"
+      - run:
+          name: Setup Ansible Vault pass
+          command: |
+            echo $VAULT_PASS | tee ~/repo/ansible/.vault-pass
+      - run:
+          name: Deploy with Ansible
+          command: |
+            . env/bin/activate
+            cd ~/repo/ansible
+            ansible-playbook -i hosts deploy.yml --limit staging_v1 --vault-password-file ~/repo/ansible/.vault-pass
+  production_ui:
+    docker:
+      - image: circleci/python:3.6
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - deps-{{ checksum "~/repo/ansible/requirements.txt" }}
+      - run:
+          name: Install PIP Dependencies
+          command: |
+            python3 -m venv env
+            . env/bin/activate
+            pip install -r ~/repo/ansible/requirements.txt
+      - save_cache:
+          key: deps-{{ checksum "~/repo/ansible/requirements.txt" }}
+          paths:
+            - "env"
+      - run:
+          name: Setup Ansible Vault pass
+          command: |
+            echo $VAULT_PASS | tee ~/repo/ansible/.vault-pass
+      - run:
+          name: Deploy with Ansible
+          command: |
+            . env/bin/activate
+            cd ~/repo/ansible
+            ansible-playbook -i hosts deploy.yml --limit production_v1 --vault-password-file ~/repo/ansible/.vault-pass
 workflows:
-   deploy:
-     jobs:
-       - deploy-to-coopernetes:
-           context: coopernetes-staging
-           #           filters:
-           #             branches:
-           #               only: develop
+  deploy:
+    jobs:
+      - deploy-to-coopernetes:
+          context: coopernetes-staging
+          filters:
+            branches:
+              only: develop
+      - staging_ui:
+          filters:
+            branches:
+              only: ambassador-stage
+      - production_ui:
+          filters:
+            branches:
+              only: ambassador

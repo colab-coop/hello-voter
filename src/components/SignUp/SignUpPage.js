@@ -4,6 +4,7 @@ import { RadioButton16 } from '@carbon/icons-react'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import { spacing, colors } from '../../theme'
+import { useHistory } from 'react-router-dom'
 
 const List = styled.ol`
   width: 100%;
@@ -19,30 +20,40 @@ const Item = styled.li`
   padding: ${ spacing[4] } ${ spacing[5] };
 `
 
-const ListItem = ({ text }) => (
+const ListItem = ({ text, bold }) => (
   <Item>
-    { text }
+    { 
+      bold ? 
+      <strong>{text}</strong> :
+      text 
+    }
     <RadioButton16 />
   </Item>
 )
 
-export const SignUpPage = () => (
-  <PageLayout 
-    title="Sign Up" 
-    submitButtonTitle="Continue"
-    header={<Breadcrumbs items={
-      [{
-        name: "Back",
-        route: "/"
-      }]
-    } />}
-  >
-    <p>Becoming an ambassador is an easy way to better your community.</p>
-    <List>
-      <ListItem text="Tell us about you" />
-      <ListItem text="Complete 10 minute training" />
-      <ListItem text="We’ll review your application" />
-      <ListItem text="Start recruiting and earning" />
-    </List>
-  </PageLayout>
-)
+export const SignUpPage = () => {
+  const history = useHistory()
+  return (
+    <PageLayout
+      onClickSubmit={() => {
+        history.push('/ambassador/personal_info')
+      }}
+      title="Sign Up"
+      submitButtonTitle="Continue"
+      header={<Breadcrumbs items={
+        [{
+          name: "Back",
+          route: "/ambassador"
+        }]
+      }/>}
+    >
+      <p>Being a Voting Ambassador is an easy and rewarding way to bring positive change to your community. To sign up:</p>
+      <List>
+        <ListItem text="Complete a brief application" />
+        <ListItem text="Take a 15-minute training" />
+        <ListItem text="Have a 10-minute phone interview" />
+        <ListItem bold text="Start working and earning!" />
+      </List>
+    </PageLayout>
+  )
+}

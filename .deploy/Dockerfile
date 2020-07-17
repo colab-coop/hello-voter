@@ -8,16 +8,21 @@ RUN npm ci --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 COPY . ./
 RUN REACT_APP_ORGID=VT6WX8A \
-    REACT_APP_AUDIANCE=blockpower.us \
+    REACT_APP_AUDIANCE=hello-voter.coopernetes.colab.coop \
     REACT_APP_BASEURI=/voterambassador/staging \
     REACT_APP_APPPATH=voterambassador/staging \
     REACT_APP_API_DOMAIN=gotv-vt.ourvoiceusa.org \
     REACT_APP_API_SSL=true \
     REACT_APP_OAUTH_HEADER=x-sm-oauth-url \
     REACT_APP_TOKEN_KEY=token \
-    REACT_APP_REDIRECT_URL=https://hello-voter.coopernetes.colab.coop \
-    REACT_APP_DEVELOPMENT=true \
+    REACT_APP_KEY=auth \
+    REACT_APP_DEVELOPMENT=false \
     REACT_APP_API_URL=https://hellovoter.api.stage.colab.coop \
+    REACT_APP_CALENDLY_LINK=https://calendly.com/ambassador-screening/10 \
+    REACT_APP_TRIPLER_PAYMENT_AMT=25 \
+    REACT_APP_HEADER=dark \
+    REACT_APP_LOGO=block-power \
+    REACT_APP_GA_TRACKING_ID=UA-172693622-1 \
     npm run build
 
 # production environment

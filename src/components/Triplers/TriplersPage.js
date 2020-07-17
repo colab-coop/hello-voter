@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'carbon-components-react'
-import { Add16 } from '@carbon/icons-react'
+import { Link, Tag } from 'carbon-components-react'
+import { Add16, ChevronRight16 } from '@carbon/icons-react'
 import styled from 'styled-components'
 import { colors, spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import Button from '../Button'
+import Loading from '../Loading'
 
-import { AppProvider, AppContext } from '../../api/AppContext'
+import { AppContext } from '../../api/AppContext'
+
+const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
 
 const SectionTitle = styled.h5`
   margin-top: ${ spacing[7] };
@@ -19,6 +22,7 @@ const Paragraph = styled.p`
 `
 
 const TriplerRowStyled = styled.div`
+  display: flex;
   width: 100%;
   padding: ${ spacing[4] };
   background-color: ${ colors.gray[10] };
@@ -26,7 +30,7 @@ const TriplerRowStyled = styled.div`
   &:hover {
     background-color: #e5e5e5;
     cursor: pointer;
-  } 
+  }
 `
 
 const TriplerRowName = styled.h6`
@@ -37,67 +41,125 @@ const TriplerRowAddress = styled.p`
   font-size: 12px;
 `
 
-const TriplerRow = ({ name, address }) => (
+const TriplerColumn = styled.div`
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  align-items: center;
+`
+
+const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, confirmed, tagText }) => (
   <TriplerRowStyled>
-    <TriplerRowName>{ name }</TriplerRowName>
-    <TriplerRowAddress>{ address }</TriplerRowAddress>
+    <div>
+      <TriplerRowName>{ name }</TriplerRowName>
+      <TriplerRowAddress>{ address }</TriplerRowAddress>
+    </div>
+    <TriplerColumn>
+      {unconfirmed &&
+        <Button pill href={`/triplers/confirm/${id}`}
+          trackingEvent={{ category: 'TriplerAddInfo', label: 'Add Info'}}
+          >
+          Add Info <ChevronRight16 />
+        </Button>
+      }
+      {pending &&
+        <Button pill data-id={id} onClick={remindTripler}
+          trackingEvent={{ category: 'TriplerRemind', label: 'Remind'}}
+          >
+          Remind
+        </Button>
+      }
+      {/* FIXME: Hardcode fake confirmation */}
+      {confirmed && tagText &&
+        <Tag type="green">
+          {tagText}
+        </Tag>
+      }
+    </TriplerColumn>
   </TriplerRowStyled>
 )
 
-const TriplersEmpty = () => (
-  <>
-    <p>
-      Confirm that these people will ask 3 friends to vote and earn 50 dollars
-    </p>
-    <Button href='/triplers/add'>Find new Triplers<Add16 /></Button>
-  </>
-)
+const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
+  const hasTriplers =
+    unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
+  const hasMaxTriplers = 
+    unconfirmed.length + confirmed.length + pending.length >= 12
 
-const Triplers = ({ unconfirmed, pending, confirmed }) => (
-  <>
-    <p>
-      These are your contacts that will each help 3 others vote. Confirm each
-      Tripler by adding their information below
-    </p>
-    <Button href='/triplers/add'>Find new Triplers<Add16 /></Button>
-    <SectionTitle>Your unconfirmed Triplers</SectionTitle>
-    <Paragraph>Add information for a Tripler. We’ll send them a text message to confirm.</Paragraph>
-    {
-      unconfirmed &&
-        unconfirmed.map((tripler) => (
-          <TriplerRow
-            name={`${tripler.first_name} ${tripler.last_name}`}
-            address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-            onClick={() => { }}
-          />
-        ))
-    }
-    <SectionTitle>Your Triplers who haven’t replied yet</SectionTitle>
-    <Paragraph>Once the Tripler confirms “YES” to our text message, you will get your reward.</Paragraph>
-    {
-      pending &&
-        pending.map((tripler) => (
-          <TriplerRow
-            name={`${tripler.first_name} ${tripler.last_name}`}
-            address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-            onClick={() => { }}
-          />
-        ))
-    }
-    <SectionTitle>Your confirmed Triplers</SectionTitle>
-    <Paragraph>Once your <Link href="#">payment method is set up</Link>, you’ll receive your reward for these Triplers.</Paragraph>
-    {
-      confirmed &&
-        confirmed.map((tripler) => (
-          <TriplerRow
-            name={`${tripler.first_name} ${tripler.last_name}`}
-            address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-            onClick={() => { }}
-          />
-        ))
-    }
-  </>
-)
+  return (
+    <>
+      <p>
+        As a Voting Ambassador, your task is to recruit “Vote Triplers” from a
+        list of family members and neighbors. A Vote Tripler is someone who
+        agrees to remind three other people to vote in the next election.
+      </p>
+      <br />
+      <p>
+        You will receive ${REACT_APP_TRIPLER_PAYMENT_AMT} for each Vote Tripler you recruit.
+      </p>
+      <Button
+        href="/triplers/add"
+        trackingEvent={{ category: 'FindNewVoteTriplers', label: 'Find new Vote Triplers'}}
+        disabled={hasMaxTriplers}
+      >
+        Find new Vote Triplers
+        <Add16 />
+      </Button>
+      
+      {hasTriplers && (
+        <>
+          <SectionTitle>Your possible Vote Triplers</SectionTitle>
+          <Paragraph>
+            Add information for a Vote Tripler. We’ll send them a text message to
+            confirm.
+          </Paragraph>
+          {unconfirmed.map((tripler) => (
+            <TriplerRow
+              id={tripler.id}
+              name={`${tripler.first_name} ${tripler.last_name}`}
+              address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+              unconfirmed
+              onClick={() => {}}
+            />
+          ))}
+
+          <SectionTitle>Your unconfirmed Vote Triplers</SectionTitle>
+          <Paragraph>
+            These possible Vote Triplers have not yet confirmed their identity.
+          </Paragraph>
+          {pending.map((tripler) => (
+            <TriplerRow
+              id={tripler.id}
+              name={`${tripler.first_name} ${tripler.last_name}`}
+              address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+              onClick={() => {}}
+              pending
+              remindTripler={remindTripler}
+            />
+          ))}
+
+          <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
+          <Paragraph>
+            You'll receive payment for these Vote Triplers.
+          </Paragraph>
+          {confirmed.map((tripler, i) => (
+              <TriplerRow
+              name={`${tripler.first_name} ${tripler.last_name}`}
+              address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+              onClick={() => {}}
+              confirmed
+              // FIXME: Hardcode fake confirmation
+              tagText={
+                i === 0
+                  ? `$${REACT_APP_TRIPLER_PAYMENT_AMT} Collected`
+                  : `$${REACT_APP_TRIPLER_PAYMENT_AMT} Sent`
+              }
+            />
+          ))}
+        </>
+      )}
+    </>
+  );
+};
 
 export default () => {
   const [triplers, setTriplers] = useState(null)
@@ -109,12 +171,15 @@ export default () => {
     }
     fetchData()
   }, [])
+  const sendReminder = async (el) => {
+    api.sendReminder(el.target.dataset.id)
+  }
   return (
-    triplers ? <TriplersPage triplers={triplers} /> : 'Loading...'
+    triplers ? <TriplersPage triplers={triplers} remindTripler={sendReminder} /> : <Loading />
   )
 }
 
-const TriplersPage = ({ triplers }) => {
+const TriplersPage = ({ triplers, remindTripler }) => {
   const confirmed = triplers.filter((tripler) => tripler.status === 'confirmed')
   const pending = triplers.filter((tripler) => tripler.status === 'pending')
   const unconfirmed = triplers.filter((tripler) => tripler.status === 'unconfirmed')
@@ -128,21 +193,18 @@ const TriplersPage = ({ triplers }) => {
             route: "/"
           },
           {
-            name: "Triplers",
+            name: "Vote Triplers",
             route: "/"
           }
         ]
       }/>}
     >
-      {
-        !triplers ?
-          <TriplersEmpty/> :
-          <Triplers
-            unconfirmed={unconfirmed}
-            pending={pending}
-            confirmed={confirmed}
-          />
-      }
+      <Triplers
+        unconfirmed={unconfirmed}
+        pending={pending}
+        confirmed={confirmed}
+        remindTripler={remindTripler}
+      />
     </PageLayout>
   )
 }
