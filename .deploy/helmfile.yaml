@@ -1,7 +1,12 @@
+repositories:
+- name: coopernetes
+  url: https://colab-coop.github.io/coopernetes/charts
+
 releases:
   - name: hello-voter
     namespace: hello-voter
-    chart: ./chart
+    chart: coopernetes/basic-http-server
+    version: 0.1.2
     values:
       - name: hello-voter
         issuer: "letsencrypt-prod"
@@ -9,3 +14,8 @@ releases:
         image:
           tag: {{ requiredEnv "DOCKER_TAG" }}
           port: 80
+        imageCredentials:
+          registry: https://index.docker.io/v1/
+          username: {{ requiredEnv "DOCKER_USER" }}
+          password: {{ requiredEnv "DOCKER_PASSWORD" }}
+          email: devops+dockerhub@colab.coop
