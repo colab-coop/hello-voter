@@ -21,7 +21,7 @@ dotenv:
   REACT_APP_KEY: "auth"
   REACT_APP_DEVELOPMENT: "false"
   REACT_APP_CALENDLY_LINK: "https://calendly.com/ambassador-screening/10"
-  REACT_APP_TRIPLER_PAYMENT_AMT: "10"
+  REACT_APP_TRIPLER_PAYMENT_AMT: "15"
   REACT_APP_HEADER: "light"
   REACT_APP_LOGO: "new-georgia"
   REACT_APP_GA_TRACKING_ID: "UA-172693622-1"
