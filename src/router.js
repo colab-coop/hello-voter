@@ -9,6 +9,7 @@ import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
 import { SignUpPage } from './components/SignUp/SignUpPage'
+import { LandingPage } from './components/SignUp/LandingPage'
 import { BecomeAmbassadorPage } from './components/SignUp/BecomeAmbassadorPage'
 import { PersonalInfoPage } from './components/SignUp/PersonalInfoPage'
 import { AddressPage } from './components/SignUp/AddressPage'
@@ -78,6 +79,7 @@ const AppRoutes = () => {
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} user={user}/>
+        <Route path="/tallahassee" component={LandingPage} />
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} user={user}/>
