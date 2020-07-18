@@ -20,6 +20,17 @@ import ConfirmPage from './components/Triplers/ConfirmPage'
 import OnBoarding01 from './components/Onboarding/01'
 import OnBoarding02 from './components/Onboarding/02'
 import OnBoarding03 from './components/Onboarding/03'
+import OnBoarding04 from './components/Onboarding/04'
+import OnBoarding05 from './components/Onboarding/05'
+import OnBoarding06 from './components/Onboarding/06'
+import OnBoarding07 from './components/Onboarding/07'
+import OnBoarding08 from './components/Onboarding/08'
+import OnBoarding09 from './components/Onboarding/09'
+import OnBoarding10 from './components/Onboarding/10'
+import OnBoarding11 from './components/Onboarding/11'
+import OnBoarding12 from './components/Onboarding/12'
+import OnBoarding13 from './components/Onboarding/13'
+import OnBoarding14 from './components/Onboarding/14'
 import PendingApprovalPage from './components/PendingApprovalPage'
 
 
@@ -74,6 +85,17 @@ const AppRoutes = () => {
         <AuthPublicRoute path="/onboarding/01" component={OnBoarding01} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/02" component={OnBoarding02} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/03" component={OnBoarding03} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/04" component={OnBoarding04} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/05" component={OnBoarding05} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/06" component={OnBoarding06} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/07" component={OnBoarding07} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/08" component={OnBoarding08} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/09" component={OnBoarding09} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/10" component={OnBoarding10} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/11" component={OnBoarding11} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/12" component={OnBoarding12} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/13" component={OnBoarding13} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/14" component={OnBoarding14} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/approval" component={PendingApprovalPage} exact={true} authenticated={authenticated} />
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} user={user}/>

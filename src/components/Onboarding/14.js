@@ -10,6 +10,7 @@ export default () => {
       prevPage="/onboarding/13"
       nextPage="approval"
       title="Acknowledgement"
+      shouldSubmit
     >
       <p>
         I understand and acknowledge that in performing my activities as a
@@ -19,21 +20,21 @@ export default () => {
       <br />
       <FormGroup>
         <Checkbox
-          id="response-1"
+          name="response-1"
           labelText={`I am acting as an independent contractor, and not as an employee or agent of ${REACT_APP_ORG}.`}
           // onChange={function noRefCheck() {}}
         />
       </FormGroup>
       <FormGroup>
         <Checkbox
-          id="response-2"
+          name="response-2"
           labelText={`I do not have the power or authority to speak for ${REACT_APP_ORG} or to legally bind it by anything I say or do.`}
           // onChange={function noRefCheck() {}}
         />
       </FormGroup>
       <FormGroup>
         <Checkbox
-          id="response-3"
+          name="response-3"
           labelText="I am not being paid to vote, to register to vote, or to register anyone else to vote."
           // onChange={function noRefCheck() {}}
         />

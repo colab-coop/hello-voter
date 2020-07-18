@@ -15,7 +15,7 @@ export default () => {
       </p>
       <br />
       <TextArea
-        id="response_01"
+        name="response_01"
         invalidText="A valid value is required"
         placeholder=""
         rows={4}

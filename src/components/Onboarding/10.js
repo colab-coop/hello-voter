@@ -23,12 +23,12 @@ export default () => {
           name="radio-button-group"
         >
           <RadioButton
-            id="true"
+            name="true"
             labelText="True"
             value="standard"
           />
           <RadioButton
-            id="false"
+            name="false"
             labelText="False"
             value="standard"
           />
