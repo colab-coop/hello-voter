@@ -96,7 +96,11 @@ export default () => {
   return (
     <ThemeProvider theme={theme}>
       <Header aria-label="Hello Voter">
-        <Logo onClick={() => {}} />
+        <Logo
+          onClick={() => {
+            redirect("/");
+          }}
+        />
         <HeaderGlobalBar>
           <HeaderGlobalAction
             aria-label="Help"
