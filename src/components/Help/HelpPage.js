@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 import CardButton from '../CardButton'
-import { Catalog24, Help24 } from '@carbon/icons-react';
+import { Devices24, Partnership24 } from '@carbon/icons-react';
 
 const TopParagraph = styled.p`
   margin-bottom: ${ spacing[7]};
@@ -13,16 +13,20 @@ export default () => (
   <PageLayout title="Help">
     <TopParagraph>Have questions? Here’s how to get answers.</TopParagraph>
     <CardButton
-      icon={ <Catalog24 /> }
-      title="Schedule a call"
-      description="Schedule a call to discuss your questions with an Organizer"
-      onClick={() => { }}
+      icon={<Devices24 />}
+      title="Technical Support"
+      description="blockpower@zammad.com"
+      onClick={() => {
+        window.open("mailto:blockpower@zammad.com");
+      }}
     />
     <CardButton
-      icon={ <Help24 /> }
-      title="FAQ"
-      description="See answers to common questions asked by other Voting Ambassadors"
-      onClick={() => { }}
+      icon={<Partnership24 />}
+      title="New Georgia Project Support"
+      description="reach@ngpaf.org"
+      onClick={() => {
+        window.open("reach@ngpaf.org");
+      }}
     />
   </PageLayout>
-)
+);
