@@ -32,7 +32,7 @@ const NoMatch = ({authenticated, path, user }) => (
         <Redirect to={{pathname: '/triplers', state: {from: props.location}}} />
         :
         <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
-      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+      : <Redirect to={{pathname: '/tallahassee', state: {from: props.location}}} />}
   />
 )
 
@@ -47,7 +47,7 @@ const AuthRoute = ({component: Component, authenticated, path, user }) => (
           <Redirect to={{pathname: '/approval', state: {from: props.location}}} />
           :
           <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
-      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+      : <Redirect to={{pathname: '/tallahassee', state: {from: props.location}}} />}
   />
 )
 
