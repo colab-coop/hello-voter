@@ -150,8 +150,8 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
               // FIXME: Hardcode fake confirmation
               tagText={
                 i === 0
-                  ? `$${REACT_APP_TRIPLER_PAYMENT_AMT} Sent`
-                  : `$${REACT_APP_TRIPLER_PAYMENT_AMT} Collected`
+                  ? `$${REACT_APP_TRIPLER_PAYMENT_AMT} Collected`
+                  : `$${REACT_APP_TRIPLER_PAYMENT_AMT} Sent`
               }
             />
           ))}
