@@ -15,10 +15,11 @@ export default () => {
       </p>
       <br />
       <TextArea
-        id="response_01"
+        name="questions"
         invalidText="A valid value is required"
         placeholder=""
         rows={4}
+        required
       />
     </TrainingLayout>
   );

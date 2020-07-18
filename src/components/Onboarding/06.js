@@ -12,13 +12,13 @@ export default () => {
       <p>What three government policies are most important to you?</p>
       <br />
       <FormGroup>
-        <TextInput id="response_01" invalidText="A valid value is required" placeholder="1." />
+        <TextInput name="gov_pols_01" invalidText="A valid value is required" placeholder="1." required />
       </FormGroup>
       <FormGroup>
-        <TextInput id="response_02" invalidText="A valid value is required" placeholder="2." />
+        <TextInput name="gov_pols_02" invalidText="A valid value is required" placeholder="2." required />
       </FormGroup>
       <FormGroup>
-        <TextInput id="response_03" invalidText="A valid value is required" placeholder="3." />
+        <TextInput name="gove_pols_03" invalidText="A valid value is required" placeholder="3." required />
       </FormGroup>
     </TrainingLayout>
   );
