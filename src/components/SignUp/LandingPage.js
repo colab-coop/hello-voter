@@ -28,7 +28,7 @@ export const LandingPage = () => {
         history.push("/login");
       }}
       title="Earn Money as a Voting Ambassador!"
-      formId="LandingPage"
+      trackingEvent={{ category: 'LandingPageContinue', label: 'Learn more!'}}
       submitButtonTitle="Learn more!"
       hideMenuButtons
     >
