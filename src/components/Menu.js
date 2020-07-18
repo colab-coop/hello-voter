@@ -86,28 +86,30 @@ const HeaderGlobalAction = styled.button`
   }
 `;
 
-export default () => {
+export default ({ hideButtons }) => {
   return (
     <ThemeProvider theme={theme}>
       <Header aria-label="Hello Voter">
         <Logo onClick={() => {}} />
-        <HeaderGlobalBar>
-          <HeaderGlobalAction
-            aria-label="Help"
-            type="button"
-            onClick={() => {}}
-          >
-            <Help20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="Profile"
-            type="button"
-            onClick={() => {}}
-          >
-            <UserAvatar20 />
-          </HeaderGlobalAction>
-        </HeaderGlobalBar>
+        {!hideButtons && (
+          <HeaderGlobalBar>
+            <HeaderGlobalAction
+              aria-label="Help"
+              type="button"
+              onClick={() => {}}
+            >
+              <Help20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label="Profile"
+              type="button"
+              onClick={() => {}}
+            >
+              <UserAvatar20 />
+            </HeaderGlobalAction>
+          </HeaderGlobalBar>
+        )}
       </Header>
     </ThemeProvider>
   );
-}
+};

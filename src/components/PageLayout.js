@@ -37,9 +37,9 @@ const CtaButton = styled(Button)`
   margin-top: 0;
 `
 
-export default ({ header, title, children, submitButtonTitle, onClickSubmit, error }) => (
+export default ({ header, title, children, submitButtonTitle, onClickSubmit, error, hideMenuButtons }) => (
   <>
-    <Menu />
+    <Menu hideButtons={hideMenuButtons} />
     <FormStyled onSubmit={onClickSubmit}>
       <ContentContainer>
         <Column lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>

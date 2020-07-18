@@ -12,13 +12,13 @@ export default () => {
       <p>What three reasons to vote are most important to you?</p>
       <br />
       <FormGroup>
-        <TextInput name="response_01" invalidText="A valid value is required" placeholder="1." />
+        <TextInput name="reasons_to_vote_01" invalidText="A valid value is required" placeholder="1." required />
       </FormGroup>
       <FormGroup>
-        <TextInput name="response_02" invalidText="A valid value is required" placeholder="2." />
+        <TextInput name="reasons_to_vote_02" invalidText="A valid value is required" placeholder="2." required />
       </FormGroup>
       <FormGroup>
-        <TextInput name="response_03" invalidText="A valid value is required" placeholder="3." />
+        <TextInput name="reasons_to_vote_03" invalidText="A valid value is required" placeholder="3." required />
       </FormGroup>
     </TrainingLayout>
   );

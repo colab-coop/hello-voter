@@ -12,10 +12,11 @@ export default () => {
       <p>What did you think about President Obama’s speech?</p>
       <br />
       <TextArea
-        name="response_01"
+        name="obama_speech"
         invalidText="A valid value is required"
         placeholder="I thought..."
         rows={4}
+        required
       />
     </TrainingLayout>
   )
