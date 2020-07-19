@@ -224,12 +224,12 @@ export const fetchAmbassador = async () => {
   }
 }
 
-export const completeOnboarding = async (data) => {
+export const completeOnboarding = async (body) => {
   try {
     let res = await fetch(COMPLETE_ONBOARDING, {
       method: 'PUT',
       headers: addAuth(),
-      body: JSON.stringify(data)
+      body: JSON.stringify(body)
     })
 
     let data = await res.json()
