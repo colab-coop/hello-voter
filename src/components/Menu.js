@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { Help20, UserAvatar20 } from '@carbon/icons-react'
 import styled, { ThemeProvider } from 'styled-components'
 import BlockPower from '../assets/logos/block-power.png'
@@ -86,29 +87,38 @@ const HeaderGlobalAction = styled.button`
   }
 `;
 
-export default ({ hideButtons }) => {
+export default () => {
+  const history = useHistory()
+  const redirect = async (href) => {
+    history.push(href)
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Header aria-label="Hello Voter">
-        <Logo onClick={() => {}} />
-        {!hideButtons && (
-          <HeaderGlobalBar>
-            <HeaderGlobalAction
-              aria-label="Help"
-              type="button"
-              onClick={() => {}}
-            >
-              <Help20 />
-            </HeaderGlobalAction>
-            <HeaderGlobalAction
-              aria-label="Profile"
-              type="button"
-              onClick={() => {}}
-            >
-              <UserAvatar20 />
-            </HeaderGlobalAction>
-          </HeaderGlobalBar>
-        )}
+        <Logo
+          onClick={() => {
+            redirect("/");
+          }}
+        />
+        <HeaderGlobalBar>
+          <HeaderGlobalAction
+            aria-label="Help"
+            type="button"
+            onClick={() => {
+              redirect("/help");
+            }}
+          >
+            <Help20 />
+          </HeaderGlobalAction>
+          <HeaderGlobalAction
+            aria-label="Profile"
+            type="button"
+            onClick={() => {}}
+          >
+            <UserAvatar20 />
+          </HeaderGlobalAction>
+        </HeaderGlobalBar>
       </Header>
     </ThemeProvider>
   );
