@@ -231,7 +231,7 @@ export const completeOnboarding = async (data) => {
       headers: addAuth()
     })
 
-    let data = await res.json()
+    let data = await res.json(data)
 
     if (isFailStatusCode(data.code)) {
       return {
