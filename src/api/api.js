@@ -228,10 +228,11 @@ export const completeOnboarding = async (data) => {
   try {
     let res = await fetch(COMPLETE_ONBOARDING, {
       method: 'PUT',
-      headers: addAuth()
+      headers: addAuth(),
+      body: JSON.stringify(data)
     })
 
-    let data = await res.json(data)
+    let data = await res.json()
 
     if (isFailStatusCode(data.code)) {
       return {
