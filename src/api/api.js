@@ -11,6 +11,7 @@ const FREE_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/suggest-triplers`
 const SIGNUP_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/signup`
 const TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
 const CONFIRM_TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
+const COMPLETE_ONBOARDING = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/complete-onboarding`
 
 const errorHandler = (e) => {
   console.warn(e)
@@ -204,6 +205,31 @@ export const fetchAmbassador = async () => {
     let res = await fetch(AMBASSADOR_URL, {
       method: 'GET',
       headers: addAuth()
+    })
+
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const completeOnboarding = async (body) => {
+  try {
+    let res = await fetch(COMPLETE_ONBOARDING, {
+      method: 'PUT',
+      headers: addAuth(),
+      body: JSON.stringify(body)
     })
 
     let data = await res.json()

@@ -16,6 +16,7 @@ const CardContainer = styled.button`
 const CardTitleContainer = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin-bottom: ${ spacing[5] };
 `
 

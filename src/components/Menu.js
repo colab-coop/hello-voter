@@ -92,7 +92,7 @@ export default () => {
   const redirect = async (href) => {
     history.push(href)
   }
-  
+
   return (
     <ThemeProvider theme={theme}>
       <Header aria-label="Hello Voter">
@@ -122,4 +122,4 @@ export default () => {
       </Header>
     </ThemeProvider>
   );
-}
+};

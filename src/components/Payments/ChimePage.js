@@ -1,0 +1,86 @@
+import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
+import { spacing } from '../../theme'
+import PageLayout from '../PageLayout'
+import Breadcrumbs from '../Breadcrumbs'
+import Button from '../Button'
+import chime from '../../assets/images/chime-card.png'
+
+const Image = styled.img`
+  width: 100%;
+  max-width: 320px;
+`
+
+const Subheader = styled.h4`
+  font-weight: 600;
+  margin-top: ${ spacing[5] };
+`;
+
+const OrderedList = styled.ol`
+  list-style: decimal;
+  margin-bottom: ${ spacing[7] };
+`;
+
+const ListItem = styled.li`
+  margin-block-start: ${ spacing[5] };
+  margin-block-end: ${ spacing[5] };
+  margin-inline-start: ${ spacing[5] };
+  margin-inline-end: 0;
+  line-height: 1.5;
+`;
+
+export default () => {
+  return (
+    <PageLayout
+      title={""}
+      header={
+        <Breadcrumbs
+          items={[
+            {
+              name: "Home",
+              route: "/",
+            },
+            {
+              name: "Payments",
+              route: "/",
+            },
+            {
+              name: "Edit",
+              route: "/",
+            },
+            {
+              name: "Chime",
+              route: "/",
+            },
+          ]}
+        />
+      }
+    >
+      <Image src={chime} />
+      <p>Chime is a new kind of bank. Open a free account in five minutes.</p>
+      <Subheader>How it works</Subheader>
+      <OrderedList>
+        <ListItem>Visit Chime.com and sign up for an account.</ListItem>
+        <ListItem>Once your account is open, return to this screen to connect to that account and receive your payment.</ListItem>
+      </OrderedList>
+      <Button
+        type="submit"
+        style={{backgroundColor: "#25C87D"}}
+        // trackingEvent={{ category: "SubmitTriplerConfirm", label: "Add" }}
+      >
+        Sign up for a Chime account
+      </Button>
+      <Button
+        small
+        kind="tertiary"
+        href={"/payments"}
+        // trackingEvent={{
+        //   category: "BackFromTriplerConfirm",
+        //   label: "Go back to My Vote Triplers",
+        // }}
+      >
+        Go back to Payments
+      </Button>
+    </PageLayout>
+  );
+}
