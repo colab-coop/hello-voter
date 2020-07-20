@@ -20,23 +20,23 @@ export default () => {
       <br />
       <FormGroup>
         <Checkbox
-          name="response-1"
+          id="acknowledgement-1"
+          name="acknowledgement-1"
           labelText={`I am acting as an independent contractor, and not as an employee or agent of ${REACT_APP_ORG}.`}
-          // onChange={function noRefCheck() {}}
         />
       </FormGroup>
       <FormGroup>
         <Checkbox
-          name="response-2"
+          id="acknowledgement-2"
+          name="acknowledgement-2"
           labelText={`I do not have the power or authority to speak for ${REACT_APP_ORG} or to legally bind it by anything I say or do.`}
-          // onChange={function noRefCheck() {}}
         />
       </FormGroup>
       <FormGroup>
         <Checkbox
-          name="response-3"
+          id="acknowledgement-3"
+          name="acknowledgement-3"
           labelText="I am not being paid to vote, to register to vote, or to register anyone else to vote."
-          // onChange={function noRefCheck() {}}
         />
       </FormGroup>
     </TrainingLayout>
