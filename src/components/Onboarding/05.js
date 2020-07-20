@@ -18,10 +18,10 @@ export default () => {
         <FigureRow bgLevel={70}>Making housing more affordable</FigureRow>
         <FigureRow bgLevel={60}>Lowering the cost of healthcare</FigureRow>
         <FigureRow bgLevel={50}>Reducing racism</FigureRow>
-        <FigureRow bgLevel={40}>Improving water air quality</FigureRow>
+        <FigureRow bgLevel={40}>Improving water and air quality</FigureRow>
         <FigureRow bgLevel={30}>Making college more affordable</FigureRow>
         <FigureRow bgLevel={20}>Creating more higher paying jobs</FigureRow>
-        <FigureRow bgLevel={10}>Making ends meet with</FigureRow>
+        <FigureRow bgLevel={10}>Making ends meet with one job</FigureRow>
       </FigureContainer>
     </TrainingLayout>
   );
