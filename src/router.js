@@ -33,7 +33,7 @@ import OnBoarding12 from './components/Onboarding/12'
 import OnBoarding13 from './components/Onboarding/13'
 import OnBoarding14 from './components/Onboarding/14'
 import PendingApprovalPage from './components/PendingApprovalPage'
-
+import Help from './components/Help/HelpPage'
 
 const NoMatch = ({authenticated, path, user }) => (
   <Route
@@ -101,6 +101,7 @@ const AppRoutes = () => {
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} user={user}/>
+        <Route path="/help" component={Help}/>
         <Route path="/tallahassee" component={LandingPage} />
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>

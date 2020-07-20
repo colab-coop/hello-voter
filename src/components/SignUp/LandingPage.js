@@ -3,23 +3,6 @@ import styled from 'styled-components'
 import PageLayout from '../PageLayout'
 import { useHistory } from 'react-router-dom'
 
-const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
-
-const VideoContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
-`
-
-const Video = styled.iframe`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`
-
 export const LandingPage = () => {
   const history = useHistory()
   return (
@@ -30,6 +13,7 @@ export const LandingPage = () => {
       title="Earn Money as a Voting Ambassador!"
       trackingEvent={{ category: 'LandingPageContinue', label: 'Learn more!'}}
       submitButtonTitle="Learn more!"
+      submitButtonTitle="Sign up now"
       hideMenuButtons
     >
       <p>
@@ -40,16 +24,9 @@ export const LandingPage = () => {
       <br />
       <br />
       <p>
-        Voting Ambassadors earn ${REACT_APP_TRIPLER_PAYMENT_AMT} each time they recruit a new Vote Tripler.
-        At the same time, by raising awareness about voting in their community,
-        Ambassadors also help improve Black turnout and give the community a
-        stronger voice in our future.
+        This page will walk you through the sign-up process. It should take no
+        more than 10 minutes.
       </p>
-      <br />
-      <br />
-      <VideoContainer>
-        <Video src="https://youtube.com/embed/VUf394_KJ0c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
-      </VideoContainer>
     </PageLayout>
   );
 }
