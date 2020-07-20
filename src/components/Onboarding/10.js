@@ -25,12 +25,12 @@ export default () => {
           <RadioButton
             name="true"
             labelText="True"
-            value="standard"
+            value="true"
           />
           <RadioButton
             name="false"
             labelText="False"
-            value="standard"
+            value="false"
           />
         </RadioButtonGroup>
       </FormGroup>

@@ -7,7 +7,7 @@ export default () => {
   return (
     <TrainingLayout
       nextPage='/onboarding/02'
-      title="Training"
+      title="Voting Ambassador Guide"
     >
       <p>Voting Ambassadors understand the importance of <strong>voting</strong> in bringing positive change to their communities. By recruiting "Vote Triplers" — friends and family members who agree to remind three other people to vote in the next election — Voting Ambassadors give their communities a more powerful voice.</p>
       <br />
