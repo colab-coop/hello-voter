@@ -1,33 +1,33 @@
 import styled from 'styled-components'
 import { spacing } from "../../theme";
 
-const green = {
-  3: "#fafdfc",
-  5: "#f7fcfa",
-  7: "#f5fbf8",
-  10: "#f0f9f5",
-  15: "#eaf7f1",
-  20: "#e4f5ed",
-  30: "#d9f1e5",
-  40: "#d0eddf",
-  50: "#c8ead9",
-  60: "#c0e7d4",
-  70: "#b9e4cf",
-  80: "#b3e2cb",
-  90: "#addfc7",
-  100: "#a7ddc3",
-  125: "#9bd8ba",
-  150: "#90d4b3",
-  175: "#87d1ad",
-  200: "#7ecda7",
-  300: "#64c395",
-  400: "#4fbb87",
-  500: "#47b881",
-  600: "#3faf77",
-  700: "#37a56d",
-  800: "#2d9760",
-  900: "#248953",
-  1000: "#197140"
+const grey = {
+  3: "#fafbfc",
+  5: "#f7f8fa",
+  7: "#f3f6f8",
+  10: "#eff2f5",
+  15: "#e7ecf1",
+  20: "#e1e7ed",
+  30: "#d5dee6",
+  40: "#cad5df",
+  50: "#c1ced9",
+  60: "#b8c7d4",
+  70: "#b0c1d0",
+  80: "#a9bbcb",
+  90: "#a2b6c7",
+  100: "#9cb1c3",
+  125: "#8ea6bb",
+  150: "#829cb4",
+  175: "#7894ad",
+  200: "#6e8ca8",
+  300: "#56748f",
+  400: "#496279",
+  500: "#435a6f",
+  600: "#37536c",
+  700: "#2c4b68",
+  800: "#1f4160",
+  900: "#153656",
+  1000: "#092744"
 }
 
 export const VideoContainer = styled.div`
@@ -52,7 +52,7 @@ export const FigureContainer = styled.ul`
 export const FigureRow = styled.li`
   font-weight: 600;
   padding: ${spacing[5]};
-  background-color: ${(props) => green[props.bgLevel]};
-  color: ${green[1000]};
-  border-bottom: 1px solid ${green[100]};
+  background-color: ${(props) => grey[props.bgLevel]};
+  color: ${grey[1000]};
+  border-bottom: 1px solid ${grey[100]};
 `;
