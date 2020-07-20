@@ -102,7 +102,7 @@ const AppRoutes = () => {
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} user={user}/>
         <Route path="/help" component={Help}/>
-        <Route path="/tallahassee" component={LandingPage} />
+        <Route path="/landing" component={LandingPage} />
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} user={user}/>

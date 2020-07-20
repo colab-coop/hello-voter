@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import PageLayout from '../PageLayout'
 import { useHistory } from 'react-router-dom'
 
+const { REACT_APP_LANDING_TITLE, REACT_APP_LANDING_CONTENT } = process.env
+
 export const LandingPage = () => {
   const history = useHistory()
   return (
@@ -10,16 +12,14 @@ export const LandingPage = () => {
       onClickSubmit={() => {
         history.push("/login");
       }}
-      title="Earn Money as a Voting Ambassador!"
+      title={REACT_APP_LANDING_TITLE}
       trackingEvent={{ category: 'LandingPageContinue', label: 'Learn more!'}}
       submitButtonTitle="Learn more!"
       submitButtonTitle="Sign up now"
       hideMenuButtons
     >
       <p>
-        Voting Ambassadors talk to their housemates, friends and neighbors about
-        the importance of voting in the next election. Their goal is recruit
-        “Vote Triplers” — people who commit to reminding three friends to vote.
+        {REACT_APP_LANDING_CONTENT}
       </p>
       <br />
       <br />
