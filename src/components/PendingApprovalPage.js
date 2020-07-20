@@ -5,7 +5,7 @@ import PageLayout from './PageLayout'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../api/AppContext'
 
-const { REACT_APP_CALENDLY_LINK } = process.env
+const { REACT_APP_CALENDLY_LINK, REACT_APP_APPROVE_HEADER, REACT_APP_APPROVE_CONTENT } = process.env
 
 export default () => {
   const history = useHistory()
@@ -14,17 +14,15 @@ export default () => {
   return (
     <>
       <PageLayout
-        title='Training Complete!'
+        title={REACT_APP_APPROVE_HEADER}
       >
         <p>
-          Thank you for completing the training. The final step in the
-          application process is a ten-minute phone interview. Please choose a
-          convenient date and time.
+          {REACT_APP_APPROVE_CONTENT}
         </p>
         <br />
         <br />
-        <Button 
-          href={REACT_APP_CALENDLY_LINK} 
+        <Button
+          href={REACT_APP_CALENDLY_LINK}
           trackingEvent={{
             category: 'CalendlyLink',
             label: 'Choose a date and time'
