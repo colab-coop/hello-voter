@@ -25,7 +25,7 @@ export default () => (
       title="New Georgia Project Support"
       description="reach@ngpaf.org"
       onClick={() => {
-        window.open("reach@ngpaf.org");
+        window.open("mailto:reach@ngpaf.org");
       }}
     />
   </PageLayout>

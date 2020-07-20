@@ -20,9 +20,11 @@ export default ({ items }) => (
         </BreadcrumbItemStyled>
       ))
       :
-      <BreadcrumbItemStyled href={items[0].route}>
-        {items[0].name}
-      </BreadcrumbItemStyled>
+      // FIXME: Back button doesnt work, so hiding for now
+      // <BreadcrumbItemStyled href={items[0].route}>
+      //   {items[0].name}
+      // </BreadcrumbItemStyled>
+      null
     }
   </BreadcrumbStyled>
 )
