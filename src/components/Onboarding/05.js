@@ -11,7 +11,7 @@ export default () => {
     >
       <p>
         Voting is not just about electing a President. We elect hundreds of
-        other government officials who control the polices that affect our
+        other government officials who control the policies that affect our
         lives, including:
       </p>
       <figure>
