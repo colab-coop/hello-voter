@@ -3,7 +3,12 @@ import styled from 'styled-components'
 import PageLayout from '../PageLayout'
 import { useHistory } from 'react-router-dom'
 
-const { REACT_APP_LANDING_TITLE, REACT_APP_LANDING_CONTENT, REACT_APP_LANDING_VIDEO } = process.env
+const {
+  REACT_APP_LANDING_TITLE,
+  REACT_APP_LANDING_CONTENT,
+  REACT_APP_LANDING_SIGNUP,
+  REACT_APP_LANDING_VIDEO,
+} = process.env;
 
 const VideoContainer = styled.div`
   position: relative;
@@ -39,8 +44,7 @@ export const LandingPage = () => {
       <br />
       <br />
       <p>
-        This page will walk you through the sign-up process. It should take no
-        more than 10 minutes.
+        {REACT_APP_LANDING_SIGNUP}
       </p>
       {REACT_APP_LANDING_VIDEO && (
         <>
