@@ -6,7 +6,7 @@ export default () => {
     <TrainingLayout
       prevPage="/onboarding/11"
       nextPage="/onboarding/13"
-      title="Voting Ambassador"
+      title="Being a Voting Ambassador"
     >
       <p>
         For example, let's say you saw your friend Vanessa Taylor on the list of
