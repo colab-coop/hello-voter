@@ -15,16 +15,14 @@ export default ({ items }) => (
   <BreadcrumbStyled noTrailingSlash>
     {items.length > 1 ?
       items.map((item, i) => (
-        <BreadcrumbItemStyled key={i} isCurrentPage={i === items.length - 1} href={item.route}>
+        <BreadcrumbItemStyled key={i} isCurrentPage={i === items.length - 1} href={'#' + item.route}>
           {item.name}
         </BreadcrumbItemStyled>
       ))
       :
-      // FIXME: Back button doesnt work, so hiding for now
-      // <BreadcrumbItemStyled href={items[0].route}>
-      //   {items[0].name}
-      // </BreadcrumbItemStyled>
-      null
+      <BreadcrumbItemStyled href={'#' + items[0].route}>
+        {items[0].name}
+      </BreadcrumbItemStyled>
     }
   </BreadcrumbStyled>
 )
