@@ -24,7 +24,7 @@ export const ContactInfoPage = () => {
       if (userError) return setErr(userError.msg)
 
       if (process.env.REACT_APP_ORG === 'NGP') {
-        history.push('/approval')
+        history.push('/onboarding/ngp/01')
       }else{
         history.push('/onboarding/01')
       }

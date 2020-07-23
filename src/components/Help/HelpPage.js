@@ -9,6 +9,10 @@ const TopParagraph = styled.p`
   margin-bottom: ${ spacing[7]};
 `
 
+const { REACT_APP_ORG } = process.env;
+const isNGP = REACT_APP_ORG === "NGP";
+const isBlockPower = REACT_APP_ORG === "BlockPower"
+
 export default () => (
   <PageLayout title="Help">
     <TopParagraph>Have questions? Here’s how to get answers.</TopParagraph>
@@ -20,13 +24,25 @@ export default () => (
         window.open("mailto:blockpower@zammad.com");
       }}
     />
-    <CardButton
-      icon={<Partnership24 />}
-      title="New Georgia Project Support"
-      description="reach@ngpaf.org"
-      onClick={() => {
-        window.open("mailto:reach@ngpaf.org");
-      }}
-    />
+    {isNGP && (
+      <CardButton
+        icon={<Partnership24 />}
+        title="New Georgia Project Support"
+        description="reach@ngpaf.org"
+        onClick={() => {
+          window.open("mailto:reach@ngpaf.org");
+        }}
+      />
+    )}
+    {isBlockPower && (
+      <CardButton
+        icon={<Partnership24 />}
+        title="BlockPower Support"
+        description="organizer@blockpower.vote"
+        onClick={() => {
+          window.open("mailto:organizer@blockpower.vote");
+        }}
+      />
+    )}
   </PageLayout>
 );

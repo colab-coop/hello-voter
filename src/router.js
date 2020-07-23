@@ -32,6 +32,9 @@ import OnBoarding11 from './components/Onboarding/11'
 import OnBoarding12 from './components/Onboarding/12'
 import OnBoarding13 from './components/Onboarding/13'
 import OnBoarding14 from './components/Onboarding/14'
+import OnBoardingNGP1 from './components/Onboarding/NGP/01'
+import OnBoardingNGP2 from './components/Onboarding/NGP/02'
+import OnBoardingNGP3 from './components/Onboarding/NGP/03'
 import PendingApprovalPage from './components/PendingApprovalPage'
 import Help from './components/Help/HelpPage'
 
@@ -97,6 +100,9 @@ const AppRoutes = () => {
         <AuthPublicRoute path="/onboarding/12" component={OnBoarding12} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/13" component={OnBoarding13} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/14" component={OnBoarding14} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/ngp/01" component={OnBoardingNGP1} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/ngp/02" component={OnBoardingNGP2} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/ngp/03" component={OnBoardingNGP3} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/approval" component={PendingApprovalPage} exact={true} authenticated={authenticated} />
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} user={user}/>
