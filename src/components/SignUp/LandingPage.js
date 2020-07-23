@@ -10,14 +10,14 @@ const {
   REACT_APP_LANDING_VIDEO,
 } = process.env;
 
-const VideoContainer = styled.div`
+const VideoContainer = styled.video`
   position: relative;
   width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
+  height: 320px;
+  background-color: #000;
 `
 
-const Video = styled.iframe`
+const Video = styled.source`
   position: absolute;
   top: 0;
   left: 0;
@@ -50,12 +50,9 @@ export const LandingPage = () => {
         <>
           <br />
           <br />
-          <VideoContainer>
+          <VideoContainer controls preload="metadata">
             <Video
-              src={REACT_APP_LANDING_VIDEO}
-              frameborder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              src={`${REACT_APP_LANDING_VIDEO}#t=0.1`}              
             />
           </VideoContainer>
         </>
