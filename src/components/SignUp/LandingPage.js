@@ -3,16 +3,21 @@ import styled from 'styled-components'
 import PageLayout from '../PageLayout'
 import { useHistory } from 'react-router-dom'
 
-const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
+const {
+  REACT_APP_LANDING_TITLE,
+  REACT_APP_LANDING_CONTENT,
+  REACT_APP_LANDING_SIGNUP,
+  REACT_APP_LANDING_VIDEO,
+} = process.env;
 
-const VideoContainer = styled.div`
+const VideoContainer = styled.video`
   position: relative;
   width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
+  height: 320px;
+  background-color: #000;
 `
 
-const Video = styled.iframe`
+const Video = styled.source`
   position: absolute;
   top: 0;
   left: 0;
@@ -27,29 +32,31 @@ export const LandingPage = () => {
       onClickSubmit={() => {
         history.push("/login");
       }}
-      title="Earn Money as a Voting Ambassador!"
+      title={REACT_APP_LANDING_TITLE}
       trackingEvent={{ category: 'LandingPageContinue', label: 'Learn more!'}}
       submitButtonTitle="Learn more!"
+      submitButtonTitle="Sign up now"
       hideMenuButtons
     >
       <p>
-        Voting Ambassadors talk to their housemates, friends and neighbors about
-        the importance of voting in the next election. Their goal is recruit
-        “Vote Triplers” — people who commit to reminding three friends to vote.
+        {REACT_APP_LANDING_CONTENT}
       </p>
       <br />
       <br />
       <p>
-        Voting Ambassadors earn ${REACT_APP_TRIPLER_PAYMENT_AMT} each time they recruit a new Vote Tripler.
-        At the same time, by raising awareness about voting in their community,
-        Ambassadors also help improve Black turnout and give the community a
-        stronger voice in our future.
+        {REACT_APP_LANDING_SIGNUP}
       </p>
-      <br />
-      <br />
-      <VideoContainer>
-        <Video src="https://youtube.com/embed/VUf394_KJ0c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
-      </VideoContainer>
+      {REACT_APP_LANDING_VIDEO && (
+        <>
+          <br />
+          <br />
+          <VideoContainer controls preload="metadata">
+            <Video
+              src={`${REACT_APP_LANDING_VIDEO}#t=0.1`}              
+            />
+          </VideoContainer>
+        </>
+      )}
     </PageLayout>
   );
 }

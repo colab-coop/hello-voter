@@ -20,6 +20,7 @@ export default ({ title, prevPage, nextPage, children, shouldSubmit }) => {
   return (
     <PageLayout
       onClickSubmit={(e) => {
+        e.preventDefault()
         const formData = new FormData(e.target)
         const dataf = {}
         for (let item of formData.entries()) {

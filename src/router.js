@@ -32,10 +32,15 @@ import OnBoarding11 from './components/Onboarding/11'
 import OnBoarding12 from './components/Onboarding/12'
 import OnBoarding13 from './components/Onboarding/13'
 import OnBoarding14 from './components/Onboarding/14'
+import OnBoardingNGP1 from './components/Onboarding/NGP/01'
+import OnBoardingNGP2 from './components/Onboarding/NGP/02'
+import OnBoardingNGP3 from './components/Onboarding/NGP/03'
 import PendingApprovalPage from './components/PendingApprovalPage'
+
 import PaymentsPage from './components/Payments/AddPage'
 import PaymentsHomePage from './components/Payments/PaymentsPage'
 
+import Help from './components/Help/HelpPage'
 
 const NoMatch = ({authenticated, path, user }) => (
   <Route
@@ -45,7 +50,7 @@ const NoMatch = ({authenticated, path, user }) => (
         <Redirect to={{pathname: '/triplers', state: {from: props.location}}} />
         :
         <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
-      : <Redirect to={{pathname: '/tallahassee', state: {from: props.location}}} />}
+      : <Redirect to={{pathname: '/landing', state: {from: props.location}}} />}
   />
 )
 
@@ -60,7 +65,7 @@ const AuthRoute = ({component: Component, authenticated, path, user }) => (
           <Redirect to={{pathname: '/approval', state: {from: props.location}}} />
           :
           <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
-      : <Redirect to={{pathname: '/tallahassee', state: {from: props.location}}} />}
+      : <Redirect to={{pathname: '/landing', state: {from: props.location}}} />}
   />
 )
 
@@ -99,13 +104,21 @@ const AppRoutes = () => {
         <AuthPublicRoute path="/onboarding/12" component={OnBoarding12} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/13" component={OnBoarding13} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/14" component={OnBoarding14} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/ngp/01" component={OnBoardingNGP1} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/ngp/02" component={OnBoardingNGP2} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/ngp/03" component={OnBoardingNGP3} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/approval" component={PendingApprovalPage} exact={true} authenticated={authenticated} />
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} user={user}/>
+<<<<<<< HEAD
         <AuthRoute path="/payments/add" component={PaymentsPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/payments" component={PaymentsHomePage} exact={true} authenticated={authenticated} user={user}/>
         <Route path="/tallahassee" component={LandingPage} />
+=======
+        <Route path="/help" component={Help}/>
+        <Route path="/landing" component={LandingPage} />
+>>>>>>> ambassador-stage
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} user={user}/>

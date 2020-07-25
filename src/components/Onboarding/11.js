@@ -8,7 +8,7 @@ export default () => {
     <TrainingLayout
       prevPage="/onboarding/10"
       nextPage="/onboarding/12"
-      title="Voting Ambassador"
+      title="Being a Voting Ambassador"
     >
       <p>
         As a Voting Ambasssador, your task is to recruit “Vote Triplers” from a
@@ -21,8 +21,8 @@ export default () => {
       <br />
       <br />
       <p>
-        You are not being paid to vote, to register to vote, or to get others to
-        register or vote.
+        Please keep in mind that you are not being paid to vote, to register to
+        vote, or to get others to register or vote.
       </p>
     </TrainingLayout>
   );

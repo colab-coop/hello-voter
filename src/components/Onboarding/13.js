@@ -7,7 +7,7 @@ export default () => {
     <TrainingLayout
       prevPage="/onboarding/12"
       nextPage="/onboarding/14"
-      title="Voting Ambassador"
+      title="Being a Voting Ambassador"
     >
       <p>
         Do you have any questions about being a Voting Ambassador and talking
