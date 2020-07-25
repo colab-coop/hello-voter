@@ -12,6 +12,8 @@ const SIGNUP_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/signup`
 const TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
 const CONFIRM_TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
 const COMPLETE_ONBOARDING = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/complete-onboarding`
+const PAYMENT_URL = `${REACT_APP_API_URL}/api/v1/va/payouts/account?stripe=true`
+const PAYMENT_HISTORY_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/payouts`
 
 const errorHandler = (e) => {
   console.warn(e)
@@ -231,6 +233,53 @@ export const completeOnboarding = async (data) => {
       headers: addAuth()
     })
 
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const setToken = async (token, accountId) => {
+  try {
+    let res = await fetch(PAYMENT_URL, {
+      method: 'POST',
+      headers: addAuth(),
+      body: JSON.stringify({token: token, account_id: accountId})
+    })
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch (e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const getPayments = async () => {
+  try {
+    let res = await fetch(`${PAYMENT_HISTORY_URL}`, {
+      method: 'GET',
+      headers: addAuth()
+    })
     let data = await res.json()
 
     if (isFailStatusCode(data.code)) {
