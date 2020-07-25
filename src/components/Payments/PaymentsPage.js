@@ -74,12 +74,8 @@ const renderTable = ({
 
 const headers = [
   {
-    key: 'date',
+    key: 'disbursed_at',
     header: 'Date',
-  },
-  {
-    key: 'tripler',
-    header: 'Tripler Name',
   },
   {
     key: 'amount',
@@ -91,28 +87,18 @@ const PaymentTable = ({ data }) => (
   <DataTable render={renderTable} headers={headers} rows={data} />
 );
 
-const Payments = ({ pending, completed, plaidAcct }) => {
-  const hasPending = pending && pending.length > 0;
-  const hasCompleted = completed && completed.length > 0;
+const Payments = ({ completed, user }) => {
+  const hasCompleted = completed && completed.length > 0
 
   return (
     <>
       <SectionTitle>Your payment account</SectionTitle>
-      {plaidAcct ? (
-        <AcctTable>
-          <div>Account #:</div>
-          <AcctNumber>**** **** **** {plaidAcct.accounts[0].mask}</AcctNumber>
-          <Link href="/payments/add">Link</Link>
-        </AcctTable>
-      ) : (
+      {user.payout_provider ? <div>You are connected.</div> : (
         <Button href="/payments/add">
           Add an Account
           <Add16 />
         </Button>
       )}
-
-      <SectionTitle>Payments pending</SectionTitle>
-      <PaymentTable data={hasPending ? pending : []} />
 
       <SectionTitle>Completed payments</SectionTitle>
       <PaymentTable data={hasCompleted ? completed : []} />
@@ -120,13 +106,13 @@ const Payments = ({ pending, completed, plaidAcct }) => {
   );
 };
 
-const PaymentsPage = ({ payments, plaidAcct }) => {
+const PaymentsPage = ({ payments, user }) => {
   const pending = payments.filter((payment) => payment.status === 'pending')
-  const completed = payments.filter((payment) => payment.status === 'completed')
+  const completed = payments.filter((payment) => payment.status === 'disbursed')
   
   return (
     <PageLayout
-      title="My Vote Triplers"
+      title="Payments"
       header={<Breadcrumbs items={
         [
           {
@@ -141,25 +127,25 @@ const PaymentsPage = ({ payments, plaidAcct }) => {
       }/>}
     >
       <Payments
-        plaidAcct={plaidAcct}
         pending={pending}
         completed={completed}
+        user={user}
       />
     </PageLayout>
   )
 }
 
 export default () => {
-  // const [payments, setPayments] = useState(null)
-  // const { api } = React.useContext(AppContext)
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await api.fetchPayments()
-  //     setPayments(data.data)
-  //   }
-  //   fetchData()
-  // }, [])
+  const [payments, setPayments] = useState(null)
+  const { api, user } = React.useContext(AppContext)
+  useEffect(() => {
+   const fetchData = async () => {
+     const data = await api.getPayments()
+     setPayments(data.data)
+    }
+  fetchData()
+  }, [])
   return (
-    payments ? <PaymentsPage payments={payments} plaidAcct={plaidAcct} /> : <Loading />
+    payments ? <PaymentsPage payments={payments} user={user} /> : <Loading />
   )
 }
