@@ -10,7 +10,7 @@ const { REACT_APP_CALENDLY_LINK, REACT_APP_APPROVE_HEADER, REACT_APP_APPROVE_CON
 export default () => {
   const history = useHistory()
   const { user } = React.useContext(AppContext)
-  user.approved && history.push('/triplers')
+  //user.approved && history.push('/triplers')
   return (
     <>
       <PageLayout

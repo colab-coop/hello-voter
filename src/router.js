@@ -101,7 +101,7 @@ const AppRoutes = () => {
         <AuthPublicRoute path="/onboarding/09" component={OnBoarding09} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/10" component={OnBoarding10} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/11" component={OnBoarding11} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/12" component={OnBoarding12} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/onboarding/12" component={OnBoarding12} exact={true} authenticated  ={authenticated} />
         <AuthPublicRoute path="/onboarding/13" component={OnBoarding13} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/14" component={OnBoarding14} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/ngp/01" component={OnBoardingNGP1} exact={true} authenticated={authenticated} />

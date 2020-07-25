@@ -8,7 +8,7 @@ export default () => {
   return (
     <TrainingLayout
       prevPage="/onboarding/13"
-      nextPage="approval"
+      nextPage="/approval"
       title="Acknowledgement"
       shouldSubmit
     >
