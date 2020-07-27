@@ -55,11 +55,11 @@ export default () => {
             },
             {
               name: "Payments",
-              route: "/",
+              route: "/payments",
             },
             {
               name: "Add",
-              route: "/",
+              route: "/payments/add",
             },
           ]}
         />
