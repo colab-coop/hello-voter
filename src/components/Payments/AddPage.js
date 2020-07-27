@@ -9,6 +9,7 @@ import Breadcrumbs from '../Breadcrumbs'
 import chime from '../../assets/images/chime.png'
 import { usePlaidLink } from 'react-plaid-link'
 import { AppContext } from '../../api/AppContext'
+import { useHistory } from 'react-router-dom'
 
 const { REACT_APP_PLAID_KEY, REACT_APP_PAYMENT_TYPE } = process.env
 
@@ -24,10 +25,12 @@ const Chime = styled.img`
 `
 
 export default () => {
+  const history = useHistory()
   const { api, fetchUser } = React.useContext(AppContext)
   const onSuccess = useCallback(async (token, metadata) => {
     await api.setToken(token, metadata.account_id)
     await fetchUser()
+    history.push('/payments')
   }, [])
   const onPaypal = useCallback((token) => {
     // api.setTokenPaypal(token)
@@ -78,7 +81,9 @@ export default () => {
         icon={<Chime src={chime}/>}
         title="Sign up for Chime"
         description="Chime is a new kind of bank. Open a free account in five minutes."
-        onClick={() => {}}
+        onClick={() => {
+          history.push("/payments/chime")
+        }}
       />
       }
       {REACT_APP_PAYMENT_TYPE === 'paypal' &&

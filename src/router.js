@@ -39,6 +39,7 @@ import PendingApprovalPage from './components/PendingApprovalPage'
 
 import PaymentsPage from './components/Payments/AddPage'
 import PaymentsHomePage from './components/Payments/PaymentsPage'
+import Chime from './components/Payments/ChimePage'
 
 import Help from './components/Help/HelpPage'
 
@@ -113,6 +114,7 @@ const AppRoutes = () => {
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/payments/add" component={PaymentsPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/payments" component={PaymentsHomePage} exact={true} authenticated={authenticated} user={user}/>
+        <AuthRoute path="/payments/chime" component={Chime} exact={true} authenticated={authenticated} user={user}/>
         <Route path="/tallahassee" component={LandingPage} />
         <Route path="/help" component={Help}/>
         <Route path="/landing" component={LandingPage} />

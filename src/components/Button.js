@@ -33,7 +33,8 @@ const PillButton = styled.div`
   }
 `
 
-export default ({ href, children, kind, loading, onClick, pill, trackingEvent, ...props }) => {
+export default (props) => {
+  const { href, children, kind, loading, onClick, pill, trackingEvent, shouldRedirect } = props
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
@@ -64,7 +65,7 @@ export default ({ href, children, kind, loading, onClick, pill, trackingEvent, .
       onClick={(e) => {
         trackingEvent && track(trackingEvent)
         onClick && onClick(e)
-        href && redirect(href)
+        href && !shouldRedirect && redirect(href)
       }}
       {...props}
     >

@@ -64,8 +64,10 @@ export default () => {
         <ListItem>Once your account is open, return to this screen to connect to that account and receive your payment.</ListItem>
       </OrderedList>
       <Button
-        type="submit"
         style={{backgroundColor: "#25C87D"}}
+        href='https://chime.com'
+        target='_blank'
+        shouldRedirect
         // trackingEvent={{ category: "SubmitTriplerConfirm", label: "Add" }}
       >
         Sign up for a Chime account
@@ -73,7 +75,6 @@ export default () => {
       <Button
         small
         kind="tertiary"
-        href={"/payments"}
         // trackingEvent={{
         //   category: "BackFromTriplerConfirm",
         //   label: "Go back to My Vote Triplers",
