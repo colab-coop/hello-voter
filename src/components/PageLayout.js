@@ -66,9 +66,11 @@ export default ({ header, title, children, submitButtonTitle, onClickSubmit, err
             />
           )}
           {submitButtonTitle && (
-              <CtaButton 
+              <CtaButton
                 type="submit"
-                trackingEvent={{ category: `Submit${title.replace(/ /g,'')}`, label: submitButtonTitle }}>
+                trackingEvent={{ category: `Submit${title.replace(/ /g,'')}`, label: submitButtonTitle }}
+                isAForm
+              >
               {submitButtonTitle}
             </CtaButton>
           )}

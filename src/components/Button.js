@@ -34,7 +34,7 @@ const PillButton = styled.div`
 `
 
 export default (props) => {
-  const { href, children, kind, loading, onClick, pill, trackingEvent, shouldRedirect } = props
+  const { href, children, kind, loading, onClick, pill, trackingEvent, shouldRedirect, isAForm } = props
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
@@ -63,7 +63,7 @@ export default (props) => {
     <ButtonStyled
       kind={loading ? "ghost" : kind}
       onClick={(e) => {
-        !shouldRedirect && e.preventDefault()
+        !shouldRedirect && !isAForm && e.preventDefault()
         trackingEvent && track(trackingEvent)
         onClick && onClick(e)
         href && !shouldRedirect && redirect(href)
