@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Help20, UserAvatar20 } from '@carbon/icons-react'
+import { Help20, Wallet20 } from '@carbon/icons-react'
 import styled, { ThemeProvider } from 'styled-components'
 import BlockPower from '../assets/logos/block-power.png'
 import NewGeorgia from '../assets/logos/new-georgia.png'
@@ -112,11 +112,13 @@ export default () => {
             <Help20 />
           </HeaderGlobalAction>
           <HeaderGlobalAction
-            aria-label="Profile"
+            aria-label="Payments"
             type="button"
-            onClick={() => {}}
+            onClick={() => {
+              redirect("/payments");
+            }}
           >
-            <UserAvatar20 />
+            <Wallet20 />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
       </Header>
