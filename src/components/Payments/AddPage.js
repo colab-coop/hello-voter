@@ -37,7 +37,7 @@ export default () => {
   }, [])
   const config = {
     clientName: 'BlockPower',
-    env: 'sandbox',
+    env: 'production',
     product: ['auth', 'transactions'],
     publicKey: REACT_APP_PLAID_KEY,
     onSuccess
