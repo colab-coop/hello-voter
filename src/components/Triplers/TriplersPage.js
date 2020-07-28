@@ -190,11 +190,10 @@ const TriplersPage = ({ triplers, remindTripler }) => {
         [
           {
             name: "Home",
-            route: "/"
+            route: "/home"
           },
           {
-            name: "Vote Triplers",
-            route: "/"
+            name: "Vote Triplers"
           }
         ]
       }/>}

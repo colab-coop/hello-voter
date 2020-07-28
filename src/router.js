@@ -36,7 +36,7 @@ import OnBoardingNGP1 from './components/Onboarding/NGP/01'
 import OnBoardingNGP2 from './components/Onboarding/NGP/02'
 import OnBoardingNGP3 from './components/Onboarding/NGP/03'
 import PendingApprovalPage from './components/PendingApprovalPage'
-
+import HomePage from './components/HomePage'
 import PaymentsPage from './components/Payments/AddPage'
 import PaymentsHomePage from './components/Payments/PaymentsPage'
 import Chime from './components/Payments/ChimePage'
@@ -109,6 +109,7 @@ const AppRoutes = () => {
         <AuthPublicRoute path="/onboarding/ngp/02" component={OnBoardingNGP2} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/ngp/03" component={OnBoardingNGP3} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/approval" component={PendingApprovalPage} exact={true} authenticated={authenticated} />
+        <AuthRoute path="/home" component={HomePage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} user={user}/>
