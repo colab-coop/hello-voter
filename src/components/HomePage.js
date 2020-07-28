@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 import { spacing } from '../theme'
 import PageLayout from './PageLayout'
 import CardButton from './CardButton'
@@ -14,21 +15,37 @@ const BottomParagraph = styled.p`
   margin-top: ${ spacing[7] };
 `
 
-export default () => (
-  <PageLayout title="Home">
-    <TopParagraph>Make a positive impact on your community — and make money, too!</TopParagraph>
-    <CardButton 
-      icon={ <Events24 /> }
-      title="Vote Triplers" 
-      description="Find, recruit, and manage potential Vote Triplers in your community" 
-      onClick={() => {}}
-    />
-    <CardButton
-      icon={ <Wallet24 /> }
-      title="Earnings"
-      description="Set up and view your earnings from your organizing efforts"
-      onClick={() => {}}
-    />
-    <BottomParagraph>Have questions? <Link href="">Schedule a meeting</Link> with an Organizer.</BottomParagraph>
-  </PageLayout>
-)
+export default () => {
+  const history = useHistory()
+  const redirect = async (href) => {
+    history.push(href)
+  }
+
+  return (
+    <PageLayout title="Home">
+      <TopParagraph>
+        Make a positive impact on your community — and make money, too!
+      </TopParagraph>
+      <CardButton
+        icon={<Events24 />}
+        title="Vote Triplers"
+        description="Find, recruit, and manage potential Vote Triplers in your community"
+        onClick={() => {
+          redirect("/triplers");
+        }}
+      />
+      <CardButton
+        icon={<Wallet24 />}
+        title="Earnings"
+        description="Set up and view your earnings from your organizing efforts"
+        onClick={() => {
+          redirect("/payments");
+        }}
+      />
+      <BottomParagraph>
+        Have questions? <Link href="">Schedule a meeting</Link> with an
+        Organizer.
+      </BottomParagraph>
+    </PageLayout>
+  );
+}

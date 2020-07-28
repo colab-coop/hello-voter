@@ -117,11 +117,10 @@ const PaymentsPage = ({ payments, user }) => {
         [
           {
             name: "Home",
-            route: "/"
+            route: "/home"
           },
           {
-            name: "Payments",
-            route: "/"
+            name: "Payments"
           }
         ]
       }/>}

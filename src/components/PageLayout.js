@@ -2,7 +2,6 @@ import React from 'react'
 import { Column, Row, Form, Content } from 'carbon-components-react'
 import styled from 'styled-components'
 import { spacing } from '../theme'
-import Menu from './Menu'
 import Button from './Button'
 import { InlineNotification } from 'carbon-components-react'
 
@@ -37,9 +36,8 @@ const CtaButton = styled(Button)`
   margin-top: 0;
 `
 
-export default ({ header, title, children, submitButtonTitle, onClickSubmit, error, hideMenuButtons }) => (
+export default ({ header, title, children, submitButtonTitle, onClickSubmit, error }) => (
   <>
-    <Menu hideButtons={hideMenuButtons} />
     <FormStyled onSubmit={onClickSubmit}>
       <ContentContainer>
         <Column lg={{ span: 4, offset: 3 }} md={{ span: 4, offset: 1 }} sm={{ span: 4 }}>

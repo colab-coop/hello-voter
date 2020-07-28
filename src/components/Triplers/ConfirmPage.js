@@ -58,16 +58,15 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           items={[
             {
               name: "Home",
-              route: "/",
+              route: "/home",
             },
             {
               name: "Vote Triplers",
-              route: "/",
+              route: "/triplers",
             },
             {
-              name: "Confirm",
-              route: "/",
-            },
+              name: "Confirm"
+            }
           ]}
         />
       }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Help20, Wallet20 } from '@carbon/icons-react'
+import { Help20, Events20, Wallet20 } from '@carbon/icons-react'
 import styled, { ThemeProvider } from 'styled-components'
 import BlockPower from '../assets/logos/block-power.png'
 import NewGeorgia from '../assets/logos/new-georgia.png'
@@ -87,7 +87,7 @@ const HeaderGlobalAction = styled.button`
   }
 `;
 
-export default () => {
+export default ({ isApproved }) => {
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
@@ -111,15 +111,28 @@ export default () => {
           >
             <Help20 />
           </HeaderGlobalAction>
-          <HeaderGlobalAction
-            aria-label="Payments"
-            type="button"
-            onClick={() => {
-              redirect("/payments");
-            }}
-          >
-            <Wallet20 />
-          </HeaderGlobalAction>
+          {isApproved && (
+            <>
+              <HeaderGlobalAction
+                aria-label="Vote Triplers"
+                type="button"
+                onClick={() => {
+                  redirect("/triplers");
+                }}
+              >
+                <Events20 />
+              </HeaderGlobalAction>
+              <HeaderGlobalAction
+                aria-label="Payments"
+                type="button"
+                onClick={() => {
+                  redirect("/payments");
+                }}
+              >
+                <Wallet20 />
+              </HeaderGlobalAction>
+            </>
+          )}
         </HeaderGlobalBar>
       </Header>
     </ThemeProvider>

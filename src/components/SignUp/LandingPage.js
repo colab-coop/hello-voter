@@ -36,7 +36,6 @@ export const LandingPage = () => {
       trackingEvent={{ category: 'LandingPageContinue', label: 'Learn more!'}}
       submitButtonTitle="Learn more!"
       submitButtonTitle="Sign up now"
-      hideMenuButtons
     >
       <p>
         {REACT_APP_LANDING_CONTENT}

@@ -46,15 +46,14 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
         [
           {
             name: "Home",
-            route: "/"
+            route: "/home"
           },
           {
             name: "Vote Triplers",
-            route: "/"
+            route: "/triplers"
           },
           {
-            name: "Add",
-            route: "/"
+            name: "Add"
           }
         ]
       }/>}
