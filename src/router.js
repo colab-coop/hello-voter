@@ -5,6 +5,7 @@ import { AppProvider, AppContext } from './api/AppContext'
 
 import { initAnalytics, useAnalytics } from './hooks/useAnalytics'
 
+import Menu from './components/Menu'
 import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
@@ -84,6 +85,8 @@ const AppRoutes = () => {
   useAnalytics()
   if (loading) return <Loading />
   return (
+    <>
+      <Menu isApproved={user && user.approved} />
       <Switch>
         <AuthPublicRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/ambassador/signup" component={SignUpPage} exact={true} authenticated={authenticated} />
@@ -123,6 +126,7 @@ const AppRoutes = () => {
         <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} user={user}/>
       </Switch>
+    </>
   )
 }
 
