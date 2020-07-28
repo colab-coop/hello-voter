@@ -69,10 +69,9 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
           Remind
         </Button>
       }
-      {/* FIXME: Hardcode fake confirmation */}
-      {confirmed && tagText &&
+      {confirmed &&
         <Tag type="green">
-          {tagText}
+          ${REACT_APP_TRIPLER_PAYMENT_AMT} Earned
         </Tag>
       }
     </TriplerColumn>
@@ -147,12 +146,6 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
               onClick={() => {}}
               confirmed
-              // FIXME: Hardcode fake confirmation
-              tagText={
-                i === 0
-                  ? `$${REACT_APP_TRIPLER_PAYMENT_AMT} Collected`
-                  : `$${REACT_APP_TRIPLER_PAYMENT_AMT} Sent`
-              }
             />
           ))}
         </>
