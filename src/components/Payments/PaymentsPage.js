@@ -74,11 +74,15 @@ const renderTable = ({
 
 const headers = [
   {
-    key: 'disbursed_at',
+    key: 'tripler_name',
+    header: 'Tripler Name',
+  },
+  {
+    key: 'formatted_disbursed_at',
     header: 'Date',
   },
   {
-    key: 'amount',
+    key: 'formatted_amount',
     header: 'Amount',
   },
 ];
@@ -109,7 +113,7 @@ const Payments = ({ completed, user }) => {
 const PaymentsPage = ({ payments, user }) => {
   const pending = payments.filter((payment) => payment.status === 'pending')
   const completed = payments.filter((payment) => payment.status === 'disbursed')
-  
+
   return (
     <PageLayout
       title="Payments"
