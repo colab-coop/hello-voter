@@ -16,7 +16,7 @@ export const ContactInfoPage = () => {
   const [err, setErr] = useState(false)
   const history = useHistory()
   const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
-  user && user.signup_completed && history.push('/')
+  user && user.signup_completed && user.onboarding_completed && history.push('/')
   useEffect(() => {
     const signup = async () => {
       const { error } = await api.signup(ambassador)

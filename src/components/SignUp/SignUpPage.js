@@ -35,7 +35,7 @@ const ListItem = ({ text, bold }) => (
 export const SignUpPage = () => {
   const history = useHistory()
   const { user } = React.useContext(AppContext)
-  user && user.signup_completed && history.push('/')
+  user && user.signup_completed && user.onboarding_completed && history.push('/')
   return (
     <PageLayout
       onClickSubmit={() => {
