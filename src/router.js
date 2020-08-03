@@ -66,7 +66,10 @@ const AuthRoute = ({component: Component, authenticated, path, user }) => (
         (user && user.signup_completed && user.onboarding_completed) ?
           <Redirect to={{pathname: '/approval', state: {from: props.location}}} />
           :
-          <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
+          (!user) ?
+            <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
+            :
+            <Redirect to={{pathname: '/onboarding/01', state: {from: props.location}}} />
       : <Redirect to={{pathname: '/landing', state: {from: props.location}}} />}
   />
 )
@@ -84,6 +87,7 @@ const AppRoutes = () => {
   const { authenticated, loading, user } = React.useContext(AppContext)
   useAnalytics()
   if (loading) return <Loading />
+  console.log(user)
   return (
     <>
       <Menu isApproved={user && user.approved} />
