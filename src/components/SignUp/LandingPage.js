@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PageLayout from '../PageLayout'
 import { useHistory } from 'react-router-dom'
+import {AppContext} from "../../api/AppContext";
 
 const {
   REACT_APP_LANDING_TITLE,
@@ -27,6 +28,8 @@ const Video = styled.source`
 
 export const LandingPage = () => {
   const history = useHistory()
+  const { user } = React.useContext(AppContext)
+  user.signup_completed && history.push('/')
   return (
     <PageLayout
       onClickSubmit={() => {
@@ -51,7 +54,7 @@ export const LandingPage = () => {
           <br />
           <VideoContainer controls preload="metadata">
             <Video
-              src={`${REACT_APP_LANDING_VIDEO}#t=0.1`}              
+              src={`${REACT_APP_LANDING_VIDEO}#t=0.1`}
             />
           </VideoContainer>
         </>

@@ -7,7 +7,8 @@ import { useHistory } from 'react-router-dom'
 
 export const ContactPage = () => {
   const history = useHistory()
-  const { setAmbassador } = React.useContext(AppContext)
+  const { setAmbassador, user } = React.useContext(AppContext)
+  user.signup_completed && history.push('/')
   return (
     <PageLayout
       title="Contact"

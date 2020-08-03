@@ -13,9 +13,10 @@ const SectionTitle = styled.h5`
 `
 
 export const ContactInfoPage = () => {
-  const [err, setErr] = useState(false)
   const history = useHistory()
-  const { ambassador, setAmbassador, api, fetchUser } = React.useContext(AppContext)
+  const [err, setErr] = useState(false)
+  const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
+  user.signup_completed && history.push('/')
   useEffect(() => {
     const signup = async () => {
       const { error } = await api.signup(ambassador)

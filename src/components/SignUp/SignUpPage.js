@@ -5,6 +5,7 @@ import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import { spacing, colors } from '../../theme'
 import { useHistory } from 'react-router-dom'
+import {AppContext} from "../../api/AppContext"
 
 const List = styled.ol`
   width: 100%;
@@ -22,10 +23,10 @@ const Item = styled.li`
 
 const ListItem = ({ text, bold }) => (
   <Item>
-    { 
-      bold ? 
+    {
+      bold ?
       <strong>{text}</strong> :
-      text 
+      text
     }
     <RadioButton16 />
   </Item>
@@ -33,6 +34,8 @@ const ListItem = ({ text, bold }) => (
 
 export const SignUpPage = () => {
   const history = useHistory()
+  const { user } = React.useContext(AppContext)
+  user.signup_completed && history.push('/')
   return (
     <PageLayout
       onClickSubmit={() => {

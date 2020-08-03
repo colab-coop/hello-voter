@@ -7,7 +7,8 @@ import { AppContext } from '../../api/AppContext'
 
 export const PersonalInfoPage = () => {
   const history = useHistory()
-  const { setAmbassador } = React.useContext(AppContext)
+  const { setAmbassador, user } = React.useContext(AppContext)
+  user.signup_completed && history.push('/')
   return (
     <PageLayout
       title="Personal Info"
