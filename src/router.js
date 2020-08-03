@@ -5,6 +5,7 @@ import { AppProvider, AppContext } from './api/AppContext'
 
 import { initAnalytics, useAnalytics } from './hooks/useAnalytics'
 
+import Menu from './components/Menu'
 import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
@@ -36,7 +37,7 @@ import OnBoardingNGP1 from './components/Onboarding/NGP/01'
 import OnBoardingNGP2 from './components/Onboarding/NGP/02'
 import OnBoardingNGP3 from './components/Onboarding/NGP/03'
 import PendingApprovalPage from './components/PendingApprovalPage'
-
+import HomePage from './components/HomePage'
 import PaymentsPage from './components/Payments/AddPage'
 import PaymentsHomePage from './components/Payments/PaymentsPage'
 import Chime from './components/Payments/ChimePage'
@@ -62,10 +63,13 @@ const AuthRoute = ({component: Component, authenticated, path, user }) => (
       ? (user && user.approved) ?
         <Component {...props} />
         :
-        (user && user.signup_completed && user.approved) ?
+        (user && user.signup_completed && user.onboarding_completed) ?
           <Redirect to={{pathname: '/approval', state: {from: props.location}}} />
           :
-          <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
+          (!user) ?
+            <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
+            :
+            <Redirect to={{pathname: '/onboarding/01', state: {from: props.location}}} />
       : <Redirect to={{pathname: '/landing', state: {from: props.location}}} />}
   />
 )
@@ -83,7 +87,10 @@ const AppRoutes = () => {
   const { authenticated, loading, user } = React.useContext(AppContext)
   useAnalytics()
   if (loading) return <Loading />
+  console.log(user)
   return (
+    <>
+      <Menu isApproved={user && user.approved} />
       <Switch>
         <AuthPublicRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/ambassador/signup" component={SignUpPage} exact={true} authenticated={authenticated} />
@@ -109,6 +116,7 @@ const AppRoutes = () => {
         <AuthPublicRoute path="/onboarding/ngp/02" component={OnBoardingNGP2} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/onboarding/ngp/03" component={OnBoardingNGP3} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/approval" component={PendingApprovalPage} exact={true} authenticated={authenticated} />
+        <AuthRoute path="/home" component={HomePage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/confirm/:triplerId" component={ConfirmPage} exact={true} authenticated={authenticated} user={user}/>
@@ -122,6 +130,7 @@ const AppRoutes = () => {
         <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} user={user}/>
       </Switch>
+    </>
   )
 }
 

@@ -38,19 +38,18 @@ export default () => {
           items={[
             {
               name: "Home",
-              route: "/",
+              route: "/home",
             },
             {
               name: "Payments",
-              route: "/",
+              route: "/payments",
             },
             {
-              name: "Edit",
-              route: "/",
+              name: "Add",
+              route: "/payments/add",
             },
             {
-              name: "Chime",
-              route: "/",
+              name: "Chime"
             },
           ]}
         />

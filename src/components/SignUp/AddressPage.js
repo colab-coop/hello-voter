@@ -11,7 +11,8 @@ import { AppContext } from '../../api/AppContext'
 
 export const AddressPage = () => {
   const history = useHistory()
-  const { setAmbassador } = React.useContext(AppContext)
+  const { setAmbassador, user } = React.useContext(AppContext)
+  user && user.signup_completed && user.onboarding_completed && history.push('/')
   return (
     <PageLayout
       onClickSubmit={(e) => {

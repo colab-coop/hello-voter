@@ -51,15 +51,14 @@ export default () => {
           items={[
             {
               name: "Home",
-              route: "/",
+              route: "/home",
             },
             {
               name: "Payments",
               route: "/payments",
             },
             {
-              name: "Add",
-              route: "/payments/add",
+              name: "Add"
             },
           ]}
         />
