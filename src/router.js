@@ -63,7 +63,7 @@ const AuthRoute = ({component: Component, authenticated, path, user }) => (
       ? (user && user.approved) ?
         <Component {...props} />
         :
-        (user && user.signup_completed && user.approved) ?
+        (user && user.signup_completed && !user.approved) ?
           <Redirect to={{pathname: '/approval', state: {from: props.location}}} />
           :
           <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
