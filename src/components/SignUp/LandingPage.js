@@ -51,7 +51,7 @@ export const LandingPage = () => {
           <br />
           <VideoContainer controls preload="metadata">
             <Video
-              src={`${REACT_APP_LANDING_VIDEO}#t=0.1`}
+              src={`${REACT_APP_LANDING_VIDEO}#t=0.1`}              
             />
           </VideoContainer>
         </>

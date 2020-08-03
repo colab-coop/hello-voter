@@ -5,7 +5,6 @@ import PageLayout from '../PageLayout'
 import { spacing, colors } from '../../theme'
 import { useHistory } from 'react-router-dom'
 import placeholder from '../../assets/images/placeholder.png';
-import {AppContext} from "../../api/AppContext";
 
 const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
 
@@ -58,8 +57,6 @@ const CheckboxComponent = ({ title, description }) => (
 
 export const BecomeAmbassadorPage = () => {
   const history = useHistory()
-  const { user } = React.useContext(AppContext)
-  user.signup_completed && history.push('/')
   return (
     <PageLayout
       onClickSubmit={() => {
