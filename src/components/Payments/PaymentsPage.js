@@ -112,7 +112,7 @@ const Payments = ({ completed, user }) => {
 
 const PaymentsPage = ({ payments, user }) => {
   const pending = payments.filter((payment) => payment.status === 'pending')
-  const completed = payments.filter((payment) => payment.status === 'disbursed')
+  const completed = payments.filter((payment) => payment.status === 'settled')
 
   return (
     <PageLayout
