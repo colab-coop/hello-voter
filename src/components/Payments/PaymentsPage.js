@@ -104,7 +104,7 @@ const Payments = ({ completed, user }) => {
         </Button>
       )}
 
-      <SectionTitle>Completed payments</SectionTitle>
+      <SectionTitle>Payments</SectionTitle>
       <PaymentTable data={hasCompleted ? completed : []} />
     </>
   );
