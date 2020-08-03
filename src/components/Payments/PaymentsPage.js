@@ -82,7 +82,7 @@ const headers = [
     header: 'Date',
   },
   {
-    key: 'amount',
+    key: 'formatted_amount',
     header: 'Amount',
   },
 ];
