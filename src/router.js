@@ -19,23 +19,6 @@ import { ContactInfoPage } from './components/SignUp/ContactInfoPage'
 import TriplersPage from './components/Triplers/TriplersPage'
 import TriplersAdd from './components/Triplers/AddTripler'
 import ConfirmPage from './components/Triplers/ConfirmPage'
-import OnBoarding01 from './components/Onboarding/01'
-import OnBoarding02 from './components/Onboarding/02'
-import OnBoarding03 from './components/Onboarding/03'
-import OnBoarding04 from './components/Onboarding/04'
-import OnBoarding05 from './components/Onboarding/05'
-import OnBoarding06 from './components/Onboarding/06'
-import OnBoarding07 from './components/Onboarding/07'
-import OnBoarding08 from './components/Onboarding/08'
-import OnBoarding09 from './components/Onboarding/09'
-import OnBoarding10 from './components/Onboarding/10'
-import OnBoarding11 from './components/Onboarding/11'
-import OnBoarding12 from './components/Onboarding/12'
-import OnBoarding13 from './components/Onboarding/13'
-import OnBoarding14 from './components/Onboarding/14'
-import OnBoardingNGP1 from './components/Onboarding/NGP/01'
-import OnBoardingNGP2 from './components/Onboarding/NGP/02'
-import OnBoardingNGP3 from './components/Onboarding/NGP/03'
 import PendingApprovalPage from './components/PendingApprovalPage'
 import HomePage from './components/HomePage'
 import PaymentsPage from './components/Payments/AddPage'
@@ -51,7 +34,7 @@ const NoMatch = ({authenticated, path, user }) => (
       ? (user && user.signup_completed) ?
         <Redirect to={{pathname: '/triplers', state: {from: props.location}}} />
         :
-        <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
+        <Redirect to={{pathname: '/ambassador/signup', state: {from: props.location}}} />
       : <Redirect to={{pathname: '/landing', state: {from: props.location}}} />}
   />
 )
@@ -66,10 +49,7 @@ const AuthRoute = ({component: Component, authenticated, path, user }) => (
         (user && user.signup_completed && user.onboarding_completed) ?
           <Redirect to={{pathname: '/approval', state: {from: props.location}}} />
           :
-          (!user) ?
-            <Redirect to={{pathname: '/ambassador', state: {from: props.location}}} />
-            :
-            <Redirect to={{pathname: '/onboarding/01', state: {from: props.location}}} />
+          <Redirect to={{pathname: '/ambassador/signup', state: {from: props.location}}} />
       : <Redirect to={{pathname: '/landing', state: {from: props.location}}} />}
   />
 )
@@ -92,29 +72,8 @@ const AppRoutes = () => {
     <>
       <Menu isApproved={user && user.approved} />
       <Switch>
-        <AuthPublicRoute path="/ambassador" component={BecomeAmbassadorPage} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/ambassador/signup" component={SignUpPage} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/ambassador/personal_info" component={PersonalInfoPage} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/ambassador/address" component={AddressPage} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/ambassador/contact" component={ContactPage} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/ambassador/confirm" component={ContactInfoPage} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/01" component={OnBoarding01} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/02" component={OnBoarding02} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/03" component={OnBoarding03} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/04" component={OnBoarding04} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/05" component={OnBoarding05} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/06" component={OnBoarding06} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/07" component={OnBoarding07} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/08" component={OnBoarding08} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/09" component={OnBoarding09} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/10" component={OnBoarding10} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/11" component={OnBoarding11} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/12" component={OnBoarding12} exact={true} authenticated  ={authenticated} />
-        <AuthPublicRoute path="/onboarding/13" component={OnBoarding13} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/14" component={OnBoarding14} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/ngp/01" component={OnBoardingNGP1} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/ngp/02" component={OnBoardingNGP2} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/onboarding/ngp/03" component={OnBoardingNGP3} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/approval" component={PendingApprovalPage} exact={true} authenticated={authenticated} />
         <AuthRoute path="/home" component={HomePage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
@@ -125,7 +84,6 @@ const AppRoutes = () => {
         <AuthRoute path="/payments/chime" component={Chime} exact={true} authenticated={authenticated} user={user}/>
         <Route path="/tallahassee" component={LandingPage} />
         <Route path="/help" component={Help}/>
-        <Route path="/landing" component={LandingPage} />
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} user={user}/>

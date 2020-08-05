@@ -6,6 +6,8 @@ import Breadcrumbs from '../Breadcrumbs'
 import { spacing, colors } from '../../theme'
 import { useHistory } from 'react-router-dom'
 import {AppContext} from "../../api/AppContext";
+import {FormGroup, TextInput} from "carbon-components-react";
+import AddressForm from "../AddressForm";
 
 const List = styled.ol`
   width: 100%;
@@ -34,14 +36,37 @@ const ListItem = ({ text, bold }) => (
 
 export const SignUpPage = () => {
   const history = useHistory()
-  const { user } = React.useContext(AppContext)
+  const { user, ambassador, setAmbassador } = React.useContext(AppContext)
   user && user.signup_completed && user.onboarding_completed && history.push('/')
   return (
     <PageLayout
-      onClickSubmit={() => {
-        history.push('/ambassador/personal_info')
+      onClickSubmit={(e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+
+        const userData = {
+          first_name: formData.get('first_name'),
+          last_name: formData.get('last_name'),
+          email: formData.get('email'),
+          phone: formData.get('phone').toString(),
+          address: {
+            address1: formData.get('address1'),
+            state: formData.get('state'),
+            zip: formData.get('zip'),
+            city: formData.get('city'),
+          }
+        }
+
+        setAmbassador((data) => {
+          return {
+            ...data,
+            ...userData
+          }
+        })
+
+        history.push('/ambassador/confirm')
       }}
-      title="Sign Up"
+      title="My contact information"
       submitButtonTitle="Continue"
       header={<Breadcrumbs items={
         [{
@@ -50,13 +75,42 @@ export const SignUpPage = () => {
         }]
       }/>}
     >
-      <p>Being a Voting Ambassador is an easy and rewarding way to bring positive change to your community. To sign up:</p>
-      <List>
-        <ListItem text="Complete a brief application" />
-        <ListItem text="Take a 15-minute training" />
-        <ListItem text="Have a 10-minute phone interview" />
-        <ListItem bold text="Start working and earning!" />
-      </List>
+      <FormGroup>
+        <TextInput
+          name="first_name"
+          invalidText="Invalid error message."
+          labelText="First Name*"
+          defaultValue={ambassador.first_name}
+          required
+        />
+      </FormGroup>
+      <FormGroup>
+        <TextInput
+          name="last_name"
+          invalidText="Invalid error message."
+          labelText="Last Name*"
+          defaultValue={ambassador.last_name}
+          required
+        />
+      </FormGroup>
+      <AddressForm ambassador={ambassador}/>
+      <FormGroup>
+        <TextInput
+          name="email"
+          invalidText="Invalid error message."
+          labelText="Email"
+          defaultValue={ambassador.email}
+        />
+      </FormGroup>
+      <FormGroup>
+        <TextInput
+          name="phone"
+          invalidText="Invalid error message."
+          labelText="Phone number*"
+          defaultValue={ambassador.phone}
+          required
+        />
+      </FormGroup>
     </PageLayout>
   )
 }

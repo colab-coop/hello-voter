@@ -42,10 +42,6 @@ export default () => {
           redirect("/payments");
         }}
       />
-      <BottomParagraph>
-        Have questions? <Link href="">Schedule a meeting</Link> with an
-        Organizer.
-      </BottomParagraph>
     </PageLayout>
   );
 }
