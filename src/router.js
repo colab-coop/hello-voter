@@ -32,10 +32,10 @@ const NoMatch = ({authenticated, path, user }) => (
     path={path}
     render={(props) => authenticated === true
       ? (user && user.signup_completed) ?
-        <Redirect to={{pathname: '/triplers', state: {from: props.location}}} />
+        <Redirect to={{pathname: '/home', state: {from: props.location}}} />
         :
         <Redirect to={{pathname: '/ambassador/signup', state: {from: props.location}}} />
-      : <Redirect to={{pathname: '/landing', state: {from: props.location}}} />}
+      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
   />
 )
 
@@ -50,7 +50,7 @@ const AuthRoute = ({component: Component, authenticated, path, user }) => (
           <Redirect to={{pathname: '/approval', state: {from: props.location}}} />
           :
           <Redirect to={{pathname: '/ambassador/signup', state: {from: props.location}}} />
-      : <Redirect to={{pathname: '/landing', state: {from: props.location}}} />}
+      : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
   />
 )
 
