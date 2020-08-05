@@ -138,7 +138,8 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
 
           <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
           <Paragraph>
-            You'll receive payment for these Vote Triplers.
+            Once your <Link href="#/payments">payment method is set up</Link>,
+            you’ll receive payment for these Vote Triplers.
           </Paragraph>
           {confirmed.map((tripler, i) => (
               <TriplerRow
