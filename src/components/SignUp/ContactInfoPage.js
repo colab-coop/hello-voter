@@ -12,6 +12,13 @@ const SectionTitle = styled.h5`
   margin-bottom: ${ spacing[5] };
 `
 
+const Row = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-column-gap: ${spacing[5]};
+  grid-template-columns: 1fr 1fr;
+`;
+
 export const ContactInfoPage = () => {
   const [err, setErr] = useState(false)
   const history = useHistory()
@@ -37,7 +44,7 @@ export const ContactInfoPage = () => {
   return (
     <PageLayout
       error={err}
-      title="Confirm Info"
+      title="Please Enter Your Details"
       submitButtonTitle="Submit"
       onClickSubmit={(e) => {
         e.preventDefault()
@@ -74,42 +81,44 @@ export const ContactInfoPage = () => {
     >
       <SectionTitle>Personal Info</SectionTitle>
       <FormGroup>
-        <TextInput
-          name="first_name"
-          invalidText="Invalid error message."
-          labelText="First Name*"
-          defaultValue={ambassador.first_name}
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextInput
-          name="last_name"
-          invalidText="Invalid error message."
-          labelText="Last Name*"
-          defaultValue={ambassador.last_name}
-          required
-        />
+        <Row>
+          <TextInput
+            name="first_name"
+            invalidText="Invalid error message."
+            labelText="First Name*"
+            defaultValue={ambassador.first_name}
+            required
+          />
+          <TextInput
+            name="last_name"
+            invalidText="Invalid error message."
+            labelText="Last Name*"
+            defaultValue={ambassador.last_name}
+            required
+          />
+        </Row>
       </FormGroup>
       <SectionTitle>Address</SectionTitle>
-      <AddressForm ambassador={ambassador}/>
+      <AddressForm 
+        ambassador={ambassador}
+      />
       <SectionTitle>Contact</SectionTitle>
       <FormGroup>
-        <TextInput
-          name="email"
-          invalidText="Invalid error message."
-          labelText="Email"
-          defaultValue={ambassador.email}
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextInput
-          name="phone"
-          invalidText="Invalid error message."
-          labelText="Phone number*"
-          defaultValue={ambassador.phone}
-          required
-        />
+        <Row>
+          <TextInput
+            name="email"
+            invalidText="Invalid error message."
+            labelText="Email"
+            defaultValue={ambassador.email}
+          />
+          <TextInput
+            name="phone"
+            invalidText="Invalid error message."
+            labelText="Phone number*"
+            defaultValue={ambassador.phone}
+            required
+          />
+        </Row>
       </FormGroup>
     </PageLayout>
   )
