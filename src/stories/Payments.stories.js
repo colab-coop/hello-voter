@@ -1,7 +1,6 @@
 import React from 'react'
 import Payments from '../components/Payments/PaymentsPage'
 import Add from '../components/Payments/AddPage'
-import Edit from '../components/Payments/EditPage'
 import Chime from '../components/Payments/ChimePage'
 
 const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
@@ -10,11 +9,11 @@ export default {
   title: 'Payments'
 }
 
-export const PaymentsEmptyPage = () => (
+export const PaymentsEmpty = () => (
   <Payments payments={[]} />
 )
 
-export const PendingPayments = () => (
+export const PaymentsPending = () => (
   <Payments
     payments={[
       {
@@ -78,7 +77,7 @@ export const PendingPayments = () => (
   />
 );
 
-export const CompletedPayments = () => (
+export const PaymentsCompleted = () => (
   <Payments
     payments={[
       {
@@ -142,7 +141,7 @@ export const CompletedPayments = () => (
   />
 );
 
-export const PaymentsFilled = () => (
+export const PaymentsFull = () => (
   <Payments
     payments={[
       {
@@ -222,10 +221,6 @@ export const PaymentsFilled = () => (
 
 export const AddPage = () => (
   <Add />
-)
-
-export const EditPage = () => (
-  <Edit />
 )
 
 export const ChimePage = () => (

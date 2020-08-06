@@ -7,11 +7,11 @@ export default {
   title: 'Triplers'
 }
 
-export const TriplersEmptyPage = () => (
+export const TriplersEmpty = () => (
   <Triplers triplers={[]} />
 )
 
-export const UnconfirmedTriplers = () => (
+export const TriplersUnconfirmed = () => (
   <Triplers
     triplers={[
       {
@@ -28,7 +28,7 @@ export const UnconfirmedTriplers = () => (
   />
 );
 
-export const PendingTriplers = () => (
+export const TriplersPending = () => (
   <Triplers
     triplers={[
       {
@@ -45,7 +45,7 @@ export const PendingTriplers = () => (
   />
 );
 
-export const ConfirmedTriplers = () => (
+export const TriplersConfirmed = () => (
   <Triplers
     triplers={[
       {
@@ -62,7 +62,7 @@ export const ConfirmedTriplers = () => (
   />
 );
 
-export const TriplersPage = () => (
+export const TriplersFull = () => (
   <Triplers
     triplers={[
       {
