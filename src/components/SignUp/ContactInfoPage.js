@@ -72,12 +72,6 @@ export const ContactInfoPage = () => {
           }
         })
       }}
-      header={<Breadcrumbs items={
-        [{
-          name: "Back",
-          route: "/"
-        }]
-      }/>}
     >
       <SectionTitle>Personal Info</SectionTitle>
       <FormGroup>
