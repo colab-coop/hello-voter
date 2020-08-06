@@ -9,12 +9,7 @@ import Menu from './components/Menu'
 import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
-import { SignUpPage } from './components/SignUp/SignUpPage'
 import { LandingPage } from './components/SignUp/LandingPage'
-import { BecomeAmbassadorPage } from './components/SignUp/BecomeAmbassadorPage'
-import { PersonalInfoPage } from './components/SignUp/PersonalInfoPage'
-import { AddressPage } from './components/SignUp/AddressPage'
-import { ContactPage } from './components/SignUp/ContactPage'
 import { ContactInfoPage } from './components/SignUp/ContactInfoPage'
 import TriplersPage from './components/Triplers/TriplersPage'
 import TriplersAdd from './components/Triplers/AddTripler'
@@ -72,8 +67,7 @@ const AppRoutes = () => {
     <>
       <Menu isApproved={user && user.approved} />
       <Switch>
-        <AuthPublicRoute path="/ambassador/signup" component={SignUpPage} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/ambassador/confirm" component={ContactInfoPage} exact={true} authenticated={authenticated} />
+        <AuthPublicRoute path="/ambassador/signup" component={ContactInfoPage} exact={true} authenticated={authenticated} />
         <AuthPublicRoute path="/approval" component={PendingApprovalPage} exact={true} authenticated={authenticated} />
         <AuthRoute path="/home" component={HomePage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
