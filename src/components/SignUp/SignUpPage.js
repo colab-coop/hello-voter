@@ -1,62 +1,102 @@
-import React from 'react'
-import styled from 'styled-components'
-import { RadioButton16 } from '@carbon/icons-react'
-import PageLayout from '../PageLayout'
-import Breadcrumbs from '../Breadcrumbs'
-import { spacing, colors } from '../../theme'
-import { useHistory } from 'react-router-dom'
-import {AppContext} from "../../api/AppContext";
+import React from "react";
+import styled from "styled-components";
+import { FormGroup, TextInput } from "carbon-components-react";
+import { useHistory } from "react-router-dom";
+import PageLayout from "../PageLayout";
+import Breadcrumbs from "../Breadcrumbs";
+import { spacing, colors } from "../../theme";
+import { AppContext } from "../../api/AppContext";
+import AddressForm from "../AddressForm";
 
-const List = styled.ol`
+const Row = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-column-gap: ${spacing[5]};
+  grid-template-columns: 1fr 1fr;
+`;
+
+const Divider = styled.div`
+  height: 1px;
   width: 100%;
-  margin-top: ${ spacing[7] };
-`
-
-const Item = styled.li`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid ${ colors.gray[20] };
-  padding: ${ spacing[4] } ${ spacing[5] };
-`
-
-const ListItem = ({ text, bold }) => (
-  <Item>
-    {
-      bold ?
-      <strong>{text}</strong> :
-      text
-    }
-    <RadioButton16 />
-  </Item>
-)
+  background-color: ${colors.gray[20]};
+  margin-bottom: ${spacing[5]};
+`;
 
 export const SignUpPage = () => {
   const history = useHistory()
-  const { user } = React.useContext(AppContext)
+  const { user, ambassador, setAmbassador } = React.useContext(AppContext)
   user && user.signup_completed && user.onboarding_completed && history.push('/')
   return (
     <PageLayout
-      onClickSubmit={() => {
-        history.push('/ambassador/personal_info')
+      onClickSubmit={(e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+
+        const userData = {
+          first_name: formData.get('first_name'),
+          last_name: formData.get('last_name'),
+          email: formData.get('email'),
+          phone: formData.get('phone').toString(),
+          address: {
+            address1: formData.get('address1'),
+            state: formData.get('state'),
+            zip: formData.get('zip'),
+            city: formData.get('city'),
+          }
+        }
+
+        setAmbassador((data) => {
+          return {
+            ...data,
+            ...userData
+          }
+        })
+
+        history.push('/ambassador/confirm')
       }}
-      title="Sign Up"
+      title="My contact information"
       submitButtonTitle="Continue"
-      header={<Breadcrumbs items={
-        [{
-          name: "Back",
-          route: "/ambassador"
-        }]
-      }/>}
     >
-      <p>Being a Voting Ambassador is an easy and rewarding way to bring positive change to your community. To sign up:</p>
-      <List>
-        <ListItem text="Complete a brief application" />
-        <ListItem text="Take a 15-minute training" />
-        <ListItem text="Have a 10-minute phone interview" />
-        <ListItem bold text="Start working and earning!" />
-      </List>
+      <FormGroup>
+        <Row>
+          <TextInput
+            name="first_name"
+            invalidText="Invalid error message."
+            labelText="First Name*"
+            defaultValue={ambassador.first_name}
+            required
+          />
+          <TextInput
+            name="last_name"
+            invalidText="Invalid error message."
+            labelText="Last Name*"
+            defaultValue={ambassador.last_name}
+            required
+          />
+        </Row>
+      </FormGroup>
+      <Divider />
+      <AddressForm 
+        ambassador={ambassador}
+      />
+      <Divider />
+      <FormGroup>
+        <Row>
+          <TextInput
+            name="email"
+            invalidText="Invalid error message."
+            labelText="Email"
+            defaultValue={ambassador.email}
+          />
+          <TextInput
+            name="phone"
+            invalidText="Invalid error message."
+            labelText="Phone number*"
+            defaultValue={ambassador.phone}
+            required
+          />
+        </Row>
+      </FormGroup>
     </PageLayout>
-  )
-}
+  );
+};

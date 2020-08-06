@@ -7,6 +7,7 @@ import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import Button from '../Button'
 import Loading from '../Loading'
+import { Tag } from 'carbon-components-react'
 
 import { AppContext } from '../../api/AppContext'
 
@@ -44,33 +45,28 @@ const TableContainerStyled = styled(TableContainer)`
 `
 
 const renderTable = ({
-  rows,
-  headers,
-  getHeaderProps,
+  rows
 }) => (
   <TableContainerStyled>
     <Table>
-      <TableHead>
-        <TableRow>
-          {headers.map((header) => (
-            <TableHeader key={header.key} {...getHeaderProps({ header })}>
-              {header.header}
-            </TableHeader>
-          ))}
-        </TableRow>
-      </TableHead>
       <TableBody>
         {rows.map((row) => (
           <TableRow key={row.id}>
-            {row.cells.map((cell) => (
-              <TableCell key={cell.id}>{cell.value}</TableCell>
-            ))}
+            <TableCell key={row.cells[0].id}>
+              <div>
+                <strong>{row.cells[0].value}</strong>
+              </div>
+              <div> {row.cells[1].value} </div>
+            </TableCell>
+            <TableCell key={row.cells[2].id}>
+              <Tag type='green'>{row.cells[2].value} sent</Tag>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
     </Table>
   </TableContainerStyled>
-);
+)
 
 const headers = [
   {
@@ -84,7 +80,7 @@ const headers = [
   {
     key: 'formatted_amount',
     header: 'Amount',
-  },
+  }
 ];
 
 const PaymentTable = ({ data }) => (
@@ -97,14 +93,20 @@ const Payments = ({ completed, user }) => {
   return (
     <>
       <SectionTitle>Your payment account</SectionTitle>
-      {user.payout_provider ? <div>You are connected.</div> : (
+      {user.payout_provider ?
+        <AcctTable>
+          Account #: ********{user.account.account_data.last4}
+          <AcctNumber>
+
+          </AcctNumber>
+        </AcctTable> : (
         <Button href="/payments/add">
           Add an Account
           <Add16 />
         </Button>
       )}
 
-      <SectionTitle>Payments</SectionTitle>
+      <SectionTitle>Earned Payments</SectionTitle>
       <PaymentTable data={hasCompleted ? completed : []} />
     </>
   );
