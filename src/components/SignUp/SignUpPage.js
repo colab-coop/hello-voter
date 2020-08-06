@@ -1,38 +1,26 @@
-import React from 'react'
-import styled from 'styled-components'
-import { RadioButton16 } from '@carbon/icons-react'
-import PageLayout from '../PageLayout'
-import Breadcrumbs from '../Breadcrumbs'
-import { spacing, colors } from '../../theme'
-import { useHistory } from 'react-router-dom'
-import {AppContext} from "../../api/AppContext";
-import {FormGroup, TextInput} from "carbon-components-react";
+import React from "react";
+import styled from "styled-components";
+import { FormGroup, TextInput } from "carbon-components-react";
+import { useHistory } from "react-router-dom";
+import PageLayout from "../PageLayout";
+import Breadcrumbs from "../Breadcrumbs";
+import { spacing, colors } from "../../theme";
+import { AppContext } from "../../api/AppContext";
 import AddressForm from "../AddressForm";
 
-const List = styled.ol`
+const Row = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-column-gap: ${spacing[5]};
+  grid-template-columns: 1fr 1fr;
+`;
+
+const Divider = styled.div`
+  height: 1px;
   width: 100%;
-  margin-top: ${ spacing[7] };
-`
-
-const Item = styled.li`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid ${ colors.gray[20] };
-  padding: ${ spacing[4] } ${ spacing[5] };
-`
-
-const ListItem = ({ text, bold }) => (
-  <Item>
-    {
-      bold ?
-      <strong>{text}</strong> :
-      text
-    }
-    <RadioButton16 />
-  </Item>
-)
+  background-color: ${colors.gray[20]};
+  margin-bottom: ${spacing[5]};
+`;
 
 export const SignUpPage = () => {
   const history = useHistory()
@@ -68,49 +56,45 @@ export const SignUpPage = () => {
       }}
       title="My contact information"
       submitButtonTitle="Continue"
-      header={<Breadcrumbs items={
-        [{
-          name: "Back",
-          route: "/ambassador"
-        }]
-      }/>}
     >
       <FormGroup>
-        <TextInput
-          name="first_name"
-          invalidText="Invalid error message."
-          labelText="First Name*"
-          defaultValue={ambassador.first_name}
-          required
-        />
+        <Row>
+          <TextInput
+            name="first_name"
+            invalidText="Invalid error message."
+            labelText="First Name*"
+            defaultValue={ambassador.first_name}
+            required
+          />
+          <TextInput
+            name="last_name"
+            invalidText="Invalid error message."
+            labelText="Last Name*"
+            defaultValue={ambassador.last_name}
+            required
+          />
+        </Row>
       </FormGroup>
+      <Divider />
+      <AddressForm />
+      <Divider />
       <FormGroup>
-        <TextInput
-          name="last_name"
-          invalidText="Invalid error message."
-          labelText="Last Name*"
-          defaultValue={ambassador.last_name}
-          required
-        />
-      </FormGroup>
-      <AddressForm ambassador={ambassador}/>
-      <FormGroup>
-        <TextInput
-          name="email"
-          invalidText="Invalid error message."
-          labelText="Email"
-          defaultValue={ambassador.email}
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextInput
-          name="phone"
-          invalidText="Invalid error message."
-          labelText="Phone number*"
-          defaultValue={ambassador.phone}
-          required
-        />
+        <Row>
+          <TextInput
+            name="email"
+            invalidText="Invalid error message."
+            labelText="Email"
+            defaultValue={ambassador.email}
+          />
+          <TextInput
+            name="phone"
+            invalidText="Invalid error message."
+            labelText="Phone number*"
+            defaultValue={ambassador.phone}
+            required
+          />
+        </Row>
       </FormGroup>
     </PageLayout>
-  )
-}
+  );
+};
