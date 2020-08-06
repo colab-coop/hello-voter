@@ -1,15 +1,22 @@
-import React from 'react'
-import Home from '../components/HomePage'
-import Help from '../components/Help/HelpPage'
+import React from "react";
+import Menu from "../components/Menu";
+import Home from "../components/HomePage";
+import Help from "../components/Help/HelpPage";
 
 export default {
-  title: 'Home'
-}
+  title: "Home",
+};
 
 export const HomePage = () => (
-  <Home />
-)
+  <>
+    <Menu isApproved={false} />
+    <Home />
+  </>
+);
 
 export const HelpPage = () => (
-  <Help />
-)
+  <>
+    <Menu isApproved={false} />
+    <Help />
+  </>
+);

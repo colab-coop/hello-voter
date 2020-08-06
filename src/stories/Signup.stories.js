@@ -1,25 +1,30 @@
-import React from 'react'
-import { LogIn } from '../components/Login'
-import { BecomeAmbassadorPage } from '../components/SignUp/BecomeAmbassadorPage'
-import { SignUpPage } from '../components/SignUp/SignUpPage'
+import React from "react";
+import Menu from "../components/Menu";
+import { LogIn } from "../components/Login";
+import { SignUpPage } from "../components/SignUp/SignUpPage";
 import PendingApprovalPage from '../components/PendingApprovalPage'
 
 export default {
-  title: 'SignUp'
-}
+  title: "SignUp",
+};
 
 export const LoginPage = () => (
-  <LogIn />
-)
-
-export const BecomeAmbassador = () => (
-  <BecomeAmbassadorPage />
-)
+  <>
+    <Menu isApproved={false} />
+    <LogIn />
+  </>
+);
 
 export const SignUp = () => (
-  <SignUpPage />
-)
+  <>
+    <Menu isApproved={false} />
+    <SignUpPage />
+  </>
+);
 
 export const PendingApproval = () => (
-  <PendingApprovalPage />
-)
+  <>
+    <Menu isApproved={false} />
+    <PendingApprovalPage />
+  </>
+);

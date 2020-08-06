@@ -1,228 +1,142 @@
-import React from 'react'
-import Payments from '../components/Payments/PaymentsPage'
-import Add from '../components/Payments/AddPage'
-import Chime from '../components/Payments/ChimePage'
+import React from "react";
+import Menu from "../components/Menu";
+import Payments from "../components/Payments/PaymentsPage";
+import Add from "../components/Payments/AddPage";
+import Chime from "../components/Payments/ChimePage";
 
-const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
+const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env;
 
 export default {
-  title: 'Payments'
-}
+  title: "Payments",
+};
 
 export const PaymentsEmpty = () => (
-  <Payments payments={[]} />
-)
-
-export const PaymentsPending = () => (
-  <Payments
-    payments={[
-      {
-        id: 'a',
-        date: 'Jun 09',
-        tripler: 'Epison Shepherd',
-        amount: `$${REACT_APP_TRIPLER_PAYMENT_AMT}`,
-        status: 'pending'
-      },
-      {
-        id: 'b',
-        date: 'June 10',
-        tripler: 'Lauren Ralph',
-        amount: `$${REACT_APP_TRIPLER_PAYMENT_AMT}`,
-        status: 'pending'
-      },
-    ]}
-    plaidAcct={{
-      "accounts": [{
-        "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-        "balances": {
-          "available": 100,
-          "current": 110,
-          "limit": null,
-          "iso_currency_code": "USD",
-          "unofficial_currency_code": null,
-        },
-        "mask": "9606",
-        "name": "Plaid Checking",
-        "official_name": "Plaid Gold Checking",
-        "subtype": "checking",
-        "type": "depository"
-      }],
-      "numbers": {
-        "ach": [{
-          "account": "9900009606",
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "routing": "011401533",
-          "wire_routing": "021000021"
-        }],
-        "eft":[{
-          "account": "111122223333",
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "institution": "021",
-          "branch": "01140"
-        }],
-        "international":[{
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "bic": "NWBKGB21",
-          "iban": "GB29NWBK60161331926819",
-        }],
-        "bacs":[{
-          "account": "31926819",
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "sort_code": "601613"
-        }]
-      },
-      // "item": {Object},
-      "request_id": "m8MDnv9okwxFNBV"
-    }}
-  />
+  <>
+    <Menu isApproved={true} />
+    <Payments user={[]} payments={[]} />
+  </>
 );
 
-export const PaymentsCompleted = () => (
-  <Payments
-    payments={[
-      {
-        id: "a",
-        date: "Jun 09",
-        tripler: "Rebekah Tripler",
-        amount: `$${REACT_APP_TRIPLER_PAYMENT_AMT}`,
-        status: "completed",
-      },
-      {
-        id: "b",
-        date: "June 10",
-        tripler: "Desee Something",
-        amount: `$${REACT_APP_TRIPLER_PAYMENT_AMT}`,
-        status: "completed",
-      },
-    ]}
-    plaidAcct={{
-      "accounts": [{
-        "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-        "balances": {
-          "available": 100,
-          "current": 110,
-          "limit": null,
-          "iso_currency_code": "USD",
-          "unofficial_currency_code": null,
+export const PaymentsPending = () => (
+  <>
+    <Menu isApproved={true} />
+    <Payments
+      user={{
+        payout_provider: "stripe",
+        account: {
+          account_data: {
+            last4: "1234",
+          },
         },
-        "mask": "9606",
-        "name": "Plaid Checking",
-        "official_name": "Plaid Gold Checking",
-        "subtype": "checking",
-        "type": "depository"
-      }],
-      "numbers": {
-        "ach": [{
-          "account": "9900009606",
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "routing": "011401533",
-          "wire_routing": "021000021"
-        }],
-        "eft":[{
-          "account": "111122223333",
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "institution": "021",
-          "branch": "01140"
-        }],
-        "international":[{
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "bic": "NWBKGB21",
-          "iban": "GB29NWBK60161331926819",
-        }],
-        "bacs":[{
-          "account": "31926819",
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "sort_code": "601613"
-        }]
-      },
-      // "item": {Object},
-      "request_id": "m8MDnv9okwxFNBV"
-    }}
-  />
+      }}
+      payments={[
+        {
+          id: "a",
+          tripler_name: "Epison Shepherd",
+          formatted_disbursed_at: "June 09",
+          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+          status: "pending",
+        },
+        {
+          id: "b",
+          tripler_name: "Lauren Ralph",
+          formatted_disbursed_at: "June 10",
+          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+          status: "pending",
+        },
+      ]}
+    />
+  </>
+);
+
+export const PaymentsSettled = () => (
+  <>
+    <Menu isApproved={true} />
+    <Payments
+      user={{
+        payout_provider: "stripe",
+        account: {
+          account_data: {
+            last4: "1234",
+          },
+        },
+      }}
+      payments={[
+        {
+          id: "a",
+          tripler_name: "Rebekah Tripler",
+          formatted_disbursed_at: "June 09",
+          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+          status: "settled",
+        },
+        {
+          id: "b",
+          tripler_name: "Desee Something",
+          formatted_disbursed_at: "June 10",
+          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+          status: "settled",
+        },
+      ]}
+    />
+  </>
 );
 
 export const PaymentsFull = () => (
-  <Payments
-    payments={[
-      {
-        id: 'a',
-        date: 'Jun 09',
-        tripler: 'Epison Shepherd',
-        amount: `$${REACT_APP_TRIPLER_PAYMENT_AMT}`,
-        status: 'pending'
-      },
-      {
-        id: 'b',
-        date: 'June 10',
-        tripler: 'Lauren Ralph',
-        amount: `$${REACT_APP_TRIPLER_PAYMENT_AMT}`,
-        status: 'pending'
-      },
-      {
-        id: "c",
-        date: "Jun 09",
-        tripler: "Rebekah Tripler",
-        amount: `$${REACT_APP_TRIPLER_PAYMENT_AMT}`,
-        status: "completed",
-      },
-      {
-        id: "d",
-        date: "June 10",
-        tripler: "Desee Something",
-        amount: `$${REACT_APP_TRIPLER_PAYMENT_AMT}`,
-        status: "completed",
-      },
-    ]}
-    plaidAcct={{
-      "accounts": [{
-        "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-        "balances": {
-          "available": 100,
-          "current": 110,
-          "limit": null,
-          "iso_currency_code": "USD",
-          "unofficial_currency_code": null,
+  <>
+    <Menu isApproved={true} />
+    <Payments
+      user={{
+        payout_provider: "stripe",
+        account: {
+          account_data: {
+            last4: "1234",
+          },
         },
-        "mask": "9606",
-        "name": "Plaid Checking",
-        "official_name": "Plaid Gold Checking",
-        "subtype": "checking",
-        "type": "depository"
-      }],
-      "numbers": {
-        "ach": [{
-          "account": "9900009606",
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "routing": "011401533",
-          "wire_routing": "021000021"
-        }],
-        "eft":[{
-          "account": "111122223333",
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "institution": "021",
-          "branch": "01140"
-        }],
-        "international":[{
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "bic": "NWBKGB21",
-          "iban": "GB29NWBK60161331926819",
-        }],
-        "bacs":[{
-          "account": "31926819",
-          "account_id": "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D",
-          "sort_code": "601613"
-        }]
-      },
-      // "item": {Object},
-      "request_id": "m8MDnv9okwxFNBV"
-    }}
-  />
+      }}
+      payments={[
+        {
+          id: "a",
+          tripler_name: "Epison Shepherd",
+          formatted_disbursed_at: "June 09",
+          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+          status: "pending",
+        },
+        {
+          id: "b",
+          tripler_name: "Lauren Ralph",
+          formatted_disbursed_at: "June 10",
+          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+          status: "pending",
+        },
+        {
+          id: "c",
+          tripler_name: "Rebekah Tripler",
+          formatted_disbursed_at: "June 09",
+          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+          status: "settled",
+        },
+        {
+          id: "d",
+          tripler_name: "Desee Something",
+          formatted_disbursed_at: "June 10",
+          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+          status: "settled",
+        },
+      ]}
+    />
+  </>
 );
 
 export const AddPage = () => (
-  <Add />
-)
+  <>
+    <Menu isApproved={true} />
+    <Add />
+  </>
+);
 
 export const ChimePage = () => (
-  <Chime />
-)
+  <>
+    <Menu isApproved={true} />
+    <Chime />
+  </>
+);
