@@ -77,7 +77,7 @@ export const SignUpPage = () => {
       </FormGroup>
       <Divider />
       <AddressForm 
-        // ambassador={ambassador}
+        ambassador={ambassador}
       />
       <Divider />
       <FormGroup>
