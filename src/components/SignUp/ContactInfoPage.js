@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
-import Breadcrumbs from '../Breadcrumbs'
+import Button from '../Button'
 import AddressForm from '../AddressForm'
 import { FormGroup, TextInput } from 'carbon-components-react'
 import { useHistory } from 'react-router-dom'
@@ -45,7 +45,6 @@ export const ContactInfoPage = () => {
     <PageLayout
       error={err}
       title="Please Enter Your Details"
-      submitButtonTitle="Submit"
       onClickSubmit={(e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
@@ -114,6 +113,13 @@ export const ContactInfoPage = () => {
           />
         </Row>
       </FormGroup>
+      <Button 
+        type="submit"
+        trackingEvent={{ category: 'SubmitSignupInfo', label: 'Submit'}}
+        isAForm
+      >
+        Submit
+      </Button>
     </PageLayout>
   )
 }
