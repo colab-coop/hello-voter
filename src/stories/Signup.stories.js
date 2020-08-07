@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "../components/Menu";
 import { LogIn } from "../components/Login";
-import { SignUpPage } from "../components/SignUp/SignUpPage";
+import { ContactInfoPage } from "../components/SignUp/ContactInfoPage";
 import PendingApprovalPage from '../components/PendingApprovalPage'
 
 export default {
@@ -15,10 +15,10 @@ export const LoginPage = () => (
   </>
 );
 
-export const SignUp = () => (
+export const SignUpPage = () => (
   <>
     <Menu isApproved={false} />
-    <SignUpPage />
+    <ContactInfoPage />
   </>
 );
 
