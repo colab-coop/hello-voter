@@ -2,7 +2,6 @@ import React from 'react'
 import { Column, Row, Form, Content } from 'carbon-components-react'
 import styled from 'styled-components'
 import { spacing } from '../theme'
-import Button from './Button'
 import { InlineNotification } from 'carbon-components-react'
 
 const FormStyled = styled(Form)`
@@ -15,7 +14,7 @@ const ContentContainer = styled(Content)`
 `
 
 const TitleContainer = styled(Row)`
-  margin-top: ${ spacing[5] };
+  margin-top: ${ props => props.hasHeader ? spacing[5] : spacing[7] };
   margin-bottom: ${ spacing[7] };
 `
 
@@ -32,11 +31,7 @@ const InlineNotificationStyled = styled(InlineNotification)`
   margin-bottom: ${ spacing[3] };
 `
 
-const CtaButton = styled(Button)`
-  margin-top: 0;
-`
-
-export default ({ header, title, children, submitButtonTitle, onClickSubmit, error }) => (
+export default ({ header, title, children, onClickSubmit, error }) => (
   <>
     <FormStyled onSubmit={onClickSubmit}>
       <ContentContainer>
@@ -44,7 +39,7 @@ export default ({ header, title, children, submitButtonTitle, onClickSubmit, err
           <Row>
             { header }
           </Row>
-          <TitleContainer>
+          <TitleContainer hasHeader={header !== undefined}>
             <h3>{ title }</h3>
           </TitleContainer>
           <Row style={{display: "block"}}>
@@ -62,15 +57,6 @@ export default ({ header, title, children, submitButtonTitle, onClickSubmit, err
               subtitle={error}
               title={null}
             />
-          )}
-          {submitButtonTitle && (
-              <CtaButton
-                type="submit"
-                trackingEvent={{ category: `Submit${title.replace(/ /g,'')}`, label: submitButtonTitle }}
-                isAForm
-              >
-              {submitButtonTitle}
-            </CtaButton>
           )}
         </Row>
       </CtaButtonContainer>
