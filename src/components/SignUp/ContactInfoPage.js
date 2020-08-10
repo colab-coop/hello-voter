@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
-import Breadcrumbs from '../Breadcrumbs'
+import Button from '../Button'
 import AddressForm from '../AddressForm'
 import { FormGroup, TextInput } from 'carbon-components-react'
 import { useHistory } from 'react-router-dom'
@@ -11,6 +11,13 @@ import { AppContext } from '../../api/AppContext'
 const SectionTitle = styled.h5`
   margin-bottom: ${ spacing[5] };
 `
+
+const Row = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-column-gap: ${spacing[5]};
+  grid-template-columns: 1fr 1fr;
+`;
 
 export const ContactInfoPage = () => {
   const [err, setErr] = useState(false)
@@ -37,8 +44,7 @@ export const ContactInfoPage = () => {
   return (
     <PageLayout
       error={err}
-      title="Confirm Info"
-      submitButtonTitle="Submit"
+      title="Please Enter Your Details"
       onClickSubmit={(e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
@@ -65,52 +71,55 @@ export const ContactInfoPage = () => {
           }
         })
       }}
-      header={<Breadcrumbs items={
-        [{
-          name: "Back",
-          route: "/"
-        }]
-      }/>}
     >
       <SectionTitle>Personal Info</SectionTitle>
       <FormGroup>
-        <TextInput
-          name="first_name"
-          invalidText="Invalid error message."
-          labelText="First Name*"
-          defaultValue={ambassador.first_name}
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <TextInput
-          name="last_name"
-          invalidText="Invalid error message."
-          labelText="Last Name*"
-          defaultValue={ambassador.last_name}
-          required
-        />
+        <Row>
+          <TextInput
+            name="first_name"
+            invalidText="Invalid error message."
+            labelText="First Name*"
+            defaultValue={ambassador.first_name}
+            required
+          />
+          <TextInput
+            name="last_name"
+            invalidText="Invalid error message."
+            labelText="Last Name*"
+            defaultValue={ambassador.last_name}
+            required
+          />
+        </Row>
       </FormGroup>
       <SectionTitle>Address</SectionTitle>
-      <AddressForm ambassador={ambassador}/>
+      <AddressForm 
+        ambassador={ambassador}
+      />
       <SectionTitle>Contact</SectionTitle>
       <FormGroup>
-        <TextInput
-          name="email"
-          invalidText="Invalid error message."
-          labelText="Email"
-          defaultValue={ambassador.email}
-        />
+        <Row>
+          <TextInput
+            name="email"
+            invalidText="Invalid error message."
+            labelText="Email"
+            defaultValue={ambassador.email}
+          />
+          <TextInput
+            name="phone"
+            invalidText="Invalid error message."
+            labelText="Phone number*"
+            defaultValue={ambassador.phone}
+            required
+          />
+        </Row>
       </FormGroup>
-      <FormGroup>
-        <TextInput
-          name="phone"
-          invalidText="Invalid error message."
-          labelText="Phone number*"
-          defaultValue={ambassador.phone}
-          required
-        />
-      </FormGroup>
+      <Button 
+        type="submit"
+        trackingEvent={{ category: 'SubmitSignupInfo', label: 'Submit'}}
+        isAForm
+      >
+        Submit
+      </Button>
     </PageLayout>
   )
 }

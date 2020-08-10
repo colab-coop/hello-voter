@@ -5,6 +5,47 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Convert
+// Default, Use with em() and rem() functions
+export const baseFontSize = 16;
+
+/**
+ * Convert a given px unit to a rem unit
+ * @param {number} px
+ * @returns {string}
+ */
+export function rem(px) {
+  return `${px / baseFontSize}rem`;
+}
+
+export const breakpoints = {
+  sm: {
+    width: rem(320),
+    columns: 4,
+    margin: '0',
+  },
+  md: {
+    width: rem(672),
+    columns: 8,
+    margin: rem(16),
+  },
+  lg: {
+    width: rem(1056),
+    columns: 16,
+    margin: rem(16),
+  },
+  xlg: {
+    width: rem(1312),
+    columns: 16,
+    margin: rem(16),
+  },
+  max: {
+    width: rem(1584),
+    columns: 16,
+    margin: rem(24),
+  },
+};
+
 export const spacing = [
   '0px', // 0
   '2px', // 1
