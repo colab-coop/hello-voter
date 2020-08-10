@@ -12,7 +12,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: /deploy.sh
-  staging_ui:
+  staging:
     docker:
       - image: circleci/python:3.6
     steps:
@@ -47,8 +47,8 @@ jobs:
           command: |
             . env/bin/activate
             cd ~/operations/ansible/ui
-            ansible-playbook -i hosts deploy.yml --limit staging_v1 --vault-password-file ~/operations/ansible/ui/.vault-pass
-  production_ui:
+            ansible-playbook -i hosts deploy.yml --limit staging_v1 --vault-password-file ~/operations/ansible/ui/.vault-pass --extra-vars "deploy_branch=$CIRCLE_BRANCH"
+  production:
     docker:
       - image: circleci/python:3.6
     steps:
@@ -83,7 +83,7 @@ jobs:
           command: |
             . env/bin/activate
             cd ~/operations/ansible/ui
-            ansible-playbook -i hosts deploy.yml --limit production_v1 --vault-password-file ~/operations/ansible/ui/.vault-pass
+            ansible-playbook -i hosts deploy.yml --limit production_v1 --vault-password-file ~/operations/ansible/ui/.vault-pass --extra-vars "deploy_branch=$CIRCLE_BRANCH"
 workflows:
   deploy:
     jobs:
@@ -91,12 +91,16 @@ workflows:
           context: coopernetes-staging
           filters:
             branches:
-              only: develop
-      - staging_ui:
+              only:
+                - develop
+      - staging:
           filters:
             branches:
-              only: ambassador-stage
-      - production_ui:
+              only:
+                - ambassador-stage
+                - ambassador-stage2
+      - production:
           filters:
             branches:
-              only: ambassador
+              only:
+                - ambassador
