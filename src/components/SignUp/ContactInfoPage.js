@@ -29,7 +29,7 @@ const InlineNotificationStyled = styled(InlineNotification)`
   margin-bottom: ${ spacing[3] };
 `
 
-const ButtonStyled = styled(Button)`
+const SubmissionContainer = styled.div`
   margin-top: ${ spacing[8] };
 `
 
@@ -128,6 +128,7 @@ export const ContactInfoPage = () => {
           required
         />
       </FormGroup>
+      <SubmissionContainer>
       {err && (
         <InlineNotificationStyled
           hideCloseButton
@@ -137,13 +138,14 @@ export const ContactInfoPage = () => {
           title={null}
         />
       )}
-      <ButtonStyled 
+      <Button
         type="submit"
         trackingEvent={{ category: 'SubmitSignupInfo', label: 'Submit'}}
         isAForm
       >
         Submit
-      </ButtonStyled>
+      </Button>
+      </SubmissionContainer>
     </Form>
     </ResponsiveContainer>
     </PageLayout>

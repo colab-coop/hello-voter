@@ -85,6 +85,9 @@ export const HeaderGlobalAction = styled.button`
 
 export const FlexContainer = styled.div`
   max-width: ${breakpoints.lg.width};
+  @media (max-width: ${breakpoints.lg.width}) {
+    max-width: ${breakpoints.md.width};
+  }
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -94,6 +97,9 @@ export const FlexContainer = styled.div`
 
 export const Container = styled.div`
   max-width: ${breakpoints.lg.width};
+  @media (max-width: ${breakpoints.lg.width}) {
+    max-width: ${breakpoints.md.width};
+  }
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -112,7 +118,7 @@ export const TitleContainer = styled.div`
 export const ResponsiveContainer = styled.div`
   width: 50%;
   @media (max-width: ${breakpoints.lg.width}) {
-    width: 60%
+    width: 75%
   };
   @media (max-width: ${breakpoints.md.width}) {
     width: 100%

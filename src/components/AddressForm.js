@@ -13,6 +13,9 @@ const Row = styled.div`
 const RowLeft = styled.div`
   grid-column-end: span 10;
   @media (max-width: ${breakpoints.lg.width}) {
+    grid-column-end: span 9;
+  }
+  @media (max-width: ${breakpoints.md.width}) {
     grid-column-end: span 7;
   }
 `
@@ -20,6 +23,9 @@ const RowLeft = styled.div`
 const RowCenter = styled.div`
   grid-column-end: span 2;
   @media (max-width: ${breakpoints.lg.width}) {
+    grid-column-end: span 3;
+  }
+  @media (max-width: ${breakpoints.md.width}) {
     grid-column-end: span 4;
   }
 `
@@ -27,6 +33,9 @@ const RowCenter = styled.div`
 const RowRight = styled.div`
   grid-column-end: span 4;
   @media (max-width: ${breakpoints.lg.width}) {
+    grid-column-end: span 4;
+  }
+  @media (max-width: ${breakpoints.md.width}) {
     grid-column-end: span 5;
   }
 `
