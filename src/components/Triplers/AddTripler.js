@@ -59,7 +59,6 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
         ]
       }/>}
     >
-    <ResponsiveContainer>
       <p>Check the folks you know!</p>
       <DataTable
         headers={[
@@ -75,7 +74,6 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
         rows={triplers}
         handleSelected={claimTriplers}
       />
-    </ResponsiveContainer>
     </PageLayout>
   )
 }
