@@ -10,7 +10,6 @@ const CardContainer = styled.button`
   background-color: ${ colors.gray[10] };
   padding: ${ spacing[5] };
   width: 100%;
-  margin-bottom: ${ spacing[5] };
 `
 
 const CardTitleContainer = styled.div`
