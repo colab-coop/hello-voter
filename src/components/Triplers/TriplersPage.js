@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, Tag } from 'carbon-components-react'
 import { Add16, ChevronRight16 } from '@carbon/icons-react'
 import styled from 'styled-components'
+import { ResponsiveContainer } from '../pageStyles'
 import { colors, spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
@@ -192,12 +193,14 @@ const TriplersPage = ({ triplers, remindTripler }) => {
         ]
       }/>}
     >
+    <ResponsiveContainer>
       <Triplers
         unconfirmed={unconfirmed}
         pending={pending}
         confirmed={confirmed}
         remindTripler={remindTripler}
       />
+    </ResponsiveContainer>
     </PageLayout>
   )
 }

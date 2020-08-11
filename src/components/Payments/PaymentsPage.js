@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { DataTable, Link } from 'carbon-components-react'
+import { ResponsiveContainer } from '../pageStyles'
 import { Add16 } from '@carbon/icons-react'
 import styled from 'styled-components'
 import { colors, spacing } from '../../theme'
@@ -132,11 +133,13 @@ const PaymentsPage = ({ payments, user }) => {
         ]
       }/>}
     >
+    <ResponsiveContainer>
       <Payments
         pending={pending}
         completed={completed}
         user={user}
       />
+    </ResponsiveContainer>
     </PageLayout>
   )
 }
