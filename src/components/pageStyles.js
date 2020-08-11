@@ -123,6 +123,7 @@ export const ResponsiveContainer = styled.div`
 
 export const GridThreeUp = styled.div`
   display: grid;
+  align-items: start;
   grid-auto-columns: 1fr;
   grid-column-gap: ${ spacing[5]};
   grid-row-gap: ${ spacing[5]};
