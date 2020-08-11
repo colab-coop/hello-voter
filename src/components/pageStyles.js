@@ -103,11 +103,8 @@ export const Container = styled.div`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: ${ spacing[3] };
-  padding-right: ${ spacing[3] };
   margin-top: ${ spacing[8] };
   padding: ${ spacing[3] };
-  padding-bottom: ${ spacing[10] };
 `;
 
 export const TitleContainer = styled.div`
