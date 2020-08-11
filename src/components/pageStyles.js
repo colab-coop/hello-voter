@@ -99,7 +99,15 @@ export const Container = styled.div`
   margin-right: auto;
   padding-left: ${ spacing[3] };
   padding-right: ${ spacing[3] };
+  margin-top: ${ spacing[8] };
+  padding: ${ spacing[3] };
+  padding-bottom: ${ spacing[10] };
 `;
+
+export const TitleContainer = styled.div`
+  margin-top: ${ props => props.hasHeader ? spacing[5] : spacing[7] };
+  margin-bottom: ${ spacing[7] };
+`
 
 export const ResponsiveContainer = styled.div`
   width: 50%;
@@ -109,31 +117,4 @@ export const ResponsiveContainer = styled.div`
   @media (max-width: ${breakpoints.md.width}) {
     width: 100%
   };
-`
-
-export const FormStyled = styled(Form)`
-  margin-top: ${ spacing[8] };
-`
-
-export const ContentContainer = styled(Content)`
-  padding: ${ spacing[3] };
-  padding-bottom: ${ spacing[10] };
-`
-
-export const TitleContainer = styled.div`
-  margin-top: ${ props => props.hasHeader ? spacing[5] : spacing[7] };
-  margin-bottom: ${ spacing[7] };
-`
-
-export const CtaButtonContainer = styled(Column)`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-`
-
-export const InlineNotificationStyled = styled(InlineNotification)`
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: ${ spacing[3] };
 `

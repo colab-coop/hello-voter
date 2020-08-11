@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { spacing } from '../../theme'
+import { FormGroup, TextInput, InlineNotification, Form } from 'carbon-components-react'
+import { spacing, colors } from '../../theme'
 import PageLayout from '../PageLayout'
+import { ResponsiveContainer } from '../pageStyles'
 import Button from '../Button'
 import AddressForm from '../AddressForm'
-import { FormGroup, TextInput } from 'carbon-components-react'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../../api/AppContext'
-
-const SectionTitle = styled.h5`
-  margin-bottom: ${ spacing[5] };
-`
 
 const Row = styled.div`
   display: grid;
@@ -18,6 +15,23 @@ const Row = styled.div`
   grid-column-gap: ${spacing[5]};
   grid-template-columns: 1fr 1fr;
 `;
+
+const Divider = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: ${colors.gray[20]};
+  margin-bottom: ${spacing[5]};
+`;
+
+const InlineNotificationStyled = styled(InlineNotification)`
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: ${ spacing[3] };
+`
+
+const ButtonStyled = styled(Button)`
+  margin-top: ${ spacing[8] };
+`
 
 export const ContactInfoPage = () => {
   const [err, setErr] = useState(false)
@@ -43,9 +57,11 @@ export const ContactInfoPage = () => {
   }, [ ambassador ])
   return (
     <PageLayout
-      error={err}
       title="Please Enter Your Details"
-      onClickSubmit={(e) => {
+    >
+    <ResponsiveContainer>
+    <Form
+      onSubmit={(e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
 
@@ -72,7 +88,6 @@ export const ContactInfoPage = () => {
         })
       }}
     >
-      <SectionTitle>Personal Info</SectionTitle>
       <FormGroup>
         <Row>
           <TextInput
@@ -91,35 +106,46 @@ export const ContactInfoPage = () => {
           />
         </Row>
       </FormGroup>
-      <SectionTitle>Address</SectionTitle>
-      <AddressForm 
+      <Divider />
+      <AddressForm
         ambassador={ambassador}
       />
-      <SectionTitle>Contact</SectionTitle>
+      <Divider />
       <FormGroup>
-        <Row>
-          <TextInput
-            name="email"
-            invalidText="Invalid error message."
-            labelText="Email"
-            defaultValue={ambassador.email}
-          />
-          <TextInput
-            name="phone"
-            invalidText="Invalid error message."
-            labelText="Phone number*"
-            defaultValue={ambassador.phone}
-            required
-          />
-        </Row>
+        <TextInput
+          name="email"
+          invalidText="Invalid error message."
+          labelText="Email"
+          defaultValue={ambassador.email}
+        />
       </FormGroup>
-      <Button 
+      <FormGroup>
+        <TextInput
+          name="phone"
+          invalidText="Invalid error message."
+          labelText="Phone number*"
+          defaultValue={ambassador.phone}
+          required
+        />
+      </FormGroup>
+      {err && (
+        <InlineNotificationStyled
+          hideCloseButton
+          kind="error"
+          icondescription="Dismiss notification"
+          subtitle={err}
+          title={null}
+        />
+      )}
+      <ButtonStyled 
         type="submit"
         trackingEvent={{ category: 'SubmitSignupInfo', label: 'Submit'}}
         isAForm
       >
         Submit
-      </Button>
+      </ButtonStyled>
+    </Form>
+    </ResponsiveContainer>
     </PageLayout>
   )
 }
