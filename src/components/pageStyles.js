@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Column, Row, Form, Content, InlineNotification } from 'carbon-components-react'
 import { spacing, colors, breakpoints } from "../theme";
 import BlockPower from '../assets/logos/block-power.png'
 import NewGeorgia from '../assets/logos/new-georgia.png'
@@ -120,4 +119,19 @@ export const ResponsiveContainer = styled.div`
   @media (max-width: ${breakpoints.md.width}) {
     width: 100%
   };
+`
+
+export const GridThreeUp = styled.div`
+  display: grid;
+  align-items: start;
+  grid-auto-columns: 1fr;
+  grid-column-gap: ${ spacing[5]};
+  grid-row-gap: ${ spacing[5]};
+  grid-template-columns: repeat(3, 1fr);
+  @media (max-width: ${breakpoints.lg.width}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: ${breakpoints.md.width}) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `

@@ -33,6 +33,11 @@ const TableCellStyled = styled(TableCell)`
   vertical-align: middle !important;
 `
 
+// FIXME: Hacked styling to reduce checkbox width in table
+const TableSelectRowStyled = styled(TableSelectRow)`
+  width: ${ spacing[5] };
+`
+
 const renderTable = (batchActionClick) => (
   {
     rows,
@@ -78,7 +83,7 @@ const renderTable = (batchActionClick) => (
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id} {...getRowProps({ row })}>
-              <TableSelectRow {...getSelectionProps({ row })} />
+              <TableSelectRowStyled {...getSelectionProps({ row })} />
               <TableCellStyled colSpan={100}>
                 {row.cells.map((cell) => (
                   <p key={cell.id}>{cell.value}</p>

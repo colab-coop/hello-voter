@@ -1,19 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-import { ResponsiveContainer } from './pageStyles'
+import { Events24, Wallet24 } from '@carbon/icons-react'
 import { spacing } from '../theme'
+import { GridThreeUp } from './pageStyles'
 import PageLayout from './PageLayout'
 import CardButton from './CardButton'
-import { Link } from 'carbon-components-react'
-import { Events24, Wallet24 } from '@carbon/icons-react'
 
 const TopParagraph = styled.p`
   margin-bottom: ${ spacing[7] };
-`
-
-const BottomParagraph = styled.p`
-  margin-top: ${ spacing[7] };
 `
 
 export default () => {
@@ -24,10 +19,10 @@ export default () => {
 
   return (
     <PageLayout title="Home">
-    <ResponsiveContainer>
       <TopParagraph>
         Make a positive impact on your community — and make money, too!
       </TopParagraph>
+      <GridThreeUp>
       <CardButton
         icon={<Events24 />}
         title="Vote Triplers"
@@ -44,7 +39,7 @@ export default () => {
           redirect("/payments");
         }}
       />
-    </ResponsiveContainer>
+      </GridThreeUp>
     </PageLayout>
   );
 }

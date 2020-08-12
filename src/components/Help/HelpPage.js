@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ResponsiveContainer } from '../pageStyles'
+import { Devices24, Partnership24 } from '@carbon/icons-react';
+import { GridThreeUp } from '../pageStyles'
 import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 import CardButton from '../CardButton'
-import { Devices24, Partnership24 } from '@carbon/icons-react';
 
 const TopParagraph = styled.p`
   margin-bottom: ${ spacing[7]};
@@ -16,8 +16,8 @@ const isBlockPower = REACT_APP_ORG === "BlockPower"
 
 export default () => (
   <PageLayout title="Help">
-  <ResponsiveContainer>
     <TopParagraph>Have questions? Here’s how to get answers.</TopParagraph>
+    <GridThreeUp>
     <CardButton
       icon={<Devices24 />}
       title="Technical Support"
@@ -46,6 +46,6 @@ export default () => (
         }}
       />
     )}
-  </ResponsiveContainer>
+    </GridThreeUp>
   </PageLayout>
 );
