@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from 'carbon-components-react'
 import { Launch16 } from '@carbon/icons-react'
+import { ResponsiveContainer } from './pageStyles'
 import PageLayout from './PageLayout'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../api/AppContext'
@@ -16,6 +17,7 @@ export default () => {
       <PageLayout
         title={REACT_APP_APPROVE_HEADER}
       >
+      <ResponsiveContainer>
         <p>
           {REACT_APP_APPROVE_CONTENT}
         </p>
@@ -30,6 +32,7 @@ export default () => {
           target='_blank'>
             Choose a date and time <Launch16 style={{marginLeft:8}} />
         </Button>
+      </ResponsiveContainer>
       </PageLayout>
     </>
   )

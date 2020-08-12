@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import { ResponsiveContainer } from '../pageStyles'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import DataTable from '../DataTable'
@@ -58,6 +59,7 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
         ]
       }/>}
     >
+    <ResponsiveContainer>
       <p>Check the folks you know!</p>
       <DataTable
         headers={[
@@ -73,6 +75,7 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
         rows={triplers}
         handleSelected={claimTriplers}
       />
+    </ResponsiveContainer>
     </PageLayout>
   )
 }

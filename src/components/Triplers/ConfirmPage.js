@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {Form, FormGroup, TextInput, Link, Row} from 'carbon-components-react'
 import PageLayout from '../PageLayout'
+import { ResponsiveContainer } from '../pageStyles'
 import Breadcrumbs from '../Breadcrumbs'
 import Button from '../Button'
 import { useParams } from 'react-router-dom'
@@ -52,7 +53,6 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
   return (
     <PageLayout
       title={`Vote Tripler: ${tripler.first_name}`}
-      onClickSubmit={submit}
       header={
         <Breadcrumbs
           items={[
@@ -70,6 +70,10 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           ]}
         />
       }
+    >
+    <ResponsiveContainer>
+    <Form 
+      onSubmit={submit}
     >
       <p>Add the names of three Voters the Vote Tripler will remind to vote:</p>
       <FormGroup>
@@ -129,6 +133,8 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       >
         Go back to My Vote Triplers
       </Button>
+    </Form>
+    </ResponsiveContainer>
     </PageLayout>
   )
 }

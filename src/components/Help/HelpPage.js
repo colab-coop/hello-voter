@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { ResponsiveContainer } from '../pageStyles'
 import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 import CardButton from '../CardButton'
@@ -15,6 +16,7 @@ const isBlockPower = REACT_APP_ORG === "BlockPower"
 
 export default () => (
   <PageLayout title="Help">
+  <ResponsiveContainer>
     <TopParagraph>Have questions? Here’s how to get answers.</TopParagraph>
     <CardButton
       icon={<Devices24 />}
@@ -44,5 +46,6 @@ export default () => (
         }}
       />
     )}
+  </ResponsiveContainer>
   </PageLayout>
 );

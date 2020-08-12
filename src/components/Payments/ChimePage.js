@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { ResponsiveContainer } from '../pageStyles'
 import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
@@ -55,6 +56,7 @@ export default () => {
         />
       }
     >
+    <ResponsiveContainer>
       <Image src={chime} />
       <p>Chime is a new kind of bank. Open a free account in five minutes.</p>
       <Subheader>How it works</Subheader>
@@ -82,6 +84,7 @@ export default () => {
       >
         Go back to Payments
       </Button>
+    </ResponsiveContainer>
     </PageLayout>
   );
 }

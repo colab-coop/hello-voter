@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import ReactDOM from 'react-dom'
 import { Finance24 } from '@carbon/icons-react'
 import styled from 'styled-components'
+import { ResponsiveContainer } from '../pageStyles'
 import PageLayout from '../PageLayout'
 import CardButton from '../CardButton'
 import Button from '../Button'
@@ -64,6 +65,7 @@ export default () => {
         />
       }
     >
+    <ResponsiveContainer>
       {REACT_APP_PAYMENT_TYPE === 'stripe' &&
       <CardButton
         icon={<Finance24/>}
@@ -104,6 +106,7 @@ export default () => {
       >
         Go back to Payments
       </Button>
+    </ResponsiveContainer>
     </PageLayout>
   )
 }

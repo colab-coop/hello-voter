@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import { ResponsiveContainer } from './pageStyles'
 import { spacing } from '../theme'
 import PageLayout from './PageLayout'
 import CardButton from './CardButton'
@@ -23,6 +24,7 @@ export default () => {
 
   return (
     <PageLayout title="Home">
+    <ResponsiveContainer>
       <TopParagraph>
         Make a positive impact on your community — and make money, too!
       </TopParagraph>
@@ -42,6 +44,7 @@ export default () => {
           redirect("/payments");
         }}
       />
+    </ResponsiveContainer>
     </PageLayout>
   );
 }
