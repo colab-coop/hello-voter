@@ -46,36 +46,33 @@ const TableContainerStyled = styled(TableContainer)`
 
 const renderTable = ({
   rows
-}) => (
-  <TableContainerStyled>
-    <Table>
-      <TableBody>
-        {rows.map((row) => (
-          <TableRow key={row.id}>
-            <TableCell key={row.cells[0].id}>
-              <div>
-                <strong>{row.cells[0].value}</strong>
-              </div>
-              <div> {row.cells[1].value} </div>
-            </TableCell>
-            <TableCell key={row.cells[2].id}>
-              <Tag type='green'>{row.cells[2].value} sent</Tag>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </TableContainerStyled>
-)
+}) => {
+  return (
+    <TableContainerStyled>
+      <Table>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell key={row.cells[0].id}>
+                <div>
+                  <strong>{row.cells[0].value}</strong>
+                </div>
+              </TableCell>
+              <TableCell key={row.cells[1].id}>
+                <Tag type='green'>{row.cells[1].value} sent</Tag>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainerStyled>
+  )
+}
 
 const headers = [
   {
     key: 'tripler_name',
     header: 'Tripler Name',
-  },
-  {
-    key: 'formatted_disbursed_at',
-    header: 'Date',
   },
   {
     key: 'formatted_amount',
@@ -113,9 +110,7 @@ const Payments = ({ completed, user }) => {
 };
 
 const PaymentsPage = ({ payments, user }) => {
-  const pending = payments.filter((payment) => payment.status === 'pending')
   const completed = payments.filter((payment) => payment.status === 'settled')
-
   return (
     <PageLayout
       title="Payments"
@@ -133,7 +128,6 @@ const PaymentsPage = ({ payments, user }) => {
       }/>}
     >
       <Payments
-        pending={pending}
         completed={completed}
         user={user}
       />

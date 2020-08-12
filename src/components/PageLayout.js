@@ -1,9 +1,9 @@
 import React from 'react'
-import { 
-  FormStyled, 
-  ContentContainer, 
-  TitleContainer, 
-  CtaButtonContainer, 
+import {
+  FormStyled,
+  ContentContainer,
+  TitleContainer,
+  CtaButtonContainer,
   InlineNotificationStyled,
   Container,
   ResponsiveContainer
