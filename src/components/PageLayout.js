@@ -1,7 +1,7 @@
 import React from 'react'
-import { 
-  TitleContainer, 
-  Container,
+import {
+  TitleContainer,
+  Container
 } from './pageStyles'
 
 export default ({ header, title, children }) => (

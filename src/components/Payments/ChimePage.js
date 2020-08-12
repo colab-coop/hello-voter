@@ -80,6 +80,7 @@ export default () => {
         //   category: "BackFromTriplerConfirm",
         //   label: "Go back to My Vote Triplers",
         // }}
+        href='/payments/add'
       >
         Go back to Payments
       </Button>

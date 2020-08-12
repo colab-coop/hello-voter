@@ -35,11 +35,13 @@ const SubmissionContainer = styled.div`
 
 export const ContactInfoPage = () => {
   const [err, setErr] = useState(false)
+  const [loading, setLoading] = useState(false)
   const history = useHistory()
   const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
   user && user.signup_completed && user.onboarding_completed && history.push('/')
   useEffect(() => {
     const signup = async () => {
+      console.log('Signing up')
       const { error } = await api.signup(ambassador)
       if (error) return setErr(error.msg)
       const { userError } = await fetchUser()
@@ -87,6 +89,7 @@ export const ContactInfoPage = () => {
           }
         })
       }}
+      loading={loading}
     >
       <FormGroup>
         <Row>

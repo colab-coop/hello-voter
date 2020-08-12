@@ -6,7 +6,8 @@ import { useHistory } from 'react-router-dom'
 import { AppContext } from '../../api/AppContext'
 
 /*
-  {"address1": "1665 Logan St", "city": "Denver", "state": "CO", "zip": 80203}
+      {"address1": "1665 Logan St", "city": "Denver", "state": "CO", "zip": 80203}
+  202-555-0187
 */
 
 export const AddressPage = () => {
