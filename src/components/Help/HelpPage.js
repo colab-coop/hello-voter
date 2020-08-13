@@ -13,6 +13,7 @@ const TopParagraph = styled.p`
 const { REACT_APP_ORG } = process.env;
 const isNGP = REACT_APP_ORG === "NGP";
 const isBlockPower = REACT_APP_ORG === "BlockPower"
+const isColorOfChange = REACT_APP_ORG === "ColorOfChange"
 
 export default () => (
   <PageLayout title="Help">
@@ -43,6 +44,16 @@ export default () => (
         description="organizer@blockpower.vote"
         onClick={() => {
           window.open("mailto:organizer@blockpower.vote");
+        }}
+      />
+    )}
+    {isColorOfChange && (
+      <CardButton
+        icon={<Partnership24 />}
+        title="Color of Change Support"
+        description="organizer+colorofchange@blockpower.vote"
+        onClick={() => {
+          window.open("mailto:organizer+colorofchange@blockpower.vote");
         }}
       />
     )}
