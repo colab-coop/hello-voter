@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Link, Tag } from 'carbon-components-react'
 import { Add16, ChevronRight16 } from '@carbon/icons-react'
 import styled from 'styled-components'
-import { colors, spacing } from '../../theme'
+import { GridThreeUp } from '../pageStyles'
+import { colors, spacing, breakpoints } from '../../theme'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import Button from '../Button'
@@ -48,6 +49,28 @@ const TriplerColumn = styled.div`
   align-items: center;
 `
 
+const GridRowSpanTwo = styled.div`
+  grid-column-end: span 2;
+  @media (max-width: ${breakpoints.lg.width}) {
+    grid-column-end: span 3;
+  }
+`
+
+const GridRowSpanOne = styled.div`
+  grid-column-end: span 1;
+  @media (max-width: ${breakpoints.lg.width}) {
+    grid-column-end: span 3;
+  }
+`
+
+const Divider = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: ${colors.gray[20]};
+  margin-top: ${spacing[5]};
+  margin-bottom: ${spacing[5]};
+`
+
 const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, confirmed, tagText }) => (
   <TriplerRowStyled>
     <div>
@@ -86,26 +109,34 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
 
   return (
     <>
-      <p>
-        As a Voting Ambassador, your task is to recruit “Vote Triplers” from a
-        list of family members and neighbors. A Vote Tripler is someone who
-        agrees to remind three other people to vote in the next election.
-      </p>
-      <br />
-      <p>
-        You will receive ${REACT_APP_TRIPLER_PAYMENT_AMT} for each Vote Tripler you recruit.
-      </p>
-      <Button
-        href="/triplers/add"
-        trackingEvent={{ category: 'FindNewVoteTriplers', label: 'Find new Vote Triplers'}}
-        disabled={hasMaxTriplers}
-      >
-        Find new Vote Triplers
-        <Add16 />
-      </Button>
-      
+      <GridThreeUp>
+        <GridRowSpanTwo>
+          <p>
+            As a Voting Ambassador, your task is to recruit “Vote Triplers” from a
+            list of family members and neighbors. A Vote Tripler is someone who
+            agrees to remind three other people to vote in the next election.
+          </p>
+          <br />
+          <p>
+            You will receive ${REACT_APP_TRIPLER_PAYMENT_AMT} for each Vote Tripler you recruit.
+          </p>
+        </GridRowSpanTwo>
+        <GridRowSpanOne>
+          <Button
+            style={{marginTop: 0}} 
+            href="/triplers/add"
+            trackingEvent={{ category: 'FindNewVoteTriplers', label: 'Find new Vote Triplers'}}
+            disabled={hasMaxTriplers}
+          >
+            Find new Vote Triplers
+            <Add16 />
+          </Button>
+        </GridRowSpanOne>
+      </GridThreeUp>
+      <Divider />
       {hasTriplers && (
-        <>
+        <GridThreeUp>
+          <div>
           <SectionTitle>Your possible Vote Triplers</SectionTitle>
           <Paragraph>
             Add information for a Vote Tripler. We’ll send them a text message to
@@ -120,7 +151,9 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
               onClick={() => {}}
             />
           ))}
+          </div>
 
+          <div>
           <SectionTitle>Your unconfirmed Vote Triplers</SectionTitle>
           <Paragraph>
             These possible Vote Triplers have not yet confirmed their identity.
@@ -135,7 +168,9 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
               remindTripler={remindTripler}
             />
           ))}
-
+          </div>
+          
+          <div>
           <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
           <Paragraph>
             Once your <Link href="#/payments">payment method is set up</Link>,
@@ -149,7 +184,8 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
               confirmed
             />
           ))}
-        </>
+          </div>
+        </GridThreeUp>
       )}
     </>
   );
