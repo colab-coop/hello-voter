@@ -1,8 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { DataTable, Pagination } from 'carbon-components-react'
 import { AddAlt16 } from '@carbon/icons-react'
-import { spacing } from '../theme'
+import { spacing, colors } from '../theme'
 
 const {
   TableContainer,
@@ -25,6 +25,22 @@ const TableContainerStyled = styled(TableContainer)`
   min-width: 0;
   width: 100%;
   margin-top: ${ spacing[7] };
+  overflow: visible;
+`
+
+const TableToolbarContainer = styled.div`
+  position: sticky;
+  top: 48px;
+  z-index: 1;
+`
+
+const TableTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding-left: ${ spacing[5] };
+  background-color: ${ colors.gray[20] };
+  width: 100%;
+  font-weight: 600;
 `
 
 // FIXME: Hacked styling to make text centered in cell
@@ -36,6 +52,13 @@ const TableCellStyled = styled(TableCell)`
 // FIXME: Hacked styling to reduce checkbox width in table
 const TableSelectRowStyled = styled(TableSelectRow)`
   width: ${ spacing[5] };
+`
+
+// FIXME: Hide `x Selected` summary in data table when counting row selection
+const TableBatchActionsHack = createGlobalStyle`
+  #data-table .bx--batch-summary {
+    visibility: hidden;
+  }
 `
 
 const renderTable = (batchActionClick) => (
@@ -53,33 +76,24 @@ const renderTable = (batchActionClick) => (
     getTableContainerProps,
   }) => (
     <TableContainerStyled {...getTableContainerProps()}>
-      <TableToolbar {...getToolbarProps()}>
-        <TableBatchActions {...getBatchActionProps()}>
-          <TableBatchAction
-            renderIcon={AddAlt16}
-            iconDescription="Download the selected rows"
-            onClick={batchActionClick(selectedRows)}
-          >
-            Add
-        </TableBatchAction>
-        </TableBatchActions>
-        {/* <TableToolbarContent>
-          <TableToolbarSearch onChange={onInputChange} />
-        </TableToolbarContent> */}
-      </TableToolbar>
+      <TableToolbarContainer>
+        <TableToolbar {...getToolbarProps()}>
+          <TableBatchActionsHack />
+          <TableBatchActions id="data-table" {...getBatchActionProps()}>
+            <TableBatchAction
+              renderIcon={AddAlt16}
+              iconDescription="Download the selected rows"
+              onClick={batchActionClick(selectedRows)}
+            >
+              Add {selectedRows.length} Tripler(s) to my list
+            </TableBatchAction>
+          </TableBatchActions>
+          <TableTitleContainer>
+            Eligible People
+          </TableTitleContainer>
+        </TableToolbar>
+      </TableToolbarContainer>
       <Table {...getTableProps()} size='tall'>
-        <TableHead>
-          <TableRow>
-            <div style={{ visibility: "hidden" }}>
-              <TableSelectAll {...getSelectionProps()} />
-            </div>
-            {headers.map((header) => (
-              <TableHeader {...getHeaderProps({ header })}>
-                {header.header}
-              </TableHeader>
-            ))}
-          </TableRow>
-        </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id} {...getRowProps({ row })}>
@@ -93,22 +107,6 @@ const renderTable = (batchActionClick) => (
           ))}
         </TableBody>
       </Table>
-      <Pagination
-        backwardText="Previous page"
-        forwardText="Next page"
-        itemsPerPageText="Show:"
-        page={1}
-        pageNumberText="Page Number"
-        pageSize={10}
-        pageSizes={[
-          10,
-          20,
-          30,
-          40,
-          50
-        ]}
-        totalItems={rows.length}
-      />
     </TableContainerStyled>
   );
 
