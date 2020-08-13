@@ -41,7 +41,7 @@ export default () => {
   )
 }
 
-const SearchBarContainer = styled.div`
+const SearchBarContainer = styled(Form)`
   display: grid;
   grid-auto-columns: 1fr;
   grid-column-gap: ${ spacing[5]};
@@ -91,7 +91,7 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
       }/>}
     >
       <p>Check the folks you know!</p>
-      <SearchBarContainer>
+      <SearchBarContainer onSubmit={(e) => ([])}>
         <SearchFieldStyled
           name="" 
           placeHolderText="First Name"
@@ -104,7 +104,7 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
           size="lg"
           onChange={() => ([])}
         />
-        <SearchButtonStyled size='field' kind='tertiary'>
+        <SearchButtonStyled size="field" kind="tertiary" type="submit">
           Search
         </SearchButtonStyled>
       </SearchBarContainer>
