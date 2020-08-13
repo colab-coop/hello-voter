@@ -300,7 +300,7 @@ export const getPayments = async () => {
 
 export const searchTriplers = async (firstName, lastName) => {
   try {
-    let res = await fetch(`${TRIPLERS_URL}?firstName=${firstName}&lastName=${lastName}`, {
+    let res = await fetch(`${TRIPLER_URL}?firstName=${firstName}&lastName=${lastName}`, {
       method: 'GET',
       headers: addAuth()
     })
