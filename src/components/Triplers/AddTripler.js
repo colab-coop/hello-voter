@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import { ResponsiveContainer } from '../pageStyles'
+import { Search, Button } from 'carbon-components-react'
+import styled from 'styled-components'
+import { spacing, breakpoints } from '../../theme'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import DataTable from '../DataTable'
@@ -39,6 +41,31 @@ export default () => {
   )
 }
 
+const SearchBarContainer = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-column-gap: ${ spacing[5]};
+  grid-row-gap: ${ spacing[5]};
+  grid-template-columns: repeat(12, 1fr);
+  margin-top: ${ spacing[5]};
+`
+
+const SearchFieldStyled = styled(Search)`
+  grid-column-end: span 5;
+  @media (max-width: ${breakpoints.md.width}) {
+    grid-column-end: span 6;
+  }
+`
+
+const SearchButtonStyled = styled(Button)`
+  width: 100%;
+  max-width: 100%;
+  grid-column-end: span 2;
+  @media (max-width: ${breakpoints.md.width}) {
+    grid-column-end: span 12;
+  }
+`
+
 const AddTriplersPage = ({ triplers, claimTriplers }) => {
   return (
     <PageLayout
@@ -60,6 +87,23 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
       }/>}
     >
       <p>Check the folks you know!</p>
+      <SearchBarContainer>
+        <SearchFieldStyled
+          name="" 
+          placeHolderText="First Name"
+          size="lg"
+          onChange={() => ([])}
+        />
+        <SearchFieldStyled
+          name="" 
+          placeHolderText="Last Name"
+          size="lg"
+          onChange={() => ([])}
+        />
+        <SearchButtonStyled size='small' kind='tertiary'>
+          Search
+        </SearchButtonStyled>
+      </SearchBarContainer>
       <DataTable
         headers={[
           {
