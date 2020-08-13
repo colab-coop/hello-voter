@@ -48,6 +48,10 @@ const SearchBarContainer = styled.div`
   grid-row-gap: ${ spacing[5]};
   grid-template-columns: repeat(12, 1fr);
   margin-top: ${ spacing[5]};
+  @media (max-width: ${breakpoints.md.width}) {
+    grid-column-gap: ${ spacing[3]};
+    grid-row-gap: ${ spacing[3]};
+  }
 `
 
 const SearchFieldStyled = styled(Search)`
@@ -100,7 +104,7 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
           size="lg"
           onChange={() => ([])}
         />
-        <SearchButtonStyled size='small' kind='tertiary'>
+        <SearchButtonStyled size='field' kind='tertiary'>
           Search
         </SearchButtonStyled>
       </SearchBarContainer>
