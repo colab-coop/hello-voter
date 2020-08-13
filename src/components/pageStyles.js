@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { spacing, colors, breakpoints } from "../theme";
 import BlockPower from '../assets/logos/block-power.png'
 import NewGeorgia from '../assets/logos/new-georgia.png'
+import ColorOfChange from '../assets/logos/color-of-change.png'
 
 const { REACT_APP_HEADER, REACT_APP_LOGO } = process.env
 
@@ -13,6 +14,9 @@ switch (REACT_APP_LOGO) {
     break;
   case 'new-georgia':
     logo = NewGeorgia;
+    break;
+  case 'color-of-change':
+    logo = ColorOfChange;
     break;
 }
 
