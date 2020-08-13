@@ -298,5 +298,29 @@ export const getPayments = async () => {
   }
 }
 
+export const searchTriplers = async (firstName, lastName) => {
+  try {
+    let res = await fetch(`${TRIPLERS_URL}?firstName=${firstName}&lastName=${lastName}`, {
+      method: 'GET',
+      headers: addAuth()
+    })
+
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
 
 

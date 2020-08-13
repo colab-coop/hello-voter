@@ -15,6 +15,22 @@ export default () => {
   const [isLoading, setIsLoading] = useState(false)
   const { api } = React.useContext(AppContext)
 
+  const appendAddress = (data) => {
+    return data.data.map((p) => ({
+      id: p.id,
+      name: p.first_name + ' ' + p.last_name,
+      address: p.address.address1 + ' ' + p.address.city + ' ' + p.address.state
+    }))
+  }
+
+  const search = async (firstName, lastName) => {
+    setIsLoading(true)
+    const data = await api.searchTriplers(firstName, lastName)
+    const triplersWithAddress = appendAddress(data)
+    setIsLoading(false)
+    setTriplers(triplersWithAddress)
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await api.fetchFreeTriplers()
@@ -37,7 +53,7 @@ export default () => {
   }
 
   return (
-    triplers ? <AddTriplersPage triplers={triplers} claimTriplers={claimTriplers} loading={isLoading} /> : <Loading />
+    triplers ? <AddTriplersPage triplers={triplers} claimTriplers={claimTriplers} loading={isLoading} search={search}/> : <Loading />
   )
 }
 
@@ -70,7 +86,7 @@ const SearchButtonStyled = styled(Button)`
   }
 `
 
-const AddTriplersPage = ({ triplers, claimTriplers }) => {
+const AddTriplersPage = ({ triplers, claimTriplers, search, loading }) => {
   return (
     <PageLayout
       title="Add Vote Triplers"
@@ -91,20 +107,26 @@ const AddTriplersPage = ({ triplers, claimTriplers }) => {
       }/>}
     >
       <p>Check the folks you know!</p>
-      <SearchBarContainer onSubmit={(e) => ([])}>
+      <SearchBarContainer onSubmit={(e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const firstName = formData.get('firstName')
+        const lastName = formData.get('lastName')
+        search(firstName, lastName)
+      }}>
         <SearchFieldStyled
-          name="" 
+          name="firstName"
           placeHolderText="First Name"
           size="lg"
           onChange={() => ([])}
         />
         <SearchFieldStyled
-          name="" 
+          name="lastName"
           placeHolderText="Last Name"
           size="lg"
           onChange={() => ([])}
         />
-        <SearchButtonStyled size="field" kind="tertiary" type="submit">
+        <SearchButtonStyled size="field" kind="tertiary" type="submit" disabled={loading}>
           Search
         </SearchButtonStyled>
       </SearchBarContainer>
