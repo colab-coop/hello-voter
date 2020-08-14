@@ -19,7 +19,7 @@ import HomePage from './components/HomePage'
 import PaymentsPage from './components/Payments/AddPage'
 import PaymentsHomePage from './components/Payments/PaymentsPage'
 import Chime from './components/Payments/ChimePage'
-
+import FAQ from "./components/Help/FAQPage";
 import Help from './components/Help/HelpPage'
 
 const NoMatch = ({authenticated, path, user }) => (
@@ -78,6 +78,7 @@ const AppRoutes = () => {
         <AuthRoute path="/payments/chime" component={Chime} exact={true} authenticated={authenticated} user={user}/>
         <Route path="/tallahassee" component={LandingPage} />
         <Route path="/help" component={Help}/>
+        <Route path="/faq" component={FAQ}/>
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} user={user}/>
