@@ -1,6 +1,6 @@
 import React from 'react'
 import { createGlobalStyle } from 'styled-components'
-import { Accordion, AccordionItem } from 'carbon-components-react'
+import { Accordion, AccordionItem, Link } from 'carbon-components-react'
 import { colors, breakpoints, spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 
@@ -154,8 +154,9 @@ export default () => {
         <AccordionItem title="Is my personal and financial information secure?">
           <p>
             Yes. We do not sell or trade your personal or financial information.
-            For more details, please see our Privacy Statement and Terms of
-            Service.
+            For more details, please see our{" "}
+            <Link href="#/privacy">Privacy Statement</Link> and{" "}
+            <Link href="#/terms">Terms of Service</Link>.
           </p>
         </AccordionItem>
       </Accordion>
