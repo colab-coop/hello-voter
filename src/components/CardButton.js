@@ -10,6 +10,9 @@ const CardContainer = styled.button`
   background-color: ${ colors.gray[10] };
   padding: ${ spacing[5] };
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `
 
 const CardTitleContainer = styled.div`
@@ -17,6 +20,7 @@ const CardTitleContainer = styled.div`
   flex-direction: row;
   align-items: center;
   margin-bottom: ${ spacing[5] };
+  width: 100%;
 `
 
 const CardTitle = styled.h5`
