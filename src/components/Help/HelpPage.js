@@ -31,7 +31,7 @@ export default () => {
       title="FAQ"
       description="See answers to common questions asked by other Voting Ambassadors"
       onClick={() => {
-        redirect("/faq");
+        // window.open("https://blockpower.vote/faq", "_blank")
       }}
     />
     <CardButton
