@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Search, Button, Form } from 'carbon-components-react'
+import { Search, Button, Form, InlineNotification } from 'carbon-components-react'
 import styled from 'styled-components'
 import { spacing, breakpoints } from '../../theme'
 import PageLayout from '../PageLayout'
@@ -45,15 +45,15 @@ export default () => {
   }, [])
 
   const claimTriplers = (selectedTriplers) => async () => {
-    if (selectedTriplers.length > 12) return alert('You can select max 12 triplers.')
     setIsLoading(true)
-    await api.claimTriplers(selectedTriplers.map((c) => c.id))
+    const { error } = await api.claimTriplers(selectedTriplers.map((c) => c.id))
     setIsLoading(false)
+    if (error) return alert(error.msg)
     history.push('/triplers')
   }
 
   return (
-    triplers ? <AddTriplersPage triplers={triplers} claimTriplers={claimTriplers} loading={isLoading} search={search}/> : <Loading />
+    triplers ? <AddTriplersPage triplers={triplers} claimTriplers={claimTriplers} loading={isLoading} search={search} /> : <Loading />
   )
 }
 
@@ -86,7 +86,7 @@ const SearchButtonStyled = styled(Button)`
   }
 `
 
-const AddTriplersPage = ({ triplers, claimTriplers, search, loading }) => {
+const AddTriplersPage = ({ triplers, claimTriplers, search, loading, error }) => {
   return (
     <PageLayout
       title="Add Vote Triplers"

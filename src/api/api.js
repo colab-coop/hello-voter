@@ -14,6 +14,7 @@ const CONFIRM_TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
 const COMPLETE_ONBOARDING = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/complete-onboarding`
 const PAYMENT_URL = `${REACT_APP_API_URL}/api/v1/va/payouts/account?stripe=true`
 const PAYMENT_HISTORY_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/payouts`
+const TRIPLERS_LIMIT_URL = `${REACT_APP_API_URL}/api/v1/va/triplers-limit`
 
 const errorHandler = (e) => {
   console.warn(e)
@@ -305,6 +306,29 @@ export const searchTriplers = async (firstName, lastName) => {
       headers: addAuth()
     })
 
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const fetchTriplersLimit = async (sm) => {
+  try {
+    let res = await fetch(TRIPLERS_LIMIT_URL, {
+      method: 'GET',
+      headers: addAuth()
+    })
     let data = await res.json()
 
     if (isFailStatusCode(data.code)) {
