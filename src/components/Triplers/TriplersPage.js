@@ -101,11 +101,10 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
   </TriplerRowStyled>
 )
 
-const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
+const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit }) => {
   const hasTriplers =
     unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
-  const hasMaxTriplers = 
-    unconfirmed.length + confirmed.length + pending.length >= 12
+  console.log(limit)
 
   return (
     <>
@@ -123,10 +122,10 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
         </GridRowSpanTwo>
         <GridRowSpanOne>
           <Button
-            style={{marginTop: 0}} 
+            style={{marginTop: 0}}
             href="/triplers/add"
             trackingEvent={{ category: 'FindNewVoteTriplers', label: 'Find new Vote Triplers'}}
-            disabled={hasMaxTriplers}
+            disabled={unconfirmed.length + confirmed.length + pending.length === limit}
           >
             Find new Vote Triplers
             <Add16 />
@@ -169,7 +168,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
             />
           ))}
           </div>
-          
+
           <div>
           <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
           <Paragraph>
@@ -193,10 +192,14 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler }) => {
 
 export default () => {
   const [triplers, setTriplers] = useState(null)
+  const [limit, setLimit] = useState(null)
   const { api } = React.useContext(AppContext)
   useEffect(() => {
     const fetchData = async () => {
       const data = await api.fetchTriplers()
+      const triplerLimit = await api.fetchTriplersLimit()
+      const triplerLimitV = parseInt(triplerLimit.data.limit)
+      setLimit(triplerLimitV)
       setTriplers(data.data)
     }
     fetchData()
@@ -205,11 +208,11 @@ export default () => {
     api.sendReminder(el.target.dataset.id)
   }
   return (
-    triplers ? <TriplersPage triplers={triplers} remindTripler={sendReminder} /> : <Loading />
+    triplers ? <TriplersPage triplers={triplers} remindTripler={sendReminder} limit={limit} /> : <Loading />
   )
 }
 
-const TriplersPage = ({ triplers, remindTripler }) => {
+const TriplersPage = ({ triplers, remindTripler, limit }) => {
   const confirmed = triplers.filter((tripler) => tripler.status === 'confirmed')
   const pending = triplers.filter((tripler) => tripler.status === 'pending')
   const unconfirmed = triplers.filter((tripler) => tripler.status === 'unconfirmed')
@@ -233,6 +236,7 @@ const TriplersPage = ({ triplers, remindTripler }) => {
         pending={pending}
         confirmed={confirmed}
         remindTripler={remindTripler}
+        limit={limit}
       />
     </PageLayout>
   )
