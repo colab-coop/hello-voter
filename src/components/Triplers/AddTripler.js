@@ -135,7 +135,7 @@ const AddTriplersPage = ({ triplers, claimTriplers, search, loading, searchResul
         ]
       }/>}
     >
-      <p>Check the folks you know!</p>
+      <p>Here’s a list of possible Vote Triplers. Those who live closest to you are at the top. Select the people you plan to talk with.</p>
       <SearchBarContainer onSubmit={(e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
