@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { Search, Button, Form } from 'carbon-components-react'
 import styled from 'styled-components'
-import { spacing, breakpoints } from '../../theme'
+import { spacing, breakpoints, colors } from '../../theme'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import DataTable from '../DataTable'
@@ -13,6 +13,7 @@ export default () => {
   const history = useHistory()
   const [triplers, setTriplers] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [searchResults, setSearchResults] = useState(null)
   const { api } = React.useContext(AppContext)
 
   const appendAddress = (data) => {
@@ -29,6 +30,13 @@ export default () => {
     const triplersWithAddress = appendAddress(data)
     setIsLoading(false)
     setTriplers(triplersWithAddress)
+    setSearchResults(
+      firstName
+        ? firstName && lastName
+          ? firstName + " " + lastName
+          : firstName
+        : lastName
+    );
   }
 
   useEffect(() => {
@@ -53,7 +61,7 @@ export default () => {
   }
 
   return (
-    triplers ? <AddTriplersPage triplers={triplers} claimTriplers={claimTriplers} loading={isLoading} search={search}/> : <Loading />
+    triplers ? <AddTriplersPage triplers={triplers} claimTriplers={claimTriplers} loading={isLoading} search={search} searchResults={searchResults} /> : <Loading />
   )
 }
 
@@ -86,7 +94,28 @@ const SearchButtonStyled = styled(Button)`
   }
 `
 
-const AddTriplersPage = ({ triplers, claimTriplers, search, loading }) => {
+const Divider = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: ${colors.gray[20]};
+  margin-top: ${spacing[5]};
+  margin-bottom: ${spacing[5]};
+`;
+
+const SearchResultsContainer = styled.div`
+  background-color: ${ colors.gray[10] };
+  margin-top: ${ spacing[5] };
+  padding: ${ spacing[3] } ${ spacing[5] };
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const SearchResultsClearLink = styled.a`
+  cursor: pointer;
+`
+
+const AddTriplersPage = ({ triplers, claimTriplers, search, loading, searchResults }) => {
   return (
     <PageLayout
       title="Add Vote Triplers"
@@ -130,6 +159,21 @@ const AddTriplersPage = ({ triplers, claimTriplers, search, loading }) => {
           Search
         </SearchButtonStyled>
       </SearchBarContainer>
+      {
+        searchResults && (
+          <>
+            <Divider />
+            <SearchResultsContainer>
+              <p>Showing {triplers.length} search results for "{searchResults}"</p>
+              <SearchResultsClearLink 
+                onClick={() => search('','')}
+              >
+                Clear Search
+              </SearchResultsClearLink>
+            </SearchResultsContainer>
+          </>
+        )
+      }
       <DataTable
         headers={[
           {
