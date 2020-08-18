@@ -105,6 +105,7 @@ const Payments = ({ completed, user }) => {
       )}
 
       <SectionTitle>Earned Payments</SectionTitle>
+      <p>Estimated arrival in 2-4 business days</p>
       <PaymentTable data={hasCompleted ? completed : []} />
     </>
   );
