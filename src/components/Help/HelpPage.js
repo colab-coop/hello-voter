@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Devices24, Partnership24, Catalog24 } from '@carbon/icons-react';
-import { useHistory } from 'react-router-dom'
 import { GridThreeUp } from '../pageStyles'
 import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
@@ -34,13 +33,7 @@ switch (REACT_APP_ORG) {
     break;
 }
 
-export default () => {
-  const history = useHistory()
-  const redirect = async (href) => {
-    history.push(href)
-  }
-
-  return (
+export default () => (
   <PageLayout title="Help">
     <TopParagraph>Have questions? Here’s how to get answers.</TopParagraph>
     <GridThreeUp>
@@ -70,5 +63,4 @@ export default () => {
     />
     </GridThreeUp>
   </PageLayout>
-  )
-};
+);
