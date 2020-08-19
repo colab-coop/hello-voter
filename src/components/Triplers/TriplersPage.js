@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link, Tag } from 'carbon-components-react'
+import { Link, Tag, OverflowMenu, OverflowMenuItem } from 'carbon-components-react'
 import { Add16, ChevronRight16 } from '@carbon/icons-react'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { GridThreeUp } from '../pageStyles'
 import { colors, spacing, breakpoints } from '../../theme'
 import PageLayout from '../PageLayout'
@@ -38,15 +38,44 @@ const TriplerRowName = styled.h6`
   font-weight: normal;
 `
 
+// FIXME: Have text truncate responsively
+const TriplerColumnTruncate = styled.div`
+  min-width: 0;
+  max-width: 160px;
+`
+
 const TriplerRowAddress = styled.p`
   font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `
 
 const TriplerColumn = styled.div`
   display: flex;
-  flex: 1 1 auto;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+`
+
+const OverflowMenuStyled = styled(OverflowMenu)`
+  border-radius: 100%;
+  margin-left: ${spacing[3]};
+  width: ${spacing[6]};
+  height: ${spacing[6]};
+`
+
+const TriplerMoreMenuHack = createGlobalStyle`
+  .bx--overflow-menu-options {
+    width: auto;
+    transform: translateX(calc(-100% + 24px));
+  }
+  .bx--overflow-menu-options__btn {
+    max-width: 100%;
+  }
+  .bx--overflow-menu-options::after {
+    display: none;
+  }
 `
 
 const GridRowSpanTwo = styled.div`
@@ -71,19 +100,29 @@ const Divider = styled.div`
   margin-bottom: ${spacing[5]};
 `
 
-const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, confirmed, tagText }) => (
+const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, confirmed, deleteTripler }) => (
   <TriplerRowStyled>
-    <div>
+    <TriplerColumnTruncate>
       <TriplerRowName>{ name }</TriplerRowName>
       <TriplerRowAddress>{ address }</TriplerRowAddress>
-    </div>
+    </TriplerColumnTruncate>
     <TriplerColumn>
       {unconfirmed &&
+      <>
+        <TriplerMoreMenuHack />
         <Button pill href={`/triplers/confirm/${id}`}
           trackingEvent={{ category: 'TriplerAddInfo', label: 'Add Info'}}
           >
           Add Info <ChevronRight16 />
         </Button>
+        <OverflowMenuStyled id="tripler-more-menu">
+          <OverflowMenuItem 
+            itemText="Remove Vote Tripler from list" 
+            primaryFocus
+            onClick={() => deleteTripler(id)}
+          />
+        </OverflowMenuStyled>
+      </>
       }
       {pending &&
         <Button pill data-id={id} onClick={remindTripler}
@@ -101,10 +140,9 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
   </TriplerRowStyled>
 )
 
-const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit }) => {
+const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit, deleteTripler }) => {
   const hasTriplers =
-    unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
-  console.log(limit)
+    unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0
 
   return (
     <>
@@ -148,6 +186,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit }) => 
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
               unconfirmed
               onClick={() => {}}
+              deleteTripler={deleteTripler}
             />
           ))}
           </div>
@@ -165,6 +204,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit }) => 
               onClick={() => {}}
               pending
               remindTripler={remindTripler}
+              deleteTripler={deleteTripler}
             />
           ))}
           </div>
@@ -181,6 +221,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit }) => 
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
               onClick={() => {}}
               confirmed
+              deleteTripler={deleteTripler}
             />
           ))}
           </div>
@@ -194,25 +235,37 @@ export default () => {
   const [triplers, setTriplers] = useState(null)
   const [limit, setLimit] = useState(null)
   const { api } = React.useContext(AppContext)
+
+  const fetchData = async () => {
+    const data = await api.fetchTriplers()
+    const triplerLimit = await api.fetchTriplersLimit()
+    const triplerLimitV = parseInt(triplerLimit.data.limit)
+    setLimit(triplerLimitV)
+    setTriplers(data.data)
+  }
+
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await api.fetchTriplers()
-      const triplerLimit = await api.fetchTriplersLimit()
-      const triplerLimitV = parseInt(triplerLimit.data.limit)
-      setLimit(triplerLimitV)
-      setTriplers(data.data)
-    }
     fetchData()
   }, [])
   const sendReminder = async (el) => {
     api.sendReminder(el.target.dataset.id)
   }
+  const deleteTripler = async (id) => {
+    await api.deleteTripler([id])
+    await fetchData()
+  }
   return (
-    triplers ? <TriplersPage triplers={triplers} remindTripler={sendReminder} limit={limit} /> : <Loading />
+    triplers ? <TriplersPage
+      triplers={triplers}
+      remindTripler={sendReminder}
+      fetchData={fetchData}
+      limit={limit}
+      deleteTripler={deleteTripler}
+    /> : <Loading />
   )
 }
 
-const TriplersPage = ({ triplers, remindTripler, limit }) => {
+const TriplersPage = ({ triplers, remindTripler, limit, deleteTripler }) => {
   const confirmed = triplers.filter((tripler) => tripler.status === 'confirmed')
   const pending = triplers.filter((tripler) => tripler.status === 'pending')
   const unconfirmed = triplers.filter((tripler) => tripler.status === 'unconfirmed')
@@ -237,6 +290,7 @@ const TriplersPage = ({ triplers, remindTripler, limit }) => {
         confirmed={confirmed}
         remindTripler={remindTripler}
         limit={limit}
+        deleteTripler={deleteTripler}
       />
     </PageLayout>
   )

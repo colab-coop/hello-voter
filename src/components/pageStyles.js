@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from 'carbon-components-react'
 import { spacing, colors, breakpoints } from "../theme";
 import BlockPower from '../assets/logos/block-power.png'
 import NewGeorgia from '../assets/logos/new-georgia.png'
@@ -92,6 +93,7 @@ export const FlexContainer = styled.div`
     max-width: ${breakpoints.md.width};
   }
   width: 100%;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -106,8 +108,7 @@ export const Container = styled.div`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: ${ spacing[8] };
-  padding: ${ spacing[3] };
+  padding: ${ spacing[8] } ${ spacing[3] };
 `;
 
 export const TitleContainer = styled.div`
@@ -137,5 +138,22 @@ export const GridThreeUp = styled.div`
   }
   @media (max-width: ${breakpoints.md.width}) {
     grid-template-columns: repeat(1, 1fr);
+  }
+`
+
+export const Footer = styled.div`
+  position: absolute; 
+  margin-top: ${ spacing[7] }; 
+  bottom: 0; 
+  width: 100%; 
+  height: ${ spacing[8] };
+`
+
+export const FooterLink = styled.a`
+  &:hover, &:link, &:visited, &:active {
+    color: ${ colors.gray[60] };
+    margin-left: ${ spacing[3] };
+    margin-right: ${ spacing[3] };
+    text-decoration: none;
   }
 `

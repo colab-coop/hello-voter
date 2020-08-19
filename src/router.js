@@ -6,6 +6,7 @@ import { AppProvider, AppContext } from './api/AppContext'
 import { initAnalytics, useAnalytics } from './hooks/useAnalytics'
 
 import Menu from './components/Menu'
+import Footer from './components/Footer'
 import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
@@ -19,8 +20,9 @@ import HomePage from './components/HomePage'
 import PaymentsPage from './components/Payments/AddPage'
 import PaymentsHomePage from './components/Payments/PaymentsPage'
 import Chime from './components/Payments/ChimePage'
-
 import Help from './components/Help/HelpPage'
+import Terms from "./components/Help/TermsPage"
+import Privacy from "./components/Help/PrivacyPage"
 
 const NoMatch = ({authenticated, path, user }) => (
   <Route
@@ -64,7 +66,7 @@ const AppRoutes = () => {
   if (loading) return <Loading />
   console.log(user)
   return (
-    <>
+    <div style={{position:"relative", minHeight:"100vh"}}>
       <Menu isApproved={user && user.approved} />
       <Switch>
         <AuthPublicRoute path="/ambassador/signup" component={ContactInfoPage} exact={true} authenticated={authenticated} />
@@ -78,11 +80,14 @@ const AppRoutes = () => {
         <AuthRoute path="/payments/chime" component={Chime} exact={true} authenticated={authenticated} user={user}/>
         <Route path="/tallahassee" component={LandingPage} />
         <Route path="/help" component={Help}/>
+        <Route path="/terms" component={Terms}/>
+        <Route path="/privacy" component={Privacy}/>
         <Route path="/login" component={LogIn}/>
         <Route path="/jwt" component={Main}/>
         <NoMatch authenticated={authenticated} user={user}/>
       </Switch>
-    </>
+      <Footer />
+    </div>
   )
 }
 

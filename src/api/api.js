@@ -346,5 +346,29 @@ export const fetchTriplersLimit = async (sm) => {
   }
 }
 
+export const deleteTripler = async (triplers) => {
+  try {
+    let res = await fetch(TRIPLERS_URL, {
+      method: 'DELETE',
+      headers: addAuth(),
+      body: JSON.stringify({triplers: triplers})
+    })
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
 
 
