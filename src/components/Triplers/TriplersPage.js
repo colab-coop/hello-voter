@@ -100,7 +100,7 @@ const Divider = styled.div`
   margin-bottom: ${spacing[5]};
 `
 
-const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, confirmed, tagText }) => (
+const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, confirmed, deleteTripler }) => (
   <TriplerRowStyled>
     <TriplerColumnTruncate>
       <TriplerRowName>{ name }</TriplerRowName>
@@ -119,7 +119,7 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
           <OverflowMenuItem 
             itemText="Remove Vote Tripler from list" 
             primaryFocus
-            onClick={(id) => alert(`Delete Tripler ${id}`)} 
+            onClick={() => deleteTripler(id)}
           />
         </OverflowMenuStyled>
       </>
@@ -140,10 +140,9 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
   </TriplerRowStyled>
 )
 
-const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit }) => {
+const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit, deleteTripler }) => {
   const hasTriplers =
-    unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
-  console.log(limit)
+    unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0
 
   return (
     <>
@@ -187,6 +186,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit }) => 
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
               unconfirmed
               onClick={() => {}}
+              deleteTripler={deleteTripler}
             />
           ))}
           </div>
@@ -204,6 +204,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit }) => 
               onClick={() => {}}
               pending
               remindTripler={remindTripler}
+              deleteTripler={deleteTripler}
             />
           ))}
           </div>
@@ -220,6 +221,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit }) => 
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
               onClick={() => {}}
               confirmed
+              deleteTripler={deleteTripler}
             />
           ))}
           </div>
@@ -233,25 +235,37 @@ export default () => {
   const [triplers, setTriplers] = useState(null)
   const [limit, setLimit] = useState(null)
   const { api } = React.useContext(AppContext)
+
+  const fetchData = async () => {
+    const data = await api.fetchTriplers()
+    const triplerLimit = await api.fetchTriplersLimit()
+    const triplerLimitV = parseInt(triplerLimit.data.limit)
+    setLimit(triplerLimitV)
+    setTriplers(data.data)
+  }
+
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await api.fetchTriplers()
-      const triplerLimit = await api.fetchTriplersLimit()
-      const triplerLimitV = parseInt(triplerLimit.data.limit)
-      setLimit(triplerLimitV)
-      setTriplers(data.data)
-    }
     fetchData()
   }, [])
   const sendReminder = async (el) => {
     api.sendReminder(el.target.dataset.id)
   }
+  const deleteTripler = async (id) => {
+    await api.deleteTripler([id])
+    await fetchData()
+  }
   return (
-    triplers ? <TriplersPage triplers={triplers} remindTripler={sendReminder} limit={limit} /> : <Loading />
+    triplers ? <TriplersPage
+      triplers={triplers}
+      remindTripler={sendReminder}
+      fetchData={fetchData}
+      limit={limit}
+      deleteTripler={deleteTripler}
+    /> : <Loading />
   )
 }
 
-const TriplersPage = ({ triplers, remindTripler, limit }) => {
+const TriplersPage = ({ triplers, remindTripler, limit, deleteTripler }) => {
   const confirmed = triplers.filter((tripler) => tripler.status === 'confirmed')
   const pending = triplers.filter((tripler) => tripler.status === 'pending')
   const unconfirmed = triplers.filter((tripler) => tripler.status === 'unconfirmed')
@@ -276,6 +290,7 @@ const TriplersPage = ({ triplers, remindTripler, limit }) => {
         confirmed={confirmed}
         remindTripler={remindTripler}
         limit={limit}
+        deleteTripler={deleteTripler}
       />
     </PageLayout>
   )
