@@ -11,6 +11,8 @@ import {
   HeaderGlobalAction 
 } from './pageStyles'
 
+const { REACT_APP_PAYMENT_FEATURE } = process.env
+
 export default ({ isApproved }) => {
   const history = useHistory()
   const redirect = async (href) => {
@@ -47,15 +49,17 @@ export default ({ isApproved }) => {
               >
                 <Events20 />
               </HeaderGlobalAction>
-              <HeaderGlobalAction
-                aria-label="Payments"
-                type="button"
-                onClick={() => {
-                  redirect("/payments");
-                }}
-              >
-                <Wallet20 />
-              </HeaderGlobalAction>
+              {REACT_APP_PAYMENT_FEATURE &&
+                <HeaderGlobalAction
+                  aria-label="Payments"
+                  type="button"
+                  onClick={() => {
+                    redirect("/payments");
+                  }}
+                >
+                  <Wallet20/>
+                </HeaderGlobalAction>
+              }
             </>
           )}
         </HeaderGlobalBar>

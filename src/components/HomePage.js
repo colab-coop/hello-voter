@@ -7,6 +7,8 @@ import { GridThreeUp } from './pageStyles'
 import PageLayout from './PageLayout'
 import CardButton from './CardButton'
 
+const { REACT_APP_PAYMENT_FEATURE } = process.env
+
 const TopParagraph = styled.p`
   margin-bottom: ${ spacing[7] };
 `
@@ -31,14 +33,16 @@ export default () => {
           redirect("/triplers");
         }}
       />
-      <CardButton
-        icon={<Wallet24 />}
-        title="Earnings"
-        description="Set up and view your earnings from your organizing efforts"
-        onClick={() => {
-          redirect("/payments");
-        }}
-      />
+      {REACT_APP_PAYMENT_FEATURE &&
+        <CardButton
+          icon={<Wallet24 />}
+          title="Earnings"
+          description="Set up and view your earnings from your organizing efforts"
+          onClick={() => {
+            redirect("/payments");
+          }}
+        />
+      }
       </GridThreeUp>
     </PageLayout>
   );
