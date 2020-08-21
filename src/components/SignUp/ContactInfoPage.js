@@ -109,6 +109,18 @@ export const ContactInfoPage = () => {
           />
         </Row>
       </FormGroup>
+      <FormGroup>
+        <Row>
+          <TextInput
+            name="date_of_birth"
+            placeholder="mm/dd/yyyy"
+            labelText="Date of Birth*"
+            type="text"
+            defaultValue={ambassador.date_of_birth}
+            required
+          />
+        </Row>
+      </FormGroup>
       <Divider />
       <AddressForm
         ambassador={ambassador}
