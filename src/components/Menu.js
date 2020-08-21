@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Help20, Events20, Wallet20 } from '@carbon/icons-react'
+import { Help20, AppSwitcher20 } from '@carbon/icons-react'
 import { ThemeProvider } from 'styled-components'
 
 import { 
@@ -12,11 +12,15 @@ import {
   HeaderGlobalAction,
   HeaderNavigationStyled, 
   HeaderMenuItemStyled,
+  HeaderPanelStyled,
+  SwitcherStyled,
+  SwitcherItemStyled
 } from './pageStyles'
 
 const { REACT_APP_PAYMENT_FEATURE } = process.env
 
 export default ({ isApproved }) => {
+  const [navOpen, setNavOpen] = useState(false)
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
@@ -61,8 +65,33 @@ export default ({ isApproved }) => {
           >
             <Help20 />
           </HeaderGlobalAction>
+          <HeaderGlobalAction
+            mobileNav
+            aria-label="Menu"
+            type="button"
+            onClick={() => {
+              setNavOpen(!navOpen)
+            }}
+          >
+            <AppSwitcher20 />
+          </HeaderGlobalAction>
         </HeaderGlobalBar>
         </FlexContainer>
+        <HeaderPanelStyled navOpen={navOpen}>
+          <SwitcherStyled
+            // style="transform: translateY(0px); transition: transform 400ms ease 0s;"
+          >
+            <SwitcherItemStyled onClick={() => {redirect("/")}}>
+              Home
+            </SwitcherItemStyled>
+            <SwitcherItemStyled onClick={() => {redirect("/triplers")}}>
+              Vote Triplers
+            </SwitcherItemStyled>
+            <SwitcherItemStyled onClick={() => {redirect("/payments")}}>
+              Payments
+            </SwitcherItemStyled>
+          </SwitcherStyled>
+        </HeaderPanelStyled>
       </Header>
     </ThemeProvider>
   );

@@ -78,6 +78,38 @@ export const HeaderMenuItemStyled = styled(HeaderMenuItem)`
   }
 `
 
+export const HeaderPanelStyled = styled.div`
+  position: absolute;
+  overflow: hidden;
+  display: ${props => props.navOpen ? "block" : "none"};
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+`
+
+export const SwitcherStyled = styled.nav`
+  width: 100%;
+  padding: ${ spacing[5] };
+  border: 1px solid ${ colors.gray[20] };
+  background-color: ${props => props.theme[REACT_APP_HEADER].bgColor};
+  display: flex;
+  flex-direction: column;
+  max-width: ${breakpoints.md.width};
+  margin-left: auto;
+  margin-right: auto;
+`
+
+export const SwitcherItemStyled = styled.a`
+  padding-top: ${ spacing[3] };
+  padding-bottom: ${ spacing[3] };
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  text-decoration: none;
+  color: ${props => props.theme[REACT_APP_HEADER].iconColor};
+`
+
 export const HeaderGlobalBar = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -86,7 +118,10 @@ export const HeaderGlobalBar = styled.div`
 `;
 
 export const HeaderGlobalAction = styled.button`
-  display: inline-block;
+  display: ${props => props.mobileNav ? "none" : "inline-block"};
+  @media (max-width: ${breakpoints.lg.width}) {
+    display: ${props => props.mobileNav ? "inline-block" : "none"};
+  }
   background: none;
   padding: 0;
   cursor: pointer;
