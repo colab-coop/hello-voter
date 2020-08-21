@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Help20, AppSwitcher20 } from '@carbon/icons-react'
+import { Help20, AppSwitcher20, Close24 } from '@carbon/icons-react'
 import { ThemeProvider } from 'styled-components'
 
 import { 
@@ -75,7 +75,7 @@ export default ({ isApproved }) => {
               setNavOpen(!navOpen)
             }}
           >
-            <AppSwitcher20 />
+            {navOpen ? <Close24 /> : <AppSwitcher20 />}
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         </FlexContainer>

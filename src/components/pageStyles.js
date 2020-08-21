@@ -49,9 +49,11 @@ export const Logo = styled.div`
   width: ${ spacing[10] };
   height: 5rem;
   margin-left: ${ spacing[3] };
+  margin-right: ${ spacing[7] };
   background-image: url(${ logo });
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
   &:hover {
     cursor: pointer;
   }
@@ -114,7 +116,7 @@ export const SwitcherItemStyled = styled.a`
 export const SwitcherDividerStyled = styled(SwitcherDivider)`
   width: 100%;
   margin: ${ spacing[3] } 0;
-  background-color: ${props => props.theme[REACT_APP_HEADER].iconBgHover}
+  background-color: ${props => props.theme[REACT_APP_HEADER].iconBgHover};
 `
 
 export const HeaderGlobalBar = styled.div`
