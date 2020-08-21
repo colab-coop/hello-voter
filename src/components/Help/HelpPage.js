@@ -22,7 +22,7 @@ switch (REACT_APP_ORG) {
     email = "organizer@blockpower.vote";
     break;
   case 'NGP':
-    url = "https://www.blockpower.vote/nga/faq-nga";
+    url = "https://www.blockpower.vote/ngp/faq-ngp";
     title = "New Georgia Project Support";
     email = "reach@ngpaf.org";
     break;
