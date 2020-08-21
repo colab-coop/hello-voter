@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from 'carbon-components-react'
+import { HeaderNavigation, HeaderMenuItem } from 'carbon-components-react'
 import { spacing, colors, breakpoints } from "../theme";
 import BlockPower from '../assets/logos/block-power.png'
 import NewGeorgia from '../assets/logos/new-georgia.png'
@@ -39,7 +39,7 @@ export const Header = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  height: 3rem;
+  height: 5rem;
   background-color: ${props => props.theme[REACT_APP_HEADER].bgColor};
   border-bottom: 1px solid ${ colors.gray[20] };
   z-index: 6000;
@@ -47,13 +47,34 @@ export const Header = styled.header`
 
 export const Logo = styled.div`
   width: ${ spacing[10] };
-  height: ${ spacing[7] };
+  height: 5rem;
   margin-left: ${ spacing[3] };
   background-image: url(${ logo });
   background-size: contain;
   background-repeat: no-repeat;
   &:hover {
     cursor: pointer;
+  }
+`
+
+export const HeaderNavigationStyled = styled(HeaderNavigation)`
+  &:before {
+    background-color: ${props => props.theme[REACT_APP_HEADER].iconBgHover}
+  }
+`
+
+export const HeaderMenuItemStyled = styled(HeaderMenuItem)`
+  cursor: pointer;
+  & > .bx--header__menu-item {
+    color: ${props => props.theme[REACT_APP_HEADER].iconColor};
+    &:hover {
+      color: ${props => props.theme[REACT_APP_HEADER].iconColor};
+      background-color: ${props => props.theme[REACT_APP_HEADER].iconBgHover}
+    }
+    &:focus {
+      border-color: ${ colors.white };
+      outline: none;
+    }
   }
 `
 
@@ -70,8 +91,8 @@ export const HeaderGlobalAction = styled.button`
   padding: 0;
   cursor: pointer;
   width: 100%;
-  width: 3rem;
-  height: 3rem;
+  width: 5rem;
+  height: 5rem;
   border: 0.125rem solid transparent;
   border-bottom: 1px solid ${ colors.gray[20] };
   transition: background-color 0.11s, border-color 0.11s;
@@ -112,7 +133,7 @@ export const Container = styled.div`
 `;
 
 export const TitleContainer = styled.div`
-  margin-top: ${ props => props.hasHeader ? spacing[5] : spacing[7] };
+  margin-top: ${ props => props.hasHeader ? spacing[5] : spacing[9] };
   margin-bottom: ${ spacing[7] };
 `
 

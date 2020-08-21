@@ -2,13 +2,16 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Help20, Events20, Wallet20 } from '@carbon/icons-react'
 import { ThemeProvider } from 'styled-components'
+
 import { 
   theme, 
   Header, 
   FlexContainer, 
   Logo, 
   HeaderGlobalBar, 
-  HeaderGlobalAction 
+  HeaderGlobalAction,
+  HeaderNavigationStyled, 
+  HeaderMenuItemStyled,
 } from './pageStyles'
 
 const { REACT_APP_PAYMENT_FEATURE } = process.env
@@ -28,6 +31,26 @@ export default ({ isApproved }) => {
             redirect("/");
           }}
         />
+        {isApproved && (
+          <HeaderNavigationStyled>
+            <HeaderMenuItemStyled 
+              onClick={() => {
+                redirect("/triplers");
+              }}
+            >
+              Vote Triplers
+            </HeaderMenuItemStyled>
+            {REACT_APP_PAYMENT_FEATURE &&
+              <HeaderMenuItemStyled 
+                onClick={() => {
+                  redirect("/payments");
+                }}
+              >
+                Payments
+              </HeaderMenuItemStyled>
+            }
+          </HeaderNavigationStyled>
+        )}
         <HeaderGlobalBar>
           <HeaderGlobalAction
             aria-label="Help"
@@ -38,30 +61,6 @@ export default ({ isApproved }) => {
           >
             <Help20 />
           </HeaderGlobalAction>
-          {isApproved && (
-            <>
-              <HeaderGlobalAction
-                aria-label="Vote Triplers"
-                type="button"
-                onClick={() => {
-                  redirect("/triplers");
-                }}
-              >
-                <Events20 />
-              </HeaderGlobalAction>
-              {REACT_APP_PAYMENT_FEATURE &&
-                <HeaderGlobalAction
-                  aria-label="Payments"
-                  type="button"
-                  onClick={() => {
-                    redirect("/payments");
-                  }}
-                >
-                  <Wallet20/>
-                </HeaderGlobalAction>
-              }
-            </>
-          )}
         </HeaderGlobalBar>
         </FlexContainer>
       </Header>
