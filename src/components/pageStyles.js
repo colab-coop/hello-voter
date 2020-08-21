@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { HeaderNavigation, HeaderMenuItem } from 'carbon-components-react'
+import { HeaderNavigation, HeaderMenuItem, SwitcherDivider } from 'carbon-components-react'
 import { spacing, colors, breakpoints } from "../theme";
 import BlockPower from '../assets/logos/block-power.png'
 import NewGeorgia from '../assets/logos/new-georgia.png'
@@ -108,6 +108,13 @@ export const SwitcherItemStyled = styled.a`
   font-weight: 600;
   text-decoration: none;
   color: ${props => props.theme[REACT_APP_HEADER].iconColor};
+  cursor: pointer;
+`
+
+export const SwitcherDividerStyled = styled(SwitcherDivider)`
+  width: 100%;
+  margin: ${ spacing[3] } 0;
+  background-color: ${props => props.theme[REACT_APP_HEADER].iconBgHover}
 `
 
 export const HeaderGlobalBar = styled.div`

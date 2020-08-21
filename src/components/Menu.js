@@ -14,7 +14,8 @@ import {
   HeaderMenuItemStyled,
   HeaderPanelStyled,
   SwitcherStyled,
-  SwitcherItemStyled
+  SwitcherItemStyled,
+  SwitcherDividerStyled
 } from './pageStyles'
 
 const { REACT_APP_PAYMENT_FEATURE } = process.env
@@ -23,7 +24,8 @@ export default ({ isApproved }) => {
   const [navOpen, setNavOpen] = useState(false)
   const history = useHistory()
   const redirect = async (href) => {
-    history.push(href)
+    setNavOpen(false)
+    history.push(href);
   }
 
   return (
@@ -87,8 +89,14 @@ export default ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/triplers")}}>
               Vote Triplers
             </SwitcherItemStyled>
-            <SwitcherItemStyled onClick={() => {redirect("/payments")}}>
-              Payments
+            {REACT_APP_PAYMENT_FEATURE &&
+              <SwitcherItemStyled onClick={() => {redirect("/payments")}}>
+                Payments
+              </SwitcherItemStyled>
+            }
+            <SwitcherDividerStyled />
+            <SwitcherItemStyled onClick={() => {redirect("/help")}}>
+              Help
             </SwitcherItemStyled>
           </SwitcherStyled>
         </HeaderPanelStyled>
