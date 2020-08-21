@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import {Form, FormGroup, TextInput, Link, Row} from 'carbon-components-react'
+import {Form, FormGroup, TextInput, Checkbox} from 'carbon-components-react'
+import styled from 'styled-components'
+import { spacing } from '../../theme'
 import PageLayout from '../PageLayout'
 import { ResponsiveContainer } from '../pageStyles'
 import Breadcrumbs from '../Breadcrumbs'
@@ -36,15 +38,43 @@ export default () => {
   return tripler ? <ConfirmPage tripler={tripler} confirmTriplers={confirmTriplers} loading={loading}/> : <Loading />
 }
 
+const SubTitle = styled.p`
+  margin-bottom: ${ spacing[3] };
+  font-weight: 600;
+`
+
+const TwoColumnRow = styled.div`
+  display: grid;
+  align-items: start;
+  grid-auto-columns: 1fr;
+  grid-column-gap: ${ spacing[5] };
+  grid-row-gap: ${ spacing[5] };
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: ${ spacing[3] };
+`
+
 const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
   const history = useHistory()
   const [err, setErr] = useState(false)
   const submit = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
+    const handleHousemate = (triplee) => {
+      let result;
+      if (triplee === "on") {
+        result = 'isHousemate';
+      } else {
+        result = '';
+      }
+      return result;
+    }
     const { error } = await confirmTriplers(tripler.id, {
       phone: formData.get('phone'),
-      triplees: [formData.get('triplee1'), formData.get('triplee2'), formData.get('triplee3')],
+      triplees: [
+        formData.get('triplee1_first'), formData.get('triplee1_last'), handleHousemate(formData.get('triplee1_housemate')), 
+        formData.get('triplee2_first'), formData.get('triplee2_last'), handleHousemate(formData.get('triplee2_housemate')),
+        formData.get('triplee3_first'), formData.get('triplee3_last'), handleHousemate(formData.get('triplee3_housemate')),
+      ],
       address: tripler.address
     })
     if (error) return setErr(error.msg)
@@ -75,29 +105,71 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
     <Form 
       onSubmit={submit}
     >
-      <p>Add the names of three Voters the Vote Tripler will remind to vote:</p>
+      <p style={{marginBottom: 16}}>Add the names of three Voters the Vote Tripler will remind to vote:</p>
       <FormGroup>
+        <SubTitle>Voter 1</SubTitle>
+        <TwoColumnRow>
         <TextInput
-          name="triplee1"
+          name="triplee1_first"
           invalidText="Invalid error message."
-          labelText="Name 1*"
+          labelText="First Name*"
           required
+        />
+        <TextInput
+          name="triplee1_last"
+          invalidText="Invalid error message."
+          labelText="Last Name*"
+          required
+        />
+        </TwoColumnRow>
+        <Checkbox
+          id="triplee1_housemate"
+          name="triplee1_housemate"
+          labelText="Housemate"
         />
       </FormGroup>
       <FormGroup>
+      <SubTitle>Voter 2</SubTitle>
+        <TwoColumnRow>
         <TextInput
-          name="triplee2"
+          name="triplee2_first"
           invalidText="Invalid error message."
-          labelText="Name 2*"
+          labelText="First Name*"
           required
+        />
+        <TextInput
+          name="triplee2_last"
+          invalidText="Invalid error message."
+          labelText="Last Name*"
+          required
+        />
+        </TwoColumnRow>
+        <Checkbox
+          id="triplee2_housemate"
+          name="triplee2_housemate"
+          labelText="Housemate"
         />
       </FormGroup>
       <FormGroup>
+        <SubTitle>Voter 3</SubTitle>
+        <TwoColumnRow>
         <TextInput
-          name="triplee3"
+          name="triplee3_first"
           invalidText="Invalid error message."
-          labelText="Name 3*"
+          labelText="First Name*"
           required
+        />
+        <TextInput
+          name="triplee3_last"
+          invalidText="Invalid error message."
+          labelText="Last Name*"
+          required
+        />
+        </TwoColumnRow>
+        <Checkbox
+          id="triplee3_housemate"
+          name="triplee3_housemate"
+          labelText="Housemate"
         />
       </FormGroup>
       <p>Add the Vote Tripler's phone number so we can confirm their identity and send you your payment!</p>
