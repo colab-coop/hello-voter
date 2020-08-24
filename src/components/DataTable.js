@@ -89,7 +89,7 @@ const renderTable = (batchActionClick) => (
             </TableBatchAction>
           </TableBatchActions>
           <TableTitleContainer>
-            Eligible People
+            Possible Vote-Triplers within 10km
           </TableTitleContainer>
         </TableToolbar>
       </TableToolbarContainer>

@@ -36,7 +36,7 @@ export default () => {
       {REACT_APP_PAYMENT_FEATURE &&
         <CardButton
           icon={<Wallet24 />}
-          title="Earnings"
+          title="Payments"
           description="Set up and view your earnings from your organizing efforts"
           onClick={() => {
             redirect("/payments");
