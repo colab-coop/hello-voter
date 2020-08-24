@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { spacing } from '../theme'
 
 const BreadcrumbStyled = styled(Breadcrumb)`
-  margin-top: ${ spacing[7] };
+  margin-top: ${ spacing[9] };
 `
 
 const BreadcrumbItemStyled = styled(BreadcrumbItem)`

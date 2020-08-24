@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from 'carbon-components-react'
+import { HeaderNavigation, HeaderMenuItem, SwitcherDivider } from 'carbon-components-react'
 import { spacing, colors, breakpoints } from "../theme";
 import BlockPower from '../assets/logos/block-power.png'
 import NewGeorgia from '../assets/logos/new-georgia.png'
@@ -39,7 +39,7 @@ export const Header = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  height: 3rem;
+  height: 5rem;
   background-color: ${props => props.theme[REACT_APP_HEADER].bgColor};
   border-bottom: 1px solid ${ colors.gray[20] };
   z-index: 6000;
@@ -47,14 +47,76 @@ export const Header = styled.header`
 
 export const Logo = styled.div`
   width: ${ spacing[10] };
-  height: ${ spacing[7] };
+  height: 5rem;
   margin-left: ${ spacing[3] };
+  margin-right: ${ spacing[7] };
   background-image: url(${ logo });
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
   &:hover {
     cursor: pointer;
   }
+`
+
+export const HeaderNavigationStyled = styled(HeaderNavigation)`
+  &:before {
+    background-color: ${props => props.theme[REACT_APP_HEADER].iconBgHover}
+  }
+`
+
+export const HeaderMenuItemStyled = styled(HeaderMenuItem)`
+  cursor: pointer;
+  & > .bx--header__menu-item {
+    color: ${props => props.theme[REACT_APP_HEADER].iconColor};
+    &:hover {
+      color: ${props => props.theme[REACT_APP_HEADER].iconColor};
+      background-color: ${props => props.theme[REACT_APP_HEADER].iconBgHover}
+    }
+    &:focus {
+      border-color: ${ colors.white };
+      outline: none;
+    }
+  }
+`
+
+export const HeaderPanelStyled = styled.div`
+  position: absolute;
+  overflow: hidden;
+  display: ${props => props.navOpen ? "block" : "none"};
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+`
+
+export const SwitcherStyled = styled.nav`
+  width: 100%;
+  padding: ${ spacing[5] };
+  border: 1px solid ${ colors.gray[20] };
+  background-color: ${props => props.theme[REACT_APP_HEADER].bgColor};
+  display: flex;
+  flex-direction: column;
+  max-width: ${breakpoints.md.width};
+  margin-left: auto;
+  margin-right: auto;
+`
+
+export const SwitcherItemStyled = styled.a`
+  padding-top: ${ spacing[3] };
+  padding-bottom: ${ spacing[3] };
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  text-decoration: none;
+  color: ${props => props.theme[REACT_APP_HEADER].iconColor};
+  cursor: pointer;
+`
+
+export const SwitcherDividerStyled = styled(SwitcherDivider)`
+  width: 100%;
+  margin: ${ spacing[3] } 0;
+  background-color: ${props => props.theme[REACT_APP_HEADER].iconBgHover};
 `
 
 export const HeaderGlobalBar = styled.div`
@@ -65,13 +127,16 @@ export const HeaderGlobalBar = styled.div`
 `;
 
 export const HeaderGlobalAction = styled.button`
-  display: inline-block;
+  display: ${props => props.mobileNav ? "none" : "inline-block"};
+  @media (max-width: ${breakpoints.lg.width}) {
+    display: ${props => props.mobileNav ? "inline-block" : "none"};
+  }
   background: none;
   padding: 0;
   cursor: pointer;
   width: 100%;
-  width: 3rem;
-  height: 3rem;
+  width: 5rem;
+  height: 5rem;
   border: 0.125rem solid transparent;
   border-bottom: 1px solid ${ colors.gray[20] };
   transition: background-color 0.11s, border-color 0.11s;
@@ -112,7 +177,7 @@ export const Container = styled.div`
 `;
 
 export const TitleContainer = styled.div`
-  margin-top: ${ props => props.hasHeader ? spacing[5] : spacing[7] };
+  margin-top: ${ props => props.hasHeader ? spacing[5] : spacing[9] };
   margin-bottom: ${ spacing[7] };
 `
 
