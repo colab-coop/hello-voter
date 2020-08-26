@@ -62,18 +62,30 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
     const handleHousemate = (triplee) => {
       let result;
       if (triplee === "on") {
-        result = 'isHousemate';
+        result = true;
       } else {
-        result = '';
+        result = false;
       }
       return result;
     }
     const { error } = await confirmTriplers(tripler.id, {
       phone: formData.get('phone'),
       triplees: [
-        formData.get('triplee1_first'), formData.get('triplee1_last'), handleHousemate(formData.get('triplee1_housemate')), 
-        formData.get('triplee2_first'), formData.get('triplee2_last'), handleHousemate(formData.get('triplee2_housemate')),
-        formData.get('triplee3_first'), formData.get('triplee3_last'), handleHousemate(formData.get('triplee3_housemate')),
+        {
+          first_name: formData.get('triplee1_first'), 
+          last_name: formData.get('triplee1_last'), 
+          housemate: handleHousemate(formData.get('triplee1_housemate'))
+        },
+        {
+          first_name: formData.get('triplee2_first'), 
+          last_name: formData.get('triplee2_last'), 
+          housemate: handleHousemate(formData.get('triplee2_housemate'))
+        },
+        {
+          first_name: formData.get('triplee3_first'), 
+          last_name: formData.get('triplee3_last'), 
+          housemate: handleHousemate(formData.get('triplee3_housemate'))
+        },
       ],
       address: tripler.address
     })

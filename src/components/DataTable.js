@@ -30,7 +30,7 @@ const TableContainerStyled = styled(TableContainer)`
 
 const TableToolbarContainer = styled.div`
   position: sticky;
-  top: 48px;
+  top: 5rem;
   z-index: 1;
 `
 

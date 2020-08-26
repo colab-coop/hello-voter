@@ -27,7 +27,7 @@ switch (REACT_APP_ORG) {
     email = "reach@ngpaf.org";
     break;
   case 'ColorOfChange':
-    url = "https://www.blockpower.vote/cocpac/faq-cocpac";
+    url = "https://www.blockpower.vote/coc-pac/faq-coc-pac";
     title = "Color of Change Support";
     email = "organizer+colorofchange@blockpower.vote";
     break;
