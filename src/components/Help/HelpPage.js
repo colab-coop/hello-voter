@@ -10,6 +10,7 @@ const TopParagraph = styled.p`
   margin-bottom: ${ spacing[7]};
 `
 
+// FIXME: have separate .env variables for REACT_APP_HELP_URL, REACT_APP_HELP_TITLE, REACT_APP_HELP_EMAIL  
 const { REACT_APP_ORG } = process.env;
 
 let url;
@@ -30,6 +31,11 @@ switch (REACT_APP_ORG) {
     url = "https://www.blockpower.vote/coc-pac/faq-coc-pac";
     title = "Color of Change Support";
     email = "organizer+colorofchange@blockpower.vote";
+    break;
+  case 'Bloc':
+    url = "https://blockpower.vote/blocbybloc/faq-blocbybloc";
+    title = "BLOC Support";
+    email = "organizer+bloc@blockpower.vote";
     break;
 }
 
