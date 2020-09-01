@@ -20,22 +20,22 @@ switch (REACT_APP_ORG) {
   case 'BlockPower':
     url = "https://www.blockpower.vote/faq-blockpower";
     title = "BlockPower Support";
-    email = "organizer@blockpower.vote";
+    email = "support+bp@blockpower.vote";
     break;
   case 'NGP':
     url = "https://www.blockpower.vote/ngp/faq-ngp";
     title = "New Georgia Project Support";
-    email = "reach@ngpaf.org";
+    email = "support+ngp@blockpower.vote";
     break;
   case 'ColorOfChange':
     url = "https://www.blockpower.vote/coc-pac/faq-coc-pac";
     title = "Color of Change Support";
-    email = "organizer+colorofchange@blockpower.vote";
+    email = "support+coc@blockpower.vote";
     break;
   case 'Bloc':
     url = "https://blockpower.vote/blocbybloc/faq-blocbybloc";
     title = "BLOC Support";
-    email = "organizer+bloc@blockpower.vote";
+    email = "support+bloc@blockpower.vote";
     break;
 }
 
@@ -52,19 +52,19 @@ export default () => (
       }}
     />
     <CardButton
-      icon={<Devices24 />}
-      title="Technical Support"
-      description="blockpower@zammad.com"
-      onClick={() => {
-        window.open("mailto:blockpower@zammad.com");
-      }}
-    />
-    <CardButton
       icon={<Partnership24 />}
       title={title}
       description={email}
       onClick={() => {
         window.open(`mailto:${email}`);
+      }}
+    />
+    <CardButton
+      icon={<Devices24 />}
+      title="Technical Support"
+      description="blockpower@zammad.com"
+      onClick={() => {
+        window.open("mailto:blockpower@zammad.com");
       }}
     />
     </GridThreeUp>
