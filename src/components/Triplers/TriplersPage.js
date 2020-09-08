@@ -100,6 +100,21 @@ const Divider = styled.div`
   margin-bottom: ${spacing[5]};
 `
 
+// FIXME: Hack to make table alignment better for now
+const ParagraphMinHeight48 = styled(Paragraph)`
+  min-height: 48px;
+  @media (max-width: ${breakpoints.lg.width}) {
+    min-height: auto;
+  }
+`
+
+const ParagraphMinHeight72 = styled(Paragraph)`
+  min-height: 72px;
+  @media (max-width: ${breakpoints.lg.width}) {
+    min-height: auto;
+  }
+`
+
 const TriplerRow = ({ 
   name, 
   address, 
@@ -204,7 +219,7 @@ const Triplers = ({
       <Divider />
       {hasTriplers && (
         <GridThreeUp>
-          <div>
+          <GridRowSpanOne>
           <SectionTitle>Your possible Vote Triplers</SectionTitle>
           <Paragraph>
             Add information for a Vote Tripler. We’ll send them a text message to
@@ -220,9 +235,9 @@ const Triplers = ({
               deleteTripler={deleteTripler}
             />
           ))}
-          </div>
+          </GridRowSpanOne>
 
-          <div>
+          <GridRowSpanOne>
           <SectionTitle>Your unconfirmed Vote Triplers</SectionTitle>
           <Paragraph>
             These possible Vote Triplers have not yet confirmed their identity.
@@ -238,13 +253,13 @@ const Triplers = ({
               deleteTripler={deleteTripler}
             />
           ))}
-          </div>
+          </GridRowSpanOne>
 
-          <div>
+          <GridRowSpanOne>
           <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
-          <Paragraph>
+          <ParagraphMinHeight48>
             You'll receive payment for these Vote Triplers.
-          </Paragraph>
+          </ParagraphMinHeight48>
           {confirmed.map((tripler, i) => (
               <TriplerRow
               name={`${tripler.first_name} ${tripler.last_name}`}
@@ -254,13 +269,13 @@ const Triplers = ({
               deleteTripler={deleteTripler}
             />
           ))}
-          </div>
+          </GridRowSpanOne>
         </GridThreeUp>
       )}
 
       {hasAmbassadors && (
         <GridThreeUp style={{marginTop: 24}}>
-          <div>
+          <GridRowSpanOne>
           <SectionTitle>Ambassadors-in-Waiting</SectionTitle>
           <Paragraph>
             These Vote Triplers have become Voting Ambassadors but have not
@@ -273,15 +288,15 @@ const Triplers = ({
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
             />
           ))}
-          </div>
+          </GridRowSpanOne>
 
-          <div>
+          <GridRowSpanTwo>
           <SectionTitle>Recognition of Your Outstanding Work</SectionTitle>
-          <Paragraph>
+          <ParagraphMinHeight72>
             You’ll receive a special bonus for all Vote Triplers who became a
             Voting Ambassador and confirmed at least one Vote Tripler of their
             own. You’ve done a great service for your community — keep it up!
-          </Paragraph>
+          </ParagraphMinHeight72>
           {ambassadorConfirmed.map((tripler, i) => (
             <TriplerRow
               name={`${tripler.first_name} ${tripler.last_name}`}
@@ -289,7 +304,7 @@ const Triplers = ({
               ambassadorConfirmed
             />
           ))}
-          </div>
+          </GridRowSpanTwo>
         </GridThreeUp>
       )}
     </>
