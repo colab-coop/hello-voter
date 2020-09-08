@@ -1,5 +1,6 @@
 import React from "react";
 import Menu from "../components/Menu";
+import Footer from "../components/Footer";
 import Triplers from "../components/Triplers/TriplersPage";
 import Add from "../components/Triplers/AddTripler";
 import Confirm from "../components/Triplers/ConfirmPage";
@@ -29,6 +30,8 @@ export const TriplersUnconfirmed = () => (
             city: "Denver",
             state: "CO",
           },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false,
         },
       ]}
     />
@@ -49,6 +52,8 @@ export const TriplersPending = () => (
             city: "Denver",
             state: "CO",
           },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false
         },
       ]}
     />
@@ -69,6 +74,8 @@ export const TriplersConfirmed = () => (
             city: "Denver",
             state: "CO",
           },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false
         },
       ]}
     />
@@ -89,12 +96,16 @@ export const TriplersFull = () => (
             city: "Denver",
             state: "CO",
           },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false,
         },
         {
           status: "unconfirmed",
           first_name: "Edison",
           last_name: "Shepherd",
           address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false,
         },
         {
           status: "pending",
@@ -105,18 +116,24 @@ export const TriplersFull = () => (
             city: "Denver",
             state: "CO",
           },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false,
         },
         {
           status: "pending",
           first_name: "Edison",
           last_name: "Shepherd",
           address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false,
         },
         {
           status: "pending",
           first_name: "Lauren",
           last_name: "Ralph",
           address: { address1: "1 Road Rd", city: "Denver", state: "CO" },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false,
         },
         {
           status: "confirmed",
@@ -127,16 +144,99 @@ export const TriplersFull = () => (
             city: "Denver",
             state: "CO",
           },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false,
         },
         {
           status: "confirmed",
           first_name: "Edison",
           last_name: "Shepherd",
           address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false,
         },
       ]}
     />
   </>
+);
+
+export const TriplersAmbassadorsFull = () => (
+  <div style={{position:"relative", minHeight:"100vh"}}>
+    <Menu isApproved={true} />
+    <Triplers
+      triplers={[
+        {
+          status: "unconfirmed",
+          first_name: "Lauren",
+          last_name: "R",
+          address: {
+            address1: "200 Address lane",
+            city: "Denver",
+            state: "CO",
+          },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false
+        },
+        {
+          status: "unconfirmed",
+          first_name: "Edison",
+          last_name: "Shepherd",
+          address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+          is_ambassador: false,
+          is_ambassador_and_has_confirmed: false
+        },
+        {
+          status: "pending",
+          first_name: "Michael",
+          last_name: "Marsh",
+          address: {
+            address1: "200 Address lane",
+            city: "Denver",
+            state: "CO",
+          },
+          is_ambassador: true,
+          is_ambassador_and_has_confirmed: true
+        },
+        {
+          status: "pending",
+          first_name: "Edison",
+          last_name: "Shepherd",
+          address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+          is_ambassador: true,
+          is_ambassador_and_has_confirmed: false
+        },
+        {
+          status: "pending",
+          first_name: "Lauren",
+          last_name: "Ralph",
+          address: { address1: "1 Road Rd", city: "Denver", state: "CO" },
+          is_ambassador: true,
+          is_ambassador_and_has_confirmed: true
+        },
+        {
+          status: "confirmed",
+          first_name: "Michael",
+          last_name: "Marsh",
+          address: {
+            address1: "200 Address lane",
+            city: "Denver",
+            state: "CO",
+          },
+          is_ambassador: true,
+          is_ambassador_and_has_confirmed: false
+        },
+        {
+          status: "confirmed",
+          first_name: "Edison",
+          last_name: "Shepherd",
+          address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+          is_ambassador: true,
+          is_ambassador_and_has_confirmed: true
+        },
+      ]}
+    />
+    <Footer />
+  </div>
 );
 
 export const AddPage = () => (
