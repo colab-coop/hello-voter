@@ -11,7 +11,7 @@ import Loading from '../Loading'
 
 import { AppContext } from '../../api/AppContext'
 
-const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
+const { REACT_APP_TRIPLER_PAYMENT_AMT, REACT_APP_AMBASSADOR_PAYMENT_AMT } = process.env
 
 const SectionTitle = styled.h5`
   margin-top: ${ spacing[7] };
@@ -100,7 +100,17 @@ const Divider = styled.div`
   margin-bottom: ${spacing[5]};
 `
 
-const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, confirmed, deleteTripler }) => (
+const TriplerRow = ({ 
+  name, 
+  address, 
+  id, 
+  unconfirmed, 
+  pending, 
+  confirmed, 
+  ambassadorConfirmed,
+  remindTripler,
+  deleteTripler 
+}) => (
   <TriplerRowStyled>
     <TriplerColumnTruncate>
       <TriplerRowName>{ name }</TriplerRowName>
@@ -136,13 +146,34 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
           ${REACT_APP_TRIPLER_PAYMENT_AMT} Earned
         </Tag>
       }
+      {ambassadorConfirmed &&
+        <Tag type="green">
+          ${REACT_APP_AMBASSADOR_PAYMENT_AMT} Earned
+        </Tag>
+      }
     </TriplerColumn>
   </TriplerRowStyled>
 )
 
-const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit, deleteTripler }) => {
+const Triplers = ({ 
+  unconfirmed, 
+  pending, 
+  confirmed, 
+  remindTripler, 
+  limit, 
+  deleteTripler,
+  ambassadors
+}) => {
   const hasTriplers =
     unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0
+
+  const hasAmbassadors = ambassadors.length > 0
+  const ambassadorNotConfirmed = ambassadors.filter(
+    (ambassador) => ambassador.is_ambassador_and_has_confirmed === false
+  );
+  const ambassadorConfirmed = ambassadors.filter(
+    (ambassador) => ambassador.is_ambassador_and_has_confirmed === true
+  );
 
   return (
     <>
@@ -226,6 +257,41 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit, delet
           </div>
         </GridThreeUp>
       )}
+
+      {hasAmbassadors && (
+        <GridThreeUp style={{marginTop: 24}}>
+          <div>
+          <SectionTitle>Ambassadors-in-Waiting</SectionTitle>
+          <Paragraph>
+            These Vote Triplers have become Voting Ambassadors but have not
+            yet confirmed a Vote Tripler of their own.
+          </Paragraph>
+          {ambassadorNotConfirmed.map((tripler) => (
+            <TriplerRow
+              id={tripler.id}
+              name={`${tripler.first_name} ${tripler.last_name}`}
+              address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+            />
+          ))}
+          </div>
+
+          <div>
+          <SectionTitle>Recognition of Your Outstanding Work</SectionTitle>
+          <Paragraph>
+            You’ll receive a special bonus for all Vote Triplers who became a
+            Voting Ambassador and confirmed at least one Vote Tripler of their
+            own. You’ve done a great service for your community — keep it up!
+          </Paragraph>
+          {ambassadorConfirmed.map((tripler, i) => (
+            <TriplerRow
+              name={`${tripler.first_name} ${tripler.last_name}`}
+              address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+              ambassadorConfirmed
+            />
+          ))}
+          </div>
+        </GridThreeUp>
+      )}
     </>
   );
 };
@@ -268,6 +334,7 @@ const TriplersPage = ({ triplers, remindTripler, limit, deleteTripler }) => {
   const confirmed = triplers.filter((tripler) => tripler.status === 'confirmed')
   const pending = triplers.filter((tripler) => tripler.status === 'pending')
   const unconfirmed = triplers.filter((tripler) => tripler.status === 'unconfirmed')
+  const ambassadors = triplers.filter((tripler) => tripler.is_ambassador === true)
   return (
     <PageLayout
       title="My Vote Triplers"
@@ -287,6 +354,7 @@ const TriplersPage = ({ triplers, remindTripler, limit, deleteTripler }) => {
         unconfirmed={unconfirmed}
         pending={pending}
         confirmed={confirmed}
+        ambassadors={ambassadors}
         remindTripler={remindTripler}
         limit={limit}
         deleteTripler={deleteTripler}
