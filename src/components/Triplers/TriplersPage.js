@@ -11,7 +11,7 @@ import Loading from '../Loading'
 
 import { AppContext } from '../../api/AppContext'
 
-const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env
+const { REACT_APP_TRIPLER_PAYMENT_AMT, REACT_APP_AMBASSADOR_PAYMENT_AMT } = process.env
 
 const SectionTitle = styled.h5`
   margin-top: ${ spacing[7] };
@@ -100,7 +100,32 @@ const Divider = styled.div`
   margin-bottom: ${spacing[5]};
 `
 
-const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, confirmed, deleteTripler }) => (
+// FIXME: Hack to make table alignment better for now
+const ParagraphMinHeight48 = styled(Paragraph)`
+  min-height: 48px;
+  @media (max-width: ${breakpoints.lg.width}) {
+    min-height: auto;
+  }
+`
+
+const ParagraphMinHeight72 = styled(Paragraph)`
+  min-height: 72px;
+  @media (max-width: ${breakpoints.lg.width}) {
+    min-height: auto;
+  }
+`
+
+const TriplerRow = ({ 
+  name, 
+  address, 
+  id, 
+  unconfirmed, 
+  pending, 
+  confirmed, 
+  ambassadorConfirmed,
+  remindTripler,
+  deleteTripler 
+}) => (
   <TriplerRowStyled>
     <TriplerColumnTruncate>
       <TriplerRowName>{ name }</TriplerRowName>
@@ -136,13 +161,34 @@ const TriplerRow = ({ name, address, id, unconfirmed, pending, remindTripler, co
           ${REACT_APP_TRIPLER_PAYMENT_AMT} Earned
         </Tag>
       }
+      {ambassadorConfirmed &&
+        <Tag type="green">
+          ${REACT_APP_AMBASSADOR_PAYMENT_AMT} Earned
+        </Tag>
+      }
     </TriplerColumn>
   </TriplerRowStyled>
 )
 
-const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit, deleteTripler }) => {
+const Triplers = ({ 
+  unconfirmed, 
+  pending, 
+  confirmed, 
+  remindTripler, 
+  limit, 
+  deleteTripler,
+  ambassadors
+}) => {
   const hasTriplers =
     unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0
+
+  const hasAmbassadors = ambassadors.length > 0
+  const ambassadorNotConfirmed = ambassadors.filter(
+    (ambassador) => ambassador.is_ambassador_and_has_confirmed === false
+  );
+  const ambassadorConfirmed = ambassadors.filter(
+    (ambassador) => ambassador.is_ambassador_and_has_confirmed === true
+  );
 
   return (
     <>
@@ -173,7 +219,7 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit, delet
       <Divider />
       {hasTriplers && (
         <GridThreeUp>
-          <div>
+          <GridRowSpanOne>
           <SectionTitle>Your possible Vote Triplers</SectionTitle>
           <Paragraph>
             Add information for a Vote Tripler. We’ll send them a text message to
@@ -189,9 +235,9 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit, delet
               deleteTripler={deleteTripler}
             />
           ))}
-          </div>
+          </GridRowSpanOne>
 
-          <div>
+          <GridRowSpanOne>
           <SectionTitle>Your unconfirmed Vote Triplers</SectionTitle>
           <Paragraph>
             These possible Vote Triplers have not yet confirmed their identity.
@@ -207,13 +253,13 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit, delet
               deleteTripler={deleteTripler}
             />
           ))}
-          </div>
+          </GridRowSpanOne>
 
-          <div>
+          <GridRowSpanOne>
           <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
-          <Paragraph>
+          <ParagraphMinHeight48>
             You'll receive payment for these Vote Triplers.
-          </Paragraph>
+          </ParagraphMinHeight48>
           {confirmed.map((tripler, i) => (
               <TriplerRow
               name={`${tripler.first_name} ${tripler.last_name}`}
@@ -223,7 +269,42 @@ const Triplers = ({ unconfirmed, pending, confirmed, remindTripler, limit, delet
               deleteTripler={deleteTripler}
             />
           ))}
-          </div>
+          </GridRowSpanOne>
+        </GridThreeUp>
+      )}
+
+      {hasAmbassadors && (
+        <GridThreeUp style={{marginTop: 24}}>
+          <GridRowSpanOne>
+          <SectionTitle>Ambassadors-in-Waiting</SectionTitle>
+          <Paragraph>
+            These Vote Triplers have become Voting Ambassadors but have not
+            yet confirmed a Vote Tripler of their own.
+          </Paragraph>
+          {ambassadorNotConfirmed.map((tripler) => (
+            <TriplerRow
+              id={tripler.id}
+              name={`${tripler.first_name} ${tripler.last_name}`}
+              address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+            />
+          ))}
+          </GridRowSpanOne>
+
+          <GridRowSpanTwo>
+          <SectionTitle>Recognition of Your Outstanding Work</SectionTitle>
+          <ParagraphMinHeight72>
+            You’ll receive a special bonus for all Vote Triplers who became a
+            Voting Ambassador and confirmed at least one Vote Tripler of their
+            own. You’ve done a great service for your community — keep it up!
+          </ParagraphMinHeight72>
+          {ambassadorConfirmed.map((tripler, i) => (
+            <TriplerRow
+              name={`${tripler.first_name} ${tripler.last_name}`}
+              address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+              ambassadorConfirmed
+            />
+          ))}
+          </GridRowSpanTwo>
         </GridThreeUp>
       )}
     </>
@@ -268,6 +349,7 @@ const TriplersPage = ({ triplers, remindTripler, limit, deleteTripler }) => {
   const confirmed = triplers.filter((tripler) => tripler.status === 'confirmed')
   const pending = triplers.filter((tripler) => tripler.status === 'pending')
   const unconfirmed = triplers.filter((tripler) => tripler.status === 'unconfirmed')
+  const ambassadors = triplers.filter((tripler) => tripler.is_ambassador === true)
   return (
     <PageLayout
       title="My Vote Triplers"
@@ -287,6 +369,7 @@ const TriplersPage = ({ triplers, remindTripler, limit, deleteTripler }) => {
         unconfirmed={unconfirmed}
         pending={pending}
         confirmed={confirmed}
+        ambassadors={ambassadors}
         remindTripler={remindTripler}
         limit={limit}
         deleteTripler={deleteTripler}

@@ -177,7 +177,7 @@ export const Container = styled.div`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding: ${ spacing[8] } ${ spacing[3] };
+  padding: ${ spacing[8] } ${ spacing[3] } ${ spacing[10] } ${ spacing[3] };
 `;
 
 export const TitleContainer = styled.div`

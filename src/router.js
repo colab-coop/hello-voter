@@ -10,7 +10,6 @@ import Footer from './components/Footer'
 import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
-import { LandingPage } from './components/SignUp/LandingPage'
 import { ContactInfoPage } from './components/SignUp/ContactInfoPage'
 import TriplersPage from './components/Triplers/TriplersPage'
 import TriplersAdd from './components/Triplers/AddTripler'
@@ -78,7 +77,6 @@ const AppRoutes = () => {
         <AuthRoute path="/payments/add" component={PaymentsPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/payments" component={PaymentsHomePage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/payments/chime" component={Chime} exact={true} authenticated={authenticated} user={user}/>
-        <Route path="/tallahassee" component={LandingPage} />
         <Route path="/help" component={Help}/>
         <Route path="/terms" component={Terms}/>
         <Route path="/privacy" component={Privacy}/>

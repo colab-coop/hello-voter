@@ -5,7 +5,7 @@ import { spacing, colors } from '../../theme'
 import PageLayout from '../PageLayout'
 import { ResponsiveContainer } from '../pageStyles'
 import Button from '../Button'
-import AddressForm from '../AddressForm'
+import AddressForm from './AddressForm'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../../api/AppContext'
 

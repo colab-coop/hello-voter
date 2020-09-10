@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FormGroup, TextInput } from 'carbon-components-react'
-import { spacing, breakpoints } from '../theme'
+import { spacing, breakpoints } from '../../theme'
 
 const Row = styled.div`
   display: grid;
