@@ -208,9 +208,12 @@ const Triplers = ({
             agrees to remind three other people to vote in the next election.
           </p>
           <br />
-          <p>
-            You will receive ${REACT_APP_TRIPLER_PAYMENT_AMT} for each Vote Tripler you recruit.
-          </p>
+          {REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE && (
+            <p>
+              You will receive ${REACT_APP_TRIPLER_PAYMENT_AMT} for each Vote
+              Tripler you recruit.
+            </p>
+          )}
         </GridRowSpanTwo>
         <GridRowSpanOne>
           <Button
@@ -266,7 +269,9 @@ const Triplers = ({
           <GridRowSpanOne>
           <SectionTitle>Your confirmed Vote Triplers</SectionTitle>
           <ParagraphMinHeight48>
-            You'll receive payment for these Vote Triplers.
+            {REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE
+              ? "You'll receive payment for these Vote Triplers."
+              : "These Vote Triplers have been confirmed — great work!"}
           </ParagraphMinHeight48>
           {confirmed.map((tripler, i) => (
               <TriplerRow
@@ -301,9 +306,9 @@ const Triplers = ({
           <GridRowSpanTwo>
           <SectionTitle>Recognition of Your Outstanding Work</SectionTitle>
           <ParagraphMinHeight72>
-            You’ll receive a special bonus for all Vote Triplers who became a
-            Voting Ambassador and confirmed at least one Vote Tripler of their
-            own. You’ve done a great service for your community — keep it up!
+            {REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE
+              ? "You’ll receive a special bonus for all Vote Triplers who became a Voting Ambassador and confirmed at least one Vote Tripler of their own. You’ve done a great service for your community — keep it up!"
+              : "These Vote Triplers have become Voting Ambassadors and confirmed at least one Vote Tripler of their own. You've done a great service for your community — keep it up!"}
           </ParagraphMinHeight72>
           {ambassadorConfirmed.map((tripler, i) => (
             <TriplerRow
