@@ -160,6 +160,10 @@ const TriplerRow = ({
           Remind
         </Button>
       }
+      {/* 
+        FIXME: Hide payments `REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE` & `REACT_APP_PAYMENT_FEATURE`
+        with Boolean rather than "true" and empty .env field
+      */}
       {REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE && confirmed &&
         <Tag type="green">
           ${REACT_APP_TRIPLER_PAYMENT_AMT} Earned
