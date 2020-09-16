@@ -11,7 +11,11 @@ import Loading from '../Loading'
 
 import { AppContext } from '../../api/AppContext'
 
-const { REACT_APP_TRIPLER_PAYMENT_AMT, REACT_APP_AMBASSADOR_PAYMENT_AMT } = process.env
+const { 
+  REACT_APP_TRIPLER_PAYMENT_AMT, 
+  REACT_APP_AMBASSADOR_PAYMENT_AMT,
+  REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE
+} = process.env
 
 const SectionTitle = styled.h5`
   margin-top: ${ spacing[7] };
@@ -156,12 +160,12 @@ const TriplerRow = ({
           Remind
         </Button>
       }
-      {confirmed &&
+      {REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE && confirmed &&
         <Tag type="green">
           ${REACT_APP_TRIPLER_PAYMENT_AMT} Earned
         </Tag>
       }
-      {ambassadorConfirmed &&
+      {REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE && ambassadorConfirmed &&
         <Tag type="green">
           ${REACT_APP_AMBASSADOR_PAYMENT_AMT} Earned
         </Tag>
