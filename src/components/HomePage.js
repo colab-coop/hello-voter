@@ -33,6 +33,10 @@ export default () => {
           redirect("/triplers");
         }}
       />
+      {/* 
+        FIXME: Hide payments `REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE` & `REACT_APP_PAYMENT_FEATURE`
+        with Boolean rather than "true" and empty .env field
+      */}
       {REACT_APP_PAYMENT_FEATURE &&
         <CardButton
           icon={<Wallet24 />}
