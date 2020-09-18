@@ -1,3 +1,74 @@
+## Coding guide
+
+This software enables a "Voting Ambassador" workflow for get-out-the-vote campaigns. A Vote Ambassador signs up with the hello-voter React front-end. The Vote Ambassador, once signed up, is provided a list of voters in their area (within some configurable number of meters from the Ambassador). The Vote Ambassador contacts these voters (called Vote Triplers) and encourages them to help 3 additional people vote (called simply Voters in UI, or "Triplees" in the code). Once the Vote Tripler responds "YES" to the system's SMS (this software assumes Twilio SMS integration), the Vote Ambassador will receive payment from the organization who has set up this software. Currently this software assumes payment via Stripe + Plaid, and some partner organizations do not have in-app payments.
+
+### Files
+```
+|____components  - all the components of the app
+|____stories - storybook stories for components of the app
+|____theme - theme variables for spacing, colors, breakpoints (taken from carbon design system)
+|____hooks - various react hooks for different functionality
+|____api - api calls
+|____assets - various assets for the app
+| |____logos
+| |____icons
+```
+
+### Installation
+
+Before starting the server, copy .env.example to .env.
+```
+npm install
+npm start
+```
+
+And you should be good to go. If you want to see storybook stuff, execute
+```
+npm run storybook
+```
+
+### Styling
+
+In terms of styling, we use [styled-components](https://github.com/styled-components/styled-components) and [react-carbon](https://github.com/carbon-design-system/carbon-components-react).
+
+### App Router
+```
+/home
+/login
+
+/ambassador/signup - standard signup
+
+/help
+/privacy
+/terms
+
+/triplers
+/triplers/add
+/triplers/confirm/:triplerId
+
+/payments
+/payments/add
+/payments/chime
+````
+
+### Components
+```
+<Breadcrumbs> - Breadcrumbs on most pages
+<Button> - Main button component
+<CardButton> - Card button found on Home page, Help page, etc.
+<LoginButton> - Button on Login page
+<Footer> - Footer on all pages
+<Menu> - Menu Header on all pages
+<PageLayout> - Layout on all pages
+```
+
+### CI/CD
+
+- Merge into `ambassador-stage` branch to view on staging server
+- Merge into `ambassador` branch to view on production server
+
+----
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

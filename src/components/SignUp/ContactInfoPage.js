@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { spacing } from '../../theme'
+import { FormGroup, TextInput, InlineNotification, Form } from 'carbon-components-react'
+import { spacing, colors } from '../../theme'
 import PageLayout from '../PageLayout'
+import { ResponsiveContainer } from '../pageStyles'
 import Button from '../Button'
-import AddressForm from '../AddressForm'
-import { FormGroup, TextInput } from 'carbon-components-react'
+import AddressForm from './AddressForm'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../../api/AppContext'
-
-const SectionTitle = styled.h5`
-  margin-bottom: ${ spacing[5] };
-`
 
 const Row = styled.div`
   display: grid;
@@ -19,23 +16,36 @@ const Row = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
+const Divider = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: ${colors.gray[20]};
+  margin-bottom: ${spacing[5]};
+`;
+
+const InlineNotificationStyled = styled(InlineNotification)`
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: ${ spacing[3] };
+`
+
+const SubmissionContainer = styled.div`
+  margin-top: ${ spacing[8] };
+`
+
 export const ContactInfoPage = () => {
   const [err, setErr] = useState(false)
+  const [loading, setLoading] = useState(false)
   const history = useHistory()
   const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
   user && user.signup_completed && user.onboarding_completed && history.push('/')
   useEffect(() => {
     const signup = async () => {
+      console.log('Signing up')
       const { error } = await api.signup(ambassador)
       if (error) return setErr(error.msg)
       const { userError } = await fetchUser()
       if (userError) return setErr(userError.msg)
-
-      if (process.env.REACT_APP_ORG === 'NGP') {
-        history.push('/onboarding/ngp/01')
-      }else{
-        history.push('/onboarding/01')
-      }
     }
     if (ambassador.signupComplete) {
       signup()
@@ -43,9 +53,11 @@ export const ContactInfoPage = () => {
   }, [ ambassador ])
   return (
     <PageLayout
-      error={err}
       title="Please Enter Your Details"
-      onClickSubmit={(e) => {
+    >
+    <ResponsiveContainer>
+    <Form
+      onSubmit={(e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
 
@@ -71,8 +83,8 @@ export const ContactInfoPage = () => {
           }
         })
       }}
+      loading={loading}
     >
-      <SectionTitle>Personal Info</SectionTitle>
       <FormGroup>
         <Row>
           <TextInput
@@ -91,35 +103,60 @@ export const ContactInfoPage = () => {
           />
         </Row>
       </FormGroup>
-      <SectionTitle>Address</SectionTitle>
-      <AddressForm 
-        ambassador={ambassador}
-      />
-      <SectionTitle>Contact</SectionTitle>
       <FormGroup>
         <Row>
           <TextInput
-            name="email"
-            invalidText="Invalid error message."
-            labelText="Email"
-            defaultValue={ambassador.email}
-          />
-          <TextInput
-            name="phone"
-            invalidText="Invalid error message."
-            labelText="Phone number*"
-            defaultValue={ambassador.phone}
+            name="date_of_birth"
+            placeholder="mm/dd/yyyy"
+            labelText="Date of Birth*"
+            type="text"
+            defaultValue={ambassador.date_of_birth}
             required
           />
         </Row>
       </FormGroup>
-      <Button 
+      <Divider />
+      <AddressForm
+        ambassador={ambassador}
+      />
+      <Divider />
+      <FormGroup>
+        <TextInput
+          name="email"
+          invalidText="Invalid error message."
+          labelText="Email"
+          defaultValue={ambassador.email}
+        />
+      </FormGroup>
+      <FormGroup>
+        <TextInput
+          name="phone"
+          invalidText="Invalid error message."
+          labelText="Phone number*"
+          defaultValue={ambassador.phone}
+          required
+        />
+      </FormGroup>
+      <SubmissionContainer>
+      {err && (
+        <InlineNotificationStyled
+          hideCloseButton
+          kind="error"
+          icondescription="Dismiss notification"
+          subtitle={err}
+          title={null}
+        />
+      )}
+      <Button
         type="submit"
         trackingEvent={{ category: 'SubmitSignupInfo', label: 'Submit'}}
         isAForm
       >
         Submit
       </Button>
+      </SubmissionContainer>
+    </Form>
+    </ResponsiveContainer>
     </PageLayout>
   )
 }

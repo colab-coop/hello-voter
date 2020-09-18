@@ -28,6 +28,7 @@ const PillButton = styled.div`
   border: 2px solid ${ colors.gray[20]};
   display: flex;
   align-items: center;
+  white-space: nowrap;
   &:hover {
     border: 2px solid ${ colors.blue[60]};
   }
