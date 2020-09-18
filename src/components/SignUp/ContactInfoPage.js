@@ -46,12 +46,6 @@ export const ContactInfoPage = () => {
       if (error) return setErr(error.msg)
       const { userError } = await fetchUser()
       if (userError) return setErr(userError.msg)
-
-      if (process.env.REACT_APP_ORG === 'NGP') {
-        history.push('/onboarding/ngp/01')
-      }else{
-        history.push('/onboarding/01')
-      }
     }
     if (ambassador.signupComplete) {
       signup()
