@@ -14,18 +14,19 @@ This software enables a "Voting Ambassador" workflow for get-out-the-vote campai
 | |____icons
 ```
 
+### Prerequisites
+
+- Node. We recommend installing via [Node Version Manager](https://github.com/nvm-sh/nvm#installing-and-updating).
+
 ### Installation
 
-Before starting the server, copy .env.example to .env.
-```
-npm install
-npm start
-```
+1. Copy `.env.example` to `.env`: `cp .env.example .env`
+1. Install dependencies: `npm install`
+1. Start the server: `npm start`
 
-And you should be good to go. If you want to see storybook stuff, execute
-```
-npm run storybook
-```
+Optionally,
+
+1. If you want to see storybook stuff: `npm run storybook`
 
 ### Styling
 
