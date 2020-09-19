@@ -3,14 +3,14 @@ import { useHistory } from 'react-router-dom'
 import { Help20, AppSwitcher20, Close24 } from '@carbon/icons-react'
 import { ThemeProvider } from 'styled-components'
 
-import { 
-  theme, 
-  Header, 
-  FlexContainer, 
-  Logo, 
-  HeaderGlobalBar, 
+import {
+  theme,
+  Header,
+  FlexContainer,
+  Logo,
+  HeaderGlobalBar,
   HeaderGlobalAction,
-  HeaderNavigationStyled, 
+  HeaderNavigationStyled,
   HeaderMenuItemStyled,
   HeaderPanelStyled,
   SwitcherStyled,
@@ -38,8 +38,10 @@ export default ({ isApproved }) => {
           }}
         />
         {isApproved && (
-          <HeaderNavigationStyled>
-            <HeaderMenuItemStyled 
+          <HeaderNavigationStyled
+            aria-label="Menu"
+          >
+            <HeaderMenuItemStyled
               onClick={() => {
                 redirect("/triplers");
               }}
@@ -47,7 +49,7 @@ export default ({ isApproved }) => {
               Vote Triplers
             </HeaderMenuItemStyled>
             {REACT_APP_PAYMENT_FEATURE &&
-              <HeaderMenuItemStyled 
+              <HeaderMenuItemStyled
                 onClick={() => {
                   redirect("/payments");
                 }}
@@ -89,7 +91,7 @@ export default ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/triplers")}}>
               Vote Triplers
             </SwitcherItemStyled>
-            {/* 
+            {/*
               FIXME: Hide payments `REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE` & `REACT_APP_PAYMENT_FEATURE`
               with Boolean rather than "true" and empty .env field
             */}
