@@ -119,12 +119,14 @@ const AddTriplersPage = ({ triplers, claimTriplers, search, loading, error }) =>
           placeHolderText="First Name"
           size="lg"
           onChange={() => ([])}
+          labelText=""
         />
         <SearchFieldStyled
           name="lastName"
           placeHolderText="Last Name"
           size="lg"
           onChange={() => ([])}
+          labelText=""
         />
         <SearchButtonStyled size="field" kind="tertiary" type="submit" disabled={loading}>
           Search
