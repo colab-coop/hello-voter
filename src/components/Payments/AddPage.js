@@ -14,11 +14,10 @@ import { useHistory } from 'react-router-dom'
 
 const { REACT_APP_PLAID_KEY, REACT_APP_PAYMENT_TYPE } = process.env
 
-const AACComponent = window.paypal.PayoutsAAC.driver('react', {
+const AACComponent = window.paypal ? window.paypal.PayoutsAAC.driver('react', {
   React,
   ReactDOM
-});
-
+}) : null;
 
 const Chime = styled.img`
   width: 24px;
