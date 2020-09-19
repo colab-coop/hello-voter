@@ -75,3 +75,10 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
 
 - Merge into `ambassador-stage` branch to view on staging server
 - Merge into `ambassador` branch to view on production server
+
+### Troubleshooting
+
+- When signing up, if you see: `Sorry, but state employment laws don't allow us to pay Voting Ambassadors in your state.` you can use the following mock address:
+
+      1300 E Park Ave
+      Tallahassee, FL 32301
