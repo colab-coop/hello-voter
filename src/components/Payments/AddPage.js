@@ -95,7 +95,7 @@ export default () => {
         onLogin={onPaypal}/>
       }
       <Button
-        small
+        size="small"
         style={{marginTop: 0}}
         kind="tertiary"
         href={"/payments"}

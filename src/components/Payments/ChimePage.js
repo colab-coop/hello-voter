@@ -74,7 +74,7 @@ export default () => {
         Sign up for a Chime account
       </Button>
       <Button
-        small
+        size="small"
         kind="tertiary"
         // trackingEvent={{
         //   category: "BackFromTriplerConfirm",

@@ -72,18 +72,18 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       phone: formData.get('phone'),
       triplees: [
         {
-          first_name: formData.get('triplee1_first'), 
-          last_name: formData.get('triplee1_last'), 
+          first_name: formData.get('triplee1_first'),
+          last_name: formData.get('triplee1_last'),
           housemate: handleHousemate(formData.get('triplee1_housemate'))
         },
         {
-          first_name: formData.get('triplee2_first'), 
-          last_name: formData.get('triplee2_last'), 
+          first_name: formData.get('triplee2_first'),
+          last_name: formData.get('triplee2_last'),
           housemate: handleHousemate(formData.get('triplee2_housemate'))
         },
         {
-          first_name: formData.get('triplee3_first'), 
-          last_name: formData.get('triplee3_last'), 
+          first_name: formData.get('triplee3_first'),
+          last_name: formData.get('triplee3_last'),
           housemate: handleHousemate(formData.get('triplee3_housemate'))
         },
       ],
@@ -114,7 +114,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       }
     >
     <ResponsiveContainer>
-    <Form 
+    <Form
       onSubmit={submit}
     >
       <p style={{marginBottom: 16}}>Add the names of three Voters the Vote Tripler will remind to vote:</p>
@@ -201,7 +201,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         title={null}
       />
       }
-      <Button 
+      <Button
         type="submit"
         loading={loading}
         trackingEvent={{ category: 'SubmitTriplerConfirm', label: 'Add'}}
@@ -209,9 +209,9 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       >
         Add
       </Button>
-      <Button 
-        small 
-        kind="tertiary" 
+      <Button
+        size="small"
+        kind="tertiary"
         href={'/triplers'}
         trackingEvent={{ category: 'BackFromTriplerConfirm', label: 'Go back to My Vote Triplers'}}
       >
