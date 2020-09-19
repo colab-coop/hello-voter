@@ -30,9 +30,11 @@ Optionally,
 
 ### Testing
 
+We use [React Testing Library](https://testing-library.com/docs/intro) for unit tests (similar to Jest + Enzyme)
+and [Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html) for integration tests.
 Learn more about testing React apps [here](https://reactjs.org/docs/testing.html).
 
-- To run tests: `npm test`. This will launch the test runner in "interactive" mode.
+- To run unit tests: `npm test`. This will launch the test runner in "interactive" mode.
 
 ### Styling
 
