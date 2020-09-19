@@ -1,9 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, waitFor, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getAllByText } = render(<App />);
-  const text = getAllByText(/Loading/i)[0];
-  expect(text).toBeInTheDocument();
+test('renders without error', async () => {
+  render(<App />);
+  // Wait for the 'loading' screen to finish.
+  await waitFor(() => expect(screen.getByText('Log In')).toBeInTheDocument());
 });
