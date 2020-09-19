@@ -13,7 +13,12 @@ export const MenuComp = () => (
 )
 
 export const LoginButtonComp = () => (
-  <LoginButton type='FB' />
+  <div>
+    <LoginButton type='FB' />
+    <LoginButton type='GOOGLE' />
+    <LoginButton type='SMS' />
+    <LoginButton type='PASSWORD' />
+  </div>
 )
 
 export const BreadcrumbsComp = () => (
