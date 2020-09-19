@@ -35,7 +35,8 @@ const PillButton = styled.div`
 `
 
 export default (props) => {
-  const { href, children, kind, loading, onClick, pill, trackingEvent, shouldRedirect, isAForm } = props
+  const { href, children, kind, loading, onClick, pill, shouldRedirect, isAForm } = props
+  const { trackingEvent, ...passThroughProps } = props
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
@@ -56,7 +57,7 @@ export default (props) => {
         onClick && onClick(e);
         href && redirect(href);
       }}
-      {...props}
+      {...passThroughProps}
     >
       {children}
     </PillButton>
@@ -69,7 +70,7 @@ export default (props) => {
         onClick && onClick(e)
         href && !shouldRedirect && redirect(href)
       }}
-      {...props}
+      {...passThroughProps}
     >
       {loading ? (
         <InlineLoadingStyled
