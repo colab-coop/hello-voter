@@ -35,8 +35,10 @@ const PillButton = styled.div`
 `
 
 export default (props) => {
-  const { href, children, kind, loading, onClick, pill, shouldRedirect, isAForm } = props
-  const { trackingEvent, ...passThroughProps } = props
+  const {
+    href, children, kind, loading, onClick, pill, shouldRedirect, isAForm, trackingEvent,
+    ...passThroughProps
+  } = props
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
