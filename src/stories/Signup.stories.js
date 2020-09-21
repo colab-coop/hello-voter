@@ -20,6 +20,6 @@ export const LoginPage = () => (
 export const SignUpPage = () => (
   <>
     <Menu isApproved={false} />
-    <ContactInfoPage ambassador={MAIN_USER} setAmbassador={noop} loading={false} err={null} />
+    <ContactInfoPage ambassador={MAIN_USER} setAmbassador={noop} err={null} />
   </>
 );

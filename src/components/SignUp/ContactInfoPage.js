@@ -33,7 +33,7 @@ const SubmissionContainer = styled.div`
   margin-top: ${ spacing[8] };
 `
 
-export const ContactInfoPage = ({ ambassador, setAmbassador, loading, err }) => {
+export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
   return (
     <PageLayout
       title="Please Enter Your Details"
@@ -66,7 +66,6 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, loading, err }) => 
           }
         })
       }}
-      loading={loading}
     >
       <FormGroup legendText="">
         <Row>
@@ -151,7 +150,6 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, loading, err }) => 
 
 export default () => {
   const [err, setErr] = useState(false)
-  const [loading, setLoading] = useState(false)
   const history = useHistory()
   const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
   user && user.signup_completed && user.onboarding_completed && history.push('/')
@@ -168,6 +166,6 @@ export default () => {
     }
   }, [ ambassador ])
   return (
-    <ContactInfoPage ambassador={ambassador} setAmbassador={setAmbassador} loading={loading} err={err} />
+    <ContactInfoPage ambassador={ambassador} setAmbassador={setAmbassador} err={err} />
   )
 }
