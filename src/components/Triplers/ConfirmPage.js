@@ -53,7 +53,7 @@ const TwoColumnRow = styled.div`
   margin-bottom: ${ spacing[3] };
 `
 
-const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
+export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
   const history = useHistory()
   const [err, setErr] = useState(false)
   const submit = async (e) => {

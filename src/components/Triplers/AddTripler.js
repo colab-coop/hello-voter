@@ -86,7 +86,7 @@ const SearchButtonStyled = styled(Button)`
   }
 `
 
-const AddTriplersPage = ({ triplers, claimTriplers, search, loading, error }) => {
+export const AddTriplersPage = ({ triplers, claimTriplers, search, loading, error }) => {
   return (
     <PageLayout
       title="Add Vote Triplers"

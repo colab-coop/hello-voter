@@ -1,5 +1,6 @@
 import { setupWorker, rest } from 'msw'
-import { AMBASSADOR_URL, PAYMENT_HISTORY_URL } from '../constants';
+import { AMBASSADOR_URL, PAYMENT_HISTORY_URL, TRIPLERS_URL, TRIPLERS_LIMIT_URL, FREE_TRIPLERS_URL } from '../constants';
+import { TRIPLERS_FULL_WITH_AMBASSADOR, TRIPLERS_TO_ADD } from '../stories/Triplers.mocks';
 const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env;
 
 export const MOCK_USER = {
@@ -9,7 +10,7 @@ export const MOCK_USER = {
   "first_name": "BP",
   "last_name": "Tester",
   "phone": "13135551212",
-  "email": "test@example.com",
+  "email": "yourself@example.com",
   "location": {
     "srid": {
       "low": 4326,
@@ -80,6 +81,17 @@ export const MOCK_PAYMENTS_SETTLED = [
 export const worker = setupWorker(
   rest.get(AMBASSADOR_URL, (req, res, ctx) => {
     return res(ctx.json(MOCK_USER))
+  }),
+  rest.get(TRIPLERS_URL, (req, res, ctx) => {
+    return res(ctx.json(TRIPLERS_FULL_WITH_AMBASSADOR))
+  }),
+  rest.get(FREE_TRIPLERS_URL, (req, res, ctx) => {
+    return res(ctx.json([TRIPLERS_TO_ADD]))
+  }),
+  rest.get(TRIPLERS_LIMIT_URL, (req, res, ctx) => {
+    return res(ctx.json({
+      "limit": "10"
+    }))
   }),
   rest.get(PAYMENT_HISTORY_URL, (req, res, ctx) => {
     return res(ctx.json([

@@ -357,7 +357,7 @@ export default () => {
   )
 }
 
-const TriplersPage = ({ triplers, remindTripler, limit, deleteTripler }) => {
+export const TriplersPage = ({ triplers, remindTripler, limit, deleteTripler }) => {
   const confirmed = triplers.filter((tripler) => tripler.status === 'confirmed')
   const pending = triplers.filter((tripler) => tripler.status === 'pending')
   const unconfirmed = triplers.filter((tripler) => tripler.status === 'unconfirmed')
