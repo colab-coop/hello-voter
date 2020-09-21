@@ -27,6 +27,9 @@ export const worker = setupWorker(
     // TODO: Filter this list based on `?firstName=foo&lastName=bar`
     return res(ctx.json(TRIPLERS_TO_ADD))
   }),
+  rest.put(TRIPLERS_URL, (req, res, ctx) => {
+    return res(ctx.json({}))
+  }),
   rest.get(TRIPLERS_LIMIT_URL, (req, res, ctx) => {
     return res(ctx.json({
       "limit": "10"
