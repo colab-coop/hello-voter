@@ -237,6 +237,7 @@ const Triplers = ({
           </Paragraph>
           {unconfirmed.map((tripler) => (
             <TriplerRow
+              key={tripler.id}
               id={tripler.id}
               name={`${tripler.first_name} ${tripler.last_name}`}
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
@@ -254,6 +255,7 @@ const Triplers = ({
           </Paragraph>
           {pending.map((tripler) => (
             <TriplerRow
+              key={tripler.id}
               id={tripler.id}
               name={`${tripler.first_name} ${tripler.last_name}`}
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
@@ -273,7 +275,8 @@ const Triplers = ({
               : "These Vote Triplers have been confirmed — great work!"}
           </ParagraphMinHeight48>
           {confirmed.map((tripler, i) => (
-              <TriplerRow
+            <TriplerRow
+              key={tripler.id}
               name={`${tripler.first_name} ${tripler.last_name}`}
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
               onClick={() => {}}
@@ -295,6 +298,7 @@ const Triplers = ({
           </Paragraph>
           {ambassadorNotConfirmed.map((tripler) => (
             <TriplerRow
+              key={tripler.id}
               id={tripler.id}
               name={`${tripler.first_name} ${tripler.last_name}`}
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
@@ -311,6 +315,7 @@ const Triplers = ({
           </ParagraphMinHeight72>
           {ambassadorConfirmed.map((tripler, i) => (
             <TriplerRow
+              key={tripler.id}
               name={`${tripler.first_name} ${tripler.last_name}`}
               address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
               ambassadorConfirmed

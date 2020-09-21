@@ -1,5 +1,6 @@
 export const TRIPLERS_UNCONFIRMED = [
   {
+    id: "1",
     status: "unconfirmed",
     first_name: "Lauren",
     last_name: "R",
@@ -15,56 +16,7 @@ export const TRIPLERS_UNCONFIRMED = [
 
 export const TRIPLERS_PENDING = [
   {
-    status: "pending",
-    first_name: "Lauren",
-    last_name: "R",
-    address: {
-      address1: "200 Address lane",
-      city: "Denver",
-      state: "CO",
-    },
-    is_ambassador: false,
-    is_ambassador_and_has_confirmed: false
-  },
-]
-
-export const TRIPLERS_CONFIRMED = [
-  {
-    status: "confirmed",
-    first_name: "Lauren",
-    last_name: "R",
-    address: {
-      address1: "200 Address lane",
-      city: "Denver",
-      state: "CO",
-    },
-    is_ambassador: false,
-    is_ambassador_and_has_confirmed: false
-  },
-]
-
-export const TRIPLERS_FULL = [
-  {
-    status: "unconfirmed",
-    first_name: "Lauren",
-    last_name: "R",
-    address: {
-      address1: "200 Address lane",
-      city: "Denver",
-      state: "CO",
-    },
-    is_ambassador: false,
-    is_ambassador_and_has_confirmed: false,
-  },
-  {
-    status: "unconfirmed",
-    first_name: "Edison",
-    last_name: "Shepherd",
-    address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
-    is_ambassador: false,
-    is_ambassador_and_has_confirmed: false,
-  },
-  {
+    id: "2",
     status: "pending",
     first_name: "Michael",
     last_name: "Marsh",
@@ -76,7 +28,38 @@ export const TRIPLERS_FULL = [
     is_ambassador: false,
     is_ambassador_and_has_confirmed: false,
   },
+]
+
+export const TRIPLERS_CONFIRMED = [
   {
+    id: "3",
+    status: "confirmed",
+    first_name: "Mike",
+    last_name: "Marsher",
+    address: {
+      address1: "200 Address lane",
+      city: "Denver",
+      state: "CO",
+    },
+    is_ambassador: false,
+    is_ambassador_and_has_confirmed: false,
+  },
+]
+
+export const TRIPLERS_FULL = [
+  ...TRIPLERS_UNCONFIRMED,
+  {
+    id: "4",
+    status: "unconfirmed",
+    first_name: "Edison",
+    last_name: "Shepherd",
+    address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
+    is_ambassador: false,
+    is_ambassador_and_has_confirmed: false,
+  },
+  ...TRIPLERS_PENDING,
+  {
+    id: "5",
     status: "pending",
     first_name: "Edison",
     last_name: "Shepherd",
@@ -85,6 +68,7 @@ export const TRIPLERS_FULL = [
     is_ambassador_and_has_confirmed: false,
   },
   {
+    id: "6",
     status: "pending",
     first_name: "Lauren",
     last_name: "Ralph",
@@ -92,19 +76,9 @@ export const TRIPLERS_FULL = [
     is_ambassador: false,
     is_ambassador_and_has_confirmed: false,
   },
+  ...TRIPLERS_CONFIRMED,
   {
-    status: "confirmed",
-    first_name: "Michael",
-    last_name: "Marsh",
-    address: {
-      address1: "200 Address lane",
-      city: "Denver",
-      state: "CO",
-    },
-    is_ambassador: false,
-    is_ambassador_and_has_confirmed: false,
-  },
-  {
+    id: "7",
     status: "confirmed",
     first_name: "Edison",
     last_name: "Shepherd",
@@ -115,27 +89,11 @@ export const TRIPLERS_FULL = [
 ]
 
 export const TRIPLERS_FULL_WITH_AMBASSADOR = [
+  ...TRIPLERS_UNCONFIRMED,
+  ...TRIPLERS_PENDING,
+  ...TRIPLERS_CONFIRMED,
   {
-    status: "unconfirmed",
-    first_name: "Lauren",
-    last_name: "R",
-    address: {
-      address1: "200 Address lane",
-      city: "Denver",
-      state: "CO",
-    },
-    is_ambassador: false,
-    is_ambassador_and_has_confirmed: false
-  },
-  {
-    status: "unconfirmed",
-    first_name: "Edison",
-    last_name: "Shepherd",
-    address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
-    is_ambassador: false,
-    is_ambassador_and_has_confirmed: false
-  },
-  {
+    id: "8",
     status: "pending",
     first_name: "Michael",
     last_name: "Marsh",
@@ -148,6 +106,7 @@ export const TRIPLERS_FULL_WITH_AMBASSADOR = [
     is_ambassador_and_has_confirmed: true
   },
   {
+    id: "9",
     status: "pending",
     first_name: "Edison",
     last_name: "Shepherd",
@@ -156,6 +115,7 @@ export const TRIPLERS_FULL_WITH_AMBASSADOR = [
     is_ambassador_and_has_confirmed: false
   },
   {
+    id: "10",
     status: "pending",
     first_name: "Lauren",
     last_name: "Ralph",
@@ -164,6 +124,7 @@ export const TRIPLERS_FULL_WITH_AMBASSADOR = [
     is_ambassador_and_has_confirmed: true
   },
   {
+    id: "11",
     status: "confirmed",
     first_name: "Michael",
     last_name: "Marsh",
@@ -176,6 +137,7 @@ export const TRIPLERS_FULL_WITH_AMBASSADOR = [
     is_ambassador_and_has_confirmed: false
   },
   {
+    id: "12",
     status: "confirmed",
     first_name: "Edison",
     last_name: "Shepherd",
