@@ -33,24 +33,7 @@ const SubmissionContainer = styled.div`
   margin-top: ${ spacing[8] };
 `
 
-export const ContactInfoPage = () => {
-  const [err, setErr] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const history = useHistory()
-  const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
-  user && user.signup_completed && user.onboarding_completed && history.push('/')
-  useEffect(() => {
-    const signup = async () => {
-      console.log('Signing up')
-      const { error } = await api.signup(ambassador)
-      if (error) return setErr(error.msg)
-      const { userError } = await fetchUser()
-      if (userError) return setErr(userError.msg)
-    }
-    if (ambassador.signupComplete) {
-      signup()
-    }
-  }, [ ambassador ])
+export const ContactInfoPage = ({ ambassador, setAmbassador, loading, err }) => {
   return (
     <PageLayout
       title="Please Enter Your Details"
@@ -163,5 +146,28 @@ export const ContactInfoPage = () => {
     </Form>
     </ResponsiveContainer>
     </PageLayout>
+  )
+}
+
+export default () => {
+  const [err, setErr] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
+  const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
+  user && user.signup_completed && user.onboarding_completed && history.push('/')
+  useEffect(() => {
+    const signup = async () => {
+      console.log('Signing up')
+      const { error } = await api.signup(ambassador)
+      if (error) return setErr(error.msg)
+      const { userError } = await fetchUser()
+      if (userError) return setErr(userError.msg)
+    }
+    if (ambassador.signupComplete) {
+      signup()
+    }
+  }, [ ambassador ])
+  return (
+    <ContactInfoPage ambassador={ambassador} setAmbassador={setAmbassador} loading={loading} err={err} />
   )
 }

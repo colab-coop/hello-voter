@@ -2,10 +2,13 @@ import React from "react";
 import Menu from "../components/Menu";
 import { LogIn } from "../components/Login";
 import { ContactInfoPage } from "../components/SignUp/ContactInfoPage";
+import { MAIN_USER } from './Home.mocks';
 
 export default {
   title: "SignUp",
 };
+
+const noop = () => {}
 
 export const LoginPage = () => (
   <>
@@ -17,6 +20,6 @@ export const LoginPage = () => (
 export const SignUpPage = () => (
   <>
     <Menu isApproved={false} />
-    <ContactInfoPage />
+    <ContactInfoPage ambassador={MAIN_USER} setAmbassador={noop} loading={false} err={null} />
   </>
 );
