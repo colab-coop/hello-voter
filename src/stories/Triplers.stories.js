@@ -2,7 +2,7 @@ import React from "react";
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";
 import { TriplersPage } from "../components/Triplers/TriplersPage";
-import { AddTriplersPage } from "../components/Triplers/AddTripler";
+import { AddTriplersPage, normalizeTripler } from "../components/Triplers/AddTripler";
 import { ConfirmPage } from "../components/Triplers/ConfirmPage";
 import {
   TRIPLERS_UNCONFIRMED,
@@ -100,8 +100,8 @@ export const AddTriplers = () => (
   <>
     <Menu isApproved={true} />
     <AddTriplersPage
-      {...defaultConfirmTriplersPageProps}
-      triplers={TRIPLERS_TO_ADD}
+      {...defaultAddTriplersPageProps}
+      triplers={TRIPLERS_TO_ADD.map(normalizeTripler)}
     />
   </>
 );

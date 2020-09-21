@@ -14,7 +14,7 @@ export const worker = setupWorker(
     return res(ctx.json(TRIPLERS_FULL_WITH_AMBASSADOR))
   }),
   rest.get(FREE_TRIPLERS_URL, (req, res, ctx) => {
-    return res(ctx.json([TRIPLERS_TO_ADD]))
+    return res(ctx.json(TRIPLERS_TO_ADD))
   }),
   rest.get(TRIPLERS_LIMIT_URL, (req, res, ctx) => {
     return res(ctx.json({

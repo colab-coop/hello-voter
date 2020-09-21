@@ -150,132 +150,158 @@ export const TRIPLERS_FULL_WITH_AMBASSADOR = [
 export const TRIPLERS_TO_ADD = [
   {
     id: "a",
-    name: "Judy Blume",
-    address: "1 Really Long Address Ln Lorem Ipsum Lorem Ipsum",
+    first_name: "Judy",
+    last_name: "Blume",
+    address: { address1: "1 Really Long Address Ln Lorem Ipsum Lorem Ipsum", city: "Denver", state: "CO" }
   },
   {
     id: "b",
-    name: "Edison Shepherd",
-    address: "1 Good Boy Rd",
+    first_name: "Edison",
+    last_name: "Shepherd",
+    address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" }
   },
   {
     id: "c",
-    name: "Lauren Ralph",
-    address: "1 Road Rd",
+    first_name: "Lauren",
+    last_name: "Ralph",
+    address: { address1: "1 Road Rd", city: "Denver", state: "CO" }
   },
   {
     id: "d",
-    name: "Pamela Jones",
-    address: "1 Jones Road Rd",
+    first_name: "Pamela",
+    last_name: "Jones",
+    address: { address1: "1 Jones Road Rd", city: "Denver", state: "CO" }
   },
   {
     id: "e",
-    name: "Torr Carbin",
-    address: "31 Autumn Leaf Avenue",
+    first_name: "Torr",
+    last_name: "Carbin",
+    address: { address1: "31 Autumn Leaf Avenue", city: "Denver", state: "CO" }
   },
   {
     id: "f",
-    name: "Stepha Gleadhell",
-    address: "1716 Warner Drive",
+    first_name: "Stepha",
+    last_name: "Gleadhell",
+    address: { address1: "1716 Warner Drive", city: "Denver", state: "CO" }
   },
   {
     id: "g",
-    name: "Charmaine Kilalea",
-    address: "378 Carey Alley",
+    first_name: "Charmaine",
+    last_name: "Kilalea",
+    address: { address1: "378 Carey Alley", city: "Denver", state: "CO" }
   },
   {
     id: "h",
-    name: "Janeczka Pauletto",
-    address: "16 Lukken Trail",
+    first_name: "Janeczka",
+    last_name: "Pauletto",
+    address: { address1: "16 Lukken Trail", city: "Denver", state: "CO" }
   },
   {
     id: "i",
-    name: "Guthry Ondrich",
-    address: "7673 Moose Parkway",
+    first_name: "Guthry",
+    last_name: "Ondrich",
+    address: { address1: "7673 Moose Parkway", city: "Denver", state: "CO" }
   },
   {
     id: "j",
-    name: "Nils Aspinall",
-    address: "4 Mendota Plaza",
+    first_name: "Nils",
+    last_name: "Aspinall",
+    address: { address1: "4 Mendota Plaza", city: "Denver", state: "CO" }
   },
   {
     id: "k",
-    name: "Vaclav Comolli",
-    address: "186 Dryden Pass",
+    first_name: "Vaclav",
+    last_name: "Comolli",
+    address: { address1: "186 Dryden Pass", city: "Denver", state: "CO" }
   },
   {
     id: "l",
-    name: "Xylina Blakey",
-    address: "23824 Toban Lane",
+    first_name: "Xylina",
+    last_name: "Blakey",
+    address: { address1: "23824 Toban Lane", city: "Denver", state: "CO" }
   },
   {
     id: "m",
-    name: "Tann Robrow",
-    address: "49337 Waywood Circle",
+    first_name: "Tann",
+    last_name: "Robrow",
+    address: { address1: "49337 Waywood Circle", city: "Denver", state: "CO" }
   },
   {
     id: "n",
-    name: "Gretchen Kenningham",
-    address: "3599 Declaration Center",
+    first_name: "Gretchen",
+    last_name: "Kenningham",
+    address: { address1: "3599 Declaration Center", city: "Denver", state: "CO" }
   },
   {
     id: "o",
-    name: "Karel Colledge",
-    address: "23602 Myrtle Circle",
+    first_name: "Karel",
+    last_name: "Colledge",
+    address: { address1: "23602 Myrtle Circle", city: "Denver", state: "CO" }
   },
   {
     id: "p",
-    name: "Tremain Greenhouse",
-    address: "3 Leroy Plaza",
+    first_name: "Tremain",
+    last_name: "Greenhouse",
+    address: { address1: "3 Leroy Plaza", city: "Denver", state: "CO" }
   },
   {
     id: "q",
-    name: "Venita Perryn",
-    address: "5 Judy Pass",
+    first_name: "Venita",
+    last_name: "Perryn",
+    address: { address1: "5 Judy Pass", city: "Denver", state: "CO" }
   },
   {
     id: "r",
-    name: "Neal Cherrett",
-    address: "6 Merrick Road",
+    first_name: "Neal",
+    last_name: "Cherrett",
+    address: { address1: "6 Merrick Road", city: "Denver", state: "CO" }
   },
   {
     id: "s",
-    name: "Abagail Kershaw",
-    address: "2 Merrick Park",
+    first_name: "Abagail",
+    last_name: "Kershaw",
+    address: { address1: "2 Merrick Park", city: "Denver", state: "CO" }
   },
   {
     id: "t",
-    name: "Vidovik Michelotti",
-    address: "7899 David Junction",
+    first_name: "Vidovik",
+    last_name: "Michelotti",
+    address: { address1: "7899 David Junction", city: "Denver", state: "CO" }
   },
   {
     id: "u",
-    name: "Clyve Tirrell",
-    address: "21357 Brentwood Crossing",
+    first_name: "Clyve",
+    last_name: "Tirrell",
+    address: { address1: "21357 Brentwood Crossing", city: "Denver", state: "CO" }
   },
   {
     id: "v",
-    name: "Jeannine O'Loinn",
-    address: "86170 Mifflin Terrace",
+    first_name: "Jeannine",
+    last_name: "O'Loinn",
+    address: { address1: "86170 Mifflin Terrace", city: "Denver", state: "CO" }
   },
   {
     id: "w",
-    name: "Alaric Musselwhite",
-    address: "05 Weeping Birch Drive",
+    first_name: "Alaric",
+    last_name: "Musselwhite",
+    address: { address1: "05 Weeping Birch Drive", city: "Denver", state: "CO" }
   },
   {
     id: "x",
-    name: "Trefor Merit",
-    address: "1 Surrey Road",
+    first_name: "Trefor",
+    last_name: "Merit",
+    address: { address1: "1 Surrey Road", city: "Denver", state: "CO" }
   },
   {
     id: "y",
-    name: "Ramon Breed",
-    address: "85 Kipling Terrace",
+    first_name: "Ramon",
+    last_name: "Breed",
+    address: { address1: "85 Kipling Terrace", city: "Denver", state: "CO" }
   },
   {
     id: "z",
-    name: "Joann Pawden",
-    address: "2 Hollow Ridge Parkway",
+    first_name: "Joann",
+    last_name: "Pawden",
+    address: { address1: "2 Hollow Ridge Parkway", city: "Denver", state: "CO" }
   },
 ]
