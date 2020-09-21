@@ -122,12 +122,14 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         <SubTitle>Voter 1</SubTitle>
         <TwoColumnRow>
         <TextInput
+          id="triplee1_first"
           name="triplee1_first"
           invalidText="Invalid error message."
           labelText="First Name*"
           required
         />
         <TextInput
+          id="triplee1_last"
           name="triplee1_last"
           invalidText="Invalid error message."
           labelText="Last Name*"
@@ -144,12 +146,14 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       <SubTitle>Voter 2</SubTitle>
         <TwoColumnRow>
         <TextInput
+          id="triplee2_first"
           name="triplee2_first"
           invalidText="Invalid error message."
           labelText="First Name*"
           required
         />
         <TextInput
+          id="triplee2_last"
           name="triplee2_last"
           invalidText="Invalid error message."
           labelText="Last Name*"
@@ -166,12 +170,14 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         <SubTitle>Voter 3</SubTitle>
         <TwoColumnRow>
         <TextInput
+          id="triplee3_first"
           name="triplee3_first"
           invalidText="Invalid error message."
           labelText="First Name*"
           required
         />
         <TextInput
+          id="triplee3_last"
           name="triplee3_last"
           invalidText="Invalid error message."
           labelText="Last Name*"
@@ -187,6 +193,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       <p>Add the Vote Tripler's phone number so we can confirm their identity and send you your payment!</p>
       <FormGroup legendText="">
         <TextInput
+          id="phone"
           name="phone"
           invalidText="Invalid error message."
           labelText={`${tripler.first_name}'s Phone Number*`}

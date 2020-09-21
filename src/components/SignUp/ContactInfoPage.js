@@ -88,6 +88,7 @@ export const ContactInfoPage = () => {
       <FormGroup legendText="">
         <Row>
           <TextInput
+            id="first_name"
             name="first_name"
             invalidText="Invalid error message."
             labelText="First Name*"
@@ -95,6 +96,7 @@ export const ContactInfoPage = () => {
             required
           />
           <TextInput
+            id="last_name"
             name="last_name"
             invalidText="Invalid error message."
             labelText="Last Name*"
@@ -106,6 +108,7 @@ export const ContactInfoPage = () => {
       <FormGroup legendText="">
         <Row>
           <TextInput
+            id="date_of_birth"
             name="date_of_birth"
             placeholder="mm/dd/yyyy"
             labelText="Date of Birth*"
@@ -122,6 +125,7 @@ export const ContactInfoPage = () => {
       <Divider />
       <FormGroup legendText="">
         <TextInput
+          id="email"
           name="email"
           invalidText="Invalid error message."
           labelText="Email"
@@ -130,6 +134,7 @@ export const ContactInfoPage = () => {
       </FormGroup>
       <FormGroup legendText="">
         <TextInput
+          id="phone"
           name="phone"
           invalidText="Invalid error message."
           labelText="Phone number*"
