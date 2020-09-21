@@ -3,16 +3,25 @@ import Menu from "../components/Menu";
 import { PaymentsPage } from "../components/Payments/PaymentsPage";
 import Add from "../components/Payments/AddPage";
 import Chime from "../components/Payments/ChimePage";
-import { MOCK_USER, MOCK_PAYMENTS_PENDING, MOCK_PAYMENTS_SETTLED } from '../api/mocks';
+import { MAIN_USER } from './Home.mocks';
+import { PAYMENTS_PENDING, PAYMENTS_SETTLED } from './Payments.mocks';
 
 export default {
   title: "Payments",
 };
 
+const defaultProps = {
+  user: MAIN_USER,
+  payments: []
+}
+
 export const PaymentsEmpty = () => (
   <>
     <Menu isApproved={true} />
-    <PaymentsPage user={[]} payments={[]} />
+    <PaymentsPage
+      {...defaultProps}
+      user={[]}
+    />
   </>
 );
 
@@ -20,8 +29,8 @@ export const PaymentsPending = () => (
   <>
     <Menu isApproved={true} />
     <PaymentsPage
-      user={MOCK_USER}
-      payments={MOCK_PAYMENTS_PENDING}
+      {...defaultProps}
+      payments={PAYMENTS_PENDING}
     />
   </>
 );
@@ -30,8 +39,8 @@ export const PaymentsSettled = () => (
   <>
     <Menu isApproved={true} />
     <PaymentsPage
-      user={MOCK_USER}
-      payments={MOCK_PAYMENTS_SETTLED}
+      {...defaultProps}
+      payments={PAYMENTS_SETTLED}
     />
   </>
 );
@@ -40,10 +49,10 @@ export const PaymentsFull = () => (
   <>
     <Menu isApproved={true} />
     <PaymentsPage
-      user={MOCK_USER}
+      {...defaultProps}
       payments={[
-        ...MOCK_PAYMENTS_PENDING,
-        ...MOCK_PAYMENTS_SETTLED,
+        ...PAYMENTS_PENDING,
+        ...PAYMENTS_SETTLED,
       ]}
     />
   </>
