@@ -1,5 +1,6 @@
 import { setupWorker, rest } from 'msw'
 import { AMBASSADOR_URL, PAYMENT_HISTORY_URL } from '../constants';
+const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env;
 
 export const MOCK_USER = {
   "id": "fake123",
@@ -40,6 +41,40 @@ export const MOCK_USER = {
   },
 }
 
+export const MOCK_PAYMENTS_PENDING = [
+  {
+    id: "a",
+    tripler_name: "Epison Shepherd",
+    formatted_disbursed_at: "June 09",
+    formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+    status: "pending",
+  },
+  {
+    id: "b",
+    tripler_name: "Lauren Ralph",
+    formatted_disbursed_at: "June 10",
+    formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+    status: "pending",
+  },
+]
+
+export const MOCK_PAYMENTS_SETTLED = [
+  {
+    id: "c",
+    tripler_name: "Rebekah Tripler",
+    formatted_disbursed_at: "June 09",
+    formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+    status: "settled",
+  },
+  {
+    id: "d",
+    tripler_name: "Desee Tripler",
+    formatted_disbursed_at: "June 10",
+    formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
+    status: "settled",
+  },
+]
+
 // Export the worker instance, so we can await the activation on Storybook's runtime.
 // You can use this reference to start the worker for local development as well.
 export const worker = setupWorker(
@@ -47,6 +82,9 @@ export const worker = setupWorker(
     return res(ctx.json(MOCK_USER))
   }),
   rest.get(PAYMENT_HISTORY_URL, (req, res, ctx) => {
-    return res(ctx.json([]))
+    return res(ctx.json([
+      ...MOCK_PAYMENTS_PENDING,
+      ...MOCK_PAYMENTS_SETTLED,
+    ]))
   })
 )
