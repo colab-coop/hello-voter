@@ -12,6 +12,7 @@ import {
   TRIPLERS_FULL_WITH_AMBASSADOR,
   TRIPLERS_TO_ADD,
 } from './Triplers.mocks';
+import { MAIN_USER } from './Home.mocks';
 
 export default {
   title: "Triplers",
@@ -110,6 +111,7 @@ export const ConfirmTriplers = () => (
     <Menu isApproved={true} />
     <ConfirmPage
       {...defaultConfirmTriplersPageProps}
+      tripler={MAIN_USER}
     />
   </>
 );
