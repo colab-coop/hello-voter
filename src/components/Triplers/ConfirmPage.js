@@ -118,7 +118,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       onSubmit={submit}
     >
       <p style={{marginBottom: 16}}>Add the names of three Voters the Vote Tripler will remind to vote:</p>
-      <FormGroup>
+      <FormGroup legendText="">
         <SubTitle>Voter 1</SubTitle>
         <TwoColumnRow>
         <TextInput
@@ -140,7 +140,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           labelText="Housemate"
         />
       </FormGroup>
-      <FormGroup>
+      <FormGroup legendText="">
       <SubTitle>Voter 2</SubTitle>
         <TwoColumnRow>
         <TextInput
@@ -162,7 +162,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           labelText="Housemate"
         />
       </FormGroup>
-      <FormGroup>
+      <FormGroup legendText="">
         <SubTitle>Voter 3</SubTitle>
         <TwoColumnRow>
         <TextInput
@@ -185,7 +185,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         />
       </FormGroup>
       <p>Add the Vote Tripler's phone number so we can confirm their identity and send you your payment!</p>
-      <FormGroup>
+      <FormGroup legendText="">
         <TextInput
           name="phone"
           invalidText="Invalid error message."

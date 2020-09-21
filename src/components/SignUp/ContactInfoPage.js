@@ -85,7 +85,7 @@ export const ContactInfoPage = () => {
       }}
       loading={loading}
     >
-      <FormGroup>
+      <FormGroup legendText="">
         <Row>
           <TextInput
             name="first_name"
@@ -103,7 +103,7 @@ export const ContactInfoPage = () => {
           />
         </Row>
       </FormGroup>
-      <FormGroup>
+      <FormGroup legendText="">
         <Row>
           <TextInput
             name="date_of_birth"
@@ -120,7 +120,7 @@ export const ContactInfoPage = () => {
         ambassador={ambassador}
       />
       <Divider />
-      <FormGroup>
+      <FormGroup legendText="">
         <TextInput
           name="email"
           invalidText="Invalid error message."
@@ -128,7 +128,7 @@ export const ContactInfoPage = () => {
           defaultValue={ambassador.email}
         />
       </FormGroup>
-      <FormGroup>
+      <FormGroup legendText="">
         <TextInput
           name="phone"
           invalidText="Invalid error message."
