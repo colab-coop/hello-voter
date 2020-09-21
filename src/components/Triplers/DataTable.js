@@ -83,7 +83,7 @@ const renderTable = (batchActionClick) => (
             <TableBatchAction
               renderIcon={AddAlt16}
               iconDescription="Download the selected rows"
-              onClick={batchActionClick(selectedRows)}
+              onClick={() => batchActionClick(selectedRows)}
             >
               Add {selectedRows.length} Tripler(s) to my list
             </TableBatchAction>

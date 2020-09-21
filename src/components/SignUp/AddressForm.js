@@ -42,8 +42,9 @@ const RowRight = styled.div`
 
 export default ({ ambassador }) => (
   <>
-    <FormGroup>
+    <FormGroup legendText="">
       <TextInput
+        id="address1"
         name="address1"
         invalidText="Invalid error message."
         labelText="Street Address*"
@@ -51,10 +52,11 @@ export default ({ ambassador }) => (
         required
       />
     </FormGroup>
-    <FormGroup>
+    <FormGroup legendText="">
       <Row>
         <RowLeft>
           <TextInput
+            id="city"
             name="city"
             invalidText="Invalid error message."
             labelText="City*"
@@ -64,6 +66,7 @@ export default ({ ambassador }) => (
         </RowLeft>
         <RowCenter>
           <TextInput
+            id="state"
             name="state"
             invalidText="Invalid error message."
             labelText="State*"
@@ -73,6 +76,7 @@ export default ({ ambassador }) => (
         </RowCenter>
         <RowRight>
           <TextInput
+            id="zip"
             name="zip"
             invalidText="Invalid error message."
             labelText="ZIP Code*"
