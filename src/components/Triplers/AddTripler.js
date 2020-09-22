@@ -9,6 +9,14 @@ import { AppContext } from '../../api/AppContext'
 import { useHistory } from 'react-router-dom'
 import Loading from '../Loading'
 
+export function normalizeTripler(tripler) {
+  return {
+    id: tripler.id,
+    name: tripler.first_name + ' ' + tripler.last_name,
+    address: tripler.address.address1 + ' ' + tripler.address.city + ' ' + tripler.address.state
+  }
+}
+
 export default () => {
   const history = useHistory()
   const [triplers, setTriplers] = useState(null)
@@ -16,11 +24,7 @@ export default () => {
   const { api } = React.useContext(AppContext)
 
   const appendAddress = (data) => {
-    return data.data.map((p) => ({
-      id: p.id,
-      name: p.first_name + ' ' + p.last_name,
-      address: p.address.address1 + ' ' + p.address.city + ' ' + p.address.state
-    }))
+    return data.data.map(normalizeTripler)
   }
 
   const search = async (firstName, lastName) => {
@@ -34,11 +38,7 @@ export default () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await api.fetchFreeTriplers()
-      const triplersWithAddress = data.data.map((p) => ({
-        id: p.id,
-        name: p.first_name + ' ' + p.last_name,
-        address: p.address.address1 + ' ' + p.address.city + ' ' + p.address.state
-      }))
+      const triplersWithAddress = data.data.map(normalizeTripler)
       setTriplers(triplersWithAddress)
     }
     fetchData()
@@ -86,7 +86,7 @@ const SearchButtonStyled = styled(Button)`
   }
 `
 
-const AddTriplersPage = ({ triplers, claimTriplers, search, loading, error }) => {
+export const AddTriplersPage = ({ triplers, claimTriplers, search, loading, error }) => {
   return (
     <PageLayout
       title="Add Vote Triplers"
