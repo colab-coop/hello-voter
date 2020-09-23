@@ -40,7 +40,7 @@ export default () => {
           ? firstName + " " + lastName
           : firstName
         : lastName
-    );
+    )
   }
 
   useEffect(() => {
@@ -60,8 +60,16 @@ export default () => {
     history.push('/triplers')
   }
 
+  if (isLoading) return <Loading />
+
   return (
-    triplers ? <AddTriplersPage triplers={triplers} claimTriplers={claimTriplers} loading={isLoading} search={search} searchResults={searchResults} /> : <Loading />
+    triplers ? <AddTriplersPage
+      triplers={triplers}
+      claimTriplers={claimTriplers}
+      loading={isLoading}
+      search={search}
+      searchResults={searchResults}
+    /> : <Loading />
   )
 }
 
@@ -116,8 +124,6 @@ const SearchResultsClearLink = styled.a`
 `
 
 export const AddTriplersPage = ({ triplers, claimTriplers, search, loading, searchResults }) => {
-  const [firstName, setFirstName] = useState(null)
-  const [lastName, setLastName] = useState(null)
   return (
     <PageLayout
       title="Add Vote Triplers"
@@ -138,14 +144,11 @@ export const AddTriplersPage = ({ triplers, claimTriplers, search, loading, sear
       }/>}
     >
       <p>Here’s a list of possible Vote Triplers. Those who live closest to you are at the top. Select the people you plan to talk with.</p>
-      {loading && <Loading /> }
-      {!loading && <SearchBarContainer onSubmit={(e) => {
+      <SearchBarContainer onSubmit={(e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
         const firstName = formData.get('firstName')
         const lastName = formData.get('lastName')
-        setFirstName(firstName)
-        setLastName(lastName)
         search(firstName, lastName)
       }}>
         <SearchFieldStyled
@@ -154,7 +157,6 @@ export const AddTriplersPage = ({ triplers, claimTriplers, search, loading, sear
           size="lg"
           onChange={() => ([])}
           labelText=""
-          defaultValue={firstName}
         />
         <SearchFieldStyled
           name="lastName"
@@ -162,13 +164,11 @@ export const AddTriplersPage = ({ triplers, claimTriplers, search, loading, sear
           size="lg"
           onChange={() => ([])}
           labelText=""
-          defaultValue={lastName}
         />
         <SearchButtonStyled size="field" kind="tertiary" type="submit" disabled={loading}>
           Search
         </SearchButtonStyled>
       </SearchBarContainer>
-      }
       {
         searchResults && (
           <>
@@ -178,8 +178,6 @@ export const AddTriplersPage = ({ triplers, claimTriplers, search, loading, sear
               <SearchResultsClearLink 
                 onClick={() => {
                   search('','')
-                  setFirstName(null)
-                  setLastName(null)
                 }}
               >
                 Clear Search
