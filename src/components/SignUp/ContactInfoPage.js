@@ -5,7 +5,7 @@ import { spacing, colors } from '../../theme'
 import PageLayout from '../PageLayout'
 import { ResponsiveContainer } from '../pageStyles'
 import Button from '../Button'
-import AddressForm from '../AddressForm'
+import AddressForm from './AddressForm'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../../api/AppContext'
 
@@ -33,30 +33,7 @@ const SubmissionContainer = styled.div`
   margin-top: ${ spacing[8] };
 `
 
-export const ContactInfoPage = () => {
-  const [err, setErr] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const history = useHistory()
-  const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
-  user && user.signup_completed && user.onboarding_completed && history.push('/')
-  useEffect(() => {
-    const signup = async () => {
-      console.log('Signing up')
-      const { error } = await api.signup(ambassador)
-      if (error) return setErr(error.msg)
-      const { userError } = await fetchUser()
-      if (userError) return setErr(userError.msg)
-
-      if (process.env.REACT_APP_ORG === 'NGP') {
-        history.push('/onboarding/ngp/01')
-      }else{
-        history.push('/onboarding/01')
-      }
-    }
-    if (ambassador.signupComplete) {
-      signup()
-    }
-  }, [ ambassador ])
+export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
   return (
     <PageLayout
       title="Please Enter Your Details"
@@ -89,11 +66,11 @@ export const ContactInfoPage = () => {
           }
         })
       }}
-      loading={loading}
     >
-      <FormGroup>
+      <FormGroup legendText="">
         <Row>
           <TextInput
+            id="first_name"
             name="first_name"
             invalidText="Invalid error message."
             labelText="First Name*"
@@ -101,10 +78,24 @@ export const ContactInfoPage = () => {
             required
           />
           <TextInput
+            id="last_name"
             name="last_name"
             invalidText="Invalid error message."
             labelText="Last Name*"
             defaultValue={ambassador.last_name}
+            required
+          />
+        </Row>
+      </FormGroup>
+      <FormGroup legendText="">
+        <Row>
+          <TextInput
+            id="date_of_birth"
+            name="date_of_birth"
+            placeholder="mm/dd/yyyy"
+            labelText="Date of Birth*"
+            type="text"
+            defaultValue={ambassador.date_of_birth}
             required
           />
         </Row>
@@ -114,16 +105,18 @@ export const ContactInfoPage = () => {
         ambassador={ambassador}
       />
       <Divider />
-      <FormGroup>
+      <FormGroup legendText="">
         <TextInput
+          id="email"
           name="email"
           invalidText="Invalid error message."
           labelText="Email"
           defaultValue={ambassador.email}
         />
       </FormGroup>
-      <FormGroup>
+      <FormGroup legendText="">
         <TextInput
+          id="phone"
           name="phone"
           invalidText="Invalid error message."
           labelText="Phone number*"
@@ -152,5 +145,27 @@ export const ContactInfoPage = () => {
     </Form>
     </ResponsiveContainer>
     </PageLayout>
+  )
+}
+
+export default () => {
+  const [err, setErr] = useState(false)
+  const history = useHistory()
+  const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
+  user && user.signup_completed && user.onboarding_completed && history.push('/')
+  useEffect(() => {
+    const signup = async () => {
+      console.log('Signing up')
+      const { error } = await api.signup(ambassador)
+      if (error) return setErr(error.msg)
+      const { userError } = await fetchUser()
+      if (userError) return setErr(userError.msg)
+    }
+    if (ambassador.signupComplete) {
+      signup()
+    }
+  }, [ ambassador ])
+  return (
+    <ContactInfoPage ambassador={ambassador} setAmbassador={setAmbassador} err={err} />
   )
 }

@@ -19,7 +19,9 @@ const initGATracking = ({
   if (typeof process.env.REACT_APP_GA_COOKIE_DOMAIN !== 'undefined') {
     options.cookieDomain = process.env.REACT_APP_GA_COOKIE_DOMAIN
   }
-  ReactGA.initialize(trackingId, options);
+  if (process.env.NODE_ENV !== 'test') {
+    ReactGA.initialize(trackingId, options);
+  }
 }
 
 const initFBPixel = (

@@ -4,10 +4,18 @@ import styled from 'styled-components'
 import { spacing, breakpoints, colors } from '../../theme'
 import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
-import DataTable from '../DataTable'
+import DataTable from './DataTable'
 import { AppContext } from '../../api/AppContext'
 import { useHistory } from 'react-router-dom'
 import Loading from '../Loading'
+
+export function normalizeTripler(tripler) {
+  return {
+    id: tripler.id,
+    name: tripler.first_name + ' ' + tripler.last_name,
+    address: tripler.address.address1 + ' ' + tripler.address.city + ' ' + tripler.address.state
+  }
+}
 
 export default () => {
   const history = useHistory()
@@ -17,11 +25,7 @@ export default () => {
   const { api } = React.useContext(AppContext)
 
   const appendAddress = (data) => {
-    return data.data.map((p) => ({
-      id: p.id,
-      name: p.first_name + ' ' + p.last_name,
-      address: p.address.address1 + ' ' + p.address.city + ' ' + p.address.state
-    }))
+    return data.data.map(normalizeTripler)
   }
 
   const search = async (firstName, lastName) => {
@@ -42,11 +46,7 @@ export default () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await api.fetchFreeTriplers()
-      const triplersWithAddress = data.data.map((p) => ({
-        id: p.id,
-        name: p.first_name + ' ' + p.last_name,
-        address: p.address.address1 + ' ' + p.address.city + ' ' + p.address.state
-      }))
+      const triplersWithAddress = data.data.map(normalizeTripler)
       setTriplers(triplersWithAddress)
     }
     fetchData()
@@ -115,7 +115,9 @@ const SearchResultsClearLink = styled.a`
   cursor: pointer;
 `
 
-const AddTriplersPage = ({ triplers, claimTriplers, search, loading, searchResults }) => {
+export const AddTriplersPage = ({ triplers, claimTriplers, search, loading, searchResults }) => {
+  const [firstName, setFirstName] = useState(null)
+  const [lastName, setLastName] = useState(null)
   return (
     <PageLayout
       title="Add Vote Triplers"
@@ -136,11 +138,14 @@ const AddTriplersPage = ({ triplers, claimTriplers, search, loading, searchResul
       }/>}
     >
       <p>Here’s a list of possible Vote Triplers. Those who live closest to you are at the top. Select the people you plan to talk with.</p>
-      <SearchBarContainer onSubmit={(e) => {
+      {loading && <Loading /> }
+      {!loading && <SearchBarContainer onSubmit={(e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
         const firstName = formData.get('firstName')
         const lastName = formData.get('lastName')
+        setFirstName(firstName)
+        setLastName(lastName)
         search(firstName, lastName)
       }}>
         <SearchFieldStyled
@@ -148,17 +153,22 @@ const AddTriplersPage = ({ triplers, claimTriplers, search, loading, searchResul
           placeHolderText="First Name"
           size="lg"
           onChange={() => ([])}
+          labelText=""
+          defaultValue={firstName}
         />
         <SearchFieldStyled
           name="lastName"
           placeHolderText="Last Name"
           size="lg"
           onChange={() => ([])}
+          labelText=""
+          defaultValue={lastName}
         />
         <SearchButtonStyled size="field" kind="tertiary" type="submit" disabled={loading}>
           Search
         </SearchButtonStyled>
       </SearchBarContainer>
+      }
       {
         searchResults && (
           <>
@@ -166,7 +176,11 @@ const AddTriplersPage = ({ triplers, claimTriplers, search, loading, searchResul
             <SearchResultsContainer>
               <p>Showing {triplers.length} search results for "{searchResults}"</p>
               <SearchResultsClearLink 
-                onClick={() => search('','')}
+                onClick={() => {
+                  search('','')
+                  setFirstName(null)
+                  setLastName(null)
+                }}
               >
                 Clear Search
               </SearchResultsClearLink>

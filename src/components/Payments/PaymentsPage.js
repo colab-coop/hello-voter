@@ -111,8 +111,8 @@ const Payments = ({ completed, user }) => {
   );
 };
 
-const PaymentsPage = ({ payments, user }) => {
-  const completed = payments.filter((payment) => payment.status === 'settled')
+export const PaymentsPage = ({ payments, user }) => {
+  const completed = payments.filter((payment) => payment.status === 'settled' || payment.status === 'disbursed')
   return (
     <PageLayout
       title="Payments"
@@ -143,11 +143,11 @@ export default () => {
   const [payments, setPayments] = useState(null)
   const { api, user } = React.useContext(AppContext)
   useEffect(() => {
-   const fetchData = async () => {
-     const data = await api.getPayments()
-     setPayments(data.data)
+    const fetchData = async () => {
+      const data = await api.getPayments()
+      setPayments(data.data)
     }
-  fetchData()
+    fetchData()
   }, [])
   return (
     payments ? <PaymentsPage payments={payments} user={user} /> : <Loading />

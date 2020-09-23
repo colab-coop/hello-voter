@@ -10,12 +10,10 @@ import Footer from './components/Footer'
 import Loading from './components/Loading'
 import { LogIn } from './components/Login'
 import { Main } from './components/Main'
-import { LandingPage } from './components/SignUp/LandingPage'
-import { ContactInfoPage } from './components/SignUp/ContactInfoPage'
+import ContactInfoPage from './components/SignUp/ContactInfoPage'
 import TriplersPage from './components/Triplers/TriplersPage'
 import TriplersAdd from './components/Triplers/AddTripler'
 import ConfirmPage from './components/Triplers/ConfirmPage'
-import PendingApprovalPage from './components/PendingApprovalPage'
 import HomePage from './components/HomePage'
 import PaymentsPage from './components/Payments/AddPage'
 import PaymentsHomePage from './components/Payments/PaymentsPage'
@@ -43,9 +41,6 @@ const AuthRoute = ({component: Component, authenticated, path, user }) => (
       ? (user && user.approved) ?
         <Component {...props} />
         :
-        (user && user.signup_completed && user.onboarding_completed) ?
-          <Redirect to={{pathname: '/approval', state: {from: props.location}}} />
-          :
           <Redirect to={{pathname: '/ambassador/signup', state: {from: props.location}}} />
       : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
   />
@@ -70,7 +65,6 @@ const AppRoutes = () => {
       <Menu isApproved={user && user.approved} />
       <Switch>
         <AuthPublicRoute path="/ambassador/signup" component={ContactInfoPage} exact={true} authenticated={authenticated} />
-        <AuthPublicRoute path="/approval" component={PendingApprovalPage} exact={true} authenticated={authenticated} />
         <AuthRoute path="/home" component={HomePage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers" component={TriplersPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/triplers/add" component={TriplersAdd} exact={true} authenticated={authenticated} user={user}/>
@@ -78,7 +72,6 @@ const AppRoutes = () => {
         <AuthRoute path="/payments/add" component={PaymentsPage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/payments" component={PaymentsHomePage} exact={true} authenticated={authenticated} user={user}/>
         <AuthRoute path="/payments/chime" component={Chime} exact={true} authenticated={authenticated} user={user}/>
-        <Route path="/tallahassee" component={LandingPage} />
         <Route path="/help" component={Help}/>
         <Route path="/terms" component={Terms}/>
         <Route path="/privacy" component={Privacy}/>

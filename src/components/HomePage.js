@@ -7,6 +7,8 @@ import { GridThreeUp } from './pageStyles'
 import PageLayout from './PageLayout'
 import CardButton from './CardButton'
 
+const { REACT_APP_PAYMENT_FEATURE } = process.env
+
 const TopParagraph = styled.p`
   margin-bottom: ${ spacing[7] };
 `
@@ -31,14 +33,20 @@ export default () => {
           redirect("/triplers");
         }}
       />
-      <CardButton
-        icon={<Wallet24 />}
-        title="Earnings"
-        description="Set up and view your earnings from your organizing efforts"
-        onClick={() => {
-          redirect("/payments");
-        }}
-      />
+      {/* 
+        FIXME: Hide payments `REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE` & `REACT_APP_PAYMENT_FEATURE`
+        with Boolean rather than "true" and empty .env field
+      */}
+      {REACT_APP_PAYMENT_FEATURE &&
+        <CardButton
+          icon={<Wallet24 />}
+          title="Payments"
+          description="Set up and view your earnings from your organizing efforts"
+          onClick={() => {
+            redirect("/payments");
+          }}
+        />
+      }
       </GridThreeUp>
     </PageLayout>
   );

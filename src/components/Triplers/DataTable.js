@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import { DataTable, Pagination } from 'carbon-components-react'
 import { AddAlt16 } from '@carbon/icons-react'
-import { spacing, colors } from '../theme'
+import { spacing, colors } from '../../theme'
 
 const {
   TableContainer,
@@ -30,7 +30,7 @@ const TableContainerStyled = styled(TableContainer)`
 
 const TableToolbarContainer = styled.div`
   position: sticky;
-  top: 48px;
+  top: 5rem;
   z-index: 1;
 `
 

@@ -10,28 +10,7 @@ const TopParagraph = styled.p`
   margin-bottom: ${ spacing[7]};
 `
 
-const { REACT_APP_ORG } = process.env;
-
-let url;
-let title;
-let email;
-switch (REACT_APP_ORG) {
-  case 'BlockPower':
-    url = "https://www.blockpower.vote/faq-blockpower";
-    title = "BlockPower Support";
-    email = "organizer@blockpower.vote";
-    break;
-  case 'NGP':
-    url = "https://www.blockpower.vote/nga/faq-nga";
-    title = "New Georgia Project Support";
-    email = "reach@ngpaf.org";
-    break;
-  case 'ColorOfChange':
-    url = "https://www.blockpower.vote/cocpac/faq-cocpac";
-    title = "Color of Change Support";
-    email = "organizer+colorofchange@blockpower.vote";
-    break;
-}
+const { REACT_APP_HELP_URL, REACT_APP_HELP_TITLE, REACT_APP_HELP_EMAIL } = process.env;
 
 export default () => (
   <PageLayout title="Help">
@@ -42,7 +21,15 @@ export default () => (
       title="FAQ"
       description="See answers to common questions asked by other Voting Ambassadors"
       onClick={() => {
-        window.open(url, "_blank")
+        window.open(REACT_APP_HELP_URL, "_blank")
+      }}
+    />
+    <CardButton
+      icon={<Partnership24 />}
+      title={REACT_APP_HELP_TITLE}
+      description={REACT_APP_HELP_EMAIL}
+      onClick={() => {
+        window.open(`mailto:${REACT_APP_HELP_EMAIL}`);
       }}
     />
     <CardButton
@@ -51,14 +38,6 @@ export default () => (
       description="blockpower@zammad.com"
       onClick={() => {
         window.open("mailto:blockpower@zammad.com");
-      }}
-    />
-    <CardButton
-      icon={<Partnership24 />}
-      title={title}
-      description={email}
-      onClick={() => {
-        window.open(`mailto:${email}`);
       }}
     />
     </GridThreeUp>
