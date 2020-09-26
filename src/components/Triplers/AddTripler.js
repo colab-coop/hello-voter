@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import { Search, Button, Form, InlineNotification } from 'carbon-components-react'
+import React, {useEffect, useState, useCallback} from 'react'
+import { Search, Button, Form } from 'carbon-components-react'
 import styled from 'styled-components'
 import { spacing, breakpoints, colors } from '../../theme'
 import PageLayout from '../PageLayout'
@@ -22,6 +22,11 @@ export default () => {
   const [triplers, setTriplers] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [searchResults, setSearchResults] = useState(null)
+  // Setting default form input values
+  const [searchInputs, setSearchInputs] = useState({
+    firstName: '',
+    lastName: ''
+  })
   const { api } = React.useContext(AppContext)
 
   const appendAddress = (data) => {
@@ -34,6 +39,10 @@ export default () => {
     const triplersWithAddress = appendAddress(data)
     setIsLoading(false)
     setTriplers(triplersWithAddress)
+    setSearchInputs({
+      firstName,
+      lastName
+    })
     setSearchResults(
       firstName
         ? firstName && lastName
@@ -60,6 +69,17 @@ export default () => {
     history.push('/triplers')
   }
 
+  // need "inputName" to handle HTML5 input's clear x button.
+  //  onChange passes in "target.name", but not on clear x button click.
+  const onSearchInputChange = useCallback((inputName) => (
+    (e) => {
+      setSearchInputs({
+        ...searchInputs,
+        [inputName]: e.target.value
+      })
+    }
+  ), [setSearchInputs, searchInputs])
+
   if (isLoading) return <Loading />
 
   return (
@@ -69,6 +89,8 @@ export default () => {
       loading={isLoading}
       search={search}
       searchResults={searchResults}
+      searchInputs={searchInputs}
+      onSearchInputChange={onSearchInputChange}
     /> : <Loading />
   )
 }
@@ -123,7 +145,15 @@ const SearchResultsClearLink = styled.a`
   cursor: pointer;
 `
 
-export const AddTriplersPage = ({ triplers, claimTriplers, search, loading, searchResults }) => {
+export const AddTriplersPage = ({
+  triplers,
+  claimTriplers,
+  search,
+  loading,
+  searchResults,
+  searchInputs,
+  onSearchInputChange
+}) => {
   return (
     <PageLayout
       title="Add Vote Triplers"
@@ -155,14 +185,16 @@ export const AddTriplersPage = ({ triplers, claimTriplers, search, loading, sear
           name="firstName"
           placeHolderText="First Name"
           size="lg"
-          onChange={() => ([])}
+          onChange={onSearchInputChange('firstName')}
+          value={searchInputs.firstName}
           labelText=""
         />
         <SearchFieldStyled
           name="lastName"
           placeHolderText="Last Name"
           size="lg"
-          onChange={() => ([])}
+          onChange={onSearchInputChange('lastName')}
+          value={searchInputs.lastName}
           labelText=""
         />
         <SearchButtonStyled size="field" kind="tertiary" type="submit" disabled={loading}>
