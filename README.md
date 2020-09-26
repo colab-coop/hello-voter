@@ -20,13 +20,14 @@ This software enables a "Voting Ambassador" workflow for get-out-the-vote campai
 
 ### Installation
 
-1. Copy `.env.example` to `.env`: `cp .env.example .env`
+1. Copy `.env.example` to `.env` and modify as needed: `cp .env.example .env`
+    1. Set `REACT_APP_FORCE_MOCK_DATA=true` if you want to use mock data offline
 1. Install dependencies: `npm install`
 1. Start the server: `npm start`
 
 Optionally,
 
-1. If you want to see storybook stuff: `npm run storybook`
+1. If you want to explore the app in [Storybook](https://storybook.js.org/): `npm run storybook`
 
 ### Testing
 
