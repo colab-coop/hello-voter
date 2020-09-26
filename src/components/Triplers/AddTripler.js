@@ -78,7 +78,7 @@ export default () => {
         [inputName]: e.target.value
       })
     }
-  ), setSearchInputs, searchInputs)
+  ), [setSearchInputs, searchInputs])
 
   if (isLoading) return <Loading />
 
