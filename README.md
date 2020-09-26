@@ -1,68 +1,84 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Coding guide
 
-## Available Scripts
+This software enables a "Voting Ambassador" workflow for get-out-the-vote campaigns. A Vote Ambassador signs up with the hello-voter React front-end. The Vote Ambassador, once signed up, is provided a list of voters in their area (within some configurable number of meters from the Ambassador). The Vote Ambassador contacts these voters (called Vote Triplers) and encourages them to help 3 additional people vote (called simply Voters in UI, or "Triplees" in the code). Once the Vote Tripler responds "YES" to the system's SMS (this software assumes Twilio SMS integration), the Vote Ambassador will receive payment from the organization who has set up this software. Currently this software assumes payment via Stripe + Plaid, and some partner organizations do not have in-app payments.
 
-In the project directory, you can run:
+### Files
+```
+|____components  - all the components of the app
+|____stories - storybook stories for components of the app
+|____theme - theme variables for spacing, colors, breakpoints (taken from carbon design system)
+|____hooks - various react hooks for different functionality
+|____api - api calls
+|____assets - various assets for the app
+| |____logos
+| |____icons
+```
 
-### `npm start`
+### Prerequisites
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node. We recommend installing via [Node Version Manager](https://github.com/nvm-sh/nvm#installing-and-updating).
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Installation
 
-### `npm test`
+1. Copy `.env.example` to `.env`: `cp .env.example .env`
+1. Install dependencies: `npm install`
+1. Start the server: `npm start`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Optionally,
 
-### `npm run build`
+1. If you want to see storybook stuff: `npm run storybook`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Testing
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+We use [React Testing Library](https://testing-library.com/docs/intro) for unit tests (similar to Jest + Enzyme)
+and [Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html) for integration tests.
+Learn more about testing React apps [here](https://reactjs.org/docs/testing.html).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- To run unit tests: `npm test`. This will launch the test runner in "interactive" mode.
 
-### `npm run eject`
+### Styling
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+In terms of styling, we use [styled-components](https://github.com/styled-components/styled-components) and [react-carbon](https://github.com/carbon-design-system/carbon-components-react).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### App Router
+```
+/home
+/login
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+/ambassador/signup - standard signup
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+/help
+/privacy
+/terms
 
-## Learn More
+/triplers
+/triplers/add
+/triplers/confirm/:triplerId
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+/payments
+/payments/add
+/payments/chime
+````
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Components
+```
+<Breadcrumbs> - Breadcrumbs on most pages
+<Button> - Main button component
+<CardButton> - Card button found on Home page, Help page, etc.
+<LoginButton> - Button on Login page
+<Footer> - Footer on all pages
+<Menu> - Menu Header on all pages
+<PageLayout> - Layout on all pages
+```
 
-### Code Splitting
+### CI/CD
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- Merge into `ambassador-stage` branch to view on staging server
+- Merge into `ambassador` branch to view on production server
 
-### Analyzing the Bundle Size
+### Troubleshooting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- When signing up, if you see: `Sorry, but state employment laws don't allow us to pay Voting Ambassadors in your state.` you can use the following mock address:
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+      1300 E Park Ave
+      Tallahassee, FL 32301

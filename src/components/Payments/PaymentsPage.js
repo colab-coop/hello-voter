@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { DataTable, Link } from 'carbon-components-react'
+import { ResponsiveContainer } from '../pageStyles'
 import { Add16 } from '@carbon/icons-react'
 import styled from 'styled-components'
 import { colors, spacing } from '../../theme'
@@ -7,6 +8,7 @@ import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import Button from '../Button'
 import Loading from '../Loading'
+import { Tag } from 'carbon-components-react'
 
 import { AppContext } from '../../api/AppContext'
 
@@ -44,33 +46,29 @@ const TableContainerStyled = styled(TableContainer)`
 `
 
 const renderTable = ({
-  rows,
-  headers,
-  getHeaderProps,
-}) => (
-  <TableContainerStyled>
-    <Table>
-      <TableHead>
-        <TableRow>
-          {headers.map((header) => (
-            <TableHeader key={header.key} {...getHeaderProps({ header })}>
-              {header.header}
-            </TableHeader>
+  rows
+}) => {
+  return (
+    <TableContainerStyled>
+      <Table>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell key={row.cells[0].id}>
+                <div>
+                  <strong>{row.cells[0].value}</strong>
+                </div>
+              </TableCell>
+              <TableCell key={row.cells[1].id}>
+                <Tag type='green'>{row.cells[1].value} sent</Tag>
+              </TableCell>
+            </TableRow>
           ))}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {rows.map((row) => (
-          <TableRow key={row.id}>
-            {row.cells.map((cell) => (
-              <TableCell key={cell.id}>{cell.value}</TableCell>
-            ))}
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </TableContainerStyled>
-);
+        </TableBody>
+      </Table>
+    </TableContainerStyled>
+  )
+}
 
 const headers = [
   {
@@ -78,13 +76,9 @@ const headers = [
     header: 'Tripler Name',
   },
   {
-    key: 'formatted_disbursed_at',
-    header: 'Date',
-  },
-  {
     key: 'formatted_amount',
     header: 'Amount',
-  },
+  }
 ];
 
 const PaymentTable = ({ data }) => (
@@ -97,23 +91,28 @@ const Payments = ({ completed, user }) => {
   return (
     <>
       <SectionTitle>Your payment account</SectionTitle>
-      {user.payout_provider ? <div>You are connected.</div> : (
+      {user.payout_provider ?
+        <AcctTable>
+          Account #: ********{user.account.account_data.last4}
+          <AcctNumber>
+
+          </AcctNumber>
+        </AcctTable> : (
         <Button href="/payments/add">
           Add an Account
           <Add16 />
         </Button>
       )}
 
-      <SectionTitle>Payments</SectionTitle>
+      <SectionTitle>Earned Payments</SectionTitle>
+      <p>Estimated arrival in 2-4 business days</p>
       <PaymentTable data={hasCompleted ? completed : []} />
     </>
   );
 };
 
-const PaymentsPage = ({ payments, user }) => {
-  const pending = payments.filter((payment) => payment.status === 'pending')
-  const completed = payments.filter((payment) => payment.status === 'settled')
-
+export const PaymentsPage = ({ payments, user }) => {
+  const completed = payments.filter((payment) => payment.status === 'settled' || payment.status === 'disbursed')
   return (
     <PageLayout
       title="Payments"
@@ -130,11 +129,12 @@ const PaymentsPage = ({ payments, user }) => {
         ]
       }/>}
     >
+    <ResponsiveContainer>
       <Payments
-        pending={pending}
         completed={completed}
         user={user}
       />
+    </ResponsiveContainer>
     </PageLayout>
   )
 }
@@ -143,11 +143,11 @@ export default () => {
   const [payments, setPayments] = useState(null)
   const { api, user } = React.useContext(AppContext)
   useEffect(() => {
-   const fetchData = async () => {
-     const data = await api.getPayments()
-     setPayments(data.data)
+    const fetchData = async () => {
+      const data = await api.getPayments()
+      setPayments(data.data)
     }
-  fetchData()
+    fetchData()
   }, [])
   return (
     payments ? <PaymentsPage payments={payments} user={user} /> : <Loading />

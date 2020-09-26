@@ -1,19 +1,19 @@
-const { REACT_APP_OAUTH_HEADER, REACT_APP_TOKEN_KEY, REACT_APP_AUDIANCE, REACT_APP_KEY, REACT_APP_DEVELOPMENT, REACT_APP_API_URL } = process.env
+import {
+  LOGIN_URL,
+  TRIPLERS_URL,
+  PUT_TRIPLERS_URL,
+  AMBASSADOR_URL,
+  FREE_TRIPLERS_URL,
+  SIGNUP_URL,
+  TRIPLER_URL,
+  CONFIRM_TRIPLER_URL,
+  COMPLETE_ONBOARDING,
+  PAYMENT_URL,
+  PAYMENT_HISTORY_URL,
+  TRIPLERS_LIMIT_URL,
+} from '../constants';
 
-export const SERVER_URL =
-  `https://${process.env.REACT_APP_API_DOMAIN}/HelloVoterHQ/${process.env.REACT_APP_ORGID}/api/v1`
-
-const LOGIN_URL = `${SERVER_URL}/hello`
-const TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
-const PUT_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/triplers`
-const AMBASSADOR_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current`
-const FREE_TRIPLERS_URL = `${REACT_APP_API_URL}/api/v1/va/suggest-triplers`
-const SIGNUP_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/signup`
-const TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
-const CONFIRM_TRIPLER_URL = `${REACT_APP_API_URL}/api/v1/va/triplers`
-const COMPLETE_ONBOARDING = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/complete-onboarding`
-const PAYMENT_URL = `${REACT_APP_API_URL}/api/v1/va/payouts/account?stripe=true`
-const PAYMENT_HISTORY_URL = `${REACT_APP_API_URL}/api/v1/va/ambassadors/current/payouts`
+const { REACT_APP_OAUTH_HEADER, REACT_APP_TOKEN_KEY, REACT_APP_AUDIANCE, REACT_APP_KEY, REACT_APP_DEVELOPMENT } = process.env
 
 const errorHandler = (e) => {
   console.warn(e)
@@ -280,6 +280,77 @@ export const getPayments = async () => {
     let res = await fetch(`${PAYMENT_HISTORY_URL}`, {
       method: 'GET',
       headers: addAuth()
+    })
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const searchTriplers = async (firstName, lastName) => {
+  try {
+    let res = await fetch(`${TRIPLER_URL}?firstName=${firstName}&lastName=${lastName}`, {
+      method: 'GET',
+      headers: addAuth()
+    })
+
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const fetchTriplersLimit = async (sm) => {
+  try {
+    let res = await fetch(TRIPLERS_LIMIT_URL, {
+      method: 'GET',
+      headers: addAuth()
+    })
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const deleteTripler = async (triplers) => {
+  try {
+    let res = await fetch(TRIPLERS_URL, {
+      method: 'DELETE',
+      headers: addAuth(),
+      body: JSON.stringify({triplers: triplers})
     })
     let data = await res.json()
 

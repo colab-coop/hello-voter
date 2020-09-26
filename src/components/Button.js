@@ -28,13 +28,17 @@ const PillButton = styled.div`
   border: 2px solid ${ colors.gray[20]};
   display: flex;
   align-items: center;
+  white-space: nowrap;
   &:hover {
     border: 2px solid ${ colors.blue[60]};
   }
 `
 
 export default (props) => {
-  const { href, children, kind, loading, onClick, pill, trackingEvent, shouldRedirect, isAForm } = props
+  const {
+    href, children, kind, loading, onClick, pill, shouldRedirect, isAForm, trackingEvent,
+    ...passThroughProps
+  } = props
   const history = useHistory()
   const redirect = async (href) => {
     history.push(href)
@@ -55,7 +59,7 @@ export default (props) => {
         onClick && onClick(e);
         href && redirect(href);
       }}
-      {...props}
+      {...passThroughProps}
     >
       {children}
     </PillButton>
@@ -68,7 +72,7 @@ export default (props) => {
         onClick && onClick(e)
         href && !shouldRedirect && redirect(href)
       }}
-      {...props}
+      {...passThroughProps}
     >
       {loading ? (
         <InlineLoadingStyled

@@ -1,157 +1,117 @@
-import React from 'react'
-import Triplers from '../components/Triplers/TriplersPage'
-import Add from '../components/Triplers/AddTripler'
-import Confirm from '../components/Triplers/ConfirmPage'
+import React from "react";
+import Menu from "../components/Menu";
+import Footer from "../components/Footer";
+import { TriplersPage } from "../components/Triplers/TriplersPage";
+import { AddTriplersPage, normalizeTripler } from "../components/Triplers/AddTripler";
+import { ConfirmPage } from "../components/Triplers/ConfirmPage";
+import {
+  TRIPLERS_UNCONFIRMED,
+  TRIPLERS_PENDING,
+  TRIPLERS_CONFIRMED,
+  TRIPLERS_FULL,
+  TRIPLERS_FULL_WITH_AMBASSADOR,
+  TRIPLERS_TO_ADD,
+} from './Triplers.mocks';
+import { MAIN_USER } from './Home.mocks';
 
 export default {
-  title: 'Triplers'
+  title: "Triplers",
+};
+
+const noop = () => {}
+const defaultTriplersPageProps = {
+  triplers: [],
+  limit: 10,
+  remindTripler: noop,
+  deleteTripler: noop
+}
+const defaultAddTriplersPageProps = {
+  triplers: [],
+  loading: false,
+  error: null,
+  claimTriplers: noop,
+  search: noop
+}
+const defaultConfirmTriplersPageProps = {
+  tripler: {},
+  loading: false,
+  confirmTriplers: noop,
 }
 
-export const TriplersEmptyPage = () => (
-  <Triplers triplers={[]} />
-)
-
-export const UnconfirmedTriplers = () => (
-  <Triplers
-    triplers={[
-      {
-        status: "unconfirmed",
-        first_name: "Lauren",
-        last_name: "R",
-        address: {
-          address1: "200 Address lane",
-          city: "Denver",
-          state: "CO",
-        },
-      },
-    ]}
-  />
+export const TriplersEmpty = () => (
+  <>
+    <Menu isApproved={true} />
+    <TriplersPage {...defaultTriplersPageProps} />
+  </>
 );
 
-export const PendingTriplers = () => (
-  <Triplers
-    triplers={[
-      {
-        status: "pending",
-        first_name: "Lauren",
-        last_name: "R",
-        address: {
-          address1: "200 Address lane",
-          city: "Denver",
-          state: "CO",
-        },
-      },
-    ]}
-  />
+export const TriplersUnconfirmed = () => (
+  <>
+    <Menu isApproved={true} />
+    <TriplersPage
+      {...defaultTriplersPageProps}
+      triplers={TRIPLERS_UNCONFIRMED}
+    />
+  </>
 );
 
-export const ConfirmedTriplers = () => (
-  <Triplers
-    triplers={[
-      {
-        status: "confirmed",
-        first_name: "Lauren",
-        last_name: "R",
-        address: {
-          address1: "200 Address lane",
-          city: "Denver",
-          state: "CO",
-        },
-      },
-    ]}
-  />
+export const TriplersPending = () => (
+  <>
+    <Menu isApproved={true} />
+    <TriplersPage
+      {...defaultTriplersPageProps}
+      triplers={TRIPLERS_PENDING}
+    />
+  </>
 );
 
-export const TriplersPage = () => (
-  <Triplers
-    triplers={[
-      {
-        status: "unconfirmed",
-        first_name: "Lauren",
-        last_name: "R",
-        address: {
-          address1: "200 Address lane",
-          city: "Denver",
-          state: "CO",
-        },
-      },
-      {
-        status: "unconfirmed",
-        first_name: "Edison",
-        last_name: "Shepherd",
-        address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
-      },
-      {
-        status: "pending",
-        first_name: "Michael",
-        last_name: "Marsh",
-        address: {
-          address1: "200 Address lane",
-          city: "Denver",
-          state: "CO",
-        },
-      },
-      {
-        status: "pending",
-        first_name: "Edison",
-        last_name: "Shepherd",
-        address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
-      },
-      {
-        status: "pending",
-        first_name: "Lauren",
-        last_name: "Ralph",
-        address: { address1: "1 Road Rd", city: "Denver", state: "CO" },
-      },
-      {
-        status: "confirmed",
-        first_name: "Michael",
-        last_name: "Marsh",
-        address: {
-          address1: "200 Address lane",
-          city: "Denver",
-          state: "CO",
-        },
-      },
-      {
-        status: "confirmed",
-        first_name: "Edison",
-        last_name: "Shepherd",
-        address: { address1: "1 Good Boy Rd", city: "Denver", state: "CO" },
-      },
-    ]}
-  />
-)
+export const TriplersConfirmed = () => (
+  <>
+    <Menu isApproved={true} />
+    <TriplersPage
+      {...defaultTriplersPageProps}
+      triplers={TRIPLERS_CONFIRMED}
+    />
+  </>
+);
 
-export const AddPage = () => (
-  <Add 
-    triplers={
-      [
-        {
-          id: 'a',
-          name: 'Judy Blume',
-          address: '1 Really Good Address Ln asdasdsa as das dasd '
-        },
-        {
-          id: 'b',
-          name: 'Edison Shepherd',
-          address: '1 Good Boy Rd'
-        },
-        {
-          id: 'd',
-          name: 'Lauren Ralph',
-          address: '1 Road Rd'
-        },
-        {
-          id: 'e',
-          name: 'Pamela Jones',
-          address: '1 Jones Road Rd'
-        },
-      ]
-    } 
-  />
-)
+export const TriplersFull = () => (
+  <>
+    <Menu isApproved={true} />
+    <TriplersPage
+      {...defaultTriplersPageProps}
+      triplers={TRIPLERS_FULL}
+    />
+  </>
+);
 
-export const ConfirmPage = () => (
-  <Confirm />
-)
+export const TriplersAmbassadorsFull = () => (
+  <div style={{position:"relative", minHeight:"100vh"}}>
+    <Menu isApproved={true} />
+    <TriplersPage
+      {...defaultTriplersPageProps}
+      triplers={TRIPLERS_FULL_WITH_AMBASSADOR}
+    />
+    <Footer />
+  </div>
+);
+
+export const AddTriplers = () => (
+  <>
+    <Menu isApproved={true} />
+    <AddTriplersPage
+      {...defaultAddTriplersPageProps}
+      triplers={TRIPLERS_TO_ADD.map(normalizeTripler)}
+    />
+  </>
+);
+
+export const ConfirmTriplers = () => (
+  <>
+    <Menu isApproved={true} />
+    <ConfirmPage
+      {...defaultConfirmTriplersPageProps}
+      tripler={MAIN_USER}
+    />
+  </>
+);

@@ -1,45 +1,46 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { spacing } from '../../theme'
+import { FormGroup, TextInput, InlineNotification, Form } from 'carbon-components-react'
+import { spacing, colors } from '../../theme'
 import PageLayout from '../PageLayout'
-import Breadcrumbs from '../Breadcrumbs'
-import AddressForm from '../AddressForm'
-import { FormGroup, TextInput } from 'carbon-components-react'
+import { ResponsiveContainer } from '../pageStyles'
+import Button from '../Button'
+import AddressForm from './AddressForm'
 import { useHistory } from 'react-router-dom'
 import { AppContext } from '../../api/AppContext'
 
-const SectionTitle = styled.h5`
-  margin-bottom: ${ spacing[5] };
+const Row = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-column-gap: ${spacing[5]};
+  grid-template-columns: 1fr 1fr;
+`;
+
+const Divider = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: ${colors.gray[20]};
+  margin-bottom: ${spacing[5]};
+`;
+
+const InlineNotificationStyled = styled(InlineNotification)`
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: ${ spacing[3] };
 `
 
-export const ContactInfoPage = () => {
-  const [err, setErr] = useState(false)
-  const history = useHistory()
-  const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
-  user && user.signup_completed && user.onboarding_completed && history.push('/')
-  useEffect(() => {
-    const signup = async () => {
-      const { error } = await api.signup(ambassador)
-      if (error) return setErr(error.msg)
-      const { userError } = await fetchUser()
-      if (userError) return setErr(userError.msg)
+const SubmissionContainer = styled.div`
+  margin-top: ${ spacing[8] };
+`
 
-      if (process.env.REACT_APP_ORG === 'NGP') {
-        history.push('/onboarding/ngp/01')
-      }else{
-        history.push('/onboarding/01')
-      }
-    }
-    if (ambassador.signupComplete) {
-      signup()
-    }
-  }, [ ambassador ])
+export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
   return (
     <PageLayout
-      error={err}
-      title="Confirm Info"
-      submitButtonTitle="Submit"
-      onClickSubmit={(e) => {
+      title="Please Enter Your Details"
+    >
+    <ResponsiveContainer>
+    <Form
+      onSubmit={(e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
 
@@ -65,45 +66,57 @@ export const ContactInfoPage = () => {
           }
         })
       }}
-      header={<Breadcrumbs items={
-        [{
-          name: "Back",
-          route: "/"
-        }]
-      }/>}
     >
-      <SectionTitle>Personal Info</SectionTitle>
-      <FormGroup>
-        <TextInput
-          name="first_name"
-          invalidText="Invalid error message."
-          labelText="First Name*"
-          defaultValue={ambassador.first_name}
-          required
-        />
+      <FormGroup legendText="">
+        <Row>
+          <TextInput
+            id="first_name"
+            name="first_name"
+            invalidText="Invalid error message."
+            labelText="First Name*"
+            defaultValue={ambassador.first_name}
+            required
+          />
+          <TextInput
+            id="last_name"
+            name="last_name"
+            invalidText="Invalid error message."
+            labelText="Last Name*"
+            defaultValue={ambassador.last_name}
+            required
+          />
+        </Row>
       </FormGroup>
-      <FormGroup>
-        <TextInput
-          name="last_name"
-          invalidText="Invalid error message."
-          labelText="Last Name*"
-          defaultValue={ambassador.last_name}
-          required
-        />
+      <FormGroup legendText="">
+        <Row>
+          <TextInput
+            id="date_of_birth"
+            name="date_of_birth"
+            placeholder="mm/dd/yyyy"
+            labelText="Date of Birth*"
+            type="text"
+            defaultValue={ambassador.date_of_birth}
+            required
+          />
+        </Row>
       </FormGroup>
-      <SectionTitle>Address</SectionTitle>
-      <AddressForm ambassador={ambassador}/>
-      <SectionTitle>Contact</SectionTitle>
-      <FormGroup>
+      <Divider />
+      <AddressForm
+        ambassador={ambassador}
+      />
+      <Divider />
+      <FormGroup legendText="">
         <TextInput
+          id="email"
           name="email"
           invalidText="Invalid error message."
           labelText="Email"
           defaultValue={ambassador.email}
         />
       </FormGroup>
-      <FormGroup>
+      <FormGroup legendText="">
         <TextInput
+          id="phone"
           name="phone"
           invalidText="Invalid error message."
           labelText="Phone number*"
@@ -111,6 +124,48 @@ export const ContactInfoPage = () => {
           required
         />
       </FormGroup>
+      <SubmissionContainer>
+      {err && (
+        <InlineNotificationStyled
+          hideCloseButton
+          kind="error"
+          icondescription="Dismiss notification"
+          subtitle={err}
+          title={null}
+        />
+      )}
+      <Button
+        type="submit"
+        trackingEvent={{ category: 'SubmitSignupInfo', label: 'Submit'}}
+        isAForm
+      >
+        Submit
+      </Button>
+      </SubmissionContainer>
+    </Form>
+    </ResponsiveContainer>
     </PageLayout>
+  )
+}
+
+export default () => {
+  const [err, setErr] = useState(false)
+  const history = useHistory()
+  const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(AppContext)
+  user && user.signup_completed && user.onboarding_completed && history.push('/')
+  useEffect(() => {
+    const signup = async () => {
+      console.log('Signing up')
+      const { error } = await api.signup(ambassador)
+      if (error) return setErr(error.msg)
+      const { userError } = await fetchUser()
+      if (userError) return setErr(userError.msg)
+    }
+    if (ambassador.signupComplete) {
+      signup()
+    }
+  }, [ ambassador ])
+  return (
+    <ContactInfoPage ambassador={ambassador} setAmbassador={setAmbassador} err={err} />
   )
 }

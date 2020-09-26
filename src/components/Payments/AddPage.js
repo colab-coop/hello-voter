@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import ReactDOM from 'react-dom'
 import { Finance24 } from '@carbon/icons-react'
 import styled from 'styled-components'
+import { GridThreeUp } from '../pageStyles'
 import PageLayout from '../PageLayout'
 import CardButton from '../CardButton'
 import Button from '../Button'
@@ -13,11 +14,10 @@ import { useHistory } from 'react-router-dom'
 
 const { REACT_APP_PLAID_KEY, REACT_APP_PAYMENT_TYPE } = process.env
 
-const AACComponent = window.paypal.PayoutsAAC.driver('react', {
+const AACComponent = window.paypal ? window.paypal.PayoutsAAC.driver('react', {
   React,
   ReactDOM
-});
-
+}) : null;
 
 const Chime = styled.img`
   width: 24px;
@@ -64,6 +64,7 @@ export default () => {
         />
       }
     >
+    <GridThreeUp>
       {REACT_APP_PAYMENT_TYPE === 'stripe' &&
       <CardButton
         icon={<Finance24/>}
@@ -94,7 +95,8 @@ export default () => {
         onLogin={onPaypal}/>
       }
       <Button
-        small
+        size="small"
+        style={{marginTop: 0}}
         kind="tertiary"
         href={"/payments"}
         trackingEvent={{
@@ -104,6 +106,7 @@ export default () => {
       >
         Go back to Payments
       </Button>
+    </GridThreeUp>
     </PageLayout>
   )
 }
