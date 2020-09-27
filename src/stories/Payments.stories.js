@@ -1,50 +1,36 @@
 import React from "react";
 import Menu from "../components/Menu";
-import Payments from "../components/Payments/PaymentsPage";
+import { PaymentsPage } from "../components/Payments/PaymentsPage";
 import Add from "../components/Payments/AddPage";
 import Chime from "../components/Payments/ChimePage";
-
-const { REACT_APP_TRIPLER_PAYMENT_AMT } = process.env;
+import { MAIN_USER } from './Home.mocks';
+import { PAYMENTS_PENDING, PAYMENTS_SETTLED } from './Payments.mocks';
 
 export default {
   title: "Payments",
 };
 
+const defaultProps = {
+  user: MAIN_USER,
+  payments: []
+}
+
 export const PaymentsEmpty = () => (
   <>
     <Menu isApproved={true} />
-    <Payments user={[]} payments={[]} />
+    <PaymentsPage
+      {...defaultProps}
+      user={[]}
+    />
   </>
 );
 
 export const PaymentsPending = () => (
   <>
     <Menu isApproved={true} />
-    <Payments
-      user={{
-        payout_provider: "stripe",
-        account: {
-          account_data: {
-            last4: "1234",
-          },
-        },
-      }}
-      payments={[
-        {
-          id: "a",
-          tripler_name: "Epison Shepherd",
-          formatted_disbursed_at: "June 09",
-          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
-          status: "pending",
-        },
-        {
-          id: "b",
-          tripler_name: "Lauren Ralph",
-          formatted_disbursed_at: "June 10",
-          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
-          status: "pending",
-        },
-      ]}
+    <PaymentsPage
+      {...defaultProps}
+      payments={PAYMENTS_PENDING}
     />
   </>
 );
@@ -52,31 +38,9 @@ export const PaymentsPending = () => (
 export const PaymentsSettled = () => (
   <>
     <Menu isApproved={true} />
-    <Payments
-      user={{
-        payout_provider: "stripe",
-        account: {
-          account_data: {
-            last4: "1234",
-          },
-        },
-      }}
-      payments={[
-        {
-          id: "a",
-          tripler_name: "Rebekah Tripler",
-          formatted_disbursed_at: "June 09",
-          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
-          status: "settled",
-        },
-        {
-          id: "b",
-          tripler_name: "Desee Something",
-          formatted_disbursed_at: "June 10",
-          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
-          status: "settled",
-        },
-      ]}
+    <PaymentsPage
+      {...defaultProps}
+      payments={PAYMENTS_SETTLED}
     />
   </>
 );
@@ -84,44 +48,11 @@ export const PaymentsSettled = () => (
 export const PaymentsFull = () => (
   <>
     <Menu isApproved={true} />
-    <Payments
-      user={{
-        payout_provider: "stripe",
-        account: {
-          account_data: {
-            last4: "1234",
-          },
-        },
-      }}
+    <PaymentsPage
+      {...defaultProps}
       payments={[
-        {
-          id: "a",
-          tripler_name: "Epison Shepherd",
-          formatted_disbursed_at: "June 09",
-          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
-          status: "pending",
-        },
-        {
-          id: "b",
-          tripler_name: "Lauren Ralph",
-          formatted_disbursed_at: "June 10",
-          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
-          status: "pending",
-        },
-        {
-          id: "c",
-          tripler_name: "Rebekah Tripler",
-          formatted_disbursed_at: "June 09",
-          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
-          status: "settled",
-        },
-        {
-          id: "d",
-          tripler_name: "Desee Something",
-          formatted_disbursed_at: "June 10",
-          formatted_amount: REACT_APP_TRIPLER_PAYMENT_AMT,
-          status: "settled",
-        },
+        ...PAYMENTS_PENDING,
+        ...PAYMENTS_SETTLED,
       ]}
     />
   </>

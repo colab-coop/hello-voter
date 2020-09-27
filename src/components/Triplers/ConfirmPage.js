@@ -53,7 +53,7 @@ const TwoColumnRow = styled.div`
   margin-bottom: ${ spacing[3] };
 `
 
-const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
+export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
   const history = useHistory()
   const [err, setErr] = useState(false)
   const submit = async (e) => {
@@ -72,18 +72,18 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       phone: formData.get('phone'),
       triplees: [
         {
-          first_name: formData.get('triplee1_first'), 
-          last_name: formData.get('triplee1_last'), 
+          first_name: formData.get('triplee1_first'),
+          last_name: formData.get('triplee1_last'),
           housemate: handleHousemate(formData.get('triplee1_housemate'))
         },
         {
-          first_name: formData.get('triplee2_first'), 
-          last_name: formData.get('triplee2_last'), 
+          first_name: formData.get('triplee2_first'),
+          last_name: formData.get('triplee2_last'),
           housemate: handleHousemate(formData.get('triplee2_housemate'))
         },
         {
-          first_name: formData.get('triplee3_first'), 
-          last_name: formData.get('triplee3_last'), 
+          first_name: formData.get('triplee3_first'),
+          last_name: formData.get('triplee3_last'),
           housemate: handleHousemate(formData.get('triplee3_housemate'))
         },
       ],
@@ -114,20 +114,22 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       }
     >
     <ResponsiveContainer>
-    <Form 
+    <Form
       onSubmit={submit}
     >
       <p style={{marginBottom: 16}}>Add the names of three Voters the Vote Tripler will remind to vote:</p>
-      <FormGroup>
+      <FormGroup legendText="">
         <SubTitle>Voter 1</SubTitle>
         <TwoColumnRow>
         <TextInput
+          id="triplee1_first"
           name="triplee1_first"
           invalidText="Invalid error message."
           labelText="First Name*"
           required
         />
         <TextInput
+          id="triplee1_last"
           name="triplee1_last"
           invalidText="Invalid error message."
           labelText="Last Name*"
@@ -140,16 +142,18 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           labelText="Housemate"
         />
       </FormGroup>
-      <FormGroup>
+      <FormGroup legendText="">
       <SubTitle>Voter 2</SubTitle>
         <TwoColumnRow>
         <TextInput
+          id="triplee2_first"
           name="triplee2_first"
           invalidText="Invalid error message."
           labelText="First Name*"
           required
         />
         <TextInput
+          id="triplee2_last"
           name="triplee2_last"
           invalidText="Invalid error message."
           labelText="Last Name*"
@@ -162,16 +166,18 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           labelText="Housemate"
         />
       </FormGroup>
-      <FormGroup>
+      <FormGroup legendText="">
         <SubTitle>Voter 3</SubTitle>
         <TwoColumnRow>
         <TextInput
+          id="triplee3_first"
           name="triplee3_first"
           invalidText="Invalid error message."
           labelText="First Name*"
           required
         />
         <TextInput
+          id="triplee3_last"
           name="triplee3_last"
           invalidText="Invalid error message."
           labelText="Last Name*"
@@ -185,8 +191,9 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         />
       </FormGroup>
       <p>Add the Vote Tripler's phone number so we can confirm their identity and send you your payment!</p>
-      <FormGroup>
+      <FormGroup legendText="">
         <TextInput
+          id="phone"
           name="phone"
           invalidText="Invalid error message."
           labelText={`${tripler.first_name}'s Phone Number*`}
@@ -201,7 +208,7 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
         title={null}
       />
       }
-      <Button 
+      <Button
         type="submit"
         loading={loading}
         trackingEvent={{ category: 'SubmitTriplerConfirm', label: 'Add'}}
@@ -209,9 +216,9 @@ const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       >
         Add
       </Button>
-      <Button 
-        small 
-        kind="tertiary" 
+      <Button
+        size="small"
+        kind="tertiary"
         href={'/triplers'}
         trackingEvent={{ category: 'BackFromTriplerConfirm', label: 'Go back to My Vote Triplers'}}
       >
