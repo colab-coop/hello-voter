@@ -1,61 +1,73 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Button, InlineLoading } from 'carbon-components-react'
-import { useHistory } from 'react-router-dom'
-import { spacing, colors } from '../theme'
-import ReactGA from 'react-ga';
+import React from "react";
+import styled from "styled-components";
+import { Button, InlineLoading } from "carbon-components-react";
+import { useHistory } from "react-router-dom";
+import { spacing, colors } from "../theme";
+import ReactGA from "react-ga";
 
 const ButtonStyled = styled(Button)`
   display: flex;
   justify-content: space-between;
-  width: ${props => props.micro ? '50%' : '100%'};
+  width: ${(props) => (props.micro ? "50%" : "100%")};
   max-width: 100%;
-  padding-right: ${ spacing[4] };
-  margin-top: ${ spacing[5] };
-`
+  padding-right: ${spacing[4]};
+  margin-top: ${spacing[5]};
+`;
 
 const InlineLoadingStyled = styled(InlineLoading)`
   width: 100%;
   justify-content: center;
-  height: ${ spacing[5] };
-`
+  height: ${spacing[5]};
+`;
 
 const PillButton = styled.div`
   border-radius: 32px;
   font-size: 12px;
-  padding: ${ spacing[2]} ${spacing[3]};
-  background-color: ${ colors.gray[20]};
-  border: 2px solid ${ colors.gray[20]};
+  padding: ${spacing[2]} ${spacing[3]};
+  background-color: ${colors.gray[20]};
+  border: 2px solid ${colors.gray[20]};
   display: flex;
   align-items: center;
   white-space: nowrap;
   &:hover {
-    border: 2px solid ${ colors.blue[60]};
+    border: 2px solid ${colors.blue[60]};
   }
-`
+`;
 
 export default (props) => {
   const {
-    href, children, kind, loading, onClick, pill, shouldRedirect, isAForm, trackingEvent,
+    href,
+    children,
+    kind,
+    loading,
+    onClick,
+    pill,
+    shouldRedirect,
+    isAForm,
+    trackingEvent,
     ...passThroughProps
-  } = props
-  const history = useHistory()
+  } = props;
+  const history = useHistory();
   const redirect = async (href) => {
-    history.push(href)
-  }
+    history.push(href);
+  };
 
   const track = async (trackingEvent) => {
     if (window.ga) {
-      trackingEvent.action = trackingEvent.action || history.location.pathname
-      trackingEvent.category = `ButtonClick_${trackingEvent.category}`
+      trackingEvent.action = trackingEvent.action || history.location.pathname;
+      trackingEvent.category = `ButtonClick_${trackingEvent.category}`;
       ReactGA.event(trackingEvent);
     }
-  }
+  };
+
+  //user is available in the app context, should be able to pass it to the track function
+  //grab all the variables from use context and pass it in
+  //do it here or in use analytics [send it on tracking Event]
 
   return pill ? (
     <PillButton
       onClick={(e) => {
-        trackingEvent && track(trackingEvent)
+        trackingEvent && track(trackingEvent);
         onClick && onClick(e);
         href && redirect(href);
       }}
@@ -67,20 +79,22 @@ export default (props) => {
     <ButtonStyled
       kind={loading ? "ghost" : kind}
       onClick={(e) => {
-        !shouldRedirect && !isAForm && e.preventDefault()
-        trackingEvent && track(trackingEvent)
-        onClick && onClick(e)
-        href && !shouldRedirect && redirect(href)
+        !shouldRedirect && !isAForm && e.preventDefault();
+        trackingEvent && track(trackingEvent);
+        onClick && onClick(e);
+        href && !shouldRedirect && redirect(href);
       }}
       {...passThroughProps}
     >
       {loading ? (
         <InlineLoadingStyled
           description=""
-          status={!loading ? 'finished' : 'active'}
-          aria-live={'off'}
+          status={!loading ? "finished" : "active"}
+          aria-live={"off"}
         />
-      ) : children}
+      ) : (
+        children
+      )}
     </ButtonStyled>
-  )
-}
+  );
+};
