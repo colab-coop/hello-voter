@@ -54,8 +54,8 @@ export default (props) => {
 
   const track = async (trackingEvent) => {
     if (window.ga) {
-      trackingEvent.action = trackingEvent.action || history.location.pathname;
-      trackingEvent.category = `ButtonClick_${trackingEvent.category}`;
+      trackingEvent.label = history.location.pathname;
+      trackingEvent.category = `ButtonClick`;
       ReactGA.event(trackingEvent);
     }
   };
