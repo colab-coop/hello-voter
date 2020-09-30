@@ -60,10 +60,6 @@ export default (props) => {
     }
   };
 
-  //user is available in the app context, should be able to pass it to the track function
-  //grab all the variables from use context and pass it in
-  //do it here or in use analytics [send it on tracking Event]
-
   return pill ? (
     <PillButton
       onClick={(e) => {
