@@ -4,6 +4,7 @@ import { DataTable, Pagination } from "carbon-components-react";
 import { AddAlt16 } from "@carbon/icons-react";
 import { spacing, colors } from "../../theme";
 import { track } from "../../analytics";
+import { useHistory } from "react-router-dom";
 
 const {
   TableContainer,
@@ -62,7 +63,7 @@ const TableBatchActionsHack = createGlobalStyle`
   }
 `;
 
-const renderTable = (batchActionClick) => ({
+const renderTable = (batchActionClick, history) => ({
   rows,
   headers,
   getHeaderProps,
@@ -74,47 +75,54 @@ const renderTable = (batchActionClick) => ({
   selectedRows,
   getTableProps,
   getTableContainerProps,
-}) => (
-  <TableContainerStyled {...getTableContainerProps()}>
-    <TableToolbarContainer>
-      <TableToolbar {...getToolbarProps()}>
-        <TableBatchActionsHack />
-        <TableBatchActions id="data-table" {...getBatchActionProps()}>
-          <TableBatchAction
-            renderIcon={AddAlt16}
-            iconDescription="Download the selected rows"
-            onClick={batchActionClick(selectedRows)}
-          >
-            Add {selectedRows.length} Tripler(s) to my list
-          </TableBatchAction>
-        </TableBatchActions>
-        <TableTitleContainer>
-          Possible Vote-Triplers within 10km
-        </TableTitleContainer>
-      </TableToolbar>
-    </TableToolbarContainer>
-    <Table {...getTableProps()} size="tall">
-      <TableBody>
-        {rows.map((row) => (
-          <TableRow key={row.id} {...getRowProps({ row })}>
-            <TableSelectRowStyled {...getSelectionProps({ row })} />
-            <TableCellStyled colSpan={100}>
-              {row.cells.map((cell) => (
-                <p key={cell.id}>{cell.value}</p>
-              ))}
-            </TableCellStyled>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </TableContainerStyled>
-);
+}) => {
+  return (
+    <TableContainerStyled {...getTableContainerProps()}>
+      <TableToolbarContainer>
+        <TableToolbar {...getToolbarProps()}>
+          <TableBatchActionsHack />
+          <TableBatchActions id="data-table" {...getBatchActionProps()}>
+            <TableBatchAction
+              renderIcon={AddAlt16}
+              iconDescription="Download the selected rows"
+              onClick={() => {
+                batchActionClick(selectedRows);
+                track({ action: "AddTriplersToList", label: "/Triplers/add" });
+                history.push("/triplers");
+              }}
+            >
+              Add {selectedRows.length} Tripler(s) to my list
+            </TableBatchAction>
+          </TableBatchActions>
+          <TableTitleContainer>
+            Possible Vote-Triplers within 10km
+          </TableTitleContainer>
+        </TableToolbar>
+      </TableToolbarContainer>
+      <Table {...getTableProps()} size="tall">
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.id} {...getRowProps({ row })}>
+              <TableSelectRowStyled {...getSelectionProps({ row })} />
+              <TableCellStyled colSpan={100}>
+                {row.cells.map((cell) => (
+                  <p key={cell.id}>{cell.value}</p>
+                ))}
+              </TableCellStyled>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainerStyled>
+  );
+};
 
 export default ({ headers, rows, handleSelected }) => {
+  const history = useHistory();
   return (
     <DataTable
       headers={headers}
-      render={renderTable(handleSelected)}
+      render={renderTable(handleSelected, history)}
       rows={rows}
     />
   );
