@@ -227,7 +227,7 @@ export const AddTriplersPage = ({
           size="field"
           kind="tertiary"
           type="submit"
-          onClick={(e) => {
+          onClick={() => {
             track({
               action: "SearchTripler",
               label: "Triplers/add",
