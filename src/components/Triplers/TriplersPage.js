@@ -287,6 +287,7 @@ const Triplers = ({
                 ? "You'll receive payment for these Vote Triplers."
                 : "These Vote Triplers have been confirmed — great work!"}
             </ParagraphMinHeight48>
+            <Button href="/payments/add">{"Add Payment Method"}</Button>
             {confirmed.map((tripler, i) => (
               <TriplerRow
                 key={tripler.id}
