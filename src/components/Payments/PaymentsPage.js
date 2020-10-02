@@ -96,7 +96,7 @@ const Payments = ({ completed, user }) => {
         </AcctTable>
       ) : (
         <Button
-          trackingEvent={{ action: "AddPayment", label: "/payment" }}
+          trackingEvent={{ action: "AddPayment", label: "/payments" }}
           href="/payments/add"
         >
           Add an Account
