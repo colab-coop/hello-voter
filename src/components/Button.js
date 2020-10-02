@@ -75,9 +75,9 @@ export default (props) => {
     <ButtonStyled
       kind={loading ? "ghost" : kind}
       onClick={(e) => {
+        !shouldRedirect && !isAForm && e.preventDefault();
         trackingEvent && track(trackingEvent);
         onClick && onClick(e);
-        !shouldRedirect && !isAForm && e.preventDefault();
         href && !shouldRedirect && redirect(href);
       }}
       {...passThroughProps}
