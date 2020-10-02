@@ -58,13 +58,6 @@ export default () => {
     );
   };
 
-  // const track = async (trackingEvent) => {
-  //   if (window.ga) {
-  //     // trackingEvent.label = history.location.pathname;
-  //     trackingEvent.category = `ButtonClick`;
-  //     ReactGA.event(trackingEvent);
-  //   }
-  // };
   useEffect(() => {
     const fetchData = async () => {
       const data = await api.fetchFreeTriplers();
