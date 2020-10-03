@@ -191,6 +191,7 @@ const Triplers = ({
   limit,
   deleteTripler,
   ambassadors,
+  user,
 }) => {
   const hasTriplers =
     unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
@@ -287,6 +288,18 @@ const Triplers = ({
                 ? "You'll receive payment for these Vote Triplers."
                 : "These Vote Triplers have been confirmed — great work!"}
             </ParagraphMinHeight48>
+            {!user.payout_provider ? (
+              <Button
+                href="/payments/add"
+                trackingEvent={{ action: "AddPayment" }}
+                style={{ marginBottom: 20 }}
+              >
+                Add Payment Method
+                <Add16 />
+              </Button>
+            ) : (
+              ""
+            )}
             {confirmed.map((tripler, i) => (
               <TriplerRow
                 key={tripler.id}
@@ -344,7 +357,7 @@ const Triplers = ({
 export default () => {
   const [triplers, setTriplers] = useState(null);
   const [limit, setLimit] = useState(null);
-  const { api } = React.useContext(AppContext);
+  const { api, user } = React.useContext(AppContext);
 
   const fetchData = async () => {
     const data = await api.fetchTriplers();
@@ -371,6 +384,7 @@ export default () => {
       fetchData={fetchData}
       limit={limit}
       deleteTripler={deleteTripler}
+      user={user}
     />
   ) : (
     <Loading />
@@ -382,6 +396,7 @@ export const TriplersPage = ({
   remindTripler,
   limit,
   deleteTripler,
+  user,
 }) => {
   const confirmed = triplers.filter(
     (tripler) => tripler.status === "confirmed"
@@ -418,6 +433,7 @@ export const TriplersPage = ({
         remindTripler={remindTripler}
         limit={limit}
         deleteTripler={deleteTripler}
+        user={user}
       />
     </PageLayout>
   );
