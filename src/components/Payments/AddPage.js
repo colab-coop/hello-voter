@@ -6,13 +6,14 @@ import PageLayout from "../PageLayout";
 import CardButton from "../CardButton";
 import Breadcrumbs from "../Breadcrumbs";
 import chime from "../../assets/images/chime.png";
+import paypal from "../../assets/images/paypal.png";
 import { usePlaidLink } from "react-plaid-link";
 import { AppContext } from "../../api/AppContext";
 import { useHistory } from "react-router-dom";
 
 const { REACT_APP_PLAID_KEY } = process.env;
 
-const Chime = styled.img`
+const CardIcon = styled.img`
   width: 24px;
   height: 24px;
 `;
@@ -32,7 +33,7 @@ export default () => {
     publicKey: REACT_APP_PLAID_KEY,
     onSuccess,
   };
-  const { open } = usePlaidLink(config);
+  const { open: openPlaid } = usePlaidLink(config);
   return (
     <PageLayout
       title="Add Payment Account"
@@ -56,16 +57,24 @@ export default () => {
     >
       <GridThreeUp>
         <CardButton
+          icon={<CardIcon src={paypal} />}
+          title="Use PayPal"
+          description="Get set up quickly to receive payments with PayPal."
+          onClick={(e) => {
+            history.push("/payments/paypal");
+          }}
+        />
+        <CardButton
           icon={<Finance24 />}
           title="Use existing account"
           description="Connect your bank account to receive payments immediately."
           onClick={(e) => {
             e.preventDefault();
-            open();
+            openPlaid();
           }}
         />
         <CardButton
-          icon={<Chime src={chime} />}
+          icon={<CardIcon src={chime} />}
           title="Sign up for Chime"
           description="Chime is a new kind of bank. Open a free account in five minutes."
           onClick={() => {
