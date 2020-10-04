@@ -6,6 +6,7 @@ import PageLayout from '../PageLayout'
 import Breadcrumbs from '../Breadcrumbs'
 import Button from '../Button'
 import chime from '../../assets/images/chime-card.png'
+import { useHistory } from 'react-router-dom'
 
 const Image = styled.img`
   width: 100%;
@@ -31,6 +32,7 @@ const ListItem = styled.li`
 `;
 
 export default () => {
+  const history = useHistory()
   return (
     <PageLayout
       title={""}
@@ -62,16 +64,18 @@ export default () => {
       <Subheader>How it works</Subheader>
       <OrderedList>
         <ListItem>Visit Chime.com and sign up for an account.</ListItem>
-        <ListItem>Once your account is open, return to this screen to connect to that account and receive your payment.</ListItem>
+        <ListItem>Once your Chime account is open, return to the Add Payment Account page and click Use existing account to connect your new Chime account and receive payment.</ListItem>
       </OrderedList>
       <Button
         style={{backgroundColor: "#25C87D"}}
         href='https://chime.com'
-        target='_blank'
         shouldRedirect
+        onClick={() => {
+          history.push("/payments/add")
+        }}
         // trackingEvent={{ category: "SubmitTriplerConfirm", label: "Add" }}
       >
-        Sign up for a Chime account
+      Sign up for a Chime account
       </Button>
       <Button
         size="small"

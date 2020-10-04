@@ -71,6 +71,7 @@ export default (props) => {
         trackingEvent && track(trackingEvent)
         onClick && onClick(e)
         href && !shouldRedirect && redirect(href)
+        href && shouldRedirect && window.open(href, "_blank")
       }}
       {...passThroughProps}
     >
