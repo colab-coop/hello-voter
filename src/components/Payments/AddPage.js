@@ -97,18 +97,6 @@ export default () => {
             onLogin={onPaypal}
           />
         )}
-        <Button
-          size="small"
-          style={{ marginTop: 0 }}
-          kind="tertiary"
-          href={"/payments"}
-          trackingEvent={{
-            action: "BackFromPaymentsConfirm",
-            label: "Go back to Payments",
-          }}
-        >
-          Go back to Payments
-        </Button>
       </GridThreeUp>
     </PageLayout>
   );
