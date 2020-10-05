@@ -28,7 +28,7 @@ export default () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(false);
-  const { api, fetchUser } = React.useContext(AppContext);
+  const { user, api, fetchUser } = React.useContext(AppContext);
 
   const setPayPalAccount = async (email) => {
     setLoading(true);
@@ -84,6 +84,7 @@ export default () => {
         </Prompt>
         <Form onSubmit={submit}>
           <TextInput
+            defaultValue={user && user.email}
             id="email"
             name="email"
             invalidText="Invalid email."
