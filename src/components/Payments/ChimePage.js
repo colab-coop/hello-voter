@@ -6,6 +6,7 @@ import PageLayout from "../PageLayout";
 import Breadcrumbs from "../Breadcrumbs";
 import Button from "../Button";
 import chime from "../../assets/images/chime-card.png";
+import { useHistory } from 'react-router-dom';
 
 const Image = styled.img`
   width: 100%;
@@ -31,6 +32,8 @@ const ListItem = styled.li`
 `;
 
 export default () => {
+  const history = useHistory();
+
   return (
     <PageLayout
       title={""}
@@ -72,7 +75,8 @@ export default () => {
           href="https://chime.com"
           target="_blank"
           rel="noopener"
-          shouldRedirect
+          isExternal
+          onClick={() => { history.push("/payments/add"); }}
           // trackingEvent={{ action: "SubmitTriplerConfirm", label: "Add" }}
         >
           Sign up for a Chime account

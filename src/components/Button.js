@@ -42,11 +42,14 @@ export default (props) => {
     loading,
     onClick,
     pill,
-    shouldRedirect,
+    isExternal,
     isAForm,
     trackingEvent,
     ...passThroughProps
   } = props;
+  if (isExternal) {
+    passThroughProps.href = href;
+  }
   const history = useHistory();
   const redirect = async (href) => {
     history.push(href);
@@ -75,10 +78,10 @@ export default (props) => {
     <ButtonStyled
       kind={loading ? "ghost" : kind}
       onClick={(e) => {
-        !shouldRedirect && !isAForm && e.preventDefault();
+        !isExternal && !isAForm && e.preventDefault();
         trackingEvent && track(trackingEvent);
         onClick && onClick(e);
-        href && !shouldRedirect && redirect(href);
+        href && !isExternal && redirect(href);
       }}
       {...passThroughProps}
     >
