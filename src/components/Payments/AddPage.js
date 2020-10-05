@@ -22,7 +22,7 @@ export default () => {
   const history = useHistory();
   const { api, fetchUser } = React.useContext(AppContext);
   const onSuccess = useCallback(async (token, metadata) => {
-    await api.setToken(token, metadata.account_id);
+    await api.setStripeToken(token, metadata.account_id);
     await fetchUser();
     history.push("/payments");
   }, []);

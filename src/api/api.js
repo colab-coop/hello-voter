@@ -8,7 +8,7 @@ import {
   TRIPLER_URL,
   CONFIRM_TRIPLER_URL,
   COMPLETE_ONBOARDING,
-  PAYMENT_URL,
+  STRIPE_PAYMENT_URL,
   PAYMENT_HISTORY_URL,
   TRIPLERS_LIMIT_URL,
 } from '../constants';
@@ -251,9 +251,9 @@ export const completeOnboarding = async (body) => {
   }
 }
 
-export const setToken = async (token, accountId) => {
+export const setStripeToken = async (token, accountId) => {
   try {
-    let res = await fetch(PAYMENT_URL, {
+    let res = await fetch(STRIPE_PAYMENT_URL, {
       method: 'POST',
       headers: addAuth(),
       body: JSON.stringify({token: token, account_id: accountId})
