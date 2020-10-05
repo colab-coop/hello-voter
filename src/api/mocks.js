@@ -5,7 +5,9 @@ import {
   TRIPLERS_URL,
   TRIPLERS_LIMIT_URL,
   FREE_TRIPLERS_URL,
-  TRIPLER_URL, STRIPE_PAYMENT_URL, PAYPAL_PAYMENT_URL
+  TRIPLER_URL,
+  STRIPE_PAYMENT_URL,
+  PAYPAL_PAYMENT_URL
 } from '../constants';
 import { TRIPLERS_FULL_WITH_AMBASSADOR, TRIPLERS_TO_ADD } from '../stories/Triplers.mocks';
 import { MAIN_USER } from '../stories/Home.mocks';

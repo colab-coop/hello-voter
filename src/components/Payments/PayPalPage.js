@@ -55,21 +55,10 @@ export default () => {
       header={
         <Breadcrumbs
           items={[
-            {
-              name: "Home",
-              route: "/home",
-            },
-            {
-              name: "Payments",
-              route: "/payments",
-            },
-            {
-              name: "Add",
-              route: "/payments/add",
-            },
-            {
-              name: "PayPal",
-            },
+            { name: "Home", route: "/home" },
+            { name: "Payments", route: "/payments" },
+            { name: "Add", route: "/payments/add" },
+            { name: "PayPal" },
           ]}
         />
       }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { ResponsiveContainer } from '../pageStyles'
 import { spacing } from '../../theme'
@@ -39,21 +39,10 @@ export default () => {
       header={
         <Breadcrumbs
           items={[
-            {
-              name: "Home",
-              route: "/home",
-            },
-            {
-              name: "Payments",
-              route: "/payments",
-            },
-            {
-              name: "Add",
-              route: "/payments/add",
-            },
-            {
-              name: "Chime",
-            },
+            { name: "Home", route: "/home" },
+            { name: "Payments", route: "/payments" },
+            { name: "Add", route: "/payments/add" },
+            { name: "Chime" },
           ]}
         />
       }
