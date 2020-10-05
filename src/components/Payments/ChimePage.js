@@ -11,22 +11,22 @@ import { useHistory } from 'react-router-dom'
 const Image = styled.img`
   width: 100%;
   max-width: 320px;
-`
+`;
 
 const Subheader = styled.h4`
   font-weight: 600;
-  margin-top: ${ spacing[5] };
+  margin-top: ${spacing[5]};
 `;
 
 const OrderedList = styled.ol`
   list-style: decimal;
-  margin-bottom: ${ spacing[7] };
+  margin-bottom: ${spacing[7]};
 `;
 
 const ListItem = styled.li`
-  margin-block-start: ${ spacing[5] };
-  margin-block-end: ${ spacing[5] };
-  margin-inline-start: ${ spacing[5] };
+  margin-block-start: ${spacing[5]};
+  margin-block-end: ${spacing[5]};
+  margin-inline-start: ${spacing[5]};
   margin-inline-end: 0;
   line-height: 1.5;
 `;
@@ -52,7 +52,7 @@ export default () => {
               route: "/payments/add",
             },
             {
-              name: "Chime"
+              name: "Chime",
             },
           ]}
         />
@@ -91,4 +91,4 @@ export default () => {
     </ResponsiveContainer>
     </PageLayout>
   );
-}
+};
