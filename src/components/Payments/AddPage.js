@@ -69,8 +69,8 @@ export default () => {
         />
         <CardButton
           icon={<Finance24 />}
-          title="Use existing account"
-          description="Connect your bank account to receive payments immediately."
+          title="Link bank account"
+          description="Connect your bank account quickly and securely to receive payments."
           onClick={(e) => {
             e.preventDefault();
             openPlaid();
