@@ -21,7 +21,7 @@ export default () => (
       title="FAQ"
       description="See answers to common questions asked by other Voting Ambassadors"
       onClick={() => {
-        window.open(REACT_APP_HELP_URL, "_blank")
+        window.open(REACT_APP_HELP_URL, "_blank", "noopener")
       }}
     />
     <CardButton

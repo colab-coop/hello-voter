@@ -71,6 +71,7 @@ export default () => {
           style={{ backgroundColor: "#25C87D" }}
           href="https://chime.com"
           target="_blank"
+          rel="noopener"
           shouldRedirect
           // trackingEvent={{ action: "SubmitTriplerConfirm", label: "Add" }}
         >
