@@ -10,8 +10,13 @@ import paypal from "../../assets/images/paypal.png";
 import { usePlaidLink } from "react-plaid-link";
 import { AppContext } from "../../api/AppContext";
 import { useHistory } from "react-router-dom";
+import { spacing } from '../../theme';
 
 const { REACT_APP_PLAID_KEY } = process.env;
+
+const Details = styled.p`
+  margin-bottom: ${spacing[5]};
+`;
 
 const CardIcon = styled.img`
   width: 24px;
@@ -49,6 +54,9 @@ export default () => {
         />
       }
     >
+      {alreadyHasPayoutProvider && (
+        <Details>You already have selected a payment method.</Details>
+      )}
       <GridThreeUp>
         <CardButton
           icon={<CardIcon src={paypal} />}
