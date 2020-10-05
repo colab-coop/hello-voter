@@ -63,8 +63,8 @@ export default () => {
         <OrderedList>
           <ListItem>Visit Chime.com and sign up for an account.</ListItem>
           <ListItem>
-            Once your account is open, return to this screen to connect to that
-            account and receive your payment.
+            Once your Chime account is open, return to the Add Payment Account page
+            and click Use existing account to connect your new Chime account and receive payment.
           </ListItem>
         </OrderedList>
         <Button
