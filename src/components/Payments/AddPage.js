@@ -20,7 +20,7 @@ const CardIcon = styled.img`
 
 export default () => {
   const history = useHistory();
-  const { api, fetchUser } = React.useContext(AppContext);
+  const { user, api, fetchUser } = React.useContext(AppContext);
   const onSuccess = useCallback(async (token, metadata) => {
     await api.setStripeToken(token, metadata.account_id);
     await fetchUser();
@@ -28,12 +28,14 @@ export default () => {
   }, []);
   const config = {
     clientName: "BlockPower",
+    // TODO: Shouldn't this be an env var?
     env: "sandbox",
     product: ["auth", "transactions"],
     publicKey: REACT_APP_PLAID_KEY,
     onSuccess,
   };
   const { open: openPlaid } = usePlaidLink(config);
+  const alreadyHasPayoutProvider = user && user.payout_provider;
   return (
     <PageLayout
       title="Add Payment Account"
@@ -55,6 +57,7 @@ export default () => {
           onClick={(e) => {
             history.push("/payments/paypal");
           }}
+          disabled={alreadyHasPayoutProvider}
         />
         <CardButton
           icon={<Finance24 />}
@@ -64,6 +67,7 @@ export default () => {
             e.preventDefault();
             openPlaid();
           }}
+          disabled={alreadyHasPayoutProvider}
         />
         <CardButton
           icon={<CardIcon src={chime} />}
@@ -72,6 +76,7 @@ export default () => {
           onClick={() => {
             history.push("/payments/chime");
           }}
+          disabled={alreadyHasPayoutProvider}
         />
       </GridThreeUp>
     </PageLayout>
