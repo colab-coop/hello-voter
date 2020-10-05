@@ -18,6 +18,7 @@ import HomePage from "./components/HomePage";
 import PaymentsPage from "./components/Payments/AddPage";
 import PaymentsHomePage from "./components/Payments/PaymentsPage";
 import Chime from "./components/Payments/ChimePage";
+import PayPal from "./components/Payments/PayPalPage";
 import Help from "./components/Help/HelpPage";
 import Terms from "./components/Help/TermsPage";
 import Privacy from "./components/Help/PrivacyPage";
@@ -146,6 +147,13 @@ const AppRoutes = () => {
         <AuthRoute
           path="/payments/chime"
           component={Chime}
+          exact={true}
+          authenticated={authenticated}
+          user={user}
+        />
+        <AuthRoute
+          path="/payments/paypal"
+          component={PayPal}
           exact={true}
           authenticated={authenticated}
           user={user}
