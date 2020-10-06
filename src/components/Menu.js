@@ -27,6 +27,11 @@ export default ({ isApproved }) => {
     setNavOpen(false)
     history.push(href);
   }
+  const signOut = () => {
+    // Fully clear data and refresh the webpage.
+    localStorage.clear();
+    window.location = "/";
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,6 +65,14 @@ export default ({ isApproved }) => {
           </HeaderNavigationStyled>
         )}
         <HeaderGlobalBar>
+          <HeaderGlobalAction
+            style={{ color: "white" }}
+            aria-label="Sign out"
+            type="button"
+            onClick={signOut}
+          >
+            Sign out
+          </HeaderGlobalAction>
           <HeaderGlobalAction
             aria-label="Help"
             type="button"
@@ -103,6 +116,9 @@ export default ({ isApproved }) => {
             <SwitcherDividerStyled />
             <SwitcherItemStyled onClick={() => {redirect("/help")}}>
               Help
+            </SwitcherItemStyled>
+            <SwitcherItemStyled onClick={signOut}>
+              Sign out
             </SwitcherItemStyled>
           </SwitcherStyled>
         </HeaderPanelStyled>
