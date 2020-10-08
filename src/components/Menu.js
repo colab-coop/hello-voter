@@ -17,15 +17,22 @@ import {
   SwitcherItemStyled,
   SwitcherDividerStyled
 } from './pageStyles'
+import { AppContext } from '../api/AppContext';
 
 const { REACT_APP_PAYMENT_FEATURE } = process.env
 
 export default ({ isApproved }) => {
   const [navOpen, setNavOpen] = useState(false)
   const history = useHistory()
+  const { user } = React.useContext(AppContext)
   const redirect = async (href) => {
     setNavOpen(false)
     history.push(href);
+  }
+  const signOut = () => {
+    // Fully clear data and refresh the webpage.
+    localStorage.clear();
+    window.location = "/";
   }
 
   return (
@@ -60,6 +67,16 @@ export default ({ isApproved }) => {
           </HeaderNavigationStyled>
         )}
         <HeaderGlobalBar>
+          {user && (
+            <HeaderGlobalAction
+              style={{ color: "white" }}
+              aria-label="Sign out"
+              type="button"
+              onClick={signOut}
+            >
+              Sign out
+            </HeaderGlobalAction>
+          )}
           <HeaderGlobalAction
             aria-label="Help"
             type="button"
@@ -104,6 +121,11 @@ export default ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/help")}}>
               Help
             </SwitcherItemStyled>
+            {user && (
+              <SwitcherItemStyled onClick={signOut}>
+                Sign out
+              </SwitcherItemStyled>
+            )}
           </SwitcherStyled>
         </HeaderPanelStyled>
       </Header>
