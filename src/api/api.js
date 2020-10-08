@@ -8,9 +8,10 @@ import {
   TRIPLER_URL,
   CONFIRM_TRIPLER_URL,
   COMPLETE_ONBOARDING,
-  PAYMENT_URL,
+  STRIPE_PAYMENT_URL,
   PAYMENT_HISTORY_URL,
   TRIPLERS_LIMIT_URL,
+  PAYPAL_PAYMENT_URL,
 } from '../constants';
 
 const { REACT_APP_OAUTH_HEADER, REACT_APP_TOKEN_KEY, REACT_APP_AUDIANCE, REACT_APP_KEY, REACT_APP_DEVELOPMENT } = process.env
@@ -251,9 +252,9 @@ export const completeOnboarding = async (body) => {
   }
 }
 
-export const setToken = async (token, accountId) => {
+export const setStripeToken = async (token, accountId) => {
   try {
-    let res = await fetch(PAYMENT_URL, {
+    let res = await fetch(STRIPE_PAYMENT_URL, {
       method: 'POST',
       headers: addAuth(),
       body: JSON.stringify({token: token, account_id: accountId})
@@ -270,6 +271,30 @@ export const setToken = async (token, accountId) => {
       data
     }
   } catch (e) {
+    errorHandler(e)
+    return false
+  }
+}
+
+export const setPayPalAccount = async (email) => {
+  try {
+    let res = await fetch(`${PAYPAL_PAYMENT_URL}`, {
+      method: 'POST',
+      headers: addAuth(),
+      body: JSON.stringify({ email })
+    })
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
     errorHandler(e)
     return false
   }

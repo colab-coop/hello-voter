@@ -14,6 +14,7 @@ export const SIGNUP_URL = `${API_URL}/ambassadors/signup`
 export const TRIPLER_URL = `${API_URL}/triplers`
 export const CONFIRM_TRIPLER_URL = `${API_URL}/triplers`
 export const COMPLETE_ONBOARDING = `${API_URL}/ambassadors/current/complete-onboarding`
-export const PAYMENT_URL = `${API_URL}/payouts/account?stripe=true`
+export const STRIPE_PAYMENT_URL = `${API_URL}/payouts/account?stripe=true`
+export const PAYPAL_PAYMENT_URL = `${API_URL}/payouts/account?paypal=true`
 export const PAYMENT_HISTORY_URL = `${API_URL}/ambassadors/current/payouts`
 export const TRIPLERS_LIMIT_URL = `${API_URL}/triplers-limit`

@@ -5,7 +5,9 @@ import {
   TRIPLERS_URL,
   TRIPLERS_LIMIT_URL,
   FREE_TRIPLERS_URL,
-  TRIPLER_URL
+  TRIPLER_URL,
+  STRIPE_PAYMENT_URL,
+  PAYPAL_PAYMENT_URL
 } from '../constants';
 import { TRIPLERS_FULL_WITH_AMBASSADOR, TRIPLERS_TO_ADD } from '../stories/Triplers.mocks';
 import { MAIN_USER } from '../stories/Home.mocks';
@@ -34,6 +36,12 @@ export const worker = setupWorker(
     return res(ctx.json({
       "limit": "10"
     }))
+  }),
+  rest.post(STRIPE_PAYMENT_URL, (req, res, ctx) => {
+    return res(ctx.json({}))
+  }),
+  rest.post(PAYPAL_PAYMENT_URL, (req, res, ctx) => {
+    return res(ctx.json({}))
   }),
   rest.get(PAYMENT_HISTORY_URL, (req, res, ctx) => {
     return res(ctx.json([
