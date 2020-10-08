@@ -10,8 +10,13 @@ import paypal from "../../assets/images/paypal.png";
 import { usePlaidLink } from "react-plaid-link";
 import { AppContext } from "../../api/AppContext";
 import { useHistory } from "react-router-dom";
+import { spacing } from '../../theme';
 
 const { REACT_APP_PLAID_KEY } = process.env;
+
+const Details = styled.p`
+  margin-bottom: ${spacing[5]};
+`;
 
 const CardIcon = styled.img`
   width: 24px;
@@ -20,7 +25,7 @@ const CardIcon = styled.img`
 
 export default () => {
   const history = useHistory();
-  const { api, fetchUser } = React.useContext(AppContext);
+  const { user, api, fetchUser } = React.useContext(AppContext);
   const onSuccess = useCallback(async (token, metadata) => {
     await api.setStripeToken(token, metadata.account_id);
     await fetchUser();
@@ -28,12 +33,14 @@ export default () => {
   }, []);
   const config = {
     clientName: "BlockPower",
+    // TODO: Shouldn't this be an env var?
     env: "sandbox",
     product: ["auth", "transactions"],
     publicKey: REACT_APP_PLAID_KEY,
     onSuccess,
   };
   const { open: openPlaid } = usePlaidLink(config);
+  const alreadyHasPayoutProvider = user && user.payout_provider;
   return (
     <PageLayout
       title="Add Payment Account"
@@ -47,6 +54,9 @@ export default () => {
         />
       }
     >
+      {alreadyHasPayoutProvider && (
+        <Details>You already have selected a payment method.</Details>
+      )}
       <GridThreeUp>
         <CardButton
           icon={<CardIcon src={paypal} />}
@@ -55,15 +65,17 @@ export default () => {
           onClick={(e) => {
             history.push("/payments/paypal");
           }}
+          disabled={alreadyHasPayoutProvider}
         />
         <CardButton
           icon={<Finance24 />}
-          title="Use existing account"
-          description="Connect your bank account to receive payments immediately."
+          title="Link bank account"
+          description="Connect your bank account quickly and securely to receive payments."
           onClick={(e) => {
             e.preventDefault();
             openPlaid();
           }}
+          disabled={alreadyHasPayoutProvider}
         />
         <CardButton
           icon={<CardIcon src={chime} />}
@@ -72,6 +84,7 @@ export default () => {
           onClick={() => {
             history.push("/payments/chime");
           }}
+          disabled={alreadyHasPayoutProvider}
         />
       </GridThreeUp>
     </PageLayout>
