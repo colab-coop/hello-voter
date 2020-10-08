@@ -222,7 +222,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           <Button
             type="submit"
             loading={loading}
-            trackingEvent={{ category: "SubmitTriplerConfirm", label: "Add" }}
+            trackingEvent={{ action: "SubmitTriplerConfirm", label: "Add" }}
             isAForm
           >
             Add
@@ -232,7 +232,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
             kind="tertiary"
             href={"/triplers"}
             trackingEvent={{
-              category: "BackFromTriplerConfirm",
+              action: "BackFromTriplerConfirm",
               label: "Go back to My Vote Triplers",
             }}
           >

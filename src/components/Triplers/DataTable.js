@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { DataTable, Pagination } from "carbon-components-react";
 import { AddAlt16 } from "@carbon/icons-react";
 import { spacing, colors } from "../../theme";
+import { track } from "../../analytics";
 
 const {
   TableContainer,
