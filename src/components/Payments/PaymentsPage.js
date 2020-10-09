@@ -94,7 +94,7 @@ const Payments = ({ completed, user }) => {
 
       {payout_provider ? (
         <AcctTable>
-          {user.account.account_data.last4 === "PYPL"
+          {payout_provider === "paypal"
             ? `Your payments will be sent via PayPal to ${user.email}`
             : `Account #: ********${user.account.account_data.last4}`}
         </AcctTable>
