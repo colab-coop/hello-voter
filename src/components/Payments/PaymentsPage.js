@@ -86,13 +86,17 @@ const PaymentTable = ({ data }) => (
 const Payments = ({ completed, user }) => {
   const hasCompleted = completed && completed.length > 0;
 
+  const { payout_provider } = user;
+
   return (
     <>
       <SectionTitle>Your payment account</SectionTitle>
-      {user.payout_provider ? (
+
+      {payout_provider ? (
         <AcctTable>
-          Account #: ********{user.account.account_data.last4}
-          <AcctNumber></AcctNumber>
+          {user.account.account_data.last4 === "PYPL"
+            ? `Your payments will be sent via PayPal to ${user.email}`
+            : `Account #: ********${user.account.account_data.last4}`}
         </AcctTable>
       ) : (
         <Button
@@ -103,7 +107,6 @@ const Payments = ({ completed, user }) => {
           <Add16 />
         </Button>
       )}
-
       <SectionTitle>Earned Payments</SectionTitle>
       <p>Estimated arrival in 2-4 business days</p>
       <PaymentTable data={hasCompleted ? completed : []} />
