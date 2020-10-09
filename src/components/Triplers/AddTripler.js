@@ -240,7 +240,7 @@ export const AddTriplersPage = ({
             </p>
             <SearchResultsClearLink
               onClick={() => {
-                search("", "");
+                window.location.reload();
               }}
             >
               Clear Search
