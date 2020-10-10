@@ -19,7 +19,7 @@ import {
 } from './pageStyles'
 import { AppContext } from '../api/AppContext';
 
-const { REACT_APP_PAYMENT_FEATURE } = process.env
+const { REACT_APP_PAYMENT_FEATURE, REACT_APP_APP_PATH } = process.env
 
 export default ({ isApproved }) => {
   const [navOpen, setNavOpen] = useState(false)
@@ -32,7 +32,7 @@ export default ({ isApproved }) => {
   const signOut = () => {
     // Fully clear data and refresh the webpage.
     localStorage.clear();
-    window.location = "/";
+    window.location = REACT_APP_APP_PATH || "/";
   }
 
   return (
