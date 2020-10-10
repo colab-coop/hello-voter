@@ -102,6 +102,12 @@ const AppRoutes = () => {
           exact={true}
           authenticated={authenticated}
         />
+        <AuthPublicRoute
+          path="/profile"
+          component={ContactInfoPage}
+          exact={true}
+          authenticated={authenticated}
+        />
         <AuthRoute
           path="/home"
           component={HomePage}

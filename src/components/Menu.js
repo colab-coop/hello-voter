@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Help20, AppSwitcher20, Close24 } from '@carbon/icons-react'
+import { Help20, UserAvatar20, AppSwitcher20, Close24 } from '@carbon/icons-react'
 import { ThemeProvider } from 'styled-components'
 
 import {
@@ -67,16 +67,6 @@ export default ({ isApproved }) => {
           </HeaderNavigationStyled>
         )}
         <HeaderGlobalBar>
-          {user && (
-            <HeaderGlobalAction
-              style={{ color: "white" }}
-              aria-label="Sign out"
-              type="button"
-              onClick={signOut}
-            >
-              Sign out
-            </HeaderGlobalAction>
-          )}
           <HeaderGlobalAction
             aria-label="Help"
             type="button"
@@ -86,6 +76,25 @@ export default ({ isApproved }) => {
           >
             <Help20 />
           </HeaderGlobalAction>
+          {user && <>
+            <HeaderGlobalAction
+              aria-label="Profile"
+              type="button"
+              onClick={() => {
+                redirect("/profile");
+              }}
+            >
+              <UserAvatar20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              style={{ color: "white" }}
+              aria-label="Sign out"
+              type="button"
+              onClick={signOut}
+            >
+              Sign out
+            </HeaderGlobalAction>
+          </>}
           <HeaderGlobalAction
             mobileNav
             aria-label="Menu"
@@ -121,11 +130,14 @@ export default ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/help")}}>
               Help
             </SwitcherItemStyled>
-            {user && (
+            {user && <>
+              <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
+                Profile
+              </SwitcherItemStyled>
               <SwitcherItemStyled onClick={signOut}>
                 Sign out
               </SwitcherItemStyled>
-            )}
+            </>}
           </SwitcherStyled>
         </HeaderPanelStyled>
       </Header>
