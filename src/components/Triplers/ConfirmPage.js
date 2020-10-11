@@ -216,7 +216,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
               kind="error"
               icondescription="Dismiss notification"
               subtitle={err}
-              title={null}
+              title=""
             />
           )}
           <Button

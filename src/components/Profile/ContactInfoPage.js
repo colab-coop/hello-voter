@@ -132,7 +132,7 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
                 kind="error"
                 icondescription="Dismiss notification"
                 subtitle={err}
-                title={null}
+                title=""
               />
             )}
             <Button
