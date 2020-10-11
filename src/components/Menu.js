@@ -23,10 +23,12 @@ const { REACT_APP_PAYMENT_FEATURE } = process.env
 
 export default ({ isApproved }) => {
   const [navOpen, setNavOpen] = useState(false)
+  const [profileNavOpen, setProfileNavOpen] = useState(false)
   const history = useHistory()
   const { user } = React.useContext(AppContext)
   const redirect = async (href) => {
     setNavOpen(false)
+    setProfileNavOpen(false)
     history.push(href);
   }
   const signOut = () => {
@@ -76,25 +78,17 @@ export default ({ isApproved }) => {
           >
             <Help20 />
           </HeaderGlobalAction>
-          {user && <>
+          {user && (
             <HeaderGlobalAction
-              aria-label="Profile"
+              aria-label="Profile menu"
               type="button"
               onClick={() => {
-                redirect("/profile");
+                setProfileNavOpen(!profileNavOpen)
               }}
             >
               <UserAvatar20 />
             </HeaderGlobalAction>
-            <HeaderGlobalAction
-              style={{ color: "white" }}
-              aria-label="Sign out"
-              type="button"
-              onClick={signOut}
-            >
-              Sign out
-            </HeaderGlobalAction>
-          </>}
+          )}
           <HeaderGlobalAction
             mobileNav
             aria-label="Menu"
@@ -107,6 +101,16 @@ export default ({ isApproved }) => {
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         </FlexContainer>
+        <HeaderPanelStyled navOpen={profileNavOpen}>
+          <SwitcherStyled>
+            <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
+              Profile
+            </SwitcherItemStyled>
+            <SwitcherItemStyled onClick={signOut}>
+              Sign out
+            </SwitcherItemStyled>
+          </SwitcherStyled>
+        </HeaderPanelStyled>
         <HeaderPanelStyled navOpen={navOpen}>
           <SwitcherStyled
             // style="transform: translateY(0px); transition: transform 400ms ease 0s;"
