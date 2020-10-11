@@ -13,7 +13,10 @@ import {
   HeaderNavigationStyled,
   HeaderMenuItemStyled,
   HeaderPanelStyled,
+  HeaderPanelRightContainer,
+  HeaderPanelSpacer,
   SwitcherStyled,
+  SwitcherStyledRight,
   SwitcherItemStyled,
   SwitcherDividerStyled
 } from './pageStyles'
@@ -101,16 +104,17 @@ export default ({ isApproved }) => {
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         </FlexContainer>
-        <HeaderPanelStyled navOpen={profileNavOpen}>
-          <SwitcherStyled>
+        <HeaderPanelRightContainer navOpen={profileNavOpen}>
+          <HeaderPanelSpacer />
+          <SwitcherStyledRight>
             <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
               Profile
             </SwitcherItemStyled>
             <SwitcherItemStyled onClick={signOut}>
               Sign out
             </SwitcherItemStyled>
-          </SwitcherStyled>
-        </HeaderPanelStyled>
+          </SwitcherStyledRight>
+        </HeaderPanelRightContainer>
         <HeaderPanelStyled navOpen={navOpen}>
           <SwitcherStyled
             // style="transform: translateY(0px); transition: transform 400ms ease 0s;"

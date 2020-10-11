@@ -94,6 +94,19 @@ export const HeaderPanelStyled = styled.div`
   width: 100%;
 `
 
+// Container for header panel dropdowns that need to be small and right aligned
+// instead of wide and centered.
+export const HeaderPanelRightContainer = styled.div`
+  display: ${props => props.navOpen ? "flex" : "none"};
+  max-width: 66rem; // Same as header.
+  margin-left: auto;
+  margin-right: auto;
+`
+
+export const HeaderPanelSpacer = styled.div`
+  flex: 1;
+`
+
 export const SwitcherStyled = styled.nav`
   width: 100%;
   padding: ${ spacing[5] };
@@ -104,6 +117,10 @@ export const SwitcherStyled = styled.nav`
   max-width: ${breakpoints.md.width};
   margin-left: auto;
   margin-right: auto;
+`
+
+export const SwitcherStyledRight = styled(SwitcherStyled)`
+  max-width: 20rem;
 `
 
 export const SwitcherItemStyled = styled.a`
