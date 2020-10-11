@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Loading from "./components/Loading";
 import { LogIn } from "./components/Login";
 import { Main } from "./components/Main";
-import ContactInfoPage from "./components/Profile/ContactInfoPage";
+import { ProfilePageSignup, ProfilePageEdit } from "./components/Profile/ContactInfoPage";
 import TriplersPage from "./components/Triplers/TriplersPage";
 import TriplersAdd from "./components/Triplers/AddTripler";
 import ConfirmPage from "./components/Triplers/ConfirmPage";
@@ -98,13 +98,13 @@ const AppRoutes = () => {
       <Switch>
         <AuthPublicRoute
           path="/ambassador/signup"
-          component={ContactInfoPage}
+          component={ProfilePageSignup}
           exact={true}
           authenticated={authenticated}
         />
         <AuthPublicRoute
           path="/profile"
-          component={ContactInfoPage}
+          component={ProfilePageEdit}
           exact={true}
           authenticated={authenticated}
         />

@@ -1,5 +1,6 @@
 import { setupWorker, rest } from 'msw'
 import {
+  SIGNUP_URL,
   AMBASSADOR_URL,
   PAYMENT_HISTORY_URL,
   TRIPLERS_URL,
@@ -16,8 +17,14 @@ import { PAYMENTS_PENDING, PAYMENTS_SETTLED } from '../stories/Payments.mocks';
 // Export the worker instance, so we can await the activation on Storybook's runtime.
 // You can use this reference to start the worker for local development as well.
 export const worker = setupWorker(
+  rest.post(SIGNUP_URL, (req, res, ctx) => {
+    return res(ctx.json({}))
+  }),
   rest.get(AMBASSADOR_URL, (req, res, ctx) => {
     return res(ctx.json(MAIN_USER))
+  }),
+  rest.post(AMBASSADOR_URL, (req, res, ctx) => {
+    return res(ctx.json({}))
   }),
   rest.get(TRIPLERS_URL, (req, res, ctx) => {
     return res(ctx.json(TRIPLERS_FULL_WITH_AMBASSADOR))
