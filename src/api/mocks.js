@@ -23,7 +23,7 @@ export const worker = setupWorker(
   rest.get(AMBASSADOR_URL, (req, res, ctx) => {
     return res(ctx.json(MAIN_USER))
   }),
-  rest.post(AMBASSADOR_URL, (req, res, ctx) => {
+  rest.put(AMBASSADOR_URL, (req, res, ctx) => {
     return res(ctx.json({}))
   }),
   rest.get(TRIPLERS_URL, (req, res, ctx) => {
