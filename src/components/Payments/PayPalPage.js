@@ -85,7 +85,7 @@ export default () => {
               kind="error"
               icondescription="Dismiss notification"
               subtitle={err}
-              title={null}
+              title=""
             />
           )}
           <Button

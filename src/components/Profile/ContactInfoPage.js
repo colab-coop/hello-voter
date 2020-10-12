@@ -43,7 +43,7 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
     <PageLayout title="Please Enter Your Details">
       <ResponsiveContainer>
         <Form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
             const formData = new FormData(e.target);
 
@@ -62,7 +62,7 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
               signupComplete: true,
             };
 
-            setAmbassador((data) => {
+            await setAmbassador((data) => {
               return {
                 ...data,
                 ...userData,
@@ -132,7 +132,7 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
                 kind="error"
                 icondescription="Dismiss notification"
                 subtitle={err}
-                title={null}
+                title=""
               />
             )}
             <Button
@@ -149,7 +149,32 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
   );
 };
 
-export default () => {
+export const ProfilePageEdit = () => {
+  const [err, setErr] = useState(false);
+  const history = useHistory();
+  const { api, fetchUser, user } = React.useContext(
+    AppContext
+  );
+  const saveProfile = async (ambassador) => {
+    const { error } = await api.saveProfile(ambassador);
+    if (error) return setErr(error.msg);
+    const { userError } = await fetchUser();
+    if (userError) return setErr(userError.msg);
+  }
+  return (
+    <ContactInfoPage
+      ambassador={user}
+      setAmbassador={async (mergeData) => {
+        const newAmbassador = mergeData(user);
+        await saveProfile(newAmbassador);
+        history.push("/");
+      }}
+      err={err}
+    />
+  );
+}
+
+export const ProfilePageSignup = () => {
   const [err, setErr] = useState(false);
   const history = useHistory();
   const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(

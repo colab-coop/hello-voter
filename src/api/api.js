@@ -156,6 +156,30 @@ export const signup = async (tripler) => {
   }
 }
 
+export const saveProfile = async (user) => {
+  try {
+    let res = await fetch(AMBASSADOR_URL, {
+      method: 'PUT',
+      headers: addAuth(),
+      body: JSON.stringify(user)
+    })
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
 export const confirmTriplers = async (triplerId, json) => {
   try {
     let res = await fetch(`${CONFIRM_TRIPLER_URL}/${triplerId}/start-confirm`, {
