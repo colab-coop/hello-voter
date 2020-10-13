@@ -58,7 +58,8 @@ export default () => {
         <Details>You already have selected a payment method.</Details>
       )}
       <GridThreeUp>
-        <CardButton
+        {/* Below has been commented until we have better fraud protection measures in place */}
+        {/* <CardButton
           icon={<CardIcon src={paypal} />}
           title="Use PayPal"
           description="Get set up quickly to receive payments with PayPal."
@@ -66,7 +67,7 @@ export default () => {
             history.push("/payments/paypal");
           }}
           disabled={alreadyHasPayoutProvider}
-        />
+        /> */}
         <CardButton
           icon={<Finance24 />}
           title="Link bank account"
