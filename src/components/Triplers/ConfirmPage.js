@@ -207,7 +207,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
               id="phone"
               name="phone"
               invalidText="Invalid error message."
-              labelText={`${tripler.first_name}'s Phone Number*`}
+              labelText={`${tripler.first_name}'s Mobile Phone Number*`}
               required
             />
           </FormGroup>
@@ -216,7 +216,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
               kind="error"
               icondescription="Dismiss notification"
               subtitle={err}
-              title={null}
+              title=""
             />
           )}
           <Button

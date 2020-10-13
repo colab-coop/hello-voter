@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "../components/Menu";
 import { LogIn } from "../components/Login";
-import { ContactInfoPage } from "../components/SignUp/ContactInfoPage";
+import { ContactInfoPage } from "../components/Profile/ContactInfoPage";
 import { MAIN_USER } from './Home.mocks';
 
 export default {
