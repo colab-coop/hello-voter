@@ -288,7 +288,7 @@ const Triplers = ({
                 ? "You'll receive payment for these Vote Triplers."
                 : "These Vote Triplers have been confirmed — great work!"}
             </ParagraphMinHeight48>
-            {!user.payout_provider ? (
+            {/*!user.payout_provider ? (
               <Button
                 href="/payments/add"
                 trackingEvent={{ action: "AddPayment" }}
@@ -299,7 +299,7 @@ const Triplers = ({
               </Button>
             ) : (
               ""
-            )}
+            )*/}
             {confirmed.map((tripler, i) => (
               <TriplerRow
                 key={tripler.id}
