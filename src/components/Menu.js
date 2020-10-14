@@ -107,9 +107,9 @@ export default ({ isApproved }) => {
         <HeaderPanelRightContainer navOpen={profileNavOpen}>
           <HeaderPanelSpacer />
           <SwitcherStyledRight>
-            <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
-              Profile
-            </SwitcherItemStyled>
+            {/*<SwitcherItemStyled onClick={() => {redirect("/profile")}}>*/}
+            {/*  Profile*/}
+            {/*</SwitcherItemStyled>*/}
             <SwitcherItemStyled onClick={signOut}>
               Sign out
             </SwitcherItemStyled>
@@ -139,9 +139,9 @@ export default ({ isApproved }) => {
               Help
             </SwitcherItemStyled>
             {user && <>
-              <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
-                Profile
-              </SwitcherItemStyled>
+              {/*<SwitcherItemStyled onClick={() => {redirect("/profile")}}>*/}
+              {/*  Profile*/}
+              {/*</SwitcherItemStyled>*/}
               <SwitcherItemStyled onClick={signOut}>
                 Sign out
               </SwitcherItemStyled>
