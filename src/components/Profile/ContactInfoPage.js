@@ -39,6 +39,7 @@ const SubmissionContainer = styled.div`
 `;
 
 export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
+  
   return (
     <PageLayout title="Please Enter Your Details">
       <ResponsiveContainer>
@@ -149,6 +150,15 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
   );
 };
 
+
+export const DeniedPage = () => {
+  return (
+  <PageLayout title="Your account is under review.">
+    <p>Please contact support@blockpower.vote with any questions</p>
+  </PageLayout>
+  )
+}
+
 export const ProfilePageEdit = () => {
   const [err, setErr] = useState(false);
   const history = useHistory();
@@ -160,6 +170,10 @@ export const ProfilePageEdit = () => {
     if (error) return setErr(error.msg);
     const { userError } = await fetchUser();
     if (userError) return setErr(userError.msg);
+  }
+  
+  if(user.msg==="Your account is locked."){
+    return <DeniedPage/>
   }
   return (
     <ContactInfoPage
@@ -180,6 +194,7 @@ export const ProfilePageSignup = () => {
   const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(
     AppContext
   );
+  
   user &&
     user.signup_completed &&
     user.onboarding_completed &&
@@ -196,6 +211,11 @@ export const ProfilePageSignup = () => {
       signup();
     }
   }, [ambassador]);
+
+
+  if(user.msg==="Your account is locked."){
+    return <DeniedPage/>
+  }
   return (
     <ContactInfoPage
       ambassador={ambassador}
