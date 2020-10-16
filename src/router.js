@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Loading from "./components/Loading";
 import { LogIn } from "./components/Login";
 import { Main } from "./components/Main";
-import ContactInfoPage from "./components/SignUp/ContactInfoPage";
+import { ProfilePageSignup, ProfilePageEdit } from "./components/Profile/ContactInfoPage";
 import TriplersPage from "./components/Triplers/TriplersPage";
 import TriplersAdd from "./components/Triplers/AddTripler";
 import ConfirmPage from "./components/Triplers/ConfirmPage";
@@ -18,6 +18,7 @@ import HomePage from "./components/HomePage";
 import PaymentsPage from "./components/Payments/AddPage";
 import PaymentsHomePage from "./components/Payments/PaymentsPage";
 import Chime from "./components/Payments/ChimePage";
+import PayPal from "./components/Payments/PayPalPage";
 import Help from "./components/Help/HelpPage";
 import Terms from "./components/Help/TermsPage";
 import Privacy from "./components/Help/PrivacyPage";
@@ -97,7 +98,13 @@ const AppRoutes = () => {
       <Switch>
         <AuthPublicRoute
           path="/ambassador/signup"
-          component={ContactInfoPage}
+          component={ProfilePageSignup}
+          exact={true}
+          authenticated={authenticated}
+        />
+        <AuthPublicRoute
+          path="/profile"
+          component={ProfilePageEdit}
           exact={true}
           authenticated={authenticated}
         />
@@ -146,6 +153,13 @@ const AppRoutes = () => {
         <AuthRoute
           path="/payments/chime"
           component={Chime}
+          exact={true}
+          authenticated={authenticated}
+          user={user}
+        />
+        <AuthRoute
+          path="/payments/paypal"
+          component={PayPal}
           exact={true}
           authenticated={authenticated}
           user={user}

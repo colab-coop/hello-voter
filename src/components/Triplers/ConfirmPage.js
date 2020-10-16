@@ -61,6 +61,12 @@ const TwoColumnRow = styled.div`
   margin-bottom: ${spacing[3]};
 `;
 
+const Column = styled.div`
+  display: grid;
+  align-items: start;
+  margin-bottom: ${spacing[5]};
+`;
+
 export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
   const history = useHistory();
   const [err, setErr] = useState(false);
@@ -202,12 +208,21 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
             Add the Vote Tripler's phone number so we can confirm their identity
             and send you your payment!
           </p>
+          
           <FormGroup legendText="">
+            <Column>
             <TextInput
               id="phone"
               name="phone"
               invalidText="Invalid error message."
-              labelText={`${tripler.first_name}'s Phone Number*`}
+              labelText={`${tripler.first_name}'s Mobile Phone Number*`}
+              required
+            />
+            </Column>
+            <Checkbox
+              id="Honor"
+              name="Honor"
+              labelText="I certify this information is true to the best of my knowledge. I understand that I may be removed from BlockPower if I submit false information."
               required
             />
           </FormGroup>
@@ -216,9 +231,10 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
               kind="error"
               icondescription="Dismiss notification"
               subtitle={err}
-              title={null}
+              title=""
             />
           )}
+          
           <Button
             type="submit"
             loading={loading}

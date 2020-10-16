@@ -5,7 +5,7 @@ import { spacing, colors } from "../theme";
 
 const CardContainer = styled.button`
   border: none;
-  cursor: pointer;
+  cursor: ${props => props.disabled ? "inherit" : "pointer"};
   text-align: left;
   background-color: ${colors.gray[10]};
   padding: ${spacing[5]};
@@ -29,9 +29,12 @@ const CardTitle = styled.h5`
   margin-left: ${spacing[3]};
 `;
 
-export default ({ icon, title, description, onClick }) => {
+export default ({ icon, title, description, onClick, disabled }) => {
   return (
-    <CardContainer onClick={onClick}>
+    <CardContainer
+      disabled={disabled}
+      onClick={disabled ? null : onClick}
+    >
       <CardTitleContainer>
         {icon}
         <CardTitle>{title}</CardTitle>
