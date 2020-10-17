@@ -3,6 +3,7 @@ import Menu from "../components/Menu";
 import Footer from "../components/Footer";
 import { TriplersPage } from "../components/Triplers/TriplersPage";
 import { AddTriplersPage, normalizeTripler } from "../components/Triplers/AddTripler";
+import { SearchFilters } from '../components/Triplers/SearchFilters';
 import { ConfirmPage } from "../components/Triplers/ConfirmPage";
 import {
   TRIPLERS_UNCONFIRMED,
@@ -106,6 +107,12 @@ export const AddTriplers = () => (
       triplers={TRIPLERS_TO_ADD.map(normalizeTripler)}
     />
   </>
+);
+
+export const TriplerSearchFilters = () => (
+  <SearchFilters
+    {...defaultAddTriplersPageProps}
+  />
 );
 
 export const ConfirmTriplers = () => (

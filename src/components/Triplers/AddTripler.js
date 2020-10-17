@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Search, Form, Button } from "carbon-components-react";
 import styled from "styled-components";
-import { spacing, breakpoints, colors } from "../../theme";
+import { spacing, colors } from "../../theme";
 import PageLayout from "../PageLayout";
 import Breadcrumbs from "../Breadcrumbs";
 import DataTable from "./DataTable";
 import { AppContext } from "../../api/AppContext";
 import { useHistory } from "react-router-dom";
 import Loading from "../Loading";
-import { track } from "../../analytics";
+import { SearchFilters } from './SearchFilters';
 
 export function normalizeTripler(tripler) {
   return {
@@ -106,35 +105,6 @@ export default () => {
   );
 };
 
-const SearchBarContainer = styled(Form)`
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-column-gap: ${spacing[5]};
-  grid-row-gap: ${spacing[5]};
-  grid-template-columns: repeat(12, 1fr);
-  margin-top: ${spacing[5]};
-  @media (max-width: ${breakpoints.md.width}) {
-    grid-column-gap: ${spacing[3]};
-    grid-row-gap: ${spacing[3]};
-  }
-`;
-
-const SearchFieldStyled = styled(Search)`
-  grid-column-end: span 5;
-  @media (max-width: ${breakpoints.md.width}) {
-    grid-column-end: span 6;
-  }
-`;
-
-const SearchButtonStyled = styled(Button)`
-  width: 100%;
-  max-width: 100%;
-  grid-column-end: span 2;
-  @media (max-width: ${breakpoints.md.width}) {
-    grid-column-end: span 12;
-  }
-`;
-
 const Divider = styled.div`
   height: 1px;
   width: 100%;
@@ -171,17 +141,9 @@ export const AddTriplersPage = ({
       header={
         <Breadcrumbs
           items={[
-            {
-              name: "Home",
-              route: "/home",
-            },
-            {
-              name: "Vote Triplers",
-              route: "/triplers",
-            },
-            {
-              name: "Add",
-            },
+            { name: "Home", route: "/home" },
+            { name: "Vote Triplers", route: "/triplers" },
+            { name: "Add" },
           ]}
         />
       }
@@ -190,47 +152,12 @@ export const AddTriplersPage = ({
         Here’s a list of possible Vote Triplers. Those who live closest to you
         are at the top. Select the people you plan to talk with.
       </p>
-      <SearchBarContainer
-        onSubmit={(e) => {
-          e.preventDefault();
-          const formData = new FormData(e.target);
-          const firstName = formData.get("firstName");
-          const lastName = formData.get("lastName");
-          search(firstName, lastName);
-        }}
-      >
-        <SearchFieldStyled
-          name="firstName"
-          placeHolderText="First Name"
-          size="lg"
-          onChange={onSearchInputChange("firstName")}
-          value={searchInputs.firstName}
-          labelText=""
-        />
-        <SearchFieldStyled
-          name="lastName"
-          placeHolderText="Last Name"
-          size="lg"
-          onChange={onSearchInputChange("lastName")}
-          value={searchInputs.lastName}
-          labelText=""
-        />
-
-        <SearchButtonStyled
-          size="field"
-          kind="tertiary"
-          type="submit"
-          onClick={() => {
-            track({
-              action: "SearchTripler",
-              label: "Triplers/add",
-            });
-          }}
-          disabled={loading}
-        >
-          Search
-        </SearchButtonStyled>
-      </SearchBarContainer>
+      <SearchFilters
+        search={search}
+        loading={loading}
+        searchInputs={searchInputs}
+        onSearchInputChange={onSearchInputChange}
+      />
       {searchResults && (
         <>
           <Divider />
