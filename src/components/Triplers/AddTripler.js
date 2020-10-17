@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
+import get from "lodash/get";
 import { spacing, colors } from "../../theme";
 import PageLayout from "../PageLayout";
 import Breadcrumbs from "../Breadcrumbs";
@@ -26,6 +27,15 @@ export function searchResultSummary({ firstName, lastName, phone, distance, age,
   const displayName = [firstName, lastName].filter(Boolean).join(" ");
   const displayDistance = distance ? `${distance} mi` : "";
   return [displayName, phone, displayDistance, age, gender, msa].filter(Boolean).join(", ");
+}
+
+/**
+ * Returns the first value from the list of object paths
+ * that's not null or undefined (0 and "" are acceptable).
+ */
+function coalesceValue(object, paths) {
+  const validPath = paths.find((path) => get(object, path) != null);
+  return get(object, validPath);
 }
 
 export default () => {
@@ -84,7 +94,7 @@ export default () => {
       setSearchInputs({
         ...searchInputs,
         // Different input types have different ways of accessing their value.
-        [inputName]: e.value || e.selectedItem || e.target.value,
+        [inputName]: coalesceValue(e, ['value', 'selectedItem', 'target.value']),
       });
     },
     [setSearchInputs, searchInputs]
