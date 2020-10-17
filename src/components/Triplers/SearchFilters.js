@@ -39,10 +39,11 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
       onSubmit={(e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const firstName = formData.get("firstName");
-        const lastName = formData.get("lastName");
-        const phone = formData.get("phone");
-        search(firstName, lastName, phone);
+        search({
+          firstName: formData.get("firstName"),
+          lastName: formData.get("lastName"),
+          phone: formData.get("phone"),
+        });
       }}
     >
       <SearchFieldStyled
@@ -86,4 +87,4 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
       </SearchButtonStyled>
     </SearchBarContainer>
   )
-}
+};

@@ -1,3 +1,4 @@
+import queryString from 'query-string';
 import {
   LOGIN_URL,
   TRIPLERS_URL,
@@ -347,9 +348,15 @@ export const getPayments = async () => {
   }
 }
 
-export const searchTriplers = async (firstName, lastName, phone) => {
+export const searchTriplers = async (formData) => {
   try {
-    let res = await fetch(`${TRIPLER_URL}?firstName=${firstName}&lastName=${lastName}&phone=${phone}`, {
+    // Map frontend data names to backend search params.
+    const query = queryString.stringify({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+    });
+    let res = await fetch(`${TRIPLER_URL}?${query}`, {
       method: 'GET',
       headers: addAuth()
     })
