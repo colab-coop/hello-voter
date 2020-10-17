@@ -1,0 +1,15 @@
+@import '../../theme/variables';
+
+.bx--form-item {
+  grid-column-end: span 5;
+  @media (max-width: $break-md-width) {
+    grid-column-end: span 6;
+  }
+}
+
+.bx--dropdown__wrapper {
+  grid-column-end: span 5;
+  @media (max-width: $break-md-width) {
+    grid-column-end: span 6;
+  }
+}

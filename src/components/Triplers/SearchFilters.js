@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button, Form, Search, Slider, Dropdown } from 'carbon-components-react';
 import { breakpoints, spacing } from '../../theme';
 import { track } from '../../analytics';
+import './searchFilters.scss';
 
 const AGE_OPTIONS = [
   "18-19",
@@ -70,12 +71,6 @@ const SearchFieldStyled = styled(Search)`
   }
 `;
 
-const SliderStyled = styled(Slider)`
-`;
-
-const DropdownStyled = styled(Dropdown)`
-`;
-
 const SearchButtonStyled = styled(Button)`
   width: 100%;
   max-width: 100%;
@@ -117,7 +112,7 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
         value={searchInputs.phone}
         labelText=""
       />
-      <SliderStyled
+      <Slider
         name="distance"
         labelText="Distance away (miles)"
         max={50}
@@ -126,7 +121,7 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
         onChange={onSearchInputChange("distance")}
         value={searchInputs.distance}
       />
-      <DropdownStyled
+      <Dropdown
         id="age"
         name="age"
         items={AGE_OPTIONS}
@@ -135,7 +130,7 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
         onChange={onSearchInputChange("age")}
         selectedItem={searchInputs.age}
       />
-      <DropdownStyled
+      <Dropdown
         id="gender"
         name="gender"
         items={GENDER_OPTIONS}
@@ -144,7 +139,7 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
         onChange={onSearchInputChange("gender")}
         selectedItem={searchInputs.gender}
       />
-      <DropdownStyled
+      <Dropdown
         id="msa"
         name="msa"
         items={MSA_OPTIONS}
