@@ -18,9 +18,9 @@ const AGE_OPTIONS = [
 ];
 
 const GENDER_OPTIONS = [
-  "F",
-  "M",
-  "U",
+  "Female",
+  "Male",
+  // "Unspecified" is also possible in the database.
 ];
 
 const MSA_OPTIONS = [
@@ -49,6 +49,8 @@ const MSA_OPTIONS = [
   "Phoenix, AZ area",
   "AZ other",
   "Mansfield, OH area",
+  "Milwaukee, WI",
+  "WI other",
 ];
 
 const SearchFilterGrid = styled.div`
@@ -137,7 +139,7 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
               name="gender"
               items={GENDER_OPTIONS}
               label="Choose an option"
-              titleText="Gender"
+              titleText="Sex"
               onChange={onSearchInputChange("gender")}
               selectedItem={searchInputs.gender}
             />
