@@ -27,10 +27,12 @@ const defaultTriplersPageProps = {
 }
 const defaultAddTriplersPageProps = {
   triplers: [],
+  searchInputs: {},
   loading: false,
   error: null,
   claimTriplers: noop,
-  search: noop
+  search: noop,
+  onSearchInputChange: noop
 }
 const defaultConfirmTriplersPageProps = {
   tripler: {},
