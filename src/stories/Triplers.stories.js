@@ -24,7 +24,7 @@ const mockSearch = {
   firstName: "Foo",
   lastName: "Bar",
   phone: "313-555-1212",
-  distance: 10,
+  distance: 0.5,
   age: "20-29",
   gender: "F",
   msa: "Jacksonville, FL area",

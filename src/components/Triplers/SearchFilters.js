@@ -114,10 +114,10 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
       />
       <Slider
         name="distance"
-        labelText="Distance away (miles)"
-        max={50}
+        labelText="Distance"
+        max={1}
         min={0}
-        step={5}
+        step={0.05}
         onChange={onSearchInputChange("distance")}
         value={searchInputs.distance}
       />

@@ -25,7 +25,7 @@ export function normalizeTripler(tripler) {
 
 export function searchResultSummary({ firstName, lastName, phone, distance, age, gender, msa }) {
   const displayName = [firstName, lastName].filter(Boolean).join(" ");
-  const displayDistance = distance ? `${distance} mi` : "";
+  const displayDistance = distance < 1 ? "nearby" : "";
   return [displayName, phone, displayDistance, age, gender, msa].filter(Boolean).join(", ");
 }
 
@@ -48,7 +48,7 @@ export default () => {
     firstName: "",
     lastName: "",
     phone: "",
-    distance: 10,
+    distance: 1, // Max distance is 100% meaning "Doesn't matter".
     age: "",
     gender: "",
     msa: "",

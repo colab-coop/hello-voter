@@ -1,15 +1,41 @@
 @import '../../theme/variables';
 
-.bx--form-item {
+// Dropdowns.
+.bx--dropdown__wrapper {
   grid-column-end: span 5;
   @media (max-width: $break-md-width) {
     grid-column-end: span 6;
   }
 }
 
-.bx--dropdown__wrapper {
+// Sliders.
+.bx--form-item {
   grid-column-end: span 5;
+
+  .bx--slider {
+    min-width: 7rem;
+  }
+
   @media (max-width: $break-md-width) {
-    grid-column-end: span 6;
+    // Expand to the full grid width so it's still usable.
+    grid-column-end: span 12;
+  }
+}
+
+.bx--slider-text-input {
+  visibility: hidden;
+}
+
+.bx--slider__range-label {
+  visibility: hidden;
+
+  // Hack to change the labels of the slider.
+  &:after {
+    visibility: visible;
+    margin-left: -9px;
+    content: "Doesn't matter";
+  }
+  &:first-child:after {
+    content: "Near me";
   }
 }
