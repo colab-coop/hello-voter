@@ -25,6 +25,9 @@ const mockSearch = {
   lastName: "Bar",
   phone: "313-555-1212",
   distance: 10,
+  age: "20-29",
+  gender: "F",
+  msa: "Jacksonville, FL area",
 }
 const defaultTriplersPageProps = {
   triplers: [],

@@ -1,8 +1,54 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Form, Search, Slider } from 'carbon-components-react';
+import { Button, Form, Search, Slider, Dropdown } from 'carbon-components-react';
 import { breakpoints, spacing } from '../../theme';
 import { track } from '../../analytics';
+
+const AGE_OPTIONS = [
+  "18-19",
+  "20-29",
+  "30-39",
+  "40-49",
+  "50-59",
+  "60-69",
+  "70-79",
+  "80+",
+  // "Unavailable" is also possible in the database.
+];
+
+const GENDER_OPTIONS = [
+  "F",
+  "M",
+  "U",
+];
+
+const MSA_OPTIONS = [
+  "Jacksonville, FL area",
+  "Miami, FL area",
+  "Orlando, FL area",
+  "Tampa, FL area",
+  "FL other",
+  "Atlanta, GA area",
+  "GA other",
+  "Charlotte, NC area",
+  "Durham, NC area",
+  "Fayetteville, NC area",
+  "Greensboro, NC area",
+  "Raleigh, NC area",
+  "Winston-Salem, NC area",
+  "NC other",
+  "Charleston, SC area",
+  "Columbia, SC area",
+  "SC other",
+  "Birmingham, AL area",
+  "Montgomery, AL area",
+  "AL other",
+  "Lexington, KY area",
+  "KY other",
+  "Phoenix, AZ area",
+  "AZ other",
+  "Mansfield, OH area",
+];
 
 const SearchBarContainer = styled(Form)`
   display: grid;
@@ -25,6 +71,9 @@ const SearchFieldStyled = styled(Search)`
 `;
 
 const SliderStyled = styled(Slider)`
+`;
+
+const DropdownStyled = styled(Dropdown)`
 `;
 
 const SearchButtonStyled = styled(Button)`
@@ -76,6 +125,33 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
         step={5}
         onChange={onSearchInputChange("distance")}
         value={searchInputs.distance}
+      />
+      <DropdownStyled
+        id="age"
+        name="age"
+        items={AGE_OPTIONS}
+        label="Choose an option"
+        titleText="Age"
+        onChange={onSearchInputChange("age")}
+        selectedItem={searchInputs.age}
+      />
+      <DropdownStyled
+        id="gender"
+        name="gender"
+        items={GENDER_OPTIONS}
+        label="Choose an option"
+        titleText="Gender"
+        onChange={onSearchInputChange("gender")}
+        selectedItem={searchInputs.gender}
+      />
+      <DropdownStyled
+        id="msa"
+        name="msa"
+        items={MSA_OPTIONS}
+        label="Choose an option"
+        titleText="Metro area"
+        onChange={onSearchInputChange("msa")}
+        selectedItem={searchInputs.msa}
       />
 
       <SearchButtonStyled
