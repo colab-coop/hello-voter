@@ -31,6 +31,7 @@ export default () => {
   const [searchInputs, setSearchInputs] = useState({
     firstName: "",
     lastName: "",
+    phone: "",
   });
   const { api } = React.useContext(AppContext);
 
@@ -38,23 +39,16 @@ export default () => {
     return data.data.map(normalizeTripler);
   };
 
-  const search = async (firstName, lastName) => {
+  const search = async (firstName, lastName, phone) => {
     setIsLoading(true);
-    const data = await api.searchTriplers(firstName, lastName);
+    const data = await api.searchTriplers(firstName, lastName, phone);
     const triplersWithAddress = appendAddress(data);
     setIsLoading(false);
     setTriplers(triplersWithAddress);
-    setSearchInputs({
-      firstName,
-      lastName,
-    });
-    setSearchResults(
-      firstName
-        ? firstName && lastName
-          ? firstName + " " + lastName
-          : firstName
-        : lastName
-    );
+    setSearchInputs({ firstName, lastName, phone });
+    const name = [firstName, lastName].filter(Boolean).join(" ");
+    const resultsSummary = [name, phone].filter(Boolean).join(", ");
+    setSearchResults(resultsSummary);
   };
 
   useEffect(() => {

@@ -41,7 +41,8 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
         const formData = new FormData(e.target);
         const firstName = formData.get("firstName");
         const lastName = formData.get("lastName");
-        search(firstName, lastName);
+        const phone = formData.get("phone");
+        search(firstName, lastName, phone);
       }}
     >
       <SearchFieldStyled
@@ -58,6 +59,14 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
         size="lg"
         onChange={onSearchInputChange("lastName")}
         value={searchInputs.lastName}
+        labelText=""
+      />
+      <SearchFieldStyled
+        name="phone"
+        placeHolderText="Mobile Phone Number"
+        size="lg"
+        onChange={onSearchInputChange("phone")}
+        value={searchInputs.phone}
         labelText=""
       />
 
