@@ -22,6 +22,11 @@ export function normalizeTripler(tripler) {
   };
 }
 
+export function searchResultSummary({ firstName, lastName, phone }) {
+  const name = [firstName, lastName].filter(Boolean).join(" ");
+  return [name, phone].filter(Boolean).join(", ");
+}
+
 export default () => {
   const history = useHistory();
   const [triplers, setTriplers] = useState(null);
@@ -46,9 +51,7 @@ export default () => {
     setIsLoading(false);
     setTriplers(triplersWithAddress);
     setSearchInputs({ firstName, lastName, phone });
-    const name = [firstName, lastName].filter(Boolean).join(" ");
-    const resultsSummary = [name, phone].filter(Boolean).join(", ");
-    setSearchResults(resultsSummary);
+    setSearchResults(searchResultSummary({ firstName, lastName, phone }));
   };
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import React from "react";
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";
 import { TriplersPage } from "../components/Triplers/TriplersPage";
-import { AddTriplersPage, normalizeTripler } from "../components/Triplers/AddTripler";
+import { AddTriplersPage, normalizeTripler, searchResultSummary } from "../components/Triplers/AddTripler";
 import { SearchFilters } from '../components/Triplers/SearchFilters';
 import { ConfirmPage } from "../components/Triplers/ConfirmPage";
 import {
@@ -20,6 +20,11 @@ export default {
 };
 
 const noop = () => {}
+const mockSearch = {
+  firstName: "Foo",
+  lastName: "Bar",
+  phone: "313-555-1212"
+}
 const defaultTriplersPageProps = {
   triplers: [],
   limit: 10,
@@ -28,7 +33,8 @@ const defaultTriplersPageProps = {
 }
 const defaultAddTriplersPageProps = {
   triplers: [],
-  searchInputs: {},
+  searchInputs: mockSearch,
+  searchResults: searchResultSummary(mockSearch),
   loading: false,
   error: null,
   claimTriplers: noop,
