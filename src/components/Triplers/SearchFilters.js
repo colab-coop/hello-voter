@@ -41,13 +41,7 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
     <SearchBarContainer
       onSubmit={(e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        search({
-          firstName: formData.get("firstName"),
-          lastName: formData.get("lastName"),
-          phone: formData.get("phone"),
-          distance: formData.get("distance"),
-        });
+        search();
       }}
     >
       <SearchFieldStyled

@@ -46,14 +46,13 @@ export default () => {
     return data.data.map(normalizeTripler);
   };
 
-  const search = async (formData) => {
+  const search = async () => {
     setIsLoading(true);
-    const data = await api.searchTriplers(formData);
+    const data = await api.searchTriplers(searchInputs);
     const triplersWithAddress = appendAddress(data);
     setIsLoading(false);
     setTriplers(triplersWithAddress);
-    setSearchInputs(formData);
-    setSearchResults(searchResultSummary(formData));
+    setSearchResults(searchResultSummary(searchInputs));
   };
 
   useEffect(() => {
