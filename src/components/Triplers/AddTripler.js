@@ -22,9 +22,10 @@ export function normalizeTripler(tripler) {
   };
 }
 
-export function searchResultSummary({ firstName, lastName, phone }) {
-  const name = [firstName, lastName].filter(Boolean).join(" ");
-  return [name, phone].filter(Boolean).join(", ");
+export function searchResultSummary({ firstName, lastName, phone, distance }) {
+  const displayName = [firstName, lastName].filter(Boolean).join(" ");
+  const displayDistance = distance ? `${distance} mi` : "";
+  return [displayName, phone, displayDistance].filter(Boolean).join(", ");
 }
 
 export default () => {
@@ -37,6 +38,7 @@ export default () => {
     firstName: "",
     lastName: "",
     phone: "",
+    distance: 10,
   });
   const { api } = React.useContext(AppContext);
 
@@ -79,7 +81,8 @@ export default () => {
     (inputName) => (e) => {
       setSearchInputs({
         ...searchInputs,
-        [inputName]: e.target.value,
+        // Different input types have different ways of accessing their value.
+        [inputName]: e.value || e.target.value,
       });
     },
     [setSearchInputs, searchInputs]

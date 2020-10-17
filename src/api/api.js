@@ -355,6 +355,7 @@ export const searchTriplers = async (formData) => {
       firstName: formData.firstName,
       lastName: formData.lastName,
       phone: formData.phone,
+      distance: formData.distance,
     });
     let res = await fetch(`${TRIPLER_URL}?${query}`, {
       method: 'GET',

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Form, Search } from 'carbon-components-react';
+import { Button, Form, Search, Slider } from 'carbon-components-react';
 import { breakpoints, spacing } from '../../theme';
 import { track } from '../../analytics';
 
@@ -24,6 +24,9 @@ const SearchFieldStyled = styled(Search)`
   }
 `;
 
+const SliderStyled = styled(Slider)`
+`;
+
 const SearchButtonStyled = styled(Button)`
   width: 100%;
   max-width: 100%;
@@ -43,6 +46,7 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
           firstName: formData.get("firstName"),
           lastName: formData.get("lastName"),
           phone: formData.get("phone"),
+          distance: formData.get("distance"),
         });
       }}
     >
@@ -69,6 +73,15 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
         onChange={onSearchInputChange("phone")}
         value={searchInputs.phone}
         labelText=""
+      />
+      <SliderStyled
+        name="distance"
+        labelText="Distance away (miles)"
+        max={50}
+        min={0}
+        step={5}
+        onChange={onSearchInputChange("distance")}
+        value={searchInputs.distance}
       />
 
       <SearchButtonStyled

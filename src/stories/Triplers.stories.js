@@ -23,7 +23,8 @@ const noop = () => {}
 const mockSearch = {
   firstName: "Foo",
   lastName: "Bar",
-  phone: "313-555-1212"
+  phone: "313-555-1212",
+  distance: 10,
 }
 const defaultTriplersPageProps = {
   triplers: [],
