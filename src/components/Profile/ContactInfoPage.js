@@ -39,12 +39,11 @@ const SubmissionContainer = styled.div`
   margin-top: ${spacing[8]};
 `;
 
-export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
+export const ContactInfoPage = ({ ambassador, setAmbassador, err, disablePhone }) => {
 
   if (process.env.REACT_APP_NO_NEW_SIGNUPS) {
     return <NoNewSignupsPage />;
   }
-
   return (
     <PageLayout title="Please Enter Your Details">
       <ResponsiveContainer>
@@ -57,7 +56,7 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
               first_name: formData.get("first_name"),
               last_name: formData.get("last_name"),
               email: formData.get("email"),
-              phone: formData.get("phone").toString(),
+              phone: String(formData.get("phone") || ""),
               date_of_birth: formData.get("date_of_birth"),
               address: {
                 address1: formData.get("address1"),
@@ -129,6 +128,7 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
               labelText="Phone number*"
               defaultValue={ambassador.phone}
               required
+              disabled={disablePhone}
             />
           </FormGroup>
           <SubmissionContainer>
@@ -214,6 +214,7 @@ export const ProfilePageEdit = () => {
         const success = await saveProfile(newAmbassador);
         if (success) history.push("/");
       }}
+      disablePhone
       err={err}
     />
   );
