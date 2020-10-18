@@ -122,14 +122,16 @@ const Menu = ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/")}}>
               Home
             </SwitcherItemStyled>
-            <SwitcherItemStyled onClick={() => {redirect("/triplers")}}>
-              Vote Triplers
-            </SwitcherItemStyled>
+            {isApproved &&
+              <SwitcherItemStyled onClick={() => {redirect("/triplers")}}>
+                Vote Triplers
+              </SwitcherItemStyled>
+            }
             {/*
               FIXME: Hide payments `REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE` & `REACT_APP_PAYMENT_FEATURE`
               with Boolean rather than "true" and empty .env field
             */}
-            {REACT_APP_PAYMENT_FEATURE &&
+            {isApproved && REACT_APP_PAYMENT_FEATURE &&
               <SwitcherItemStyled onClick={() => {redirect("/payments")}}>
                 Payments
               </SwitcherItemStyled>
