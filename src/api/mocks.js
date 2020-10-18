@@ -5,7 +5,6 @@ import {
   PAYMENT_HISTORY_URL,
   TRIPLERS_URL,
   TRIPLERS_LIMIT_URL,
-  FREE_TRIPLERS_URL,
   TRIPLER_URL,
   STRIPE_PAYMENT_URL,
   PAYPAL_PAYMENT_URL
@@ -28,9 +27,6 @@ export const worker = setupWorker(
   }),
   rest.get(TRIPLERS_URL, (req, res, ctx) => {
     return res(ctx.json(TRIPLERS_FULL_WITH_AMBASSADOR))
-  }),
-  rest.get(FREE_TRIPLERS_URL, (req, res, ctx) => {
-    return res(ctx.json(TRIPLERS_TO_ADD))
   }),
   rest.get(TRIPLER_URL, (req, res, ctx) => {
     // TODO: Filter this list based on `?firstName=foo&lastName=bar`

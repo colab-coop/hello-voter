@@ -70,7 +70,7 @@ export default () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await api.fetchFreeTriplers();
+      const data = await api.searchTriplers({});
       const triplersWithAddress = data.data.map(normalizeTripler);
       setTriplers(triplersWithAddress);
     };

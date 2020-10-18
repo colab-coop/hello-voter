@@ -4,7 +4,6 @@ import {
   TRIPLERS_URL,
   PUT_TRIPLERS_URL,
   AMBASSADOR_URL,
-  FREE_TRIPLERS_URL,
   SIGNUP_URL,
   TRIPLER_URL,
   CONFIRM_TRIPLER_URL,
@@ -104,22 +103,6 @@ export const claimTriplers = async (selectedTriplers) => {
 export const fetchTripler = async (triplerId) => {
   try {
     let res = await fetch(`${TRIPLER_URL}/${triplerId}`, {
-      method: 'GET',
-      headers: addAuth()
-    })
-    let data = await res.json()
-    return {
-      data
-    }
-  } catch(e) {
-    errorHandler(e)
-    return false
-  }
-}
-
-export const fetchFreeTriplers = async () => {
-  try {
-    let res = await fetch(`${FREE_TRIPLERS_URL}`, {
       method: 'GET',
       headers: addAuth()
     })
