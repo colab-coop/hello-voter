@@ -191,12 +191,19 @@ export const ProfilePageEdit = () => {
   );
   const saveProfile = async (ambassador) => {
     const { error } = await api.saveProfile(ambassador);
-    if (error) return setErr(error.msg);
+    if (error) {
+      setErr(error.msg);
+      return false;
+    }
     const { userError } = await fetchUser();
-    if (userError) return setErr(userError.msg);
+    if (userError) {
+      setErr(userError.msg);
+      return false;
+    }
+    return true;
   }
 
-if (user && user.msg==="Your account is locked.") {
+  if (user && user.msg==="Your account is locked.") {
     return <DeniedPage/>
   }
   return (
@@ -204,8 +211,8 @@ if (user && user.msg==="Your account is locked.") {
       ambassador={user}
       setAmbassador={async (mergeData) => {
         const newAmbassador = mergeData(user);
-        await saveProfile(newAmbassador);
-        history.push("/");
+        const success = await saveProfile(newAmbassador);
+        if (success) history.push("/");
       }}
       err={err}
     />
