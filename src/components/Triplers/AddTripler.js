@@ -48,7 +48,7 @@ export default () => {
     firstName: "",
     lastName: "",
     phone: "",
-    distance: 1, // Max distance is 100% meaning "Doesn't matter".
+    distance: 0, // Scale of 0 = "nearby" to 1 = "doesn't matter".
     age: "",
     gender: "",
     msa: "",

@@ -355,7 +355,8 @@ export const searchTriplers = async (formData) => {
       firstName: formData.firstName,
       lastName: formData.lastName,
       phone: formData.phone,
-      distance: formData.distance,
+      // Invert the percentage.
+      distance: 1.0 - (formData.distance || 0),
       age: formData.age,
       gender: formData.gender,
       msa: formData.msa,
