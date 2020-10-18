@@ -24,7 +24,7 @@ import { AppContext } from '../api/AppContext';
 
 const { REACT_APP_PAYMENT_FEATURE, REACT_APP_APP_PATH } = process.env
 
-export default ({ isApproved }) => {
+const Menu = ({ isApproved }) => {
   const [navOpen, setNavOpen] = useState(false)
   const [profileNavOpen, setProfileNavOpen] = useState(false)
   const history = useHistory()
@@ -152,3 +152,5 @@ export default ({ isApproved }) => {
     </ThemeProvider>
   );
 };
+
+export default Menu;
