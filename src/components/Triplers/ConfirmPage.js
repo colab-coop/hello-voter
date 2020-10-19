@@ -61,38 +61,33 @@ const TwoColumnRow = styled.div`
   margin-bottom: ${spacing[3]};
 `;
 
+const Column = styled.div`
+  display: grid;
+  align-items: start;
+  margin-bottom: ${spacing[5]};
+`;
+
 export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
   const history = useHistory();
   const [err, setErr] = useState(false);
   const submit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const handleHousemate = (triplee) => {
-      let result;
-      if (triplee === "on") {
-        result = true;
-      } else {
-        result = false;
-      }
-      return result;
-    };
+
     const { error } = await confirmTriplers(tripler.id, {
       phone: formData.get("phone"),
       triplees: [
         {
           first_name: formData.get("triplee1_first"),
           last_name: formData.get("triplee1_last"),
-          housemate: handleHousemate(formData.get("triplee1_housemate")),
         },
         {
           first_name: formData.get("triplee2_first"),
           last_name: formData.get("triplee2_last"),
-          housemate: handleHousemate(formData.get("triplee2_housemate")),
         },
         {
           first_name: formData.get("triplee3_first"),
           last_name: formData.get("triplee3_last"),
-          housemate: handleHousemate(formData.get("triplee3_housemate")),
         },
       ],
       address: tripler.address,
@@ -144,11 +139,6 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                 required
               />
             </TwoColumnRow>
-            <Checkbox
-              id="triplee1_housemate"
-              name="triplee1_housemate"
-              labelText="Housemate"
-            />
           </FormGroup>
           <FormGroup legendText="">
             <SubTitle>Voter 2</SubTitle>
@@ -168,11 +158,6 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                 required
               />
             </TwoColumnRow>
-            <Checkbox
-              id="triplee2_housemate"
-              name="triplee2_housemate"
-              labelText="Housemate"
-            />
           </FormGroup>
           <FormGroup legendText="">
             <SubTitle>Voter 3</SubTitle>
@@ -192,22 +177,26 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                 required
               />
             </TwoColumnRow>
-            <Checkbox
-              id="triplee3_housemate"
-              name="triplee3_housemate"
-              labelText="Housemate"
-            />
           </FormGroup>
           <p>
             Add the Vote Tripler's phone number so we can confirm their identity
             and send you your payment!
           </p>
+
           <FormGroup legendText="">
+            <Column>
             <TextInput
               id="phone"
               name="phone"
               invalidText="Invalid error message."
-              labelText={`${tripler.first_name}'s Phone Number*`}
+              labelText={`${tripler.first_name}'s Mobile Phone Number*`}
+              required
+            />
+            </Column>
+            <Checkbox
+              id="Honor"
+              name="Honor"
+              labelText="I certify this information is true to the best of my knowledge. I understand that I may be removed from BlockPower if I submit false information."
               required
             />
           </FormGroup>
@@ -216,9 +205,10 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
               kind="error"
               icondescription="Dismiss notification"
               subtitle={err}
-              title={null}
+              title=""
             />
           )}
+
           <Button
             type="submit"
             loading={loading}
