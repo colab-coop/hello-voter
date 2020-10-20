@@ -3,6 +3,7 @@
 This software enables a "Voting Ambassador" workflow for get-out-the-vote campaigns. A Vote Ambassador signs up with the hello-voter React front-end. The Vote Ambassador, once signed up, is provided a list of voters in their area (within some configurable number of meters from the Ambassador). The Vote Ambassador contacts these voters (called Vote Triplers) and encourages them to help 3 additional people vote (called simply Voters in UI, or "Triplees" in the code). Once the Vote Tripler responds "YES" to the system's SMS (this software assumes Twilio SMS integration), the Vote Ambassador will receive payment from the organization who has set up this software. Currently this software assumes payment via Stripe + Plaid, and some partner organizations do not have in-app payments.
 
 ### Files
+
 ```
 |____components  - all the components of the app
 |____stories - storybook stories for components of the app
@@ -21,7 +22,7 @@ This software enables a "Voting Ambassador" workflow for get-out-the-vote campai
 ### Installation
 
 1. Copy `.env.example` to `.env` and modify as needed: `cp .env.example .env`
-    1. Set `REACT_APP_FORCE_MOCK_DATA=true` if you want to use mock data offline
+   1. Set `REACT_APP_FORCE_MOCK_DATA=true` if you want to use mock data offline
 1. Install dependencies: `npm install`
 1. Start the server: `npm start`
 
@@ -42,6 +43,7 @@ Learn more about testing React apps [here](https://reactjs.org/docs/testing.html
 In terms of styling, we use [styled-components](https://github.com/styled-components/styled-components) and [react-carbon](https://github.com/carbon-design-system/carbon-components-react).
 
 ### App Router
+
 ```
 /home
 /login
@@ -59,9 +61,10 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
 /payments
 /payments/add
 /payments/chime
-````
+```
 
 ### Components
+
 ```
 <Breadcrumbs> - Breadcrumbs on most pages
 <Button> - Main button component
@@ -83,3 +86,8 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
 
       1300 E Park Ave
       Tallahassee, FL 32301
+
+# STILL TO DO:
+
+- check against the api implementation
+- possibly resize the date box?
