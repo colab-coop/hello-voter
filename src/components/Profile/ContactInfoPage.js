@@ -13,6 +13,7 @@ import Button from "../Button";
 import AddressForm from "./AddressForm";
 import { useHistory } from "react-router-dom";
 import { AppContext } from "../../api/AppContext";
+import NoNewSignupsPage from "./NoNewSignupsPage";
 
 const Row = styled.div`
   display: grid;
@@ -39,7 +40,11 @@ const SubmissionContainer = styled.div`
 `;
 
 export const ContactInfoPage = ({ ambassador, setAmbassador, err }) => {
-  
+
+  if (process.env.REACT_APP_NO_NEW_SIGNUPS) {
+    return <NoNewSignupsPage />;
+  }
+
   return (
     <PageLayout title="Please Enter Your Details">
       <ResponsiveContainer>
@@ -171,7 +176,7 @@ export const ProfilePageEdit = () => {
     const { userError } = await fetchUser();
     if (userError) return setErr(userError.msg);
   }
-  
+
   if(user.msg==="Your account is locked."){
     return <DeniedPage/>
   }
@@ -194,7 +199,7 @@ export const ProfilePageSignup = () => {
   const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(
     AppContext
   );
-  
+
   user &&
     user.signup_completed &&
     user.onboarding_completed &&
