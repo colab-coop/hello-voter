@@ -84,6 +84,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
     };
     const { error } = await confirmTriplers(tripler.id, {
       phone: formData.get("phone"),
+      dob_entry_mm_yy: formData.get("tripler_birthdate_mm_yy"),
       triplees: [
         {
           first_name: formData.get("triplee1_first"),
@@ -205,7 +206,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
             />
           </FormGroup>
           <p>
-            Add the Vote Tripler's phone number so we can confirm their identity
+            Add the Vote Tripler's birthdate and cell phone number so we can confirm their identity
             and send you your payment!
           </p>
           
@@ -215,7 +216,16 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
               id="phone"
               name="phone"
               invalidText="Invalid error message."
-              labelText={`${tripler.first_name}'s Mobile Phone Number*`}
+              labelText={`${tripler.first_name}'s Cell Phone Number*`}
+              required
+            />
+            </Column>
+             <Column>
+            <TextInput
+              id="tripler_birthdate_mm_yy"
+              name="tripler_birthdate_mm_yy"
+              invalidText="Invalid error message."
+              labelText={`${tripler.first_name}'s Birthdate (day and month only) MM/YY*`}
               required
             />
             </Column>
