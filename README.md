@@ -86,8 +86,3 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
 
       1300 E Park Ave
       Tallahassee, FL 32301
-
-# STILL TO DO:
-
-- check against the api implementation
-- possibly resize the date box?

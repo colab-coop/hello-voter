@@ -189,6 +189,8 @@ export const confirmTriplers = async (triplerId, json) => {
     })
     let data = await res.json()
 
+    console.log(data)
+
 
     if (isFailStatusCode(data.code)) {
       return {
