@@ -9,7 +9,6 @@ const API_URL = `${REACT_APP_API_URL}/api/v1/va`
 export const TRIPLERS_URL = `${API_URL}/ambassadors/current/triplers`
 export const PUT_TRIPLERS_URL = `${API_URL}/ambassadors/current/triplers`
 export const AMBASSADOR_URL = `${API_URL}/ambassadors/current`
-export const FREE_TRIPLERS_URL = `${API_URL}/suggest-triplers`
 export const SIGNUP_URL = `${API_URL}/ambassadors/signup`
 export const TRIPLER_URL = `${API_URL}/triplers`
 export const CONFIRM_TRIPLER_URL = `${API_URL}/triplers`
