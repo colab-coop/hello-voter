@@ -84,7 +84,8 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
     };
     const { error } = await confirmTriplers(tripler.id, {
       phone: formData.get("phone"),
-      dob_entry_mm_yy: formData.get("tripler_birthdate_mm_yy"),
+      //below to be uncommented & adjusted once backend is coded up
+      // dob_entry_mm_yy: formData.get("tripler_birthdate_mm_yy"),
       triplees: [
         {
           first_name: formData.get("triplee1_first"),
