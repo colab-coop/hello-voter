@@ -79,11 +79,13 @@ export default () => {
 
   const claimTriplers = (selectedTriplers) => async () => {
     setIsLoading(true);
+  
     const { error } = await api.claimTriplers(
       selectedTriplers.map((c) => c.id)
     );
     setIsLoading(false);
     if (error) return alert(error.msg);
+
     history.push("/triplers");
   };
 

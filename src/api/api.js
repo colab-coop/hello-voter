@@ -165,6 +165,7 @@ export const saveProfile = async (user) => {
 }
 
 export const confirmTriplers = async (triplerId, json) => {
+  
   try {
     let res = await fetch(`${CONFIRM_TRIPLER_URL}/${triplerId}/start-confirm`, {
       method: 'PUT',
@@ -172,6 +173,8 @@ export const confirmTriplers = async (triplerId, json) => {
       body: JSON.stringify(json)
     })
     let data = await res.json()
+
+
 
     if (isFailStatusCode(data.code)) {
       return {
