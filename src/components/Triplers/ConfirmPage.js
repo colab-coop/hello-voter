@@ -186,6 +186,15 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           </p>
 
           <FormGroup legendText="">
+             <TwoColumnRow>
+            <TextInput
+              id="tripler_birthdate_mm_yy"
+              name="tripler_birthdate_mm_yy"
+              invalidText="Invalid error message."
+              labelText={`${tripler.first_name}'s Birth day & month DD/MM*`}
+              required
+            />
+            </TwoColumnRow>
             <Column>
             <TextInput
               id="phone"
@@ -195,15 +204,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
               required
             />
             </Column>
-             <Column>
-            <TextInput
-              id="tripler_birthdate_mm_yy"
-              name="tripler_birthdate_mm_yy"
-              invalidText="Invalid error message."
-              labelText={`${tripler.first_name}'s Birthdate (day and month only) MM/YY*`}
-              required
-            />
-            </Column>
+            
             <Checkbox
               id="Honor"
               name="Honor"
