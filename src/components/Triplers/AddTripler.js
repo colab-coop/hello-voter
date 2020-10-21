@@ -75,7 +75,7 @@ export default () => {
     );
     setIsLoading(false);
     if (error) return alert(error.msg);
-    console.log('Tripler has been claimed')
+
     history.push("/triplers");
   };
 

@@ -181,7 +181,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
             </TwoColumnRow>
           </FormGroup>
           <p>
-            Add your Vote Tripler's birthdate and cell phone number so we can confirm their identity
+            Add your Vote Tripler's birth day and month as well as their cell phone number so we can confirm their identity
             and send you your payment!
           </p>
 
