@@ -1,9 +1,9 @@
+import queryString from 'query-string';
 import {
   LOGIN_URL,
   TRIPLERS_URL,
   PUT_TRIPLERS_URL,
   AMBASSADOR_URL,
-  FREE_TRIPLERS_URL,
   SIGNUP_URL,
   TRIPLER_URL,
   CONFIRM_TRIPLER_URL,
@@ -116,22 +116,6 @@ export const fetchTripler = async (triplerId) => {
   }
 }
 
-export const fetchFreeTriplers = async () => {
-  try {
-    let res = await fetch(`${FREE_TRIPLERS_URL}`, {
-      method: 'GET',
-      headers: addAuth()
-    })
-    let data = await res.json()
-    return {
-      data
-    }
-  } catch(e) {
-    errorHandler(e)
-    return false
-  }
-}
-
 export const signup = async (tripler) => {
   try {
     let res = await fetch(SIGNUP_URL, {
@@ -181,6 +165,7 @@ export const saveProfile = async (user) => {
 }
 
 export const confirmTriplers = async (triplerId, json) => {
+  
   try {
     let res = await fetch(`${CONFIRM_TRIPLER_URL}/${triplerId}/start-confirm`, {
       method: 'PUT',
@@ -188,6 +173,8 @@ export const confirmTriplers = async (triplerId, json) => {
       body: JSON.stringify(json)
     })
     let data = await res.json()
+
+
 
     if (isFailStatusCode(data.code)) {
       return {
@@ -347,9 +334,20 @@ export const getPayments = async () => {
   }
 }
 
-export const searchTriplers = async (firstName, lastName) => {
+export const searchTriplers = async (formData) => {
   try {
-    let res = await fetch(`${TRIPLER_URL}?firstName=${firstName}&lastName=${lastName}`, {
+    // Map frontend data names to backend search params.
+    const query = queryString.stringify({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+      // Invert the percentage.
+      distance: 1.0 - (formData.distance || 0),
+      age: formData.age,
+      gender: formData.gender,
+      msa: formData.msa,
+    });
+    let res = await fetch(`${TRIPLER_URL}?${query}`, {
       method: 'GET',
       headers: addAuth()
     })

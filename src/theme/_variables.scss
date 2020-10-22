@@ -1,0 +1,6 @@
+// These should stay in sync with breakpoints in `./index.js`.
+//
+// The reason they're duplicated here is because some Carbon components
+// don't work well with Styled-Components and can only be styled with SCSS.
+//
+$break-md-width: 42rem;
