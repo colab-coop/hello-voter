@@ -165,6 +165,8 @@ export const saveProfile = async (user) => {
 }
 
 export const confirmTriplers = async (triplerId, json) => {
+
+  console.log(json)
   
   try {
     let res = await fetch(`${CONFIRM_TRIPLER_URL}/${triplerId}/start-confirm`, {
