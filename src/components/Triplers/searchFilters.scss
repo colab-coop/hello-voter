@@ -8,6 +8,13 @@
 .bx--accordion__content {
   padding-left: 0 !important;
   padding-right: 0 !important;
+  padding-top: 1rem !important;
+}
+
+// Text inputs.
+.bx--search-close {
+  // Fix janky alignment when other items in the grid are larger in height than this text input.
+  top: auto;
 }
 
 // Dropdowns.
@@ -30,7 +37,7 @@
 }
 
 .bx--slider-text-input {
-  visibility: hidden;
+  display: none;
 }
 
 .bx--slider__range-label {
