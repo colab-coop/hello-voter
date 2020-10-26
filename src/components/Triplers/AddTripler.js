@@ -25,8 +25,7 @@ export function normalizeTripler(tripler) {
 
 export function searchResultSummary({ firstName, lastName, phone, distance, age, gender, msa }) {
   const displayName = [firstName, lastName].filter(Boolean).join(" ");
-  const displayDistance = distance < 1 ? "nearby" : "";
-  return [displayName, phone, displayDistance, age, gender, msa].filter(Boolean).join(", ");
+  return [displayName, phone, age, gender, msa].filter(Boolean).join(", ");
 }
 
 /**
@@ -79,7 +78,7 @@ export default () => {
 
   const claimTriplers = (selectedTriplers) => async () => {
     setIsLoading(true);
-  
+
     const { error } = await api.claimTriplers(
       selectedTriplers.map((c) => c.id)
     );
