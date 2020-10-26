@@ -54,14 +54,14 @@ export default () => {
   });
   const { api } = React.useContext(AppContext);
 
-  const appendAddress = (data) => {
-    return data.data.map(normalizeTripler);
+  const normalizeTriplers = (data) => {
+    return (data || []).map(normalizeTripler);
   };
 
   const search = async () => {
     setIsLoading(true);
-    const data = await api.searchTriplers(searchInputs);
-    const triplersWithAddress = appendAddress(data);
+    const { data } = await api.searchTriplers(searchInputs) || {};
+    const triplersWithAddress = normalizeTriplers(data);
     setIsLoading(false);
     setTriplers(triplersWithAddress);
     setSearchResults(searchResultSummary(searchInputs));
