@@ -25,8 +25,7 @@ export function normalizeTripler(tripler) {
 
 export function searchResultSummary({ firstName, lastName, phone, distance, age, gender, msa }) {
   const displayName = [firstName, lastName].filter(Boolean).join(" ");
-  const displayDistance = distance < 1 ? "nearby" : "";
-  return [displayName, phone, displayDistance, age, gender, msa].filter(Boolean).join(", ");
+  return [displayName, phone, age, gender, msa].filter(Boolean).join(", ");
 }
 
 /**
@@ -55,14 +54,14 @@ export default () => {
   });
   const { api } = React.useContext(AppContext);
 
-  const appendAddress = (data) => {
-    return data.data.map(normalizeTripler);
+  const normalizeTriplers = (data) => {
+    return (data || []).map(normalizeTripler);
   };
 
   const search = async () => {
     setIsLoading(true);
-    const data = await api.searchTriplers(searchInputs);
-    const triplersWithAddress = appendAddress(data);
+    const { data } = await api.searchTriplers(searchInputs) || {};
+    const triplersWithAddress = normalizeTriplers(data);
     setIsLoading(false);
     setTriplers(triplersWithAddress);
     setSearchResults(searchResultSummary(searchInputs));
@@ -79,7 +78,7 @@ export default () => {
 
   const claimTriplers = (selectedTriplers) => async () => {
     setIsLoading(true);
-  
+
     const { error } = await api.claimTriplers(
       selectedTriplers.map((c) => c.id)
     );
