@@ -18,6 +18,7 @@ export function rem(px) {
   return `${px / baseFontSize}rem`;
 }
 
+// These should stay in sync with variables in `./variables.scss`
 export const breakpoints = {
   sm: {
     width: rem(320),

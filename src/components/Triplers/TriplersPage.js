@@ -231,7 +231,7 @@ const Triplers = ({
               label: "Find new Vote Triplers",
             }}
             disabled={
-              unconfirmed.length + confirmed.length + pending.length === limit
+              unconfirmed.length + confirmed.length + pending.length >= limit
             }
           >
             Find new Vote Triplers
