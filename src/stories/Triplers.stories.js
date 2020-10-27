@@ -2,7 +2,8 @@ import React from "react";
 import Menu from "../components/Menu";
 import Footer from "../components/Footer";
 import { TriplersPage } from "../components/Triplers/TriplersPage";
-import { AddTriplersPage, normalizeTripler } from "../components/Triplers/AddTripler";
+import { AddTriplersPage, normalizeTripler, searchResultSummary } from "../components/Triplers/AddTripler";
+import { SearchFilters } from '../components/Triplers/SearchFilters';
 import { ConfirmPage } from "../components/Triplers/ConfirmPage";
 import {
   TRIPLERS_UNCONFIRMED,
@@ -19,6 +20,15 @@ export default {
 };
 
 const noop = () => {}
+const mockSearch = {
+  firstName: "Foo",
+  lastName: "Bar",
+  phone: "313-555-1212",
+  distance: 0.5,
+  age: "20-29",
+  gender: "Female",
+  msa: "Jacksonville, FL area",
+}
 const defaultTriplersPageProps = {
   triplers: [],
   limit: 10,
@@ -27,10 +37,13 @@ const defaultTriplersPageProps = {
 }
 const defaultAddTriplersPageProps = {
   triplers: [],
+  searchInputs: mockSearch,
+  searchResults: searchResultSummary(mockSearch),
   loading: false,
   error: null,
   claimTriplers: noop,
-  search: noop
+  search: noop,
+  onSearchInputChange: noop
 }
 const defaultConfirmTriplersPageProps = {
   tripler: {},
@@ -104,6 +117,12 @@ export const AddTriplers = () => (
       triplers={TRIPLERS_TO_ADD.map(normalizeTripler)}
     />
   </>
+);
+
+export const TriplerSearchFilters = () => (
+  <SearchFilters
+    {...defaultAddTriplersPageProps}
+  />
 );
 
 export const ConfirmTriplers = () => (
