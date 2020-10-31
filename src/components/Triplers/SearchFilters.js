@@ -51,6 +51,11 @@ const MSA_OPTIONS = [
   "Mansfield, OH area",
   "Milwaukee, WI",
   "WI other",
+  "Detroit, MI area",
+  "MI other",
+  "Philadelphia, PA area",
+  "Pittsburgh, PA area",
+  "PA other",
 ];
 
 const SearchFilterGrid = styled.div`
