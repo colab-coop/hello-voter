@@ -204,11 +204,11 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
               required
             />
             </Column>
-            
+
             <Checkbox
               id="Honor"
               name="Honor"
-              labelText="I certify this information is true to the best of my knowledge. I understand that I may be removed from BlockPower if I submit false information."
+              labelText="I certify this information is true to the best of my knowledge. I understand that I may be removed from BlockPower if I submit false information and will be denied all compensation."
               required
             />
           </FormGroup>
