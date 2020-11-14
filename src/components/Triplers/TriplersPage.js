@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import filter from "lodash/filter";
 import {
-  Link,
   Tag,
   OverflowMenu,
   OverflowMenuItem,
@@ -191,18 +191,11 @@ const Triplers = ({
   limit,
   deleteTripler,
   ambassadors,
-  user,
 }) => {
-  const hasTriplers =
-    unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
-
+  const hasTriplers = unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
   const hasAmbassadors = ambassadors.length > 0;
-  const ambassadorNotConfirmed = ambassadors.filter(
-    (ambassador) => ambassador.is_ambassador_and_has_confirmed === false
-  );
-  const ambassadorConfirmed = ambassadors.filter(
-    (ambassador) => ambassador.is_ambassador_and_has_confirmed === true
-  );
+  const ambassadorNotConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: false });
+  const ambassadorConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: true });
 
   return (
     <>
@@ -398,29 +391,19 @@ export const TriplersPage = ({
   deleteTripler,
   user,
 }) => {
-  const confirmed = triplers.filter(
-    (tripler) => tripler.status === "confirmed"
-  );
-  const pending = triplers.filter((tripler) => tripler.status === "pending");
-  const unconfirmed = triplers.filter(
-    (tripler) => tripler.status === "unconfirmed"
-  );
-  const ambassadors = triplers.filter(
-    (tripler) => tripler.is_ambassador === true
-  );
+  const confirmed = filter(triplers, { status: "confirmed" });
+  const pending = filter(triplers, { status: "pending" });
+  const unconfirmed = filter(triplers, { status: "unconfirmed" });
+  const ambassadors = filter(triplers, { is_ambassador: true });
+
   return (
     <PageLayout
       title="My Vote Triplers"
       header={
         <Breadcrumbs
           items={[
-            {
-              name: "Home",
-              route: "/home",
-            },
-            {
-              name: "Vote Triplers",
-            },
+            { name: "Home", route: "/home" },
+            { name: "Vote Triplers" },
           ]}
         />
       }
