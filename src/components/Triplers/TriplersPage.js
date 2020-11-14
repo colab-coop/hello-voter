@@ -184,6 +184,26 @@ const TriplerRow = ({
 );
 
 const Triplers = ({
+  triplers,
+  ...passThroughProps
+}) => {
+  return (
+    <>
+      {triplers.map((tripler) => (
+        <TriplerRow
+          {...passThroughProps}
+          key={tripler.id}
+          id={tripler.id}
+          name={`${tripler.first_name} ${tripler.last_name}`}
+          address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
+          onClick={() => {}}
+        />
+      ))}
+    </>
+  )
+}
+
+const AllTriplers = ({
   unconfirmed,
   pending,
   confirmed,
@@ -241,17 +261,12 @@ const Triplers = ({
               Add information for a Vote Tripler. We’ll send them a text message
               to confirm.
             </Paragraph>
-            {unconfirmed.map((tripler) => (
-              <TriplerRow
-                key={tripler.id}
-                id={tripler.id}
-                name={`${tripler.first_name} ${tripler.last_name}`}
-                address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-                unconfirmed
-                onClick={() => {}}
-                deleteTripler={deleteTripler}
-              />
-            ))}
+            <Triplers
+              unconfirmed
+              triplers={unconfirmed}
+              remindTripler={remindTripler}
+              deleteTripler={deleteTripler}
+            />
           </GridRowSpanOne>
 
           <GridRowSpanOne>
@@ -260,18 +275,12 @@ const Triplers = ({
               These possible Vote Triplers have not yet confirmed their
               identity.
             </Paragraph>
-            {pending.map((tripler) => (
-              <TriplerRow
-                key={tripler.id}
-                id={tripler.id}
-                name={`${tripler.first_name} ${tripler.last_name}`}
-                address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-                onClick={() => {}}
-                pending
-                remindTripler={remindTripler}
-                deleteTripler={deleteTripler}
-              />
-            ))}
+            <Triplers
+              pending
+              triplers={pending}
+              remindTripler={remindTripler}
+              deleteTripler={deleteTripler}
+            />
           </GridRowSpanOne>
 
           <GridRowSpanOne>
@@ -293,16 +302,12 @@ const Triplers = ({
             ) : (
               ""
             )*/}
-            {confirmed.map((tripler, i) => (
-              <TriplerRow
-                key={tripler.id}
-                name={`${tripler.first_name} ${tripler.last_name}`}
-                address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-                onClick={() => {}}
-                confirmed
-                deleteTripler={deleteTripler}
-              />
-            ))}
+            <Triplers
+              confirmed
+              triplers={confirmed}
+              remindTripler={remindTripler}
+              deleteTripler={deleteTripler}
+            />
           </GridRowSpanOne>
         </GridThreeUp>
       )}
@@ -315,14 +320,9 @@ const Triplers = ({
               These Vote Triplers have become Voting Ambassadors but have not
               yet confirmed a Vote Tripler of their own.
             </Paragraph>
-            {ambassadorNotConfirmed.map((tripler) => (
-              <TriplerRow
-                key={tripler.id}
-                id={tripler.id}
-                name={`${tripler.first_name} ${tripler.last_name}`}
-                address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-              />
-            ))}
+            <Triplers
+              triplers={ambassadorNotConfirmed}
+            />
           </GridRowSpanOne>
 
           <GridRowSpanTwo>
@@ -332,14 +332,10 @@ const Triplers = ({
                 ? "You’ll receive a special bonus for all Vote Triplers who became a Voting Ambassador and confirmed at least one Vote Tripler of their own. You’ve done a great service for your community — keep it up!"
                 : "These Vote Triplers have become Voting Ambassadors and confirmed at least one Vote Tripler of their own. You've done a great service for your community — keep it up!"}
             </ParagraphMinHeight72>
-            {ambassadorConfirmed.map((tripler, i) => (
-              <TriplerRow
-                key={tripler.id}
-                name={`${tripler.first_name} ${tripler.last_name}`}
-                address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-                ambassadorConfirmed
-              />
-            ))}
+            <Triplers
+              ambassadorConfirmed
+              triplers={ambassadorConfirmed}
+            />
           </GridRowSpanTwo>
         </GridThreeUp>
       )}
@@ -408,7 +404,7 @@ export const TriplersPage = ({
         />
       }
     >
-      <Triplers
+      <AllTriplers
         unconfirmed={unconfirmed}
         pending={pending}
         confirmed={confirmed}
