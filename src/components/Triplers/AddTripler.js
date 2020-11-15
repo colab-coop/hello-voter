@@ -23,11 +23,11 @@ export function normalizeStreetName({ address1, address2, city, state, zip }) {
 }
 
 export function normalizeTripler(tripler) {
-  const ageSuffix = tripler.age_decade ? ` (${tripler.age_decade})` : '';
+  const age = `(Age: ${tripler.age_decade || 'unknown'})`;
   const streetName = normalizeStreetName(tripler.address);
   return {
     id: tripler.id,
-    name: `${tripler.first_name} ${tripler.last_name}${ageSuffix}`,
+    name: `${tripler.first_name} ${tripler.last_name} ${age}`,
     address: `${streetName} ${tripler.address.city}, ${tripler.address.state}`,
   };
 }
