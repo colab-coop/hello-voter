@@ -5,7 +5,7 @@ export const TRIPLERS_UNCONFIRMED = [
     first_name: "Lauren",
     last_name: "R",
     age_decade: "30-39",
-    address: { address1: "200 Address lane", city: "Denver", state: "CO" },
+    address: { address1: "200 Address lane Apt 3", city: "Denver", state: "CO" },
     is_ambassador: false,
     is_ambassador_and_has_confirmed: false,
   },

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@storybook/preset-scss": "^1.0.2",
+    "addresser": "^1.1.19",
     "carbon-components": "^10.22.0",
     "carbon-components-react": "^7.22.0",
     "carbon-icons": "^7.0.7",

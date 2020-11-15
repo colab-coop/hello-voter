@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import get from "lodash/get";
+import addresser from "addresser";
 import { spacing, colors } from "../../theme";
 import PageLayout from "../PageLayout";
 import Breadcrumbs from "../Breadcrumbs";
@@ -10,14 +11,20 @@ import { useHistory } from "react-router-dom";
 import Loading from "../Loading";
 import { SearchFilters } from './SearchFilters';
 
-// Trim off any leading numbers, e.g. "123 Main St" => "Main St".
-export function normalizeStreetName(address1) {
-  return (address1 || "").replace(/^[\d\s]+/, '');
+// Trim off any leading and trailing numbers, e.g. "123 Main St Apt 4" => "Main St".
+export function normalizeStreetName({ address1, address2, city, state, zip }) {
+  try {
+    const { addressLine1 } = addresser.parseAddress(`${address1 || ''} ${address2 || ''}, ${city || ''}, ${state || ''} ${zip || ''}`);
+    return addressLine1.replace(/^[\d\s]+/, '');
+  } catch (e) {
+    // Just don't show it if we can't determine what their street name is.
+    return "";
+  }
 }
 
 export function normalizeTripler(tripler) {
   const ageSuffix = tripler.age_decade ? ` (${tripler.age_decade})` : '';
-  const streetName = normalizeStreetName(tripler.address.address1);
+  const streetName = normalizeStreetName(tripler.address);
   return {
     id: tripler.id,
     name: `${tripler.first_name} ${tripler.last_name}${ageSuffix}`,
