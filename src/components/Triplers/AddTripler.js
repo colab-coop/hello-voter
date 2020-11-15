@@ -10,16 +10,18 @@ import { useHistory } from "react-router-dom";
 import Loading from "../Loading";
 import { SearchFilters } from './SearchFilters';
 
+// Trim off any leading numbers, e.g. "123 Main St" => "Main St".
+export function normalizeStreetName(address1) {
+  return (address1 || "").replace(/^[\d\s]+/, '');
+}
+
 export function normalizeTripler(tripler) {
+  const ageSuffix = tripler.age_decade ? ` (${tripler.age_decade})` : '';
+  const streetName = normalizeStreetName(tripler.address.address1);
   return {
     id: tripler.id,
-    name: tripler.first_name + " " + tripler.last_name,
-    address:
-      tripler.address.address1 +
-      " " +
-      tripler.address.city +
-      " " +
-      tripler.address.state,
+    name: `${tripler.first_name} ${tripler.last_name}${ageSuffix}`,
+    address: `${streetName} ${tripler.address.city}, ${tripler.address.state}`,
   };
 }
 

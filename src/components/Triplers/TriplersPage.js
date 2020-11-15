@@ -13,7 +13,7 @@ import PageLayout from "../PageLayout";
 import Breadcrumbs from "../Breadcrumbs";
 import Button from "../Button";
 import Loading from "../Loading";
-
+import { normalizeTripler } from './AddTripler';
 import { AppContext } from "../../api/AppContext";
 
 const {
@@ -189,16 +189,19 @@ const Triplers = ({
 }) => {
   return (
     <>
-      {triplers.map((tripler) => (
-        <TriplerRow
-          {...passThroughProps}
-          key={tripler.id}
-          id={tripler.id}
-          name={`${tripler.first_name} ${tripler.last_name}`}
-          address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-          onClick={() => {}}
-        />
-      ))}
+      {triplers.map((tripler) => {
+        const { name, address } = normalizeTripler(tripler);
+        return (
+          <TriplerRow
+            {...passThroughProps}
+            key={tripler.id}
+            id={tripler.id}
+            name={name}
+            address={address}
+            onClick={() => {}}
+          />
+        );
+      })}
     </>
   )
 }
