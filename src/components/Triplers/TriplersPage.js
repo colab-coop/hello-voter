@@ -37,6 +37,9 @@ const TriplerRowStyled = styled.div`
   padding: ${spacing[4]};
   background-color: ${colors.gray[10]};
   border-top: 1px solid ${colors.gray[20]};
+  @media (min-width: ${breakpoints.lg.width}) {
+    max-width: 30vw;
+  }
   &:hover {
     background-color: #e5e5e5;
     cursor: pointer;
@@ -47,17 +50,14 @@ const TriplerRowName = styled.h6`
   font-weight: normal;
 `;
 
-// FIXME: Have text truncate responsively
 const TriplerColumnTruncate = styled.div`
-  min-width: 0;
-  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: ${spacing[2]};
 `;
 
 const TriplerRowAddress = styled.p`
   font-size: 12px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 `;
 
 const TriplerColumn = styled.div`

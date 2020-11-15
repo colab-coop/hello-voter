@@ -16,7 +16,7 @@ export const TRIPLERS_PENDING = [
     id: "2",
     status: "pending",
     first_name: "Michael",
-    last_name: "Marsh",
+    last_name: "Marsh Has A Super Long Last Name That Never Fits On Any Websites That We Visit Because It's So Ridiculous",
     age_decade: "30-39",
     address: { address1: "200 Address lane", city: "Denver", state: "CO" },
     is_ambassador: false,
@@ -145,7 +145,7 @@ export const TRIPLERS_TO_ADD = [
     first_name: "Judy",
     last_name: "Blume",
     age_decade: "30-39",
-    address: { address1: "1 Really Long Address Ln Lorem Ipsum Lorem Ipsum", city: "Denver", state: "CO" },
+    address: { address1: "1 Really Really Really Really Really Really Really Really Really Long Address Ln Lorem Ipsum Lorem Ipsum", city: "Denver", state: "CO" },
   },
   {
     id: "b",
