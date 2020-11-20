@@ -90,9 +90,11 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
       
 ### Environment Variables
 Legacy code for Our Voice codebase. No adjustment needed for BlockPower.
+
 REACT_APP_ORGID=VT6WX8A
 
 Refers to associated WordPress on boarding site. No adjustment needed for BlockPower.
+
 REACT_APP_AUDIANCE=blockpower.us
 
 The URL path to the app root on this server.
