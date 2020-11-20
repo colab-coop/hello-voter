@@ -89,11 +89,13 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
       Tallahassee, FL 32301
       
 ### Environment Variables
-# Legacy code for Our Voice codebase. No adjustment needed for BlockPower.
+Legacy code for Our Voice codebase. No adjustment needed for BlockPower.
 REACT_APP_ORGID=VT6WX8A
-# Refers to associated WordPress on boarding site. No adjustment needed for BlockPower.
+
+Refers to associated WordPress on boarding site. No adjustment needed for BlockPower.
 REACT_APP_AUDIANCE=blockpower.us
-# The URL path to the app root on this server.
+
+The URL path to the app root on this server.
 REACT_APP_APP_PATH=/
 # oauth server. No adjustment needed for BlockPower.
 REACT_APP_API_DOMAIN=gotv-vt.ourvoiceusa.org
