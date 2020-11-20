@@ -21,7 +21,7 @@ Welcome to the BlockPower Voting Ambassador Platform project!  BlockPower is a n
 
 ### Installation
 
-1. Copy `.env.example` to `.env` and modify as needed: `cp .env.example .env`
+1. Copy `.env.example` to `.env` and modify as needed: `cp .env.example .env`**See documentation on env vars below**
    **If you want to use mock data offline, add the env var: `REACT_APP_FORCE_MOCK_DATA=true`
    **If you want to target staging data, then don’t include `REACT_APP_FORCE_MOCK_DATA=`and ensure the REACT_APP_API_URL is set to the stage api url: `REACT_APP_API_URL=https://blockpower.stage2.api.blockpower.vote`
 2. Install dependencies: `npm install`
@@ -87,3 +87,55 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
 
       1300 E Park Ave
       Tallahassee, FL 32301
+      
+### Environment Variables
+# Legacy code for Our Voice codebase. No adjustment needed for BlockPower.
+REACT_APP_ORGID=VT6WX8A
+# Refers to associated WordPress on boarding site. No adjustment needed for BlockPower.
+REACT_APP_AUDIANCE=blockpower.us
+# The URL path to the app root on this server.
+REACT_APP_APP_PATH=/
+# oauth server. No adjustment needed for BlockPower.
+REACT_APP_API_DOMAIN=gotv-vt.ourvoiceusa.org
+# Defines if we pass SSL to oauth server. No adjustment needed for BlockPower.
+REACT_APP_API_SSL=true
+# Defines which header we take the token from. No adjustment needed for BlockPower.
+REACT_APP_OAUTH_HEADER=x-sm-oauth-url
+# Defines which localStorage item the token is. No adjustment needed for BlockPower.
+REACT_APP_TOKEN_KEY=token
+# No adjustment needed for BlockPower.
+REACT_APP_KEY=auth
+# Defines if the app is in development mode. No adjustment needed for BlockPower.
+REACT_APP_DEVELOPMENT=true
+# If set, targets the local mock data instead of REACT_APP_API_URL.
+# Note: to disable, leave this value empty or commented out, do not set to "false".
+# REACT_APP_FORCE_MOCK_DATA=
+REACT_APP_API_URL=https://blockpower.stage2.api.blockpower.vote
+# Defines the organization for each instance.
+REACT_APP_ORG="BlockPower"
+# Defines the color of the header where ‘dark’ is black and ‘light’ is white
+REACT_APP_HEADER=dark
+# Defines the logo to use for the header. Logos can be found per organization in /src/assets/logos/
+REACT_APP_LOGO=block-power
+# Defines whether Payments page should appear in each instance. If Payments page should not be visible to Ambassadors, remove this env var.
+REACT_APP_PAYMENT_FEATURE=true
+# Defines the payment amount that should display for Ambassador’s upgraded Tripler bonus payments for each instance. 
+# Related env var in backend env vars 
+REACT_APP_TRIPLER_PAYMENT_AMT="30"
+# Defines the payment amount that should display for Ambassador’s confirmed Tripler payments for each instance.
+# Related env var in backend env vars 
+REACT_APP_AMBASSADOR_PAYMENT_AMT="25"
+# Sets google analytics property for tracking. Do not change.
+REACT_APP_GA_TRACKING_ID=UA-172693622-1
+# Sets Plaid key to be used for production or dev/QA purposes. Keep ‘fake’ for development.
+REACT_APP_PLAID_KEY=fake
+# Sets the URL that appears on the /help page for each instance.
+REACT_APP_HELP_URL="https://www.blockpower.vote/faq-blockpower""
+# Sets the URL that appears on the /help page for each instance.
+REACT_APP_HELP_TITLE="BlockPower Support"
+# Sets the help email address that appears on the /help page for each instance.
+REACT_APP_HELP_EMAIL="support+bp@blockpower.vote"
+# Defines whether any reference to payment for confirmed Triplers or Tripler upgrade bonuses should appear at all. If Volunteers instance with no payment for Ambassadors, remove this env var
+REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE=true
+# To disallow signups set this to true:
+REACT_APP_NO_NEW_SIGNUPS=
