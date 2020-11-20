@@ -22,9 +22,11 @@ Welcome to the BlockPower Voting Ambassador Platform project!  BlockPower is a n
 ### Installation
 
 1. Copy `.env.example` to `.env` and modify as needed: `cp .env.example .env`
-   1. Set `REACT_APP_FORCE_MOCK_DATA=true` if you want to use mock data offline
-1. Install dependencies: `npm install`
-1. Start the server: `npm start`
+   1A. If you want to use mock data offline, add the env var: `REACT_APP_FORCE_MOCK_DATA=true`
+   1B. If you want to target staging data, then don’t include `REACT_APP_FORCE_MOCK_DATA=`
+      and ensure the REACT_APP_API_URL is set to the stage api url: `REACT_APP_API_URL=https://blockpower.stage2.api.blockpower.vote`
+2. Install dependencies: `npm install`
+3. Start the server: `npm start`
 
 Optionally,
 
