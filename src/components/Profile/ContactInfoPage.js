@@ -196,7 +196,7 @@ export const ProfilePageEdit = () => {
     if (userError) return setErr(userError.msg);
   }
 
-  if(user.msg==="Your account is locked."){
+if (user && user.msg==="Your account is locked.") {
     return <DeniedPage/>
   }
   return (
@@ -237,7 +237,7 @@ export const ProfilePageSignup = () => {
   }, [ambassador]);
 
 
-  if(user.msg==="Your account is locked."){
+if (user && user.msg==="Your account is locked.") {
     return <DeniedPage/>
   }
   return (
