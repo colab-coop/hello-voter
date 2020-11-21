@@ -15,7 +15,7 @@ import { SearchFilters } from './SearchFilters';
 export function normalizeStreetName({ address1, address2, city, state, zip }) {
   try {
     const { addressLine1 } = addresser.parseAddress(`${address1 || ''} ${address2 || ''}, ${city || ''}, ${state || ''} ${zip || ''}`);
-    return addressLine1.replace(/^[\d\s]+/, '');
+    return addressLine1;
   } catch (e) {
     // Just don't show it if we can't determine what their street name is.
     return "";
