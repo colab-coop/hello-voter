@@ -25,11 +25,11 @@ Once the Ambassador has "claimed" one or more Vote Triplers, they can contact th
 
 ### Installation
 
-1. Copy `.env.example` to `.env` and modify as needed: `cp .env.example .env`**See documentation on Environment Variables below**
-   **If you want to use mock data offline, add the env var: `REACT_APP_FORCE_MOCK_DATA=true`
-   **If you want to target staging data, then don’t include `REACT_APP_FORCE_MOCK_DATA=`and ensure the REACT_APP_API_URL is set to the stage api url: `REACT_APP_API_URL=https://blockpower.stage2.api.blockpower.vote`
+1. Copy `.env.example` to `.env` and modify as needed: `cp .env.example .env` (for details, see the **Environment Variables** section below)
 2. Install dependencies: `npm install`
-3. Start the server: `npm start`
+3. Make sure your `HOST` environment variable is unset, or set to `localhost`.
+4. Start the server: `npm start`
+5. You should now be able to visit your local front-end at http://localhost:3000/
 
 Optionally,
 
