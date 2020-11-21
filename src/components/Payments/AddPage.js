@@ -43,7 +43,19 @@ export default () => {
     onSuccess,
   };
   const { open: openPlaid } = usePlaidLink(config);
+
+  return (
+    <AddPage user={user} openPlaid={openPlaid} />
+  );
+};
+
+export const AddPage = ({
+  user,
+  openPlaid,
+}) => {
+  const history = useHistory();
   const alreadyHasPayoutProvider = user && user.payout_provider;
+
   return (
     <PageLayout
       title="Add Payment Account"
@@ -90,4 +102,4 @@ export default () => {
       )}
     </PageLayout>
   );
-};
+}
