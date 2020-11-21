@@ -87,12 +87,13 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
 
 ### Troubleshooting
 
-- When signing up, if you see: `Sorry, but state employment laws don't allow us to pay Voting Ambassadors in your state.` you can use the following mock address:
+- When signing up, if you get the error `Sorry, but state employment laws don't allow us to pay Voting Ambassadors in your state`, you can use this mock address in Georgia:
 
-      1300 E Park Ave
-      Tallahassee, FL 32301
-      
+    391 West Paces Ferry Road NW
+    Atlanta, GA 30305
+
 ### Environment Variables
+
 Legacy code for Our Voice codebase. No adjustment needed for BlockPower.
 
 REACT_APP_ORGID=VT6WX8A
