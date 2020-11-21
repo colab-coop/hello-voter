@@ -103,17 +103,9 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       header={
         <Breadcrumbs
           items={[
-            {
-              name: "Home",
-              route: "/home",
-            },
-            {
-              name: "Vote Triplers",
-              route: "/triplers",
-            },
-            {
-              name: "Confirm",
-            },
+            { name: "Home", route: "/home" },
+            { name: "Vote Triplers", route: "/triplers" },
+            { name: "Confirm" },
           ]}
         />
       }
