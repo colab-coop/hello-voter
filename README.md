@@ -21,7 +21,7 @@ Once the Ambassador has "claimed" one or more Vote Triplers, they can contact th
 
 ### Prerequisites
 
-- Node. We recommend installing via [Node Version Manager](https://github.com/nvm-sh/nvm#installing-and-updating).
+- Node. We recommend installing via [Node Version Manager](https://github.com/nvm-sh/nvm#installing-and-updating). Run `nvm use` to install the working node version. 
 
 ### Installation
 
