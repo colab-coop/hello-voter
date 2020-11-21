@@ -6,7 +6,6 @@ import PageLayout from "../PageLayout";
 import CardButton from "../CardButton";
 import Breadcrumbs from "../Breadcrumbs";
 import chime from "../../assets/images/chime.png";
-import paypal from "../../assets/images/paypal.png";
 import { usePlaidLink } from "react-plaid-link";
 import { AppContext } from "../../api/AppContext";
 import { useHistory } from "react-router-dom";
@@ -16,6 +15,10 @@ const { REACT_APP_PLAID_KEY } = process.env;
 
 const Details = styled.p`
   margin-bottom: ${spacing[5]};
+`;
+
+const BottomLinkContainer = styled.div`
+  margin-top: ${spacing[5]};
 `;
 
 const CardIcon = styled.img`
@@ -59,15 +62,6 @@ export default () => {
       )}
       <GridThreeUp>
         <CardButton
-          icon={<CardIcon src={paypal} />}
-          title="Use PayPal"
-          description="Get set up quickly to receive payments with PayPal."
-          onClick={() => {
-            history.push("/payments/paypal");
-          }}
-          disabled={alreadyHasPayoutProvider}
-        />
-        <CardButton
           icon={<Finance24 />}
           title="Link bank account"
           description="Connect your bank account quickly and securely to receive payments."
@@ -87,6 +81,13 @@ export default () => {
           disabled={alreadyHasPayoutProvider}
         />
       </GridThreeUp>
+      {!alreadyHasPayoutProvider && (
+        <BottomLinkContainer>
+          <a href="#/payments/paypal">
+            Having trouble connecting your bank account?
+          </a>
+        </BottomLinkContainer>
+      )}
     </PageLayout>
   );
 };
