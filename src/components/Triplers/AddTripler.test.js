@@ -5,6 +5,6 @@ test('normalizes triplers', async () => {
   expect(normalizeTripler(TRIPLERS_UNCONFIRMED[0])).toEqual({
     id: "1",
     name: "Lauren R (Age: 30-39)",
-    address: "Address Ln Denver, CO"
+    address: "200 Address Ln Denver, CO"
   })
 });
