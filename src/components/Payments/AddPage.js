@@ -6,7 +6,6 @@ import PageLayout from "../PageLayout";
 import CardButton from "../CardButton";
 import Breadcrumbs from "../Breadcrumbs";
 import chime from "../../assets/images/chime.png";
-import paypal from "../../assets/images/paypal.png";
 import { usePlaidLink } from "react-plaid-link";
 import { AppContext } from "../../api/AppContext";
 import { useHistory } from "react-router-dom";
@@ -16,6 +15,10 @@ const { REACT_APP_PLAID_KEY } = process.env;
 
 const Details = styled.p`
   margin-bottom: ${spacing[5]};
+`;
+
+const BottomLinkContainer = styled.div`
+  margin-top: ${spacing[5]};
 `;
 
 const CardIcon = styled.img`
@@ -40,7 +43,19 @@ export default () => {
     onSuccess,
   };
   const { open: openPlaid } = usePlaidLink(config);
+
+  return (
+    <AddPage user={user} openPlaid={openPlaid} />
+  );
+};
+
+export const AddPage = ({
+  user,
+  openPlaid,
+}) => {
+  const history = useHistory();
   const alreadyHasPayoutProvider = user && user.payout_provider;
+
   return (
     <PageLayout
       title="Add Payment Account"
@@ -58,15 +73,6 @@ export default () => {
         <Details>You already have selected a payment method.</Details>
       )}
       <GridThreeUp>
-        <CardButton
-          icon={<CardIcon src={paypal} />}
-          title="Use PayPal"
-          description="Get set up quickly to receive payments with PayPal."
-          onClick={() => {
-            history.push("/payments/paypal");
-          }}
-          disabled={alreadyHasPayoutProvider}
-        />
         <CardButton
           icon={<Finance24 />}
           title="Link bank account"
@@ -87,6 +93,13 @@ export default () => {
           disabled={alreadyHasPayoutProvider}
         />
       </GridThreeUp>
+      {!alreadyHasPayoutProvider && (
+        <BottomLinkContainer>
+          <a href="#/payments/paypal">
+            Having trouble connecting your bank account?
+          </a>
+        </BottomLinkContainer>
+      )}
     </PageLayout>
   );
-};
+}
