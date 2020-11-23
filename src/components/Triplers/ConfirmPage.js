@@ -216,10 +216,10 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           <Button
             type="submit"
             loading={loading}
-            trackingEvent={{ action: "SubmitTriplerConfirm", label: "Add" }}
+            trackingEvent={{ action: "SubmitTriplerConfirm", label: "Send Text" }}
             isAForm
           >
-            Add
+            Send Text
           </Button>
           <Button
             size="small"
