@@ -124,14 +124,8 @@ export const PaymentsPage = ({ payments, user }) => {
       header={
         <Breadcrumbs
           items={[
-            {
-              name: "Home",
-              route: "/",
-            },
-            {
-              name: "Payments",
-              route: "/",
-            },
+            { name: "Home", route: "/" },
+            { name: "Payments", route: "/" },
           ]}
         />
       }

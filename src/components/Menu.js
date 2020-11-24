@@ -107,9 +107,9 @@ const Menu = ({ isApproved }) => {
         <HeaderPanelRightContainer navOpen={profileNavOpen}>
           <HeaderPanelSpacer />
           <SwitcherStyledRight>
-            {/*<SwitcherItemStyled onClick={() => {redirect("/profile")}}>*/}
-            {/*  Profile*/}
-            {/*</SwitcherItemStyled>*/}
+            <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
+              Profile
+            </SwitcherItemStyled>
             <SwitcherItemStyled onClick={signOut}>
               Sign out
             </SwitcherItemStyled>
@@ -141,9 +141,9 @@ const Menu = ({ isApproved }) => {
               Help
             </SwitcherItemStyled>
             {user && <>
-              {/*<SwitcherItemStyled onClick={() => {redirect("/profile")}}>*/}
-              {/*  Profile*/}
-              {/*</SwitcherItemStyled>*/}
+              <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
+                Profile
+              </SwitcherItemStyled>
               <SwitcherItemStyled onClick={signOut}>
                 Sign out
               </SwitcherItemStyled>

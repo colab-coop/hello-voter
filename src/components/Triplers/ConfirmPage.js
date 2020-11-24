@@ -103,17 +103,9 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       header={
         <Breadcrumbs
           items={[
-            {
-              name: "Home",
-              route: "/home",
-            },
-            {
-              name: "Vote Triplers",
-              route: "/triplers",
-            },
-            {
-              name: "Confirm",
-            },
+            { name: "Home", route: "/home" },
+            { name: "Vote Triplers", route: "/triplers" },
+            { name: "Confirm" },
           ]}
         />
       }
@@ -224,10 +216,10 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           <Button
             type="submit"
             loading={loading}
-            trackingEvent={{ action: "SubmitTriplerConfirm", label: "Add" }}
+            trackingEvent={{ action: "SubmitTriplerConfirm", label: "Send Text" }}
             isAForm
           >
-            Add
+            Send Text
           </Button>
           <Button
             size="small"
