@@ -39,7 +39,7 @@ const SubmissionContainer = styled.div`
   margin-top: ${spacing[8]};
 `;
 
-export const ContactInfoPage = ({ ambassador, setAmbassador, err, disablePhone }) => {
+export const ContactInfoPage = ({ ambassador, setAmbassador, err, disablePhone, disableEmail }) => {
 
   if (process.env.REACT_APP_NO_NEW_SIGNUPS) {
     return <NoNewSignupsPage />;
@@ -116,8 +116,10 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err, disablePhone }
               id="email"
               name="email"
               invalidText="Invalid error message."
-              labelText="Email"
+              labelText="Email*"
               defaultValue={ambassador.email}
+              required
+              disabled={disableEmail}
             />
           </FormGroup>
           <FormGroup legendText="">
@@ -215,6 +217,7 @@ export const ProfilePageEdit = () => {
         if (success) history.push("/");
       }}
       disablePhone
+      disableEmail
       err={err}
     />
   );
