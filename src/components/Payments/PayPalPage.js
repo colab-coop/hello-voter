@@ -50,6 +50,12 @@ export default () => {
     history.push("/payments");
   };
 
+  if (!user.paypal_approved) {
+    // Reject users that don't have the paypal_approved flag.
+    history.push("/payments");
+    return null;
+  }
+
   return (
     <PageLayout
       title={""}
