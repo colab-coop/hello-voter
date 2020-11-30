@@ -48,7 +48,7 @@ export default ({ ambassador }) => (
         name="address1"
         invalidText="Invalid error message."
         labelText="Street Address*"
-        defaultValue={ambassador.address.address1}
+        defaultValue={ambassador.address?.address1}
         required
       />
     </FormGroup>
@@ -60,7 +60,7 @@ export default ({ ambassador }) => (
             name="city"
             invalidText="Invalid error message."
             labelText="City*"
-            defaultValue={ambassador.address.city}
+            defaultValue={ambassador.address?.city}
             required
           />
         </RowLeft>
@@ -70,7 +70,7 @@ export default ({ ambassador }) => (
             name="state"
             invalidText="Invalid error message."
             labelText="State*"
-            defaultValue={ambassador.address.state}
+            defaultValue={ambassador.address?.state}
             required
           />
         </RowCenter>
@@ -80,7 +80,7 @@ export default ({ ambassador }) => (
             name="zip"
             invalidText="Invalid error message."
             labelText="ZIP Code*"
-            defaultValue={ambassador.address.zip}
+            defaultValue={ambassador.address?.zip}
             required
           />
         </RowRight>
