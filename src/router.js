@@ -4,6 +4,7 @@ import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import { AppProvider, AppContext } from "./api/AppContext";
 
 import { initAnalytics, useAnalytics } from "./hooks/useAnalytics";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
@@ -90,8 +91,23 @@ const AuthPublicRoute = ({ component: Component, authenticated, path }) => (
 
 const AppRoutes = () => {
   const { authenticated, loading, user } = React.useContext(AppContext);
+  const [ signupPrefill, setSignupPrefill ] = useLocalStorage("signup_prefill", {});
   useAnalytics();
   if (loading) return <Loading />;
+
+  const fragment = decodeURIComponent(window.location.hash);
+  const prefillMatch = fragment.match(/^\W*prefill=(.*)/);
+  if (prefillMatch) {
+    let prefill = {};
+    try {
+      prefill = JSON.parse(prefillMatch[1]);
+    } catch (err) {
+      console.log('Invalid JSON: ', prefillMatch[1]);
+    }
+    setSignupPrefill(prefill);
+    window.location.hash = '';
+  }
+
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
       <Menu isApproved={user && user.approved} />

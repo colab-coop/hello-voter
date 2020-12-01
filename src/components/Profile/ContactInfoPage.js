@@ -14,12 +14,17 @@ import AddressForm from "./AddressForm";
 import { useHistory } from "react-router-dom";
 import { AppContext } from "../../api/AppContext";
 import NoNewSignupsPage from "./NoNewSignupsPage";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const Row = styled.div`
   display: grid;
   grid-auto-columns: 1fr;
   grid-column-gap: ${spacing[5]};
   grid-template-columns: 1fr 1fr;
+
+  div {
+    grid-column-end: unset;
+  }
 `;
 
 const Divider = styled.div`
@@ -96,6 +101,27 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err, disablePhone, 
             </Row>
           </FormGroup>
           <FormGroup legendText="">
+            <TextInput
+              id="phone"
+              name="phone"
+              invalidText="Invalid error message."
+              labelText="Phone number*"
+              defaultValue={ambassador.phone}
+              required
+              disabled={disablePhone}
+            />
+          </FormGroup>
+          <FormGroup legendText="">
+            <TextInput
+              id="email"
+              name="email"
+              invalidText="Invalid error message."
+              labelText="Email"
+              required
+              defaultValue={ambassador.email}
+            />
+          </FormGroup>
+          <FormGroup legendText="">
             <Row>
               <TextInput
                 id="date_of_birth"
@@ -110,29 +136,6 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err, disablePhone, 
           </FormGroup>
           <Divider />
           <AddressForm ambassador={ambassador} />
-          <Divider />
-          <FormGroup legendText="">
-            <TextInput
-              id="email"
-              name="email"
-              invalidText="Invalid error message."
-              labelText="Email*"
-              defaultValue={ambassador.email}
-              required
-              disabled={disableEmail}
-            />
-          </FormGroup>
-          <FormGroup legendText="">
-            <TextInput
-              id="phone"
-              name="phone"
-              invalidText="Invalid error message."
-              labelText="Phone number*"
-              defaultValue={ambassador.phone}
-              required
-              disabled={disablePhone}
-            />
-          </FormGroup>
           <SubmissionContainer>
             {err && (
               <InlineNotificationStyled
@@ -229,11 +232,13 @@ export const ProfilePageSignup = () => {
   const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(
     AppContext
   );
+  const [signupPrefill, setSignupPrefill] = useLocalStorage("signup_prefill", {});
 
   user &&
     user.signup_completed &&
     user.onboarding_completed &&
     history.push("/");
+
   useEffect(() => {
     const signup = async () => {
       console.log("Signing up");
@@ -241,19 +246,23 @@ export const ProfilePageSignup = () => {
       if (error) return setErr(error.msg);
       const { userError } = await fetchUser();
       if (userError) return setErr(userError.msg);
+      setSignupPrefill({});  // clean up upon successful signup
     };
     if (ambassador.signupComplete) {
       signup();
     }
   }, [ambassador]);
 
-
-if (user && user.msg==="Your account is locked.") {
+  if (user && user.msg === "Your account is locked.") {
     return <DeniedPage/>
   }
+
+  const formDefaults = {};
+
+
   return (
     <ContactInfoPage
-      ambassador={ambassador}
+      ambassador={{...ambassador, ...signupPrefill}}
       setAmbassador={setAmbassador}
       err={err}
     />
