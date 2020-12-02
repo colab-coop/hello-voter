@@ -18,11 +18,15 @@ const HubSpot = ({ email }) => {
     if (email) {
       getCrmToken().then(token => {
         if (token) {
+          if (token.error) {
+            throw new Error(token.error.msg);
+          }
           window.hsConversationsSettings['identificationToken'] = token?.data?.token;
           window.hsConversationsSettings['identificationEmail'] = email;
         }
-        loadWidgetWhenReady();
-      });
+      })
+      .catch(console.warn)
+      .finally(loadWidgetWhenReady);
     } else {
       loadWidgetWhenReady();
     }
