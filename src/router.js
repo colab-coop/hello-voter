@@ -23,6 +23,7 @@ import PayPal from "./components/Payments/PayPalPage";
 import Help from "./components/Help/HelpPage";
 import Terms from "./components/Help/TermsPage";
 import Privacy from "./components/Help/PrivacyPage";
+import HubSpot from "./components/HubSpot";
 
 const NoMatch = ({ authenticated, path, user }) => (
   <Route
@@ -188,6 +189,7 @@ const AppRoutes = () => {
         <NoMatch authenticated={authenticated} user={user} />
       </Switch>
       <Footer />
+      <HubSpot email={user?.email} />
     </div>
   );
 };
