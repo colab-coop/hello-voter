@@ -116,9 +116,10 @@ export const ContactInfoPage = ({ ambassador, setAmbassador, err, disablePhone, 
               id="email"
               name="email"
               invalidText="Invalid error message."
-              labelText="Email"
-              required
+              labelText="Email*"
               defaultValue={ambassador.email}
+              required
+              disabled={disableEmail}
             />
           </FormGroup>
           <FormGroup legendText="">
