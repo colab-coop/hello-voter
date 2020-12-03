@@ -15,11 +15,16 @@ export const useAuth = (token, api) => {
   };
 
   const fetchUser = async () => {
-    const { error, data } = await api.fetchAmbassador()
+    let { data, error } = await api.fetchAmbassador()
     if (error) {
+      console.log('error', {error, data});
       // TODO: Change authenticated to "in_signup_process"
       if (error?.msg === 'No current ambassador') {
-        setAuthenticated(true)
+        setAuthenticated(true);
+      }
+      if (error?.msg === 'Your account is locked.') {
+        setAuthenticated(true);
+        setUser({ locked: true });
       }
       setLoading(false);
       return { error };
