@@ -14,23 +14,23 @@ export const LoginButton = ({ type }) => {
     if (data) window.location.href = data.smOauthUrl;
     setLoading(false);
   };
+  const label = (
+    type === TYPES.FB ? BUTTON_TEXTS["FB"] :
+    type === TYPES.GOOGLE ? BUTTON_TEXTS["GOOGLE"] : ''
+  );
+  const attrs = {width: 32, height: 32, fill: "#fff"};
+  const icon = (
+    type === TYPES.FB ? <IconFacebook {...attrs} /> :
+    type === TYPES.GOOGLE ? <IconGoogle {...attrs} /> : null
+  );
+
   return (
     <Button
       onClick={login}
       loading={loading}
-      trackingEvent={{
-        action: `Login${type}`,
-        label:
-          (type === TYPES.FB && BUTTON_TEXTS["FB"]) ||
-          (type === TYPES.GOOGLE && BUTTON_TEXTS["GOOGLE"]),
-      }}
+      trackingEvent={{ action: 'Login', label: label }}
     >
-      {type === TYPES.FB && <IconFacebook width={32} height={32} fill="#fff" />}
-      {type === TYPES.GOOGLE && (
-        <IconGoogle width={32} height={32} fill="#fff" />
-      )}
-      Log in with {type === TYPES.FB && BUTTON_TEXTS["FB"]}
-      {type === TYPES.GOOGLE && BUTTON_TEXTS["GOOGLE"]}
+      {icon} Log in with {label}
     </Button>
   );
 };
