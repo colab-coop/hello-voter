@@ -19,7 +19,7 @@ const HubSpot = ({ email }) => {
       getCrmToken().then(token => {
         if (token) {
           if (token.error) {
-            throw new Error(token.error.msg);
+            throw new Error(`CRM token API returned error: ${token.error.msg}. Server may be misconfigured`);
           }
           window.hsConversationsSettings['identificationToken'] = token?.data?.token;
           window.hsConversationsSettings['identificationEmail'] = email;
@@ -40,7 +40,7 @@ const HubSpot = ({ email }) => {
       document.body.appendChild(script);
     }
     return () => {
-      if (email && window.HubSpotConversations) {
+      if (email && window.HubSpotConversations && window.HubSpotConversations.resetAndReloadWidget) {
         window.HubSpotConversations.resetAndReloadWidget();
       }
     };
