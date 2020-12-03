@@ -20,6 +20,8 @@ import HomePage from "./components/HomePage";
 import TrainingPage from "./components/TrainingPage";
 import QuizCompletedPage from "./components/QuizCompletedPage";
 import UnapprovedPage from "./components/UnapprovedPage";
+import LockedPage from "./components/LockedPage";
+import SignupsClosedPage from "./components/SignupsClosedPage";
 import PaymentsPage from "./components/Payments/AddPage";
 import PaymentsHomePage from "./components/Payments/PaymentsPage";
 import Chime from "./components/Payments/ChimePage";
@@ -69,7 +71,7 @@ export default () => {
 
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
-      <Menu isApproved={user?.approved} />
+      <Menu />
       <Switch>
         <Route exact path="/help" component={Help} />
         <Route exact path="/terms" component={Terms} />
@@ -79,6 +81,12 @@ export default () => {
 
         <Route exact path="/login" component={LogIn} />
         { !authenticated && <Redirect to='/login' /> }
+
+        <Route exact path="/closed" component={SignupsClosedPage} />
+        { process.env.REACT_APP_NO_NEW_SIGNUPS && <Redirect to='/closed' /> }
+
+        <Route exact path="/locked" component={LockedPage} />
+        { user?.locked && <Redirect to='/locked' /> }
 
         <Route exact path="/signup" component={SignupPage} />
         { !user?.signup_completed && <Redirect to='/signup' /> }
