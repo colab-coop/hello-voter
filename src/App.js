@@ -2,13 +2,13 @@ import React from 'react'
 import { HashRouter } from "react-router-dom";
 import { AppProvider } from "./api/AppContext";
 import { initAnalytics } from "./hooks/useAnalytics";
-import router from "./router";
+import Router from "./router";
 
 const App = () => {
   initAnalytics();
   return <AppProvider>
     <HashRouter>
-      { router() }
+      <Router />
     </HashRouter>
   </AppProvider>
 };

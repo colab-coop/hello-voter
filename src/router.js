@@ -29,12 +29,8 @@ import Terms from "./components/Help/TermsPage";
 import Privacy from "./components/Help/PrivacyPage";
 import HubSpot from "./components/HubSpot";
 
-export default () => {
-  const { authenticated, loading, user } = React.useContext(AppContext);
-  const [ signupPrefill, setSignupPrefill ] = useLocalStorage("signup_prefill", {});
-  useAnalytics();
-  if (loading) return <Loading />;
-
+// Grabs the prefill data from the URL fragment and puts it in local storage.
+const capturePrefillData = (callback) => {
   const fragment = decodeURIComponent(window.location.hash);
   const prefillMatch = fragment.match(/^\W*prefill=(.*)/);
   if (prefillMatch) {
@@ -44,9 +40,18 @@ export default () => {
     } catch (err) {
       console.log('Invalid JSON: ', prefillMatch[1]);
     }
-    setSignupPrefill(prefill);
+    callback(prefill);
     window.location.hash = '';
   }
+};
+
+export default () => {
+  const { loading, authenticated, user } = React.useContext(AppContext);
+  const [ signupPrefill, setSignupPrefill ] = useLocalStorage("signup_prefill", {});
+  useAnalytics();
+  if (loading) return <Loading />;
+
+  capturePrefillData(setSignupPrefill);
 
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
@@ -58,18 +63,17 @@ export default () => {
         { !authenticated && <Redirect to='/login' /> }
 
         <Route exact path="/signup" component={SignupPage} />
-        { !user.signup_completed && <Redirect to='/signup' /> }
+        { !user?.signup_completed && <Redirect to='/signup' /> }
 
         <Route exact path="/unapproved" component={UnapprovedPage} />
-        { !user.approved && <Redirect to='/unapproved' /> }
+        { !user?.approved && <Redirect to='/unapproved' /> }
 
         <Route exact path="/quiz" component={QuizPage} />
-        { !user.quiz_completed && <Redirect to="/quiz" /> }
-
-        <Route exact path="/quiz_completed" component={QuizCompletedPage} />
+        <Route path="/quiz_completed" component={QuizCompletedPage} />
+        { !user?.quiz_completed && <Redirect to="/quiz" /> }
 
         <Route exact path="/ack" component={AckPage} />
-        { !user.onboarding_completed && <Redirect to="/ack" /> }
+        { !user?.onboarding_completed && <Redirect to="/ack" /> }
 
         <Route exact path="/home" component={HomePage} />
         <Route exact path="/profile" component={ProfilePage} />

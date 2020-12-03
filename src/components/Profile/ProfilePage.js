@@ -64,7 +64,7 @@ export const ProfilePage = () => {
 
   return <PageLayout title="Edit Your Profile">
     <ProfileForm
-      ambassador={user}
+      user={user}
       onSubmit={onSubmit}
       disablePhone
       disableEmail
@@ -97,7 +97,7 @@ export const SignupPage = () => {
 
   return <PageLayout title="Please Enter Your Details">
     <ProfileForm
-      ambassador={{...user, ...signupPrefill}}
+      user={{...user, ...signupPrefill}}
       onSubmit={onSubmit}
       err={err}
     />

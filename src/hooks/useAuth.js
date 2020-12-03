@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+const { REACT_APP_APP_PATH } = process.env
+
 export const useAuth = (token, api) => {
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
@@ -27,9 +29,17 @@ export const useAuth = (token, api) => {
   }
   useEffect(() => {
     if (!authenticated) fetchUser();
-  }, [authenticated])
+  });
+
+  const signOut = () => {
+    // Fully clear authentication data and refresh the webpage.
+    localStorage.clear();
+    setAuthenticated(false);
+    window.location = REACT_APP_APP_PATH || "/";
+  };
   return {
     authenticated,
+    signOut,
     user,
     loading,
     fetchUser

@@ -40,7 +40,7 @@ const SubmissionContainer = styled.div`
   margin-top: ${spacing[8]};
 `;
 
-export const ProfileForm = ({ ambassador, onSubmit, err, disablePhone, disableEmail }) => <ResponsiveContainer>
+export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail }) => <ResponsiveContainer>
   <Form onSubmit={(e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -69,7 +69,7 @@ export const ProfileForm = ({ ambassador, onSubmit, err, disablePhone, disableEm
           name="first_name"
           invalidText="Invalid error message."
           labelText="First Name*"
-          defaultValue={ambassador.first_name}
+          defaultValue={user.first_name}
           required
         />
         <TextInput
@@ -77,7 +77,7 @@ export const ProfileForm = ({ ambassador, onSubmit, err, disablePhone, disableEm
           name="last_name"
           invalidText="Invalid error message."
           labelText="Last Name*"
-          defaultValue={ambassador.last_name}
+          defaultValue={user.last_name}
           required
         />
       </Row>
@@ -88,7 +88,7 @@ export const ProfileForm = ({ ambassador, onSubmit, err, disablePhone, disableEm
         name="phone"
         invalidText="Invalid error message."
         labelText="Phone number*"
-        defaultValue={ambassador.phone}
+        defaultValue={user.phone}
         required
         disabled={disablePhone}
       />
@@ -99,7 +99,7 @@ export const ProfileForm = ({ ambassador, onSubmit, err, disablePhone, disableEm
         name="email"
         invalidText="Invalid error message."
         labelText="Email*"
-        defaultValue={ambassador.email}
+        defaultValue={user.email}
         required
         disabled={disableEmail}
       />
@@ -112,13 +112,13 @@ export const ProfileForm = ({ ambassador, onSubmit, err, disablePhone, disableEm
           placeholder="mm/dd/yyyy"
           labelText="Date of Birth*"
           type="text"
-          defaultValue={ambassador.date_of_birth}
+          defaultValue={user.date_of_birth}
           required
         />
       </Row>
     </FormGroup>
     <Divider />
-    <AddressForm ambassador={ambassador} />
+    <AddressForm user={user} />
     <SubmissionContainer>
       {err && (
         <InlineNotificationStyled

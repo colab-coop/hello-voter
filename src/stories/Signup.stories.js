@@ -19,7 +19,7 @@ export const LoginPage = () => (
 );
 
 export const SignupPage = () => (
-  <AppContext.Provider value={{ user: {}, authenticated: false, ambassador: {} }}>
+  <AppContext.Provider value={{ user: {}, authenticated: false }}>
     <Menu isApproved={false} />
     <SignupBody />
   </AppContext.Provider>

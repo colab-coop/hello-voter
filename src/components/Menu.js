@@ -22,22 +22,17 @@ import {
 } from './pageStyles'
 import { AppContext } from '../api/AppContext';
 
-const { REACT_APP_PAYMENT_FEATURE, REACT_APP_APP_PATH } = process.env
+const { REACT_APP_PAYMENT_FEATURE } = process.env;
 
 const Menu = ({ isApproved }) => {
   const [navOpen, setNavOpen] = useState(false)
   const [profileNavOpen, setProfileNavOpen] = useState(false)
   const history = useHistory()
-  const { user } = React.useContext(AppContext)
+  const { user, authenticated, signOut } = React.useContext(AppContext)
   const redirect = async (href) => {
     setNavOpen(false)
     setProfileNavOpen(false)
     history.push(href);
-  }
-  const signOut = () => {
-    // Fully clear data and refresh the webpage.
-    localStorage.clear();
-    window.location = REACT_APP_APP_PATH || "/";
   }
 
   return (
@@ -140,14 +135,16 @@ const Menu = ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/help")}}>
               Help
             </SwitcherItemStyled>
-            {user && <>
+            {user &&
               <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
                 Profile
               </SwitcherItemStyled>
+            }
+            {authenticated &&
               <SwitcherItemStyled onClick={signOut}>
                 Sign out
               </SwitcherItemStyled>
-            </>}
+            }
           </SwitcherStyled>
         </HeaderPanelStyled>
       </Header>
