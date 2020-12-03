@@ -18,10 +18,6 @@ const Details = styled.p`
   margin-bottom: ${spacing[5]};
 `;
 
-const BottomLinkContainer = styled.div`
-  margin-top: ${spacing[5]};
-`;
-
 const CardIcon = styled.img`
   width: 24px;
   height: 24px;
@@ -107,13 +103,6 @@ export const AddPage = ({
           disabled={alreadyHasPayoutProvider}
         />
       </GridThreeUp>
-      {!alreadyHasPayoutProvider && (
-        <BottomLinkContainer>
-          <a href="#/payments/paypal">
-            Having trouble connecting your bank account?
-          </a>
-        </BottomLinkContainer>
-      )}
     </PageLayout>
   );
 }
