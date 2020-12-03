@@ -1,6 +1,16 @@
 import React from 'react'
-import { RouterC } from './router'
+import { HashRouter } from "react-router-dom";
+import { AppProvider } from "./api/AppContext";
+import { initAnalytics } from "./hooks/useAnalytics";
+import router from "./router";
 
-const App = () => <RouterC />
+const App = () => {
+  initAnalytics();
+  return <AppProvider>
+    <HashRouter>
+      { router() }
+    </HashRouter>
+  </AppProvider>
+};
 
-export default App
+export default App;

@@ -47,12 +47,10 @@ export const NoNewSignupsPage = () => (
 export const ProfilePage = () => {
   const [err, setErr] = useState(false);
   const history = useHistory();
-  const { api, fetchUser, user } = React.useContext(
-    AppContext
-  );
+  const { api, fetchUser, user } = React.useContext(AppContext);
 
   const onSubmit = async (edits) => {
-    const { error } = await api.saveProfile({...ambassador, ...edits});
+    const { error } = await api.saveProfile({...user, ...edits});
     if (error) setErr(error.msg);
     else {
       const { userError } = await fetchUser();
@@ -78,13 +76,11 @@ export const ProfilePage = () => {
 export const SignupPage = () => {
   const [err, setErr] = useState(false);
   const history = useHistory();
-  const { ambassador, api, fetchUser, user } = React.useContext(
-    AppContext
-  );
+  const { api, fetchUser, user } = React.useContext(AppContext);
   const [signupPrefill, setSignupPrefill] = useLocalStorage("signup_prefill", {});
 
   const onSubmit = async (edits) => {
-    const { error } = await api.signup({...ambassador, ...edits});
+    const { error } = await api.signup({...user, ...edits});
     if (error) setErr(error.msg);
     else {
       const { userError } = await fetchUser();
@@ -101,7 +97,7 @@ export const SignupPage = () => {
 
   return <PageLayout title="Please Enter Your Details">
     <ProfileForm
-      ambassador={{...ambassador, ...signupPrefill}}
+      ambassador={{...user, ...signupPrefill}}
       onSubmit={onSubmit}
       err={err}
     />
