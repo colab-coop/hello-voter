@@ -1,8 +1,10 @@
 import {
   FormGroup,
   TextInput,
+  DatePickerInput,
   InlineNotification,
   Form,
+  DatePicker,
 } from "carbon-components-react";
 import React from 'react';
 import styled from "styled-components";
@@ -106,15 +108,16 @@ export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail })
     </FormGroup>
     <FormGroup legendText="">
       <Row>
-        <TextInput
-          id="date_of_birth"
-          name="date_of_birth"
-          placeholder="mm/dd/yyyy"
-          labelText="Date of Birth*"
-          type="text"
-          defaultValue={user.date_of_birth}
-          required
-        />
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            id="date_of_birth"
+            name="date_of_birth"
+            placeholder="mm/dd/yyyy"
+            labelText="Date of Birth*"
+            defaultValue={user.date_of_birth}
+            required
+          />
+        </DatePicker>
       </Row>
     </FormGroup>
     <Divider />
