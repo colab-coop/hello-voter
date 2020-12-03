@@ -22,7 +22,7 @@ const errorHandler = (e) => {
 }
 
 const isFailStatusCode = (status) => {
-  return [401, 400, 500].includes(status)
+  return [404, 401, 400, 500].includes(status)
 }
 
 export const getToken = () => {
@@ -225,6 +225,7 @@ export const fetchAmbassador = async () => {
     })
 
     let data = await res.json()
+    console.log('Fetched Ambassador:', data);
 
     if (isFailStatusCode(data.code)) {
       return {
