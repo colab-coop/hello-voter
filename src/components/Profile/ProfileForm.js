@@ -40,12 +40,12 @@ const SubmissionContainer = styled.div`
   margin-top: ${spacing[8]};
 `;
 
-export const ProfileForm = ({ ambassador, setAmbassador, err, disablePhone, disableEmail }) => <ResponsiveContainer>
-  <Form onSubmit={async (e) => {
+export const ProfileForm = ({ ambassador, onSubmit, err, disablePhone, disableEmail }) => <ResponsiveContainer>
+  <Form onSubmit={(e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const userData = {
+    const edits = {
       first_name: formData.get("first_name"),
       last_name: formData.get("last_name"),
       email: formData.get("email"),
@@ -60,12 +60,7 @@ export const ProfileForm = ({ ambassador, setAmbassador, err, disablePhone, disa
       form_submitted: true,
     };
 
-    await setAmbassador((data) => {
-      return {
-        ...data,
-        ...userData,
-      };
-    });
+    onSubmit(edits);
   }}>
     <FormGroup legendText="">
       <Row>

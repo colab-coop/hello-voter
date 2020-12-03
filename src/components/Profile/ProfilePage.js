@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { AppContext } from "../../api/AppContext";
@@ -84,30 +84,26 @@ export const SignupPage = () => {
   );
   const [signupPrefill, setSignupPrefill] = useLocalStorage("signup_prefill", {});
 
-  useEffect(() => {
-    const signup = async () => {
-      const { error } = await api.signup(ambassador);
-      if (error) return setErr(error.msg);  // returns undefined
+  const onSubmit = async (edits) => {
+    const { error } = await api.signup({...ambassador, ...edits});
+    if (error) setErr(error.msg);
+    else {
       const { userError } = await fetchUser();
-      if (userError) return setErr(userError.msg);  // returns undefined
-      setSignupPrefill({});  // clean up upon successful signup
-    };
-    if (ambassador.form_submitted) {
-      signup();
+      if (userError) setErr(userError.msg);
+      else {
+        setSignupPrefill({});  // clean up upon successful signup
+        history.push('/');  // let the router decide where to go next
+      }
     }
-  }, [ambassador]);
+  };
 
   if (process.env.REACT_APP_NO_NEW_SIGNUPS) return <NoNewSignupsPage />;
   if (user?.msg === "Your account is locked.") return <DeniedPage/>;
-  if (user?.signup_completed) {
-    history.push("/");  // let the router decide where to go
-    return null;
-  }
 
   return <PageLayout title="Please Enter Your Details">
     <ProfileForm
       ambassador={{...ambassador, ...signupPrefill}}
-      setAmbassador={setAmbassador}
+      onSubmit={onSubmit}
       err={err}
     />
   </PageLayout>;
