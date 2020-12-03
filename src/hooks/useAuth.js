@@ -25,9 +25,9 @@ export const useAuth = (token, api) => {
       data: data
     }
   }
-  useEffect( () => {
-    !authenticated && fetchUser()
-  }, [authenticated, fetchUser])
+  useEffect(() => {
+    if (!authenticated) fetchUser();
+  }, [authenticated])
   return {
     authenticated,
     user,
