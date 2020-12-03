@@ -6,7 +6,9 @@ import { AppContext } from "../api/AppContext";
 import Loading from './Loading';
 import PageLayout from './PageLayout';
 
-const QUIZ_KEY = process.env.QUIZ_KEY || 'QUIZ_KEY';
+// If QUIZ_KEY is defined, we'll check and enforce the token; otherwise
+// we'll accept folks landing at /quiz_completed without a token.
+const QUIZ_KEY = process.env.QUIZ_KEY || '';
 
 // This requires the WordPress server's clock to be within 2 minutes
 // of the browser's clock.
@@ -22,6 +24,8 @@ const isTokenValid = (token) => {
 };
 
 const validateQuizCompleted = () => {
+  if (!QUIZ_KEY) return true;
+
   const match = window.location.href.match(/quiz_completed\/(.*)/);
   return match && isTokenValid(match[1]);
 };
