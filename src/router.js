@@ -1,9 +1,9 @@
 import React from "react";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
-import { AppProvider, AppContext } from "./api/AppContext";
+import { AppContext } from "./api/AppContext";
 
-import { initAnalytics, useAnalytics } from "./hooks/useAnalytics";
+import { useAnalytics } from "./hooks/useAnalytics";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 
 import Menu from "./components/Menu";
@@ -15,7 +15,11 @@ import { ProfilePage, SignupPage } from "./components/Profile/ProfilePage";
 import TriplersPage from "./components/Triplers/TriplersPage";
 import TriplersAdd from "./components/Triplers/AddTripler";
 import ConfirmPage from "./components/Triplers/ConfirmPage";
+import AckPage from "./components/AckPage";
 import HomePage from "./components/HomePage";
+import TrainingPage from "./components/TrainingPage";
+import QuizCompletedPage from "./components/QuizCompletedPage";
+import UnapprovedPage from "./components/UnapprovedPage";
 import PaymentsPage from "./components/Payments/AddPage";
 import PaymentsHomePage from "./components/Payments/PaymentsPage";
 import Chime from "./components/Payments/ChimePage";
@@ -25,77 +29,8 @@ import Terms from "./components/Help/TermsPage";
 import Privacy from "./components/Help/PrivacyPage";
 import HubSpot from "./components/HubSpot";
 
-const NoMatch = ({ authenticated, path, user }) => (
-  <Route
-    path={path}
-    render={(props) =>
-      authenticated === true ? (
-        user && user.signup_completed ? (
-          <Redirect
-            to={{ pathname: "/home", state: { from: props.location } }}
-          />
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/ambassador/signup",
-              state: { from: props.location },
-            }}
-          />
-        )
-      ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
-
-const AuthRoute = ({ component: Component, authenticated, path, user }) => (
-  <Route
-    path={path}
-    render={(props) =>
-      authenticated === true ? (
-        user && user.approved ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/ambassador/signup",
-              state: { from: props.location },
-            }}
-          />
-        )
-      ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
-
-const AuthPublicRoute = ({ component: Component, authenticated, path }) => (
-  <Route
-    path={path}
-    render={(props) =>
-      authenticated === true ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
-
-const AppRoutes = () => {
-  const { authenticated, loading, user } = React.useContext(AppContext);
-  const [ signupPrefill, setSignupPrefill ] = useLocalStorage("signup_prefill", {});
-  useAnalytics();
-  if (loading) return <Loading />;
-
+// Grabs the prefill data from the URL fragment and puts it in local storage.
+const capturePrefillData = (callback) => {
   const fragment = decodeURIComponent(window.location.hash);
   const prefillMatch = fragment.match(/^\W*prefill=(.*)/);
   if (prefillMatch) {
@@ -105,102 +40,61 @@ const AppRoutes = () => {
     } catch (err) {
       console.log('Invalid JSON: ', prefillMatch[1]);
     }
-    setSignupPrefill(prefill);
+    callback(prefill);
     window.location.hash = '';
   }
+};
+
+export default () => {
+  const { loading, authenticated, user } = React.useContext(AppContext);
+  const [ signupPrefill, setSignupPrefill ] = useLocalStorage("signup_prefill", {});
+  useAnalytics();
+  if (loading) return <Loading />;
+
+  capturePrefillData(setSignupPrefill);
+  console.log('Router:', {authenticated, user});
 
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
-      <Menu isApproved={user && user.approved} />
+      <Menu isApproved={user?.approved} />
       <Switch>
-        <AuthPublicRoute
-          path="/ambassador/signup"
-          component={SignupPage}
-          exact={true}
-          authenticated={authenticated}
-        />
-        <AuthPublicRoute
-          path="/profile"
-          component={ProfilePage}
-          exact={true}
-          authenticated={authenticated}
-        />
-        <AuthRoute
-          path="/home"
-          component={HomePage}
-          exact={true}
-          authenticated={authenticated}
-          user={user}
-        />
-        <AuthRoute
-          path="/triplers"
-          component={TriplersPage}
-          exact={true}
-          authenticated={authenticated}
-          user={user}
-        />
-        <AuthRoute
-          path="/triplers/add"
-          component={TriplersAdd}
-          exact={true}
-          authenticated={authenticated}
-          user={user}
-        />
-        <AuthRoute
-          path="/triplers/confirm/:triplerId"
-          component={ConfirmPage}
-          exact={true}
-          authenticated={authenticated}
-          user={user}
-        />
-        <AuthRoute
-          path="/payments/add"
-          component={PaymentsPage}
-          exact={true}
-          authenticated={authenticated}
-          user={user}
-        />
-        <AuthRoute
-          path="/payments"
-          component={PaymentsHomePage}
-          exact={true}
-          authenticated={authenticated}
-          user={user}
-        />
-        <AuthRoute
-          path="/payments/chime"
-          component={Chime}
-          exact={true}
-          authenticated={authenticated}
-          user={user}
-        />
-        <AuthRoute
-          path="/payments/paypal"
-          component={PayPal}
-          exact={true}
-          authenticated={authenticated}
-          user={user}
-        />
-        <Route path="/help" component={Help} />
-        <Route path="/terms" component={Terms} />
-        <Route path="/privacy" component={Privacy} />
-        <Route path="/login" component={LogIn} />
+        <Route exact path="/help" component={Help} />
+        <Route exact path="/terms" component={Terms} />
+        <Route exact path="/privacy" component={Privacy} />
+
         <Route path="/jwt" component={Main} />
-        <NoMatch authenticated={authenticated} user={user} />
+
+        <Route exact path="/login" component={LogIn} />
+        { !authenticated && <Redirect to='/login' /> }
+
+        <Route exact path="/signup" component={SignupPage} />
+        { !user?.signup_completed && <Redirect to='/signup' /> }
+
+        <Route exact path="/unapproved" component={UnapprovedPage} />
+        { !user?.approved && <Redirect to='/unapproved' /> }
+
+        <Route exact path="/training" component={TrainingPage} />
+        <Route path="/quiz_completed" component={QuizCompletedPage} />
+        { !user?.quiz_completed && <Redirect to="/training" /> }
+
+        <Route exact path="/ack" component={AckPage} />
+        { !user?.onboarding_completed && <Redirect to="/ack" /> }
+
+        <Route exact path="/home" component={HomePage} />
+        <Route exact path="/profile" component={ProfilePage} />
+        <Route exact path="/triplers" component={TriplersPage} />
+        <Route exact path="/triplers/add" component={TriplersAdd} />
+        <Route exact path="/triplers/confirm/:triplerId" component={ConfirmPage} />
+
+        <Route exact path="/payments" component={PaymentsHomePage} />
+        <Route exact path="/payments/add" component={PaymentsPage} />
+        <Route exact path="/payments/chime" component={Chime} />
+        <Route exact path="/payments/paypal" component={PayPal} />
+
+        <Redirect to="/home" />
       </Switch>
       <Footer />
       <HubSpot email={user?.email} />
     </div>
-  );
-};
-
-export const RouterC = () => {
-  initAnalytics();
-  return (
-    <AppProvider>
-      <HashRouter>
-        <AppRoutes />
-      </HashRouter>
-    </AppProvider>
   );
 };

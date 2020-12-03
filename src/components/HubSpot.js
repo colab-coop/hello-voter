@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { getCrmToken } from '../api/api.js'
 
 const SCRIPT_URL = 'https://js.hs-scripts.com/8868419.js';
