@@ -191,7 +191,3 @@ REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE=true
 To disallow signups set this to true:
 
 REACT_APP_NO_NEW_SIGNUPS=
-
-Activates embedded HubSpot chat if true
-
-REACT_APP_ENABLE_HUBSPOT=false
