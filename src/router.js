@@ -29,6 +29,17 @@ import Terms from "./components/Help/TermsPage";
 import Privacy from "./components/Help/PrivacyPage";
 import HubSpot from "./components/HubSpot";
 
+// When OAuth passes back our JWT token, it inserts /auth/ into the URL
+// (probably for some outdated reason).  This removes that from the URL.
+const redirectToCanonicalUrl = () => {
+  const match = window.location.href.match(/(.*)\/auth\W*#(.*)/);
+  if (match) {
+    window.location = match[1] + '/#' + match[2];
+    return true;
+  }
+  return false;
+};
+
 // Grabs the prefill data from the URL fragment and puts it in local storage.
 const capturePrefillData = (callback) => {
   const fragment = decodeURIComponent(window.location.hash);
@@ -49,6 +60,8 @@ export default () => {
   const { loading, authenticated, user } = React.useContext(AppContext);
   const [ signupPrefill, setSignupPrefill ] = useLocalStorage("signup_prefill", {});
   useAnalytics();
+
+  if (redirectToCanonicalUrl()) return <Loading />;
   if (loading) return <Loading />;
 
   capturePrefillData(setSignupPrefill);
