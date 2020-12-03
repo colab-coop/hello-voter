@@ -50,13 +50,16 @@ export const ProfilePage = () => {
   const { api, fetchUser, user } = React.useContext(
     AppContext
   );
-  const saveProfile = async (ambassador) => {
-    const { error } = await api.saveProfile(ambassador);
-    if (error) return setErr(error.msg);  // returns undefined
-    const { userError } = await fetchUser();
-    if (userError) return setErr(userError.msg);  // returns undefined
-    return true;
-  }
+
+  const onSubmit = async (edits) => {
+    const { error } = await api.saveProfile({...ambassador, ...edits});
+    if (error) setErr(error.msg);
+    else {
+      const { userError } = await fetchUser();
+      if (userError) setErr(userError.msg);
+      else history.push("/");
+    }
+  };
 
   if (process.env.REACT_APP_NO_NEW_SIGNUPS) return <NoNewSignupsPage />;
   if (user?.msg === "Your account is locked.") return <DeniedPage/>;
@@ -64,11 +67,7 @@ export const ProfilePage = () => {
   return <PageLayout title="Edit Your Profile">
     <ProfileForm
       ambassador={user}
-      setAmbassador={async (mergeData) => {
-        const newAmbassador = mergeData(user);
-        const success = await saveProfile(newAmbassador);
-        if (success) history.push("/");
-      }}
+      onSubmit={onSubmit}
       disablePhone
       disableEmail
       err={err}
@@ -79,7 +78,7 @@ export const ProfilePage = () => {
 export const SignupPage = () => {
   const [err, setErr] = useState(false);
   const history = useHistory();
-  const { ambassador, setAmbassador, api, fetchUser, user } = React.useContext(
+  const { ambassador, api, fetchUser, user } = React.useContext(
     AppContext
   );
   const [signupPrefill, setSignupPrefill] = useLocalStorage("signup_prefill", {});
