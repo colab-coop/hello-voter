@@ -40,7 +40,7 @@ const RowRight = styled.div`
   }
 `
 
-export default ({ user }) => (
+export default ({ ambassador }) => (
   <>
     <FormGroup legendText="">
       <TextInput
@@ -48,7 +48,7 @@ export default ({ user }) => (
         name="address1"
         invalidText="Invalid error message."
         labelText="Street Address*"
-        defaultValue={user.address?.address1}
+        defaultValue={ambassador.address?.address1}
         required
       />
     </FormGroup>
@@ -60,7 +60,7 @@ export default ({ user }) => (
             name="city"
             invalidText="Invalid error message."
             labelText="City*"
-            defaultValue={user.address?.city}
+            defaultValue={ambassador.address?.city}
             required
           />
         </RowLeft>
@@ -70,7 +70,7 @@ export default ({ user }) => (
             name="state"
             invalidText="Invalid error message."
             labelText="State*"
-            defaultValue={user.address?.state}
+            defaultValue={ambassador.address?.state}
             required
           />
         </RowCenter>
@@ -80,7 +80,7 @@ export default ({ user }) => (
             name="zip"
             invalidText="Invalid error message."
             labelText="ZIP Code*"
-            defaultValue={user.address?.zip}
+            defaultValue={ambassador.address?.zip}
             required
           />
         </RowRight>

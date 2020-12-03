@@ -40,12 +40,12 @@ const SubmissionContainer = styled.div`
   margin-top: ${spacing[8]};
 `;
 
-export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail }) => <ResponsiveContainer>
-  <Form onSubmit={(e) => {
+export const ProfileForm = ({ ambassador, setAmbassador, err, disablePhone, disableEmail }) => <ResponsiveContainer>
+  <Form onSubmit={async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const edits = {
+    const userData = {
       first_name: formData.get("first_name"),
       last_name: formData.get("last_name"),
       email: formData.get("email"),
@@ -60,7 +60,12 @@ export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail })
       form_submitted: true,
     };
 
-    onSubmit(edits);
+    await setAmbassador((data) => {
+      return {
+        ...data,
+        ...userData,
+      };
+    });
   }}>
     <FormGroup legendText="">
       <Row>
@@ -69,7 +74,7 @@ export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail })
           name="first_name"
           invalidText="Invalid error message."
           labelText="First Name*"
-          defaultValue={user.first_name}
+          defaultValue={ambassador.first_name}
           required
         />
         <TextInput
@@ -77,7 +82,7 @@ export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail })
           name="last_name"
           invalidText="Invalid error message."
           labelText="Last Name*"
-          defaultValue={user.last_name}
+          defaultValue={ambassador.last_name}
           required
         />
       </Row>
@@ -88,7 +93,7 @@ export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail })
         name="phone"
         invalidText="Invalid error message."
         labelText="Phone number*"
-        defaultValue={user.phone}
+        defaultValue={ambassador.phone}
         required
         disabled={disablePhone}
       />
@@ -99,7 +104,7 @@ export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail })
         name="email"
         invalidText="Invalid error message."
         labelText="Email*"
-        defaultValue={user.email}
+        defaultValue={ambassador.email}
         required
         disabled={disableEmail}
       />
@@ -112,13 +117,13 @@ export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail })
           placeholder="mm/dd/yyyy"
           labelText="Date of Birth*"
           type="text"
-          defaultValue={user.date_of_birth}
+          defaultValue={ambassador.date_of_birth}
           required
         />
       </Row>
     </FormGroup>
     <Divider />
-    <AddressForm user={user} />
+    <AddressForm ambassador={ambassador} />
     <SubmissionContainer>
       {err && (
         <InlineNotificationStyled

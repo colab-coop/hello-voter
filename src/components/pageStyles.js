@@ -23,8 +23,6 @@ switch (REACT_APP_LOGO) {
   case 'bloc':
     logo = Bloc;
     break;
-  default:
-    logo = null;
 }
 
 export const theme = {

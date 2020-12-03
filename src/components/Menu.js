@@ -22,17 +22,22 @@ import {
 } from './pageStyles'
 import { AppContext } from '../api/AppContext';
 
-const { REACT_APP_PAYMENT_FEATURE } = process.env;
+const { REACT_APP_PAYMENT_FEATURE, REACT_APP_APP_PATH } = process.env
 
 const Menu = ({ isApproved }) => {
   const [navOpen, setNavOpen] = useState(false)
   const [profileNavOpen, setProfileNavOpen] = useState(false)
   const history = useHistory()
-  const { user, authenticated, signOut } = React.useContext(AppContext)
+  const { user } = React.useContext(AppContext)
   const redirect = async (href) => {
     setNavOpen(false)
     setProfileNavOpen(false)
     history.push(href);
+  }
+  const signOut = () => {
+    // Fully clear data and refresh the webpage.
+    localStorage.clear();
+    window.location = REACT_APP_APP_PATH || "/";
   }
 
   return (
@@ -76,7 +81,7 @@ const Menu = ({ isApproved }) => {
           >
             <Help20 />
           </HeaderGlobalAction>
-          {authenticated && (
+          {user && (
             <HeaderGlobalAction
               aria-label="Profile menu"
               type="button"
@@ -102,11 +107,9 @@ const Menu = ({ isApproved }) => {
         <HeaderPanelRightContainer navOpen={profileNavOpen}>
           <HeaderPanelSpacer />
           <SwitcherStyledRight>
-            {user &&
-              <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
-                Profile
-              </SwitcherItemStyled>
-            }
+            <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
+              Profile
+            </SwitcherItemStyled>
             <SwitcherItemStyled onClick={signOut}>
               Sign out
             </SwitcherItemStyled>
@@ -137,16 +140,14 @@ const Menu = ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/help")}}>
               Help
             </SwitcherItemStyled>
-            {user &&
+            {user && <>
               <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
                 Profile
               </SwitcherItemStyled>
-            }
-            {authenticated &&
               <SwitcherItemStyled onClick={signOut}>
                 Sign out
               </SwitcherItemStyled>
-            }
+            </>}
           </SwitcherStyled>
         </HeaderPanelStyled>
       </Header>
