@@ -17,7 +17,7 @@ import TriplersAdd from "./components/Triplers/AddTripler";
 import ConfirmPage from "./components/Triplers/ConfirmPage";
 import AckPage from "./components/AckPage";
 import HomePage from "./components/HomePage";
-import QuizPage from "./components/QuizPage";
+import TrainingPage from "./components/TrainingPage";
 import QuizCompletedPage from "./components/QuizCompletedPage";
 import UnapprovedPage from "./components/UnapprovedPage";
 import PaymentsPage from "./components/Payments/AddPage";
@@ -57,6 +57,10 @@ export default () => {
     <div style={{ position: "relative", minHeight: "100vh" }}>
       <Menu isApproved={user?.approved} />
       <Switch>
+        <Route exact path="/help" component={Help} />
+        <Route exact path="/terms" component={Terms} />
+        <Route exact path="/privacy" component={Privacy} />
+
         <Route path="/jwt" component={Main} />
 
         <Route exact path="/login" component={LogIn} />
@@ -68,9 +72,9 @@ export default () => {
         <Route exact path="/unapproved" component={UnapprovedPage} />
         { !user?.approved && <Redirect to='/unapproved' /> }
 
-        <Route exact path="/quiz" component={QuizPage} />
+        <Route exact path="/training" component={TrainingPage} />
         <Route path="/quiz_completed" component={QuizCompletedPage} />
-        { !user?.quiz_completed && <Redirect to="/quiz" /> }
+        { !user?.quiz_completed && <Redirect to="/training" /> }
 
         <Route exact path="/ack" component={AckPage} />
         { !user?.onboarding_completed && <Redirect to="/ack" /> }
@@ -85,10 +89,6 @@ export default () => {
         <Route exact path="/payments/add" component={PaymentsPage} />
         <Route exact path="/payments/chime" component={Chime} />
         <Route exact path="/payments/paypal" component={PayPal} />
-
-        <Route exact path="/help" component={Help} />
-        <Route exact path="/terms" component={Terms} />
-        <Route exact path="/privacy" component={Privacy} />
 
         <Redirect to="/home" />
       </Switch>

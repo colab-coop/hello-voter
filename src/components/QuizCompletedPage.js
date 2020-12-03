@@ -28,12 +28,14 @@ const validateQuizCompleted = () => {
 
 export default () => {
   console.log('quiz_completed');
-  const { api, user } = React.useContext(AppContext);
+  const { api, user, fetchUser } = React.useContext(AppContext);
   const history = useHistory();
 
   if (validateQuizCompleted()) {
     api.saveProfile({...user, quiz_completed: true}).then(() => {
-      history.push('/');  // let the router decide where to go next
+      fetchUser().then(() => {
+        history.push('/');  // let the router decide where to go next
+      });
     });
   } else {
     history.push('/');

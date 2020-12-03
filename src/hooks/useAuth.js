@@ -13,7 +13,6 @@ export const useAuth = (token, api) => {
       if (error?.msg === 'No current ambassador') {
         setAuthenticated(true)
       }
-      setLoading(false)
       return {
         completed: false,
         error
@@ -41,7 +40,7 @@ export const useAuth = (token, api) => {
     authenticated,
     signOut,
     user,
-    loading,
+    loading: loading || (authenticated && !user),
     fetchUser
   }
 }

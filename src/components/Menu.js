@@ -76,7 +76,7 @@ const Menu = ({ isApproved }) => {
           >
             <Help20 />
           </HeaderGlobalAction>
-          {user && (
+          {authenticated && (
             <HeaderGlobalAction
               aria-label="Profile menu"
               type="button"
@@ -102,9 +102,11 @@ const Menu = ({ isApproved }) => {
         <HeaderPanelRightContainer navOpen={profileNavOpen}>
           <HeaderPanelSpacer />
           <SwitcherStyledRight>
-            <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
-              Profile
-            </SwitcherItemStyled>
+            {user &&
+              <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
+                Profile
+              </SwitcherItemStyled>
+            }
             <SwitcherItemStyled onClick={signOut}>
               Sign out
             </SwitcherItemStyled>

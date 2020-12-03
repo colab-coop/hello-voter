@@ -11,6 +11,7 @@ export const AppProvider = ({ children }) => {
   const [ token, setAuthToken ] = useLocalStorage('token', null)
   const [ data, setData ] = useState({})
   const { user, authenticated, signOut, loading, fetchUser } = useAuth(token, api)
+  console.log({authenticated, user});
   return (
     <AppContext.Provider value={{ user, authenticated, signOut, setAuthToken, api, loading, fetchUser, data, setData }}>
       {children}

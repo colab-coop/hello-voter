@@ -53,8 +53,8 @@ export const ProfilePage = () => {
     const { error } = await api.saveProfile({...user, ...edits});
     if (error) setErr(error.msg);
     else {
-      const { userError } = await fetchUser();
-      if (userError) setErr(userError.msg);
+      const { error } = await fetchUser();
+      if (error) setErr(error.msg);
       else history.push("/");
     }
   };
@@ -83,8 +83,8 @@ export const SignupPage = () => {
     const { error } = await api.signup({...user, ...edits});
     if (error) setErr(error.msg);
     else {
-      const { userError } = await fetchUser();
-      if (userError) setErr(userError.msg);
+      const { error } = await fetchUser();
+      if (error) setErr(error.msg);
       else {
         setSignupPrefill({});  // clean up upon successful signup
         history.push('/');  // let the router decide where to go next
