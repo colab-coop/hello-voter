@@ -115,7 +115,7 @@ export default () => {
         <Redirect to="/home" />
       </Switch>
       <Footer />
-      <HubSpot email={user?.email} />
+      {process.env.REACT_APP_ENABLE_HUBSPOT === 'true' && <HubSpot email={user?.email} /> }
     </div>
   );
 };
