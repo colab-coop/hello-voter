@@ -37,7 +37,7 @@ export const useAuth = (token, api) => {
     authenticated,
     signOut,
     user,
-    loading: loading || (authenticated && !user),
+    loading, // TODO: if fetchUser is called again, set loading true again
     fetchUser
   }
 }
