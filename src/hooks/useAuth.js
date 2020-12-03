@@ -6,29 +6,6 @@ export const useAuth = (token, api) => {
   const [authenticated, setAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  const fetchUser = async () => {
-    const { error, data } = await api.fetchAmbassador()
-    if (error) {
-      // TODO: Change authenticated to "in_signup_process"
-      if (error?.msg === 'No current ambassador') {
-        setAuthenticated(true)
-      }
-      return {
-        completed: false,
-        error
-      }
-    }
-    setUser(data)
-    setAuthenticated(true)
-    setLoading(false)
-    return {
-      completed: true,
-      data: data
-    }
-  }
-  useEffect(() => {
-    if (!authenticated) fetchUser();
-  });
 
   const signOut = () => {
     // Fully clear authentication data and refresh the webpage.
@@ -36,6 +13,26 @@ export const useAuth = (token, api) => {
     setAuthenticated(false);
     window.location = REACT_APP_APP_PATH || "/";
   };
+
+  const fetchUser = async () => {
+    const { error, data } = await api.fetchAmbassador()
+    if (error) {
+      // TODO: Change authenticated to "in_signup_process"
+      if (error?.msg === 'No current ambassador') {
+        setAuthenticated(true)
+      }
+      setLoading(false);
+      return;
+    }
+    setUser(data)
+    setAuthenticated(true)
+    setLoading(false)
+    return;
+  }
+  useEffect(() => {
+    if (!authenticated) fetchUser();
+  });
+
   return {
     authenticated,
     signOut,

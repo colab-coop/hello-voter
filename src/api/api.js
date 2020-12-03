@@ -225,7 +225,7 @@ export const fetchAmbassador = async () => {
     })
 
     let data = await res.json()
-    console.log('fetch', {data});
+    console.log('Fetched Ambassador:', data);
 
     if (isFailStatusCode(data.code)) {
       return {

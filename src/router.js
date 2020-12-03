@@ -52,6 +52,7 @@ export default () => {
   if (loading) return <Loading />;
 
   capturePrefillData(setSignupPrefill);
+  console.log('Router:', {authenticated, user});
 
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
