@@ -22,12 +22,12 @@ export const useAuth = (token, api) => {
         setAuthenticated(true)
       }
       setLoading(false);
-      return;
+      return { error };
     }
     setUser(data)
     setAuthenticated(true)
     setLoading(false)
-    return;
+    return { data };
   }
   useEffect(() => {
     if (!authenticated) fetchUser();
