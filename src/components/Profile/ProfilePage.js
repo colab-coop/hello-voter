@@ -4,30 +4,7 @@ import { useHistory } from "react-router-dom";
 import { AppContext } from "../../api/AppContext";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import PageLayout from "../PageLayout";
-import { ResponsiveContainer } from '../pageStyles';
 import { ProfileForm } from "./ProfileForm";
-
-export const DeniedPage = () => (
-  <PageLayout title="Your account needs further review">
-    <p>
-      To start the review process, please visit this link to provide more information: <a href="https://blockpower.link/manualreview">
-        https://blockpower.link/manualreview
-      </a>
-    </p>
-  </PageLayout>
-);
-
-export const NoNewSignupsPage = () => (
-  <PageLayout title='This site is now closed to new Voting Ambassador sign-ups'>
-    <ResponsiveContainer>
-      <p>
-        If you are trying to access an existing account, please contact
-        support@blockpower.vote. To sign up for a new Voting Ambassador
-        account, please go to <a href='https://app.blockpower.vote/ambassadors'>https://app.blockpower.vote/ambassadors</a>
-      </p>
-    </ResponsiveContainer>
-  </PageLayout>
-);
 
 export const ProfilePage = () => {
   const [err, setErr] = useState(false);
@@ -43,9 +20,6 @@ export const ProfilePage = () => {
       else history.push("/");
     }
   };
-
-  if (process.env.REACT_APP_NO_NEW_SIGNUPS) return <NoNewSignupsPage />;
-  if (user?.msg === "Your account is locked.") return <DeniedPage/>;
 
   return <PageLayout title="Edit Your Profile">
     <ProfileForm
@@ -76,9 +50,6 @@ export const SignupPage = () => {
       }
     }
   };
-
-  if (process.env.REACT_APP_NO_NEW_SIGNUPS) return <NoNewSignupsPage />;
-  if (user?.msg === "Your account is locked.") return <DeniedPage/>;
 
   return <PageLayout title="Please Enter Your Details">
     <ProfileForm

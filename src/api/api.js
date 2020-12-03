@@ -22,7 +22,7 @@ const errorHandler = (e) => {
 }
 
 const isFailStatusCode = (status) => {
-  return [404, 401, 400, 500].includes(status)
+  return [400, 401, 403, 404, 500].includes(status)
 }
 
 export const getToken = () => {

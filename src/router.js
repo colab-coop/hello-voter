@@ -20,6 +20,8 @@ import HomePage from "./components/HomePage";
 import TrainingPage from "./components/TrainingPage";
 import QuizCompletedPage from "./components/QuizCompletedPage";
 import UnapprovedPage from "./components/UnapprovedPage";
+import LockedPage from "./components/LockedPage";
+import SignupsClosedPage from "./components/SignupsClosedPage";
 import PaymentsPage from "./components/Payments/AddPage";
 import PaymentsHomePage from "./components/Payments/PaymentsPage";
 import Chime from "./components/Payments/ChimePage";
@@ -28,6 +30,17 @@ import Help from "./components/Help/HelpPage";
 import Terms from "./components/Help/TermsPage";
 import Privacy from "./components/Help/PrivacyPage";
 import HubSpot from "./components/HubSpot";
+
+// When OAuth passes back our JWT token, it inserts /auth/ into the URL
+// (probably for some outdated reason).  This removes that from the URL.
+const redirectToCanonicalUrl = () => {
+  const match = window.location.href.match(/(.*)\/auth\W*#(.*)/);
+  if (match) {
+    window.location = match[1] + '/#' + match[2];
+    return true;
+  }
+  return false;
+};
 
 // Grabs the prefill data from the URL fragment and puts it in local storage.
 const capturePrefillData = (callback) => {
@@ -49,6 +62,8 @@ export default () => {
   const { loading, authenticated, user } = React.useContext(AppContext);
   const [ signupPrefill, setSignupPrefill ] = useLocalStorage("signup_prefill", {});
   useAnalytics();
+
+  if (redirectToCanonicalUrl()) return <Loading />;
   if (loading) return <Loading />;
 
   capturePrefillData(setSignupPrefill);
@@ -56,7 +71,7 @@ export default () => {
 
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
-      <Menu isApproved={user?.approved} />
+      <Menu />
       <Switch>
         <Route exact path="/help" component={Help} />
         <Route exact path="/terms" component={Terms} />
@@ -66,6 +81,12 @@ export default () => {
 
         <Route exact path="/login" component={LogIn} />
         { !authenticated && <Redirect to='/login' /> }
+
+        <Route exact path="/closed" component={SignupsClosedPage} />
+        { process.env.REACT_APP_NO_NEW_SIGNUPS && <Redirect to='/closed' /> }
+
+        <Route exact path="/locked" component={LockedPage} />
+        { user?.locked && <Redirect to='/locked' /> }
 
         <Route exact path="/signup" component={SignupPage} />
         { !user?.signup_completed && <Redirect to='/signup' /> }

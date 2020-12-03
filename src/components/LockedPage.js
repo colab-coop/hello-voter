@@ -1,5 +1,5 @@
-import React from 'react'
-import PageLayout from './PageLayout'
+import React from "react";
+import PageLayout from "./PageLayout";
 import { ResponsiveContainer } from './pageStyles';
 
 export default () => (

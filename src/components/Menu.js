@@ -24,11 +24,13 @@ import { AppContext } from '../api/AppContext';
 
 const { REACT_APP_PAYMENT_FEATURE } = process.env;
 
-const Menu = ({ isApproved }) => {
+const Menu = () => {
   const [navOpen, setNavOpen] = useState(false)
   const [profileNavOpen, setProfileNavOpen] = useState(false)
   const history = useHistory()
   const { user, authenticated, signOut } = React.useContext(AppContext)
+  const approved = user?.approved && !(user?.locked);
+
   const redirect = async (href) => {
     setNavOpen(false)
     setProfileNavOpen(false)
@@ -44,7 +46,7 @@ const Menu = ({ isApproved }) => {
             redirect("/");
           }}
         />
-        {isApproved && (
+        {approved && (
           <HeaderNavigationStyled
             aria-label="Menu"
           >
@@ -102,7 +104,7 @@ const Menu = ({ isApproved }) => {
         <HeaderPanelRightContainer navOpen={profileNavOpen}>
           <HeaderPanelSpacer />
           <SwitcherStyledRight>
-            {user &&
+            {approved &&
               <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
                 Profile
               </SwitcherItemStyled>
@@ -119,7 +121,7 @@ const Menu = ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/")}}>
               Home
             </SwitcherItemStyled>
-            {isApproved &&
+            {approved &&
               <SwitcherItemStyled onClick={() => {redirect("/triplers")}}>
                 Vote Triplers
               </SwitcherItemStyled>
@@ -128,7 +130,7 @@ const Menu = ({ isApproved }) => {
               FIXME: Hide payments `REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE` & `REACT_APP_PAYMENT_FEATURE`
               with Boolean rather than "true" and empty .env field
             */}
-            {isApproved && REACT_APP_PAYMENT_FEATURE &&
+            {approved && REACT_APP_PAYMENT_FEATURE &&
               <SwitcherItemStyled onClick={() => {redirect("/payments")}}>
                 Payments
               </SwitcherItemStyled>
@@ -137,7 +139,7 @@ const Menu = ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/help")}}>
               Help
             </SwitcherItemStyled>
-            {user &&
+            {approved &&
               <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
                 Profile
               </SwitcherItemStyled>
