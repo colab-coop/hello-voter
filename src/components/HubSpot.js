@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { getCrmToken } from '../api/api.js'
 
-const SCRIPT_URL = 'https://js.hs-scripts.com/8868419.js';
+const SCRIPT_URL = process.env.REACT_APP_HUBSPOT_CHAT_SCRIPT_URL;
 const SCRIPT_ELEMENT_ID = 'hs-script-loader-private';
 
 const loadWidgetWhenReady = () => {
@@ -12,7 +12,10 @@ const loadWidgetWhenReady = () => {
   }
 }
 
-const HubSpot = ({ email }) => {
+export default ({ email }) => {
+  // HubSpot chat will be disabled if REACT_APP_HUBSPOT_CHAT_SCRIPT_URL is unset
+  if (!SCRIPT_URL) return null;
+
   useEffect(() => {
     window.hsConversationsSettings = { loadImmediately: false };
     if (email) {
@@ -59,5 +62,3 @@ const HubSpot = ({ email }) => {
 
   return null;
 };
-
-export default HubSpot;

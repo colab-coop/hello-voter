@@ -29,7 +29,7 @@ import PayPal from "./components/Payments/PayPalPage";
 import Help from "./components/Help/HelpPage";
 import Terms from "./components/Help/TermsPage";
 import Privacy from "./components/Help/PrivacyPage";
-import HubSpot from "./components/HubSpot";
+import HubSpotChat from "./components/HubSpot";
 
 // When OAuth passes back our JWT token, it inserts /auth/ into the URL
 // (probably for some outdated reason).  This removes that from the URL.
@@ -115,7 +115,7 @@ export default () => {
         <Redirect to="/home" />
       </Switch>
       <Footer />
-      {process.env.REACT_APP_ENABLE_HUBSPOT === 'true' && <HubSpot email={user?.email} /> }
+      <HubSpotChat email={user?.email} />
     </div>
   );
 };
