@@ -42,7 +42,7 @@ const SubmissionContainer = styled.div`
   margin-top: ${spacing[8]};
 `;
 
-export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail }) => <ResponsiveContainer>
+export const ProfileForm = ({ user, onSubmit, loading, err, disablePhone, disableEmail }) => <ResponsiveContainer>
   <Form onSubmit={(e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -134,6 +134,7 @@ export const ProfileForm = ({ user, onSubmit, err, disablePhone, disableEmail })
       )}
       <Button
         type="submit"
+        loading={loading}
         trackingEvent={{ action: "SubmitSignupInfo", label: "Submit" }}
         isAForm
       >

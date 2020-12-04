@@ -8,14 +8,19 @@ import { ProfileForm } from "./ProfileForm";
 
 export const ProfilePage = () => {
   const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
   const { api, fetchUser, user } = React.useContext(AppContext);
 
   const onSubmit = async (edits) => {
+    setLoading(true);
     const { error } = await api.saveProfile({...user, ...edits});
+    setLoading(false);
     if (error) setErr(error.msg);
     else {
+      setLoading(true);
       const { error } = await fetchUser();
+      setLoading(false);
       if (error) setErr(error.msg);
       else history.push("/");
     }
@@ -25,6 +30,7 @@ export const ProfilePage = () => {
     <ProfileForm
       user={user}
       onSubmit={onSubmit}
+      loading={loading}
       disablePhone
       disableEmail
       err={err}
@@ -34,15 +40,20 @@ export const ProfilePage = () => {
 
 export const SignupPage = () => {
   const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
   const { api, fetchUser, user } = React.useContext(AppContext);
   const [signupPrefill, setSignupPrefill] = useLocalStorage("signup_prefill", {});
 
   const onSubmit = async (edits) => {
+    setLoading(true);
     const { error } = await api.signup({...user, ...edits});
+    setLoading(false);
     if (error) setErr(error.msg);
     else {
+      setLoading(true);
       const { error } = await fetchUser();
+      setLoading(false);
       if (error) setErr(error.msg);
       else {
         setSignupPrefill({});  // clean up upon successful signup
@@ -55,6 +66,7 @@ export const SignupPage = () => {
     <ProfileForm
       user={{...user, ...signupPrefill}}
       onSubmit={onSubmit}
+      loading={loading}
       err={err}
     />
   </PageLayout>;
