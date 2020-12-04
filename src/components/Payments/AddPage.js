@@ -12,7 +12,7 @@ import { AppContext } from "../../api/AppContext";
 import { useHistory } from "react-router-dom";
 import { spacing } from '../../theme';
 
-const { REACT_APP_PLAID_KEY } = process.env;
+const { REACT_APP_PLAID_ENVIRONMENT, REACT_APP_PLAID_KEY } = process.env;
 
 const Details = styled.p`
   margin-bottom: ${spacing[5]};
@@ -33,8 +33,7 @@ export default () => {
   }, []);
   const config = {
     clientName: "BlockPower",
-    // TODO: Shouldn't this be an env var?
-    env: "sandbox",
+    env: REACT_APP_PLAID_ENVIRONMENT,
     product: ["auth", "transactions"],
     publicKey: REACT_APP_PLAID_KEY,
     onSuccess,
