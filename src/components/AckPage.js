@@ -40,7 +40,7 @@ export default () => {
     <p>
       There are a few important things
       that we need to make sure you understand
-      before you can be an Ambassador.
+      before you can be a Voting Ambassador.
     </p>
     <Form onSubmit={(e) => {
       e.preventDefault();
@@ -69,7 +69,7 @@ export default () => {
         trackingEvent={{ action: "Submit", label: "Acknowledgements" }}
         isAForm
       >
-        I'm ready to be an Ambassador
+        I'm ready to be a Voting Ambassador
       </Button>
     </Form>
   </PageLayout>;
