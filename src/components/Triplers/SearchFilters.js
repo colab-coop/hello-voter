@@ -23,40 +23,7 @@ const GENDER_OPTIONS = [
   // "Unspecified" is also possible in the database.
 ];
 
-const MSA_OPTIONS = [
-  "Jacksonville, FL area",
-  "Miami, FL area",
-  "Orlando, FL area",
-  "Tampa, FL area",
-  "FL other",
-  "Atlanta, GA area",
-  "GA other",
-  "Charlotte, NC area",
-  "Durham, NC area",
-  "Fayetteville, NC area",
-  "Greensboro, NC area",
-  "Raleigh, NC area",
-  "Winston-Salem, NC area",
-  "NC other",
-  "Charleston, SC area",
-  "Columbia, SC area",
-  "SC other",
-  "Birmingham, AL area",
-  "Montgomery, AL area",
-  "AL other",
-  "Lexington, KY area",
-  "KY other",
-  "Phoenix, AZ area",
-  "AZ other",
-  "Mansfield, OH area",
-  "Milwaukee, WI",
-  "WI other",
-  "Detroit, MI area",
-  "MI other",
-  "Philadelphia, PA area",
-  "Pittsburgh, PA area",
-  "PA other",
-];
+const MSA_OPTIONS = (process.env.REACT_APP_METRO_AREAS || 'Any').split(';');
 
 const SearchFilterGrid = styled.div`
   display: grid;
