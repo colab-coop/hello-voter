@@ -66,9 +66,18 @@ export const AddPage = ({
         />
       }
     >
-      {alreadyHasPayoutProvider && (
-        <Details>You already have selected a payment method.</Details>
-      )}
+      {alreadyHasPayoutProvider ?
+        <Details>You already have selected a payment method.</Details> :
+        <Details>
+          Please ensure that the details for your bank account,
+          including your name, are exactly the same as your ambassador account.
+          If the name or other information does not match,
+          your bank may not accept the funds.
+          Once a bank account is linked,
+          there is currently no way to change it.
+        </Details>
+      }
+
       <GridThreeUp>
         {
           user.paypal_approved &&
