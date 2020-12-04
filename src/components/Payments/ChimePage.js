@@ -8,6 +8,8 @@ import Button from '../Button'
 import chime from '../../assets/images/chime-card.png'
 import { useHistory } from 'react-router-dom'
 
+const CHIME_URL = process.env.REACT_APP_CHIME_URL;
+
 const Image = styled.img`
   width: 100%;
   max-width: 320px;
@@ -57,7 +59,7 @@ export default () => {
       </OrderedList>
       <Button
         style={{backgroundColor: "#25C87D"}}
-        href='https://chime.com'
+        href={CHIME_URL}
         shouldRedirect
         onClick={() => {
           history.push("/payments/add")

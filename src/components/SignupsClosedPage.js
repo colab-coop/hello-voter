@@ -7,8 +7,8 @@ export default () => (
     <ResponsiveContainer>
       <p>
         If you are trying to access an existing account, please contact
-        support@blockpower.vote. To sign up for a new Voting Ambassador
-        account, please go to <a href='https://app.blockpower.vote/ambassadors'>https://app.blockpower.vote/ambassadors</a>
+        support@blockpower.vote. To sign up for a new Voting Ambassador account,
+        please go to <a href='https://app.blockpower.vote/ambassadors'>https://app.blockpower.vote/ambassadors</a>
       </p>
     </ResponsiveContainer>
   </PageLayout>
