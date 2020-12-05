@@ -12,14 +12,10 @@ import { AppContext } from "../../api/AppContext";
 import { useHistory } from "react-router-dom";
 import { spacing } from '../../theme';
 
-const { REACT_APP_PLAID_KEY } = process.env;
+const { REACT_APP_PLAID_ENVIRONMENT, REACT_APP_PLAID_KEY } = process.env;
 
 const Details = styled.p`
   margin-bottom: ${spacing[5]};
-`;
-
-const BottomLinkContainer = styled.div`
-  margin-top: ${spacing[5]};
 `;
 
 const CardIcon = styled.img`
@@ -29,25 +25,33 @@ const CardIcon = styled.img`
 
 export default () => {
   const history = useHistory();
-  const { user, api, fetchUser } = React.useContext(AppContext);
+  const { user, api, setPageLoading, fetchUser } = React.useContext(AppContext);
   const onSuccess = useCallback(async (token, metadata) => {
     await api.setStripeToken(token, metadata.account_id);
     await fetchUser();
+    setPageLoading(false);
     history.push("/payments");
   }, []);
   const config = {
     clientName: "BlockPower",
-    // TODO: Shouldn't this be an env var?
-    env: "sandbox",
+    env: REACT_APP_PLAID_ENVIRONMENT,
     product: ["auth", "transactions"],
     publicKey: REACT_APP_PLAID_KEY,
     onSuccess,
+    // To avoid leaving the user briefly on what looks like a frozen page when
+    // the Plaid Link UI closes, let's start the loading spinner as soon as
+    // the Plaid Link window opens.  Conveniently, the Plaid Link window is
+    // in the center of the page, so it covers up the loading spinner.
+    onEvent: (event) => {
+      if (event === 'OPEN') setPageLoading(true);
+      if (event === 'EXIT') setPageLoading(false);
+    }
   };
   const { open: openPlaid } = usePlaidLink(config);
 
-  return (
+  return <>
     <AddPage user={user} openPlaid={openPlaid} />
-  );
+  </>;
 };
 
 export const AddPage = ({
@@ -70,9 +74,18 @@ export const AddPage = ({
         />
       }
     >
-      {alreadyHasPayoutProvider && (
-        <Details>You already have selected a payment method.</Details>
-      )}
+      {alreadyHasPayoutProvider ?
+        <Details>You already have selected a payment method.</Details> :
+        <Details>
+          Please ensure that the details for your bank account,
+          including your name, are exactly the same as your ambassador account.
+          If the name or other information does not match,
+          your bank may not accept the funds.
+          Once a bank account is linked,
+          there is currently no way to change it.
+        </Details>
+      }
+
       <GridThreeUp>
         {
           user.paypal_approved &&
@@ -107,13 +120,6 @@ export const AddPage = ({
           disabled={alreadyHasPayoutProvider}
         />
       </GridThreeUp>
-      {!alreadyHasPayoutProvider && (
-        <BottomLinkContainer>
-          <a href="#/payments/paypal">
-            Having trouble connecting your bank account?
-          </a>
-        </BottomLinkContainer>
-      )}
     </PageLayout>
   );
 }

@@ -1,14 +1,16 @@
 import React from 'react'
-import { RouterC } from './router'
-import HubSpot from './components/HubSpot'
+import { HashRouter } from "react-router-dom";
+import { AppProvider } from "./api/AppContext";
+import { initAnalytics } from "./hooks/useAnalytics";
+import Router from "./router";
 
 const App = () => {
-  return (
-    <div style={{ width: '100%', height: '100%' }}>
-      <RouterC />
-      <HubSpot />
-    </div>
-  )
-}
+  initAnalytics();
+  return <AppProvider>
+    <HashRouter>
+      <Router />
+    </HashRouter>
+  </AppProvider>
+};
 
-export default App
+export default App;

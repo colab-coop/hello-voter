@@ -20,6 +20,7 @@ const {
   REACT_APP_TRIPLER_PAYMENT_AMT,
   REACT_APP_AMBASSADOR_PAYMENT_AMT,
   REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE,
+  REACT_APP_DISABLE_TRIPLER_UPGRADE_UI,
 } = process.env;
 
 const SectionTitle = styled.h5`
@@ -216,7 +217,7 @@ const AllTriplers = ({
   ambassadors,
 }) => {
   const hasTriplers = unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
-  const hasAmbassadors = ambassadors.length > 0;
+  const showAmbassadors = ambassadors.length > 0 && !REACT_APP_DISABLE_TRIPLER_UPGRADE_UI;
   const ambassadorNotConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: false });
   const ambassadorConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: true });
 
@@ -315,7 +316,7 @@ const AllTriplers = ({
         </GridThreeUp>
       )}
 
-      {hasAmbassadors && (
+      {showAmbassadors && (
         <GridThreeUp style={{ marginTop: 24 }}>
           <GridRowSpanOne>
             <SectionTitle>Ambassadors-in-Waiting</SectionTitle>
