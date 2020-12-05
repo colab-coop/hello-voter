@@ -48,6 +48,7 @@ export default ({ user, disableState }) => (
         name="address1"
         invalidText="Invalid error message."
         labelText="Street Address*"
+        helperText="Where you receive mail, including details like your apartment or unit number"
         defaultValue={user.address?.address1}
         required
       />
