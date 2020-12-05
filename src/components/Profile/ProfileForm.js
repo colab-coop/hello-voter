@@ -42,7 +42,7 @@ const SubmissionContainer = styled.div`
   margin-top: ${spacing[8]};
 `;
 
-export const ProfileForm = ({ user, onSubmit, loading, err, disablePhone, disableEmail, disableState }) => <ResponsiveContainer>
+export const ProfileForm = ({ user, onSubmit, loading, err, disablePhone, disableEmail, stateOptions }) => <ResponsiveContainer>
   <Form onSubmit={(e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -121,7 +121,7 @@ export const ProfileForm = ({ user, onSubmit, loading, err, disablePhone, disabl
       </Row>
     </FormGroup>
     <Divider />
-    <AddressForm user={user} disableState={disableState} />
+    <AddressForm user={user} stateOptions={stateOptions} />
     <SubmissionContainer>
       {err && (
         <InlineNotificationStyled

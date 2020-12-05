@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
-import { FormGroup, TextInput } from 'carbon-components-react'
+import { FormGroup, TextInput, Dropdown } from 'carbon-components-react'
 import { spacing, breakpoints } from '../../theme'
 
 const Row = styled.div`
   display: grid;
+  align-items: end;
   grid-auto-columns: 1fr;
   grid-column-gap: ${ spacing[5]};
   grid-template-columns: repeat(16, 1fr);
@@ -21,7 +22,7 @@ const RowLeft = styled.div`
 `
 
 const RowCenter = styled.div`
-  grid-column-end: span 2;
+  grid-column-end: span 1;
   @media (max-width: ${breakpoints.lg.width}) {
     grid-column-end: span 3;
   }
@@ -31,7 +32,7 @@ const RowCenter = styled.div`
 `
 
 const RowRight = styled.div`
-  grid-column-end: span 4;
+  grid-column-end: span 5;
   @media (max-width: ${breakpoints.lg.width}) {
     grid-column-end: span 4;
   }
@@ -40,14 +41,16 @@ const RowRight = styled.div`
   }
 `
 
-export default ({ user, disableState }) => (
-  <>
+export default ({ user, stateOptions, onStateSelected }) => {
+  const stateRef = useRef();
+  return <>
     <FormGroup legendText="">
       <TextInput
         id="address1"
         name="address1"
         invalidText="Invalid error message."
         labelText="Street Address*"
+        helperText="Where you receive mail, including details like your apartment or unit number"
         defaultValue={user.address?.address1}
         required
       />
@@ -65,15 +68,16 @@ export default ({ user, disableState }) => (
           />
         </RowLeft>
         <RowCenter>
-          <TextInput
+          <Dropdown
             id="state"
             name="state"
-            invalidText="Invalid error message."
-            labelText="State*"
-            defaultValue={user.address?.state}
+            items={stateOptions}
+            titleText="State*"
+            initialSelectedItem={user.address?.state}
+            onChange={(e) => { stateRef.current.value = e.selectedItem; }}
             required
-            disabled={disableState}
           />
+          <input name="state" type="hidden" value={user.address?.state} ref={stateRef} />
         </RowCenter>
         <RowRight>
           <TextInput
@@ -88,4 +92,4 @@ export default ({ user, disableState }) => (
       </Row>
     </FormGroup>
   </>
-)
+};
