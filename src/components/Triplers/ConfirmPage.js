@@ -103,13 +103,14 @@ const Column = styled.div`
 export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
   const history = useHistory();
   const [err, setErr] = useState(false);
+  const [birthMonth, setBirthMonth] = useState(null);
   const submit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
     const { error } = await confirmTriplers(tripler.id, {
       phone: formData.get("phone"),
-      tripler_birth_month: formData.get("tripler_birth_month"),
+      tripler_birth_month: birthMonth,
       triplees: [
         {
           first_name: formData.get("triplee1_first"),
@@ -219,6 +220,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                   titleText={`${tripler.first_name}'s birth month*`}
                   invalidText="Invalid error message."
                   label={"Select a month"}
+                  onChange={(e) => setBirthMonth(e.selectedItem)}
                   required
                 />
               </div>
