@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, FormGroup, TextInput, Checkbox } from "carbon-components-react";
+import { Form, TextInput, Dropdown, Checkbox } from "carbon-components-react";
 import styled from "styled-components";
 import { spacing } from "../../theme";
 import PageLayout from "../PageLayout";
@@ -11,6 +11,35 @@ import { AppContext } from "../../api/AppContext";
 import Loading from "../Loading";
 import { useHistory } from "react-router-dom";
 import { InlineNotification } from "carbon-components-react";
+
+const MONTH_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+const getMonthName = (month) => [
+  '', // month number 0 is invalid
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+][month];
+
+// Fix line-height inconsistencies
+const StyledForm = styled(Form)`
+  div, p, label {
+    line-height: 1.5;
+  }
+`;
+
+const Group = styled.div`
+  margin: 2rem 0;
+`;
 
 export default () => {
   const [tripler, setTripler] = useState(null);
@@ -46,19 +75,23 @@ export default () => {
   );
 };
 
-const SubTitle = styled.p`
+const SubTitle = styled.div`
   margin-bottom: ${spacing[3]};
   font-weight: 600;
 `;
 
 const TwoColumnRow = styled.div`
   display: grid;
-  align-items: start;
+  align-items: end;
   grid-auto-columns: 1fr;
   grid-column-gap: ${spacing[5]};
   grid-row-gap: ${spacing[5]};
   grid-template-columns: repeat(2, 1fr);
   margin-bottom: ${spacing[3]};
+
+  div {
+    grid-column-end: unset;
+  }
 `;
 
 const Column = styled.div`
@@ -70,14 +103,14 @@ const Column = styled.div`
 export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
   const history = useHistory();
   const [err, setErr] = useState(false);
+  const [birthMonth, setBirthMonth] = useState(null);
   const submit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
     const { error } = await confirmTriplers(tripler.id, {
       phone: formData.get("phone"),
-      //below to be uncommented & adjusted once backend is coded up
-      birthdate_mm_yy: formData.get("tripler_birthdate_mm_yy"),
+      tripler_birth_month: birthMonth,
       triplees: [
         {
           first_name: formData.get("triplee1_first"),
@@ -111,11 +144,11 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       }
     >
       <ResponsiveContainer>
-        <Form onSubmit={submit}>
+        <StyledForm onSubmit={submit}>
           <p style={{ marginBottom: 16 }}>
             Add the names of three Voters the Vote Tripler will remind to vote:
           </p>
-          <FormGroup legendText="">
+          <Group>
             <SubTitle>Voter 1</SubTitle>
             <TwoColumnRow>
               <TextInput
@@ -133,8 +166,8 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                 required
               />
             </TwoColumnRow>
-          </FormGroup>
-          <FormGroup legendText="">
+          </Group>
+          <Group>
             <SubTitle>Voter 2</SubTitle>
             <TwoColumnRow>
               <TextInput
@@ -152,8 +185,8 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                 required
               />
             </TwoColumnRow>
-          </FormGroup>
-          <FormGroup legendText="">
+          </Group>
+          <Group>
             <SubTitle>Voter 3</SubTitle>
             <TwoColumnRow>
               <TextInput
@@ -171,39 +204,44 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                 required
               />
             </TwoColumnRow>
-          </FormGroup>
+          </Group>
+          <Group>
           <p>
-            Add your Vote Tripler's birth day and month as well as their cell phone number so we can confirm their identity
-            and send you your payment!
+            Enter your Vote Tripler's birth month and cell phone number
+            so we can confirm their identity and send you your payment!
           </p>
-
-          <FormGroup legendText="">
-             <TwoColumnRow>
-            <TextInput
-              id="tripler_birthdate_mm_yy"
-              name="tripler_birthdate_mm_yy"
-              invalidText="Invalid error message."
-              labelText={`${tripler.first_name}'s Birth day & month DD/MM*`}
-              required
-            />
+            <TwoColumnRow>
+              <div>
+                <Dropdown
+                  id="tripler_birth_month"
+                  name="tripler_birth_month"
+                  items={MONTH_OPTIONS}
+                  itemToString={getMonthName}
+                  titleText={`${tripler.first_name}'s birth month*`}
+                  invalidText="Invalid error message."
+                  label={"Select a month"}
+                  onChange={(e) => setBirthMonth(e.selectedItem)}
+                  required
+                />
+              </div>
+              <TextInput
+                id="phone"
+                name="phone"
+                invalidText="Invalid error message."
+                labelText={`${tripler.first_name}'s cell number*`}
+                required
+              />
             </TwoColumnRow>
-            <Column>
-            <TextInput
-              id="phone"
-              name="phone"
-              invalidText="Invalid error message."
-              labelText={`${tripler.first_name}'s Cell Phone Number*`}
-              required
-            />
-            </Column>
+          </Group>
 
+          <Group>
             <Checkbox
               id="Honor"
               name="Honor"
-              labelText="I certify this information is true to the best of my knowledge. I understand that I may be removed from BlockPower if I submit false information and will be denied all compensation."
+              labelText="I certify this information is true to the best of my knowledge. I understand that if I submit false information, I may be removed from BlockPower and denied all compensation."
               required
             />
-          </FormGroup>
+          </Group>
           {err && (
             <InlineNotification
               kind="error"
@@ -232,7 +270,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           >
             Go back to My Vote Triplers
           </Button>
-        </Form>
+        </StyledForm>
       </ResponsiveContainer>
     </PageLayout>
   );
