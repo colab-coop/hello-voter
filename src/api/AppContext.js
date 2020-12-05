@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import Loading from 'carbon-components-react/lib/components/Loading'
 import * as api from './api'
 
 const initialState = {}
@@ -9,11 +10,12 @@ export const AppContext = React.createContext(initialState)
 
 export const AppProvider = ({ children }) => {
   const [ token, setAuthToken ] = useLocalStorage('token', null)
-  const [ ambassador, setAmbassador ] = useState({address:{}})
   const [ data, setData ] = useState({})
-  const { user, authenticated, loading, fetchUser } = useAuth(token, api)
+  const [ pageLoading, setPageLoading ] = useState(false)
+  const { user, authenticated, signOut, loading, fetchUser } = useAuth(token, api)
   return (
-    <AppContext.Provider value={{ user, authenticated, setAuthToken, api, loading, ambassador, setAmbassador, fetchUser, data, setData }}>
+    <AppContext.Provider value={{ user, authenticated, signOut, setAuthToken, api, loading, setPageLoading, fetchUser, data, setData }}>
+      { pageLoading && <Loading /> }
       {children}
     </AppContext.Provider>
   )

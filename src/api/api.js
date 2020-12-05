@@ -12,6 +12,7 @@ import {
   PAYMENT_HISTORY_URL,
   TRIPLERS_LIMIT_URL,
   PAYPAL_PAYMENT_URL,
+  CRM_URL,
 } from '../constants';
 
 const { REACT_APP_OAUTH_HEADER, REACT_APP_TOKEN_KEY, REACT_APP_AUDIANCE, REACT_APP_KEY, REACT_APP_DEVELOPMENT } = process.env
@@ -21,7 +22,7 @@ const errorHandler = (e) => {
 }
 
 const isFailStatusCode = (status) => {
-  return [401, 400, 500].includes(status)
+  return [400, 401, 403, 404, 500].includes(status)
 }
 
 export const getToken = () => {
@@ -224,6 +225,7 @@ export const fetchAmbassador = async () => {
     })
 
     let data = await res.json()
+    console.log('Fetched Ambassador:', data);
 
     if (isFailStatusCode(data.code)) {
       return {
@@ -418,5 +420,19 @@ export const deleteTripler = async (triplers) => {
   }
 }
 
-
-
+export const getCrmToken = async () => {
+  try {
+    const res = await fetch(`${CRM_URL}/token`, {
+      method: 'GET',
+      headers: addAuth()
+    });
+    const data = await res.json();
+    if (isFailStatusCode(data.code)) {
+      return { error: data };
+    }
+    return { data };
+  } catch (e) {
+    errorHandler(e);
+    return false;
+  }
+}

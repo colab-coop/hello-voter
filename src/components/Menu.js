@@ -22,22 +22,19 @@ import {
 } from './pageStyles'
 import { AppContext } from '../api/AppContext';
 
-const { REACT_APP_PAYMENT_FEATURE, REACT_APP_APP_PATH } = process.env
+const { REACT_APP_PAYMENT_FEATURE } = process.env;
 
-const Menu = ({ isApproved }) => {
+const Menu = () => {
   const [navOpen, setNavOpen] = useState(false)
   const [profileNavOpen, setProfileNavOpen] = useState(false)
   const history = useHistory()
-  const { user } = React.useContext(AppContext)
+  const { user, authenticated, signOut } = React.useContext(AppContext)
+  const approved = user?.approved && !(user?.locked);
+
   const redirect = async (href) => {
     setNavOpen(false)
     setProfileNavOpen(false)
     history.push(href);
-  }
-  const signOut = () => {
-    // Fully clear data and refresh the webpage.
-    localStorage.clear();
-    window.location = REACT_APP_APP_PATH || "/";
   }
 
   return (
@@ -49,7 +46,7 @@ const Menu = ({ isApproved }) => {
             redirect("/");
           }}
         />
-        {isApproved && (
+        {approved && (
           <HeaderNavigationStyled
             aria-label="Menu"
           >
@@ -81,7 +78,7 @@ const Menu = ({ isApproved }) => {
           >
             <Help20 />
           </HeaderGlobalAction>
-          {user && (
+          {authenticated && (
             <HeaderGlobalAction
               aria-label="Profile menu"
               type="button"
@@ -107,9 +104,11 @@ const Menu = ({ isApproved }) => {
         <HeaderPanelRightContainer navOpen={profileNavOpen}>
           <HeaderPanelSpacer />
           <SwitcherStyledRight>
-            {/*<SwitcherItemStyled onClick={() => {redirect("/profile")}}>*/}
-            {/*  Profile*/}
-            {/*</SwitcherItemStyled>*/}
+            {approved &&
+              <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
+                Profile
+              </SwitcherItemStyled>
+            }
             <SwitcherItemStyled onClick={signOut}>
               Sign out
             </SwitcherItemStyled>
@@ -122,7 +121,7 @@ const Menu = ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/")}}>
               Home
             </SwitcherItemStyled>
-            {isApproved &&
+            {approved &&
               <SwitcherItemStyled onClick={() => {redirect("/triplers")}}>
                 Vote Triplers
               </SwitcherItemStyled>
@@ -131,7 +130,7 @@ const Menu = ({ isApproved }) => {
               FIXME: Hide payments `REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE` & `REACT_APP_PAYMENT_FEATURE`
               with Boolean rather than "true" and empty .env field
             */}
-            {isApproved && REACT_APP_PAYMENT_FEATURE &&
+            {approved && REACT_APP_PAYMENT_FEATURE &&
               <SwitcherItemStyled onClick={() => {redirect("/payments")}}>
                 Payments
               </SwitcherItemStyled>
@@ -140,14 +139,16 @@ const Menu = ({ isApproved }) => {
             <SwitcherItemStyled onClick={() => {redirect("/help")}}>
               Help
             </SwitcherItemStyled>
-            {user && <>
-              {/*<SwitcherItemStyled onClick={() => {redirect("/profile")}}>*/}
-              {/*  Profile*/}
-              {/*</SwitcherItemStyled>*/}
+            {approved &&
+              <SwitcherItemStyled onClick={() => {redirect("/profile")}}>
+                Profile
+              </SwitcherItemStyled>
+            }
+            {authenticated &&
               <SwitcherItemStyled onClick={signOut}>
                 Sign out
               </SwitcherItemStyled>
-            </>}
+            }
           </SwitcherStyled>
         </HeaderPanelStyled>
       </Header>

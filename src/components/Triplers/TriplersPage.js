@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import filter from "lodash/filter";
 import {
-  Link,
   Tag,
   OverflowMenu,
   OverflowMenuItem,
@@ -13,13 +13,14 @@ import PageLayout from "../PageLayout";
 import Breadcrumbs from "../Breadcrumbs";
 import Button from "../Button";
 import Loading from "../Loading";
-
+import { normalizeTripler } from './AddTripler';
 import { AppContext } from "../../api/AppContext";
 
 const {
   REACT_APP_TRIPLER_PAYMENT_AMT,
   REACT_APP_AMBASSADOR_PAYMENT_AMT,
   REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE,
+  REACT_APP_DISABLE_TRIPLER_UPGRADE_UI,
 } = process.env;
 
 const SectionTitle = styled.h5`
@@ -37,6 +38,9 @@ const TriplerRowStyled = styled.div`
   padding: ${spacing[4]};
   background-color: ${colors.gray[10]};
   border-top: 1px solid ${colors.gray[20]};
+  @media (min-width: ${breakpoints.lg.width}) {
+    max-width: 30vw;
+  }
   &:hover {
     background-color: #e5e5e5;
     cursor: pointer;
@@ -47,17 +51,14 @@ const TriplerRowName = styled.h6`
   font-weight: normal;
 `;
 
-// FIXME: Have text truncate responsively
 const TriplerColumnTruncate = styled.div`
-  min-width: 0;
-  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: ${spacing[2]};
 `;
 
 const TriplerRowAddress = styled.p`
   font-size: 12px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 `;
 
 const TriplerColumn = styled.div`
@@ -184,6 +185,29 @@ const TriplerRow = ({
 );
 
 const Triplers = ({
+  triplers,
+  ...passThroughProps
+}) => {
+  return (
+    <>
+      {triplers.map((tripler) => {
+        const { name, address } = normalizeTripler(tripler);
+        return (
+          <TriplerRow
+            {...passThroughProps}
+            key={tripler.id}
+            id={tripler.id}
+            name={name}
+            address={address}
+            onClick={() => {}}
+          />
+        );
+      })}
+    </>
+  )
+}
+
+const AllTriplers = ({
   unconfirmed,
   pending,
   confirmed,
@@ -191,18 +215,11 @@ const Triplers = ({
   limit,
   deleteTripler,
   ambassadors,
-  user,
 }) => {
-  const hasTriplers =
-    unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
-
-  const hasAmbassadors = ambassadors.length > 0;
-  const ambassadorNotConfirmed = ambassadors.filter(
-    (ambassador) => ambassador.is_ambassador_and_has_confirmed === false
-  );
-  const ambassadorConfirmed = ambassadors.filter(
-    (ambassador) => ambassador.is_ambassador_and_has_confirmed === true
-  );
+  const hasTriplers = unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
+  const showAmbassadors = ambassadors.length > 0 && !REACT_APP_DISABLE_TRIPLER_UPGRADE_UI;
+  const ambassadorNotConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: false });
+  const ambassadorConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: true });
 
   return (
     <>
@@ -248,17 +265,12 @@ const Triplers = ({
               Add information for a Vote Tripler. We’ll send them a text message
               to confirm.
             </Paragraph>
-            {unconfirmed.map((tripler) => (
-              <TriplerRow
-                key={tripler.id}
-                id={tripler.id}
-                name={`${tripler.first_name} ${tripler.last_name}`}
-                address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-                unconfirmed
-                onClick={() => {}}
-                deleteTripler={deleteTripler}
-              />
-            ))}
+            <Triplers
+              unconfirmed
+              triplers={unconfirmed}
+              remindTripler={remindTripler}
+              deleteTripler={deleteTripler}
+            />
           </GridRowSpanOne>
 
           <GridRowSpanOne>
@@ -267,18 +279,12 @@ const Triplers = ({
               These possible Vote Triplers have not yet confirmed their
               identity.
             </Paragraph>
-            {pending.map((tripler) => (
-              <TriplerRow
-                key={tripler.id}
-                id={tripler.id}
-                name={`${tripler.first_name} ${tripler.last_name}`}
-                address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-                onClick={() => {}}
-                pending
-                remindTripler={remindTripler}
-                deleteTripler={deleteTripler}
-              />
-            ))}
+            <Triplers
+              pending
+              triplers={pending}
+              remindTripler={remindTripler}
+              deleteTripler={deleteTripler}
+            />
           </GridRowSpanOne>
 
           <GridRowSpanOne>
@@ -300,21 +306,17 @@ const Triplers = ({
             ) : (
               ""
             )*/}
-            {confirmed.map((tripler, i) => (
-              <TriplerRow
-                key={tripler.id}
-                name={`${tripler.first_name} ${tripler.last_name}`}
-                address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-                onClick={() => {}}
-                confirmed
-                deleteTripler={deleteTripler}
-              />
-            ))}
+            <Triplers
+              confirmed
+              triplers={confirmed}
+              remindTripler={remindTripler}
+              deleteTripler={deleteTripler}
+            />
           </GridRowSpanOne>
         </GridThreeUp>
       )}
 
-      {hasAmbassadors && (
+      {showAmbassadors && (
         <GridThreeUp style={{ marginTop: 24 }}>
           <GridRowSpanOne>
             <SectionTitle>Ambassadors-in-Waiting</SectionTitle>
@@ -322,14 +324,9 @@ const Triplers = ({
               These Vote Triplers have become Voting Ambassadors but have not
               yet confirmed a Vote Tripler of their own.
             </Paragraph>
-            {ambassadorNotConfirmed.map((tripler) => (
-              <TriplerRow
-                key={tripler.id}
-                id={tripler.id}
-                name={`${tripler.first_name} ${tripler.last_name}`}
-                address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-              />
-            ))}
+            <Triplers
+              triplers={ambassadorNotConfirmed}
+            />
           </GridRowSpanOne>
 
           <GridRowSpanTwo>
@@ -339,14 +336,10 @@ const Triplers = ({
                 ? "You’ll receive a special bonus for all Vote Triplers who became a Voting Ambassador and confirmed at least one Vote Tripler of their own. You’ve done a great service for your community — keep it up!"
                 : "These Vote Triplers have become Voting Ambassadors and confirmed at least one Vote Tripler of their own. You've done a great service for your community — keep it up!"}
             </ParagraphMinHeight72>
-            {ambassadorConfirmed.map((tripler, i) => (
-              <TriplerRow
-                key={tripler.id}
-                name={`${tripler.first_name} ${tripler.last_name}`}
-                address={`${tripler.address.address1} ${tripler.address.city} ${tripler.address.state}`}
-                ambassadorConfirmed
-              />
-            ))}
+            <Triplers
+              ambassadorConfirmed
+              triplers={ambassadorConfirmed}
+            />
           </GridRowSpanTwo>
         </GridThreeUp>
       )}
@@ -398,34 +391,24 @@ export const TriplersPage = ({
   deleteTripler,
   user,
 }) => {
-  const confirmed = triplers.filter(
-    (tripler) => tripler.status === "confirmed"
-  );
-  const pending = triplers.filter((tripler) => tripler.status === "pending");
-  const unconfirmed = triplers.filter(
-    (tripler) => tripler.status === "unconfirmed"
-  );
-  const ambassadors = triplers.filter(
-    (tripler) => tripler.is_ambassador === true
-  );
+  const confirmed = filter(triplers, { status: "confirmed" });
+  const pending = filter(triplers, { status: "pending" });
+  const unconfirmed = filter(triplers, { status: "unconfirmed" });
+  const ambassadors = filter(triplers, { is_ambassador: true });
+
   return (
     <PageLayout
       title="My Vote Triplers"
       header={
         <Breadcrumbs
           items={[
-            {
-              name: "Home",
-              route: "/home",
-            },
-            {
-              name: "Vote Triplers",
-            },
+            { name: "Home", route: "/home" },
+            { name: "Vote Triplers" },
           ]}
         />
       }
     >
-      <Triplers
+      <AllTriplers
         unconfirmed={unconfirmed}
         pending={pending}
         confirmed={confirmed}

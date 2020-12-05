@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "../components/Menu";
 import { PaymentsPage } from "../components/Payments/PaymentsPage";
-import Add from "../components/Payments/AddPage";
+import { AddPage } from "../components/Payments/AddPage";
 import Chime from "../components/Payments/ChimePage";
 import { MAIN_USER } from './Home.mocks';
 import { PAYMENTS_PENDING, PAYMENTS_SETTLED } from './Payments.mocks';
@@ -13,6 +13,11 @@ export default {
 const defaultProps = {
   user: MAIN_USER,
   payments: []
+}
+
+const defaultAddProps = {
+  user: MAIN_USER,
+  openPlaid: () => {},
 }
 
 export const PaymentsEmpty = () => (
@@ -58,10 +63,29 @@ export const PaymentsFull = () => (
   </>
 );
 
-export const AddPage = () => (
+export const AddBank = () => (
   <>
     <Menu isApproved={true} />
-    <Add />
+    <AddPage
+      {...defaultAddProps}
+      user={{
+        ...defaultAddProps.user,
+        payout_provider: null,
+      }}
+    />
+  </>
+);
+
+export const AddBankWithExistingProvider = () => (
+  <>
+    <Menu isApproved={true} />
+    <AddPage
+      {...defaultAddProps}
+      user={{
+        ...defaultAddProps.user,
+        payout_provider: "stripe",
+      }}
+    />
   </>
 );
 

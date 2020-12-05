@@ -89,7 +89,7 @@ const renderTable = (batchActionClick) => ({
           </TableBatchAction>
         </TableBatchActions>
         <TableTitleContainer>
-          Possible Vote-Triplers you might know
+          Possible Vote Triplers you might know
         </TableTitleContainer>
       </TableToolbar>
     </TableToolbarContainer>

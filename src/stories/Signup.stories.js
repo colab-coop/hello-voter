@@ -1,11 +1,12 @@
 import React from "react";
+import { AppContext } from '../api/AppContext.js';
 import Menu from "../components/Menu";
 import { LogIn } from "../components/Login";
-import { ContactInfoPage } from "../components/Profile/ContactInfoPage";
+import { DeniedPage as DeniedBody, NoNewSignupsPage as NoNewSignupsBody, SignupPage as SignupBody } from "../components/Profile/ProfilePage";
 import { MAIN_USER } from './Home.mocks';
 
 export default {
-  title: "SignUp",
+  title: "Signup",
 };
 
 const noop = () => {}
@@ -17,9 +18,23 @@ export const LoginPage = () => (
   </>
 );
 
-export const SignUpPage = () => (
+export const SignupPage = () => (
+  <AppContext.Provider value={{ user: {}, authenticated: false }}>
+    <Menu isApproved={false} />
+    <SignupBody />
+  </AppContext.Provider>
+);
+
+export const DeniedPage = () => (
   <>
     <Menu isApproved={false} />
-    <ContactInfoPage ambassador={MAIN_USER} setAmbassador={noop} err={null} />
+    <DeniedBody />
+  </>
+);
+
+export const NoNewSignupsPage = () => (
+  <>
+    <Menu isApproved={false} />
+    <NoNewSignupsBody />
   </>
 );

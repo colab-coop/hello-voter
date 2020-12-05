@@ -17,21 +17,12 @@ export const LoginButtonComp = () => (
 )
 
 export const BreadcrumbsComp = () => (
-  <Breadcrumbs 
-    items={
-      [{
-        name: "Breadcrumb 1",
-        route: "hellovoter-1"
-      },
-      {
-        name: "Breadcrumb 2",
-        route: "hellovoter-2"
-      },
-      {
-        name: "Breadcrumb 3",
-        route: "hellovoter-3"
-      }]
-    }
+  <Breadcrumbs
+    items={[
+      { name: "Breadcrumb 1", route: "hellovoter-1" },
+      { name: "Breadcrumb 2", route: "hellovoter-2" },
+      { name: "Breadcrumb 3", route: "hellovoter-3" },
+    ]}
   />
 )
 

@@ -18,6 +18,7 @@ const Image = styled.img`
 const Subheader = styled.h4`
   font-weight: 600;
   margin-top: ${spacing[5]};
+  margin-bottom: ${spacing[4]};
 `;
 
 const Prompt = styled.p`
@@ -49,6 +50,12 @@ export default () => {
     history.push("/payments");
   };
 
+  if (!user.paypal_approved) {
+    // Reject users that don't have the paypal_approved flag.
+    history.push("/payments");
+    return null;
+  }
+
   return (
     <PageLayout
       title={""}
@@ -65,11 +72,15 @@ export default () => {
     >
       <ResponsiveContainer>
         <Image src={paypalFull} />
-        <Subheader>Confirm details for PayPal</Subheader>
+        <Subheader>Setting up PayPal for Payments</Subheader>
         <Prompt>
-          If you already have a PayPal account, please confirm the email address you use for your PayPal account below.
-          If you don't have a PayPal account, you can still receive payments and set up an account when you are ready to claim your payments.
-          Please enter the email address where you would like to receive PayPal payments below.
+          If you already have a PayPal account, please confirm the email address you use for your
+          PayPal account below.
+        </Prompt>
+        <Prompt>
+          If you don't have a PayPal account, you will need to set up a PayPal account when you are
+          ready to claim your payments. Please enter the email address where you would like to receive
+          PayPal payments below.
         </Prompt>
         <Form onSubmit={submit}>
           <TextInput

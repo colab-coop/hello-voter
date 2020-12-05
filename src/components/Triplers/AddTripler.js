@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import get from "lodash/get";
+import addresser from "addresser";
 import { spacing, colors } from "../../theme";
 import PageLayout from "../PageLayout";
 import Breadcrumbs from "../Breadcrumbs";
@@ -10,16 +11,26 @@ import { useHistory } from "react-router-dom";
 import Loading from "../Loading";
 import { SearchFilters } from './SearchFilters';
 
+// Gets the normalized first line of an address.
+export function normalizeAddress1(address) {
+  const { address1, address2, city, state, zip } = address || {};
+  try {
+    const { addressLine1 } = addresser.parseAddress(`${address1 || ''} ${address2 || ''}, ${city || ''}, ${state || ''} ${zip || ''}`);
+    return addressLine1;
+  } catch (e) {
+    // Just don't show it if we can't determine the first line of the address.
+    return "";
+  }
+}
+
 export function normalizeTripler(tripler) {
+  const age = `(Age: ${tripler.age_decade || 'unknown'})`;
+  const address1 = normalizeAddress1(tripler.address);
+  const { city, state } = tripler.address || {};
   return {
     id: tripler.id,
-    name: tripler.first_name + " " + tripler.last_name,
-    address:
-      tripler.address.address1 +
-      " " +
-      tripler.address.city +
-      " " +
-      tripler.address.state,
+    name: `${tripler.first_name} ${tripler.last_name} ${age}`,
+    address: [address1, city, state].filter(x => x).join(', ')
   };
 }
 
