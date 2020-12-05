@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, FormGroup, TextInput, Dropdown, Checkbox } from "carbon-components-react";
+import { Form, TextInput, Dropdown, Checkbox } from "carbon-components-react";
 import styled from "styled-components";
 import { spacing } from "../../theme";
 import PageLayout from "../PageLayout";
@@ -30,9 +30,15 @@ const getMonthName = (month) => [
   'December'
 ][month];
 
-const FormGroupWithoutLegend = styled(FormGroup)`
-  margin-bottom: 1.5rem;
-  legend { display: none; }
+// Fix line-height inconsistencies
+const StyledForm = styled(Form)`
+  div, p, label {
+    line-height: 1.5;
+  }
+`;
+
+const Group = styled.div`
+  margin: 2rem 0;
 `;
 
 export default () => {
@@ -137,11 +143,11 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
       }
     >
       <ResponsiveContainer>
-        <Form onSubmit={submit}>
+        <StyledForm onSubmit={submit}>
           <p style={{ marginBottom: 16 }}>
             Add the names of three Voters the Vote Tripler will remind to vote:
           </p>
-          <FormGroupWithoutLegend>
+          <Group>
             <SubTitle>Voter 1</SubTitle>
             <TwoColumnRow>
               <TextInput
@@ -159,8 +165,8 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                 required
               />
             </TwoColumnRow>
-          </FormGroupWithoutLegend>
-          <FormGroupWithoutLegend>
+          </Group>
+          <Group>
             <SubTitle>Voter 2</SubTitle>
             <TwoColumnRow>
               <TextInput
@@ -178,8 +184,8 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                 required
               />
             </TwoColumnRow>
-          </FormGroupWithoutLegend>
-          <FormGroupWithoutLegend>
+          </Group>
+          <Group>
             <SubTitle>Voter 3</SubTitle>
             <TwoColumnRow>
               <TextInput
@@ -197,8 +203,8 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                 required
               />
             </TwoColumnRow>
-          </FormGroupWithoutLegend>
-          <FormGroupWithoutLegend>
+          </Group>
+          <Group>
           <p>
             Enter your Vote Tripler's birth month and cell phone number
             so we can confirm their identity and send you your payment!
@@ -224,16 +230,16 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
                 required
               />
             </TwoColumnRow>
-          </FormGroupWithoutLegend>
+          </Group>
 
-          <FormGroupWithoutLegend>
+          <Group>
             <Checkbox
               id="Honor"
               name="Honor"
-              labelText="I certify this information is true to the best of my knowledge. I understand that I may be removed from BlockPower if I submit false information and will be denied all compensation."
+              labelText="I certify this information is true to the best of my knowledge. I understand that if I submit false information, I may be removed from BlockPower and denied all compensation."
               required
             />
-          </FormGroupWithoutLegend>
+          </Group>
           {err && (
             <InlineNotification
               kind="error"
@@ -262,7 +268,7 @@ export const ConfirmPage = ({ tripler, confirmTriplers, loading }) => {
           >
             Go back to My Vote Triplers
           </Button>
-        </Form>
+        </StyledForm>
       </ResponsiveContainer>
     </PageLayout>
   );
