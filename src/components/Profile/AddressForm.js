@@ -40,7 +40,7 @@ const RowRight = styled.div`
   }
 `
 
-export default ({ user }) => (
+export default ({ user, disableState }) => (
   <>
     <FormGroup legendText="">
       <TextInput
@@ -72,6 +72,7 @@ export default ({ user }) => (
             labelText="State*"
             defaultValue={user.address?.state}
             required
+            disabled={disableState}
           />
         </RowCenter>
         <RowRight>

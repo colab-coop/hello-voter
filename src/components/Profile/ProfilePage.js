@@ -6,6 +6,8 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import PageLayout from "../PageLayout";
 import { ProfileForm } from "./ProfileForm";
 
+const FORCE_STATE = process.env.REACT_APP_PROFILE_FORCE_STATE;
+
 export const ProfilePage = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,6 +35,7 @@ export const ProfilePage = () => {
       loading={loading}
       disablePhone
       disableEmail
+      disableState={!!FORCE_STATE}
       err={err}
     />
   </PageLayout>;
@@ -62,11 +65,17 @@ export const SignupPage = () => {
     }
   };
 
+  const prefill = {...user, ...signupPrefill};
+  if (FORCE_STATE) {
+    prefill.address = {...prefill.address, state: FORCE_STATE};
+  }
+
   return <PageLayout title="Please Enter Your Details">
     <ProfileForm
-      user={{...user, ...signupPrefill}}
+      user={prefill}
       onSubmit={onSubmit}
       loading={loading}
+      disableState={!!FORCE_STATE}
       err={err}
     />
   </PageLayout>;
