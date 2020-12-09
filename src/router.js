@@ -67,7 +67,6 @@ export default () => {
   if (loading) return <Loading />;
 
   capturePrefillData(setSignupPrefill);
-  console.log('Router:', {authenticated, user});
 
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
@@ -85,13 +84,17 @@ export default () => {
         <Route exact path="/closed" component={SignupsClosedPage} />
         { process.env.REACT_APP_NO_NEW_SIGNUPS && <Redirect to='/closed' /> }
 
-        <Route exact path="/locked" component={LockedPage} />
+        <Route exact path="/locked">
+          {user && !user.locked ? <Redirect to="/home" /> : <LockedPage />}
+        </Route>
         { user?.locked && <Redirect to='/locked' /> }
 
         <Route exact path="/signup" component={SignupPage} />
         { !user?.signup_completed && <Redirect to='/signup' /> }
 
-        <Route exact path="/unapproved" component={UnapprovedPage} />
+        <Route exact path="/unapproved">
+          {user && user.approved ? <Redirect to="/home" /> : <UnapprovedPage />}
+        </Route>
         { !user?.approved && <Redirect to='/unapproved' /> }
 
         <Route exact path="/training" component={TrainingPage} />
