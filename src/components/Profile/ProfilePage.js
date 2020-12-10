@@ -6,7 +6,10 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import PageLayout from "../PageLayout";
 import { ProfileForm } from "./ProfileForm";
 
-const STATE_OPTIONS = process.env.REACT_APP_PROFILE_STATE_OPTIONS.split(',');
+const STATE_OPTIONS = (
+    process.env.REACT_APP_PROFILE_STATE_OPTIONS ?
+    process.env.REACT_APP_PROFILE_STATE_OPTIONS.split(',') : null
+);
 
 export const ProfilePage = () => {
   const [err, setErr] = useState(false);
@@ -66,7 +69,7 @@ export const SignupPage = () => {
   };
 
   const prefill = {...user, ...signupPrefill};
-  if (STATE_OPTIONS.length === 1) {
+  if (STATE_OPTIONS?.length === 1) {
     prefill.address = {...prefill.address, state: STATE_OPTIONS[0]};
   }
 
