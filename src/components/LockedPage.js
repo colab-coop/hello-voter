@@ -8,9 +8,12 @@ const REVIEW_URL = process.env.REACT_APP_ACCOUNT_LOCKED_REVIEW_URL;
 export default () => (
   <PageLayout title="Your account needs further review">
     <ResponsiveContainer>
-      <p>
+       <p>
         To start the review process, please visit this link and provide more
         information: <a href={REVIEW_URL}>{REVIEW_URL}</a>
+      </p>
+      <p>
+        Please contact support@blockpower.vote with any questions.
       </p>
     </ResponsiveContainer>
   </PageLayout>
