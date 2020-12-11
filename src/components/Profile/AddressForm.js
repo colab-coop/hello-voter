@@ -14,17 +14,17 @@ const Row = styled.div`
 const RowLeft = styled.div`
   grid-column-end: span 10;
   @media (max-width: ${breakpoints.lg.width}) {
-    grid-column-end: span 9;
+    grid-column-end: span 8;
   }
   @media (max-width: ${breakpoints.md.width}) {
-    grid-column-end: span 7;
+    grid-column-end: span 8;
   }
 `
 
 const RowCenter = styled.div`
-  grid-column-end: span 1;
+  grid-column-end: span 3;
   @media (max-width: ${breakpoints.lg.width}) {
-    grid-column-end: span 3;
+    grid-column-end: span 4;
   }
   @media (max-width: ${breakpoints.md.width}) {
     grid-column-end: span 4;
@@ -32,12 +32,12 @@ const RowCenter = styled.div`
 `
 
 const RowRight = styled.div`
-  grid-column-end: span 5;
+  grid-column-end: span 3;
   @media (max-width: ${breakpoints.lg.width}) {
     grid-column-end: span 4;
   }
   @media (max-width: ${breakpoints.md.width}) {
-    grid-column-end: span 5;
+    grid-column-end: span 4;
   }
 `
 
@@ -68,16 +68,27 @@ export default ({ user, stateOptions, onStateSelected }) => {
           />
         </RowLeft>
         <RowCenter>
-          <Dropdown
+        {
+          stateOptions ? <>
+            <Dropdown
+              id="state"
+              name="state"
+              items={stateOptions}
+              titleText="State*"
+              initialSelectedItem={user.address?.state}
+               onChange={(e) => { stateRef.current.value = e.selectedItem; }}
+              required
+            />
+            <input name="state" type="hidden" value={user.address?.state} ref={stateRef} />
+          </> : <TextInput
             id="state"
             name="state"
-            items={stateOptions}
-            titleText="State*"
-            initialSelectedItem={user.address?.state}
-            onChange={(e) => { stateRef.current.value = e.selectedItem; }}
+            invalidText="Invalid error message."
+            labelText="State*"
+            defaultValue={user.address?.state}
             required
           />
-          <input name="state" type="hidden" value={user.address?.state} ref={stateRef} />
+        }
         </RowCenter>
         <RowRight>
           <TextInput
