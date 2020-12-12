@@ -59,7 +59,6 @@ export const AddPage = ({
   openPlaid,
 }) => {
   const history = useHistory();
-  const alreadyHasPayoutProvider = user && user.payout_provider;
 
   return (
     <PageLayout
@@ -74,15 +73,13 @@ export const AddPage = ({
         />
       }
     >
-      {alreadyHasPayoutProvider ?
-        <Details>You already have selected a payment method.</Details> :
+      {user.account ?
+        <Details>You have already connected a payment account.</Details> :
         <Details>
-          Please ensure that the details for your bank account,
-          including your name, are exactly the same as your ambassador account.
-          If the name or other information does not match,
+          Please ensure that the details for your bank account
+          exactly match your ambassador account.
+          If the account name or other information does not match,
           your bank may not accept the funds.
-          Once a bank account is linked,
-          there is currently no way to change it.
         </Details>
       }
 
@@ -97,7 +94,7 @@ export const AddPage = ({
               e.preventDefault();
               history.push("/payments/paypal");
             }}
-            disabled={alreadyHasPayoutProvider}
+            disabled={user.account}
           />
         }
         <CardButton
@@ -108,7 +105,7 @@ export const AddPage = ({
             e.preventDefault();
             openPlaid();
           }}
-          disabled={alreadyHasPayoutProvider}
+          disabled={user.account}
         />
         <CardButton
           icon={<CardIcon src={chime} />}
@@ -117,7 +114,7 @@ export const AddPage = ({
           onClick={() => {
             history.push("/payments/chime");
           }}
-          disabled={alreadyHasPayoutProvider}
+          disabled={user.account}
         />
       </GridThreeUp>
     </PageLayout>
