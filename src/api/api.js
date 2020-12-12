@@ -267,6 +267,30 @@ export const completeOnboarding = async (body) => {
   }
 }
 
+export const removeAccount = async (accountId) => {
+  try {
+    let res = await fetch(STRIPE_PAYMENT_URL, {
+      method: 'DELETE',
+      headers: addAuth(),
+      body: JSON.stringify({id: accountId})
+    });
+    let data = await res.json()
+
+    if (isFailStatusCode(data.code)) {
+      return {
+        error: data
+      }
+    }
+
+    return {
+      data
+    }
+  } catch(e) {
+    errorHandler(e)
+    return false
+  }
+}
+
 export const setStripeToken = async (token, accountId) => {
   try {
     let res = await fetch(STRIPE_PAYMENT_URL, {

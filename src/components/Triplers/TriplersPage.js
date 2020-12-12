@@ -294,7 +294,7 @@ const AllTriplers = ({
                 ? "You'll receive payment for these Vote Triplers."
                 : "These Vote Triplers have been confirmed — great work!"}
             </ParagraphMinHeight48>
-            {/*!user.payout_provider ? (
+            {/*!user.account ? (
               <Button
                 href="/payments/add"
                 trackingEvent={{ action: "AddPayment" }}
