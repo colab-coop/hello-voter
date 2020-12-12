@@ -188,6 +188,10 @@ Defines whether any reference to payment for confirmed Triplers or Tripler upgra
 
 REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE=true
 
+To disable the components of the UI that are for tripler upgrades to ambassador accounts
+
+REACT_APP_DISABLE_TRIPLER_UPGRADE_UI=true
+
 To disallow signups set this to true:
 
 REACT_APP_NO_NEW_SIGNUPS=
@@ -195,3 +199,31 @@ REACT_APP_NO_NEW_SIGNUPS=
 Activates embedded HubSpot chat if true
 
 REACT_APP_ENABLE_HUBSPOT=false
+
+Sets metro area strings in triplers search filter dropdown:
+
+REACT_APP_METRO_AREAS: "Atlanta;Augusta;Savannah;Columbus;Macon;Athens;Albany;Gainesville;Brunswick;Waldosta;Warner Robbins;Dalton;Hinesville;Rome;GA other"
+
+Sets HubSpot Chat URL:
+
+REACT_APP_HUBSPOT_CHAT_SCRIPT_URL: "https://js.hs-scripts.com/8868419.js"
+
+Sets the URL for the link on the Account Locked page:
+
+REACT_APP_ACCOUNT_LOCKED_REVIEW_URL: "https://blockpower.link/manualreview"
+
+Sets the URL for the link on the Account Unapproved page:
+
+REACT_APP_ACCOUNT_UNAPPROVED_REVIEW_URL: "https://blockpower.link/manualreview"
+
+Sets the URL for the link on the /chime page:
+
+REACT_APP_CHIME_URL: "https://chime.com"
+
+Sets the URL for the redirect after an ambassador is approved following signup:
+
+REACT_APP_TRAINING_URL: "https://www.blockpower.vote/ambassadors/civics"
+
+Sets the plaid environment:
+
+REACT_APP_PLAID_ENVIRONMENT: "production"
