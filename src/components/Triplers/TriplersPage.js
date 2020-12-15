@@ -135,6 +135,7 @@ const TriplerRow = ({
   ambassadorConfirmed,
   remindTripler,
   deleteTripler,
+  initiateKYCFlow
 }) => (
   <TriplerRowStyled>
     <TriplerColumnTruncate>
@@ -215,12 +216,15 @@ const AllTriplers = ({
   limit,
   deleteTripler,
   ambassadors,
+  initiateKYCFlow,
+  user: ambassador
 }) => {
   const hasTriplers = unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
   const showAmbassadors = ambassadors.length > 0 && !REACT_APP_DISABLE_TRIPLER_UPGRADE_UI;
   const ambassadorNotConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: false });
   const ambassadorConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: true });
   const atTriplerLimit = unconfirmed.length + confirmed.length + pending.length >= limit;
+  const atKYCLimit = ambassador && ambassador['needs_w9_kyc'];
 
   return (
     <>
@@ -241,6 +245,7 @@ const AllTriplers = ({
           )}
         </GridRowSpanTwo>
         <GridRowSpanOne>
+          {(atTriplerLimit || !atKYCLimit) &&
           <Button
             style={{ marginTop: 0 }}
             href="/triplers/add"
@@ -252,8 +257,21 @@ const AllTriplers = ({
           >
             Find new Vote Triplers
             <Add16 />
-          </Button>
+          </Button>}
           {atTriplerLimit && "You have claimed the maximum number of Vote Triplers."}
+
+          {!atTriplerLimit && atKYCLimit &&
+          <Button
+              style={{ marginTop: 0 }}
+              onClick={() => {initiateKYCFlow()}}
+              trackingEvent={{
+                action: "ProvideStripeKYCInformation",
+                label: "Provide more information",
+              }}
+          >
+            Provide more information
+          </Button>}
+          {!atTriplerLimit && atKYCLimit && "You need to provide more information before you can claim further Vote Triplers."}
         </GridRowSpanOne>
       </GridThreeUp>
       <Divider />
@@ -363,6 +381,11 @@ export default () => {
     setTriplers(data.data);
   };
 
+  const initiateKYCFlow = async () => {
+    const stripeAccountLinkObject = await api.getAccountKYCLink();
+    window.location.href = stripeAccountLinkObject.data.url;
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -378,6 +401,7 @@ export default () => {
       triplers={triplers}
       remindTripler={sendReminder}
       fetchData={fetchData}
+      initiateKYCFlow={initiateKYCFlow}
       limit={limit}
       deleteTripler={deleteTripler}
       user={user}
@@ -390,6 +414,7 @@ export default () => {
 export const TriplersPage = ({
   triplers,
   remindTripler,
+  initiateKYCFlow,
   limit,
   deleteTripler,
   user,
@@ -419,6 +444,7 @@ export const TriplersPage = ({
         remindTripler={remindTripler}
         limit={limit}
         deleteTripler={deleteTripler}
+        initiateKYCFlow={initiateKYCFlow}
         user={user}
       />
     </PageLayout>
