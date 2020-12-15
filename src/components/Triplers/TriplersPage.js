@@ -135,7 +135,7 @@ const TriplerRow = ({
   ambassadorConfirmed,
   remindTripler,
   deleteTripler,
-  initiateKYCFlow
+  initiate1099DataEntryFlow
 }) => (
   <TriplerRowStyled>
     <TriplerColumnTruncate>
@@ -216,7 +216,7 @@ const AllTriplers = ({
   limit,
   deleteTripler,
   ambassadors,
-  initiateKYCFlow,
+  initiate1099DataEntryFlow,
   user: ambassador
 }) => {
   const hasTriplers = unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
@@ -224,7 +224,7 @@ const AllTriplers = ({
   const ambassadorNotConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: false });
   const ambassadorConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: true });
   const atTriplerLimit = unconfirmed.length + confirmed.length + pending.length >= limit;
-  const atKYCLimit = ambassador && ambassador['needs_w9_kyc'];
+  const needsAdditional1099Data = ambassador && ambassador['needs_additional_1099_data'];
 
   return (
     <>
@@ -245,7 +245,7 @@ const AllTriplers = ({
           )}
         </GridRowSpanTwo>
         <GridRowSpanOne>
-          {(atTriplerLimit || !atKYCLimit) &&
+          {(atTriplerLimit || !needsAdditional1099Data) &&
           <Button
             style={{ marginTop: 0 }}
             href="/triplers/add"
@@ -260,10 +260,10 @@ const AllTriplers = ({
           </Button>}
           {atTriplerLimit && "You have claimed the maximum number of Vote Triplers."}
 
-          {!atTriplerLimit && atKYCLimit &&
+          {!atTriplerLimit && needsAdditional1099Data &&
           <Button
               style={{ marginTop: 0 }}
-              onClick={() => {initiateKYCFlow()}}
+              onClick={() => {initiate1099DataEntryFlow()}}
               trackingEvent={{
                 action: "ProvideStripeKYCInformation",
                 label: "Provide more information",
@@ -271,7 +271,7 @@ const AllTriplers = ({
           >
             Provide more information
           </Button>}
-          {!atTriplerLimit && atKYCLimit && "You need to provide more information before you can claim further Vote Triplers."}
+          {!atTriplerLimit && needsAdditional1099Data && "You need to provide more information before you can claim further Vote Triplers."}
         </GridRowSpanOne>
       </GridThreeUp>
       <Divider />
@@ -381,8 +381,8 @@ export default () => {
     setTriplers(data.data);
   };
 
-  const initiateKYCFlow = async () => {
-    const stripeAccountLinkObject = await api.getAccountKYCLink();
+  const initiate1099DataEntryFlow = async () => {
+    const stripeAccountLinkObject = await api.getAccount1099DataEntryLink();
     window.location.href = stripeAccountLinkObject.data.url;
   };
 
@@ -401,7 +401,7 @@ export default () => {
       triplers={triplers}
       remindTripler={sendReminder}
       fetchData={fetchData}
-      initiateKYCFlow={initiateKYCFlow}
+      initiate1099DataEntryFlow={initiate1099DataEntryFlow}
       limit={limit}
       deleteTripler={deleteTripler}
       user={user}
@@ -414,7 +414,7 @@ export default () => {
 export const TriplersPage = ({
   triplers,
   remindTripler,
-  initiateKYCFlow,
+  initiate1099DataEntryFlow,
   limit,
   deleteTripler,
   user,
@@ -444,7 +444,7 @@ export const TriplersPage = ({
         remindTripler={remindTripler}
         limit={limit}
         deleteTripler={deleteTripler}
-        initiateKYCFlow={initiateKYCFlow}
+        initiate1099DataEntryFlow={initiate1099DataEntryFlow}
         user={user}
       />
     </PageLayout>

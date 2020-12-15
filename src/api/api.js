@@ -12,7 +12,7 @@ import {
   PAYMENT_HISTORY_URL,
   TRIPLERS_LIMIT_URL,
   PAYPAL_PAYMENT_URL,
-  INITIATE_KYC_FLOW_URL,
+  INITIATE_1099_DATA_ENTRY_FLOW_URL,
   CRM_URL,
 } from '../constants';
 
@@ -363,9 +363,9 @@ export const getPayments = async () => {
   }
 }
 
-export const getAccountKYCLink = async () => {
+export const getAccount1099DataEntryLink = async () => {
   try {
-    const res = await fetch(`${INITIATE_KYC_FLOW_URL}`, {
+    const res = await fetch(`${INITIATE_1099_DATA_ENTRY_FLOW_URL}`, {
       method: 'GET',
       headers: addAuth()
     });
