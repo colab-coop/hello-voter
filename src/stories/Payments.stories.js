@@ -70,7 +70,7 @@ export const AddBank = () => (
       {...defaultAddProps}
       user={{
         ...defaultAddProps.user,
-        payout_provider: null,
+        account: null
       }}
     />
   </>
@@ -83,7 +83,12 @@ export const AddBankWithExistingProvider = () => (
       {...defaultAddProps}
       user={{
         ...defaultAddProps.user,
-        payout_provider: "stripe",
+        account: {
+          id: 'uuid-1234',
+          account_id: '123456789',
+          account_type: 'stripe',
+          account_data: '{"last4": "6789"}'
+        }
       }}
     />
   </>

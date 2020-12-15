@@ -25,7 +25,6 @@ export const MAIN_USER = {
   "onboarding_completed": true,
   "approved": true,
   "locked": false,
-  "payout_provider": "stripe",
   "payout_additional_data": null,
   "admin": false,
   "address": {
