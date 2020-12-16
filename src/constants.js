@@ -16,5 +16,6 @@ export const COMPLETE_ONBOARDING = `${API_URL}/ambassadors/current/complete-onbo
 export const STRIPE_PAYMENT_URL = `${API_URL}/payouts/account?stripe=true`
 export const PAYPAL_PAYMENT_URL = `${API_URL}/payouts/account?paypal=true`
 export const PAYMENT_HISTORY_URL = `${API_URL}/ambassadors/current/payouts`
+export const INITIATE_1099_DATA_ENTRY_FLOW_URL = `${API_URL}/ambassadors/current/initiate-1099-data-entry`
 export const TRIPLERS_LIMIT_URL = `${API_URL}/triplers-limit`
 export const CRM_URL = `${API_URL}/crm`
