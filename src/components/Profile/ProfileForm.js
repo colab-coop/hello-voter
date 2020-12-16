@@ -95,6 +95,8 @@ export const ProfileForm = ({ user, onSubmit, loading, err, disablePhone, disabl
         disabled={disablePhone}
       />
     </FormGroup>
+    {disablePhone &&
+        <input name="phone" type="hidden" value={user.phone} />}
     <FormGroup legendText="">
       <TextInput
         id="email"
@@ -106,6 +108,8 @@ export const ProfileForm = ({ user, onSubmit, loading, err, disablePhone, disabl
         disabled={disableEmail}
       />
     </FormGroup>
+    {disableEmail &&
+        <input name="email" type="hidden" value={user.email} />}
     <FormGroup legendText="">
       <Row>
         <DatePicker datePickerType="single">

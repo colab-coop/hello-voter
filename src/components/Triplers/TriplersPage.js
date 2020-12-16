@@ -220,6 +220,7 @@ const AllTriplers = ({
   const showAmbassadors = ambassadors.length > 0 && !REACT_APP_DISABLE_TRIPLER_UPGRADE_UI;
   const ambassadorNotConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: false });
   const ambassadorConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: true });
+  const atTriplerLimit = unconfirmed.length + confirmed.length + pending.length >= limit;
 
   return (
     <>
@@ -247,13 +248,12 @@ const AllTriplers = ({
               action: "FindNewVoteTriplers",
               label: "Find new Vote Triplers",
             }}
-            disabled={
-              unconfirmed.length + confirmed.length + pending.length >= limit
-            }
+            disabled={atTriplerLimit}
           >
             Find new Vote Triplers
             <Add16 />
           </Button>
+          {atTriplerLimit && "You have claimed the maximum number of Vote Triplers."}
         </GridRowSpanOne>
       </GridThreeUp>
       <Divider />
@@ -294,7 +294,7 @@ const AllTriplers = ({
                 ? "You'll receive payment for these Vote Triplers."
                 : "These Vote Triplers have been confirmed — great work!"}
             </ParagraphMinHeight48>
-            {/*!user.payout_provider ? (
+            {/*!user.account ? (
               <Button
                 href="/payments/add"
                 trackingEvent={{ action: "AddPayment" }}
@@ -354,9 +354,12 @@ export default () => {
 
   const fetchData = async () => {
     const data = await api.fetchTriplers();
-    const triplerLimit = await api.fetchTriplersLimit();
-    const triplerLimitV = parseInt(triplerLimit.data.limit);
-    setLimit(triplerLimitV);
+    let triplerLimit = user.claim_tripler_limit;
+    if (triplerLimit === null || triplerLimit === undefined) {
+      const serverTriplerLimit = await api.fetchTriplersLimit();
+      triplerLimit = parseInt(serverTriplerLimit.data.limit);
+    }
+    setLimit(triplerLimit);
     setTriplers(data.data);
   };
 
