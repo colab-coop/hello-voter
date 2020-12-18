@@ -53,6 +53,15 @@ function coalesceValue(object, paths) {
   return get(object, validPath);
 }
 
+function validateSearchInputs(searchInputs) {
+  const oneOtherFilter = Object.keys(searchInputs)
+    .filter(k => k !== 'distance' && k !== 'firstName' && k !== 'lastName')
+    .filter(k => searchInputs[k])
+    .length > 0;
+  return oneOtherFilter ||
+    (searchInputs.firstName || '').length + (searchInputs.lastName || '').length >= minNameChars;
+}
+
 export default () => {
   const history = useHistory();
   const [triplers, setTriplers] = useState(null);
@@ -76,8 +85,8 @@ export default () => {
   };
 
   const search = async () => {
-    if ((searchInputs.firstName || '').length + (searchInputs.lastName || '').length <  minNameChars) {
-      setError("Please enter more characters");
+    if (!validateSearchInputs(searchInputs)) {
+      setError("Please enter more characters or select a filter below");
       return;
     } else {
       setError(null);
