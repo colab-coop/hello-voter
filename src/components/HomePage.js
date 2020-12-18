@@ -20,7 +20,7 @@ export default () => {
   }
 
   return (
-    <PageLayout title="Home">
+    <PageLayout title="Home" tutorialId="HOME">
       <TopParagraph>
         Make a positive impact on your community — and make money, too!
       </TopParagraph>

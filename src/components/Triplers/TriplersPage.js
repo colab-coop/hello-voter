@@ -434,6 +434,7 @@ export const TriplersPage = ({
   return (
     <PageLayout
       title="My Vote Triplers"
+      tutorialId="TRIPLERS"
       header={
         <Breadcrumbs
           items={[
