@@ -31,7 +31,7 @@ export const ProfilePage = () => {
     }
   };
 
-  return <PageLayout title="Edit Your Profile">
+  return <PageLayout title="Edit Your Profile" tutorialId="PROFILE">
     <ProfileForm
       user={user}
       onSubmit={onSubmit}
@@ -73,7 +73,7 @@ export const SignupPage = () => {
     prefill.address = {...prefill.address, state: STATE_OPTIONS[0]};
   }
 
-  return <PageLayout title="Please Enter Your Details">
+  return <PageLayout title="Please Enter Your Details" tutorialId="SIGNUP">
     <ProfileForm
       user={prefill}
       onSubmit={onSubmit}
