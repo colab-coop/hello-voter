@@ -167,6 +167,7 @@ export const PaymentsPage = ({ payments, user }) => {
   return (
     <PageLayout
       title="Payments"
+      tutorialId="PAYMENTS"
       header={
         <Breadcrumbs
           items={[

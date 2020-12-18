@@ -34,12 +34,13 @@ const Paragraph = styled.p`
 
 const TriplerRowStyled = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  padding: ${spacing[4]};
+  padding: ${spacing[3]} ${spacing[4]};
   background-color: ${colors.gray[10]};
   border-top: 1px solid ${colors.gray[20]};
   @media (min-width: ${breakpoints.lg.width}) {
-    max-width: 30vw;
+    max-width: calc(22rem - 16px);
   }
   &:hover {
     background-color: #e5e5e5;
@@ -51,7 +52,7 @@ const TriplerRowName = styled.h6`
   font-weight: normal;
 `;
 
-const TriplerColumnTruncate = styled.div`
+const TriplerRowNameAndAddress = styled.div`
   white-space: nowrap;
   overflow: hidden;
   margin-right: ${spacing[2]};
@@ -59,13 +60,13 @@ const TriplerColumnTruncate = styled.div`
 
 const TriplerRowAddress = styled.p`
   font-size: 12px;
+  margin: 2px 0 0 0;
 `;
 
-const TriplerColumn = styled.div`
+const TriplerRowButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  flex: 1;
 `;
 
 const OverflowMenuStyled = styled(OverflowMenu)`
@@ -135,13 +136,14 @@ const TriplerRow = ({
   ambassadorConfirmed,
   remindTripler,
   deleteTripler,
+  initiate1099DataEntryFlow
 }) => (
   <TriplerRowStyled>
-    <TriplerColumnTruncate>
+    <TriplerRowNameAndAddress>
       <TriplerRowName>{name}</TriplerRowName>
       <TriplerRowAddress>{address}</TriplerRowAddress>
-    </TriplerColumnTruncate>
-    <TriplerColumn>
+    </TriplerRowNameAndAddress>
+    <TriplerRowButtons>
       {unconfirmed && (
         <>
           <TriplerMoreMenuHack />
@@ -175,12 +177,16 @@ const TriplerRow = ({
         with Boolean rather than "true" and empty .env field
       */}
       {REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE && confirmed && (
-        <Tag type="green">${REACT_APP_TRIPLER_PAYMENT_AMT} Earned</Tag>
+        <Tag type="green" style={{ margin: 0, wordBreak: 'normal' }}>
+          ${REACT_APP_TRIPLER_PAYMENT_AMT}&nbsp;Earned
+        </Tag>
       )}
       {REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE && ambassadorConfirmed && (
-        <Tag type="green">${REACT_APP_AMBASSADOR_PAYMENT_AMT} Earned</Tag>
+        <Tag type="green" style={{ margin: 0, wordBreak: 'normal' }}>
+          ${REACT_APP_AMBASSADOR_PAYMENT_AMT}&nbsp;Earned
+        </Tag>
       )}
-    </TriplerColumn>
+    </TriplerRowButtons>
   </TriplerRowStyled>
 );
 
@@ -215,12 +221,16 @@ const AllTriplers = ({
   limit,
   deleteTripler,
   ambassadors,
+  initiate1099DataEntryFlow,
+  user: ambassador
 }) => {
   const hasTriplers = unconfirmed.length > 0 || pending.length > 0 || confirmed.length > 0;
   const showAmbassadors = ambassadors.length > 0 && !REACT_APP_DISABLE_TRIPLER_UPGRADE_UI;
   const ambassadorNotConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: false });
   const ambassadorConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: true });
   const atTriplerLimit = unconfirmed.length + confirmed.length + pending.length >= limit;
+  const needsAdditional1099Data = ambassador && ambassador['needs_additional_1099_data'];
+  const needsPaymentAccountSetup = ambassador && ambassador['needs_primary_account_setup'];
 
   return (
     <>
@@ -241,6 +251,7 @@ const AllTriplers = ({
           )}
         </GridRowSpanTwo>
         <GridRowSpanOne>
+          {(atTriplerLimit || needsPaymentAccountSetup || !needsAdditional1099Data) &&
           <Button
             style={{ marginTop: 0 }}
             href="/triplers/add"
@@ -248,12 +259,26 @@ const AllTriplers = ({
               action: "FindNewVoteTriplers",
               label: "Find new Vote Triplers",
             }}
-            disabled={atTriplerLimit}
+            disabled={atTriplerLimit || needsPaymentAccountSetup}
           >
             Find new Vote Triplers
             <Add16 />
-          </Button>
+          </Button>}
           {atTriplerLimit && "You have claimed the maximum number of Vote Triplers."}
+          {!atTriplerLimit && needsPaymentAccountSetup && "You need to set up a payments account before you can claim further Vote Triplers."}
+
+          {!atTriplerLimit && !needsPaymentAccountSetup && needsAdditional1099Data &&
+          <Button
+              style={{ marginTop: 0 }}
+              onClick={() => {initiate1099DataEntryFlow()}}
+              trackingEvent={{
+                action: "ProvideStripeKYCInformation",
+                label: "Provide more information",
+              }}
+          >
+            Provide more information
+          </Button>}
+          {!atTriplerLimit && !needsPaymentAccountSetup && needsAdditional1099Data && "You need to provide more information before you can claim further Vote Triplers."}
         </GridRowSpanOne>
       </GridThreeUp>
       <Divider />
@@ -261,10 +286,10 @@ const AllTriplers = ({
         <GridThreeUp>
           <GridRowSpanOne>
             <SectionTitle>Your possible Vote Triplers</SectionTitle>
-            <Paragraph>
+            <ParagraphMinHeight48>
               Add information for a Vote Tripler. We’ll send them a text message
               to confirm.
-            </Paragraph>
+            </ParagraphMinHeight48>
             <Triplers
               unconfirmed
               triplers={unconfirmed}
@@ -275,10 +300,10 @@ const AllTriplers = ({
 
           <GridRowSpanOne>
             <SectionTitle>Your unconfirmed Vote Triplers</SectionTitle>
-            <Paragraph>
+            <ParagraphMinHeight48>
               These possible Vote Triplers have not yet confirmed their
               identity.
-            </Paragraph>
+            </ParagraphMinHeight48>
             <Triplers
               pending
               triplers={pending}
@@ -363,6 +388,11 @@ export default () => {
     setTriplers(data.data);
   };
 
+  const initiate1099DataEntryFlow = async () => {
+    const stripeAccountLinkObject = await api.getAccount1099DataEntryLink();
+    window.location.href = stripeAccountLinkObject.data.url;
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -378,6 +408,7 @@ export default () => {
       triplers={triplers}
       remindTripler={sendReminder}
       fetchData={fetchData}
+      initiate1099DataEntryFlow={initiate1099DataEntryFlow}
       limit={limit}
       deleteTripler={deleteTripler}
       user={user}
@@ -390,6 +421,7 @@ export default () => {
 export const TriplersPage = ({
   triplers,
   remindTripler,
+  initiate1099DataEntryFlow,
   limit,
   deleteTripler,
   user,
@@ -402,6 +434,7 @@ export const TriplersPage = ({
   return (
     <PageLayout
       title="My Vote Triplers"
+      tutorialId="TRIPLERS"
       header={
         <Breadcrumbs
           items={[
@@ -419,6 +452,7 @@ export const TriplersPage = ({
         remindTripler={remindTripler}
         limit={limit}
         deleteTripler={deleteTripler}
+        initiate1099DataEntryFlow={initiate1099DataEntryFlow}
         user={user}
       />
     </PageLayout>

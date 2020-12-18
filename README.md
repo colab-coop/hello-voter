@@ -227,3 +227,18 @@ REACT_APP_TRAINING_URL: "https://www.blockpower.vote/ambassadors/civics"
 Sets the plaid environment:
 
 REACT_APP_PLAID_ENVIRONMENT: "production"
+
+Sets introductory text and links for tutorial videos that show below page titles:
+
+REACT_APP_SIGNUP_TUTORIAL_COPY=Watch this video for a pro tip:
+REACT_APP_SIGNUP_TUTORIAL_LINK=www.blockpower.link/platform_signup
+REACT_APP_HOME_TUTORIAL_COPY=Watch this video for a pro tip:
+REACT_APP_HOME_TUTORIAL_LINK=www.blockpower.link/platform_home
+REACT_APP_TRIPLERS_TUTORIAL_COPY=Watch this video for a pro tip:
+REACT_APP_TRIPLERS_TUTORIAL_LINK=www.blockpower.link/platform_myvotetriplers
+REACT_APP_ADD_TRIPLERS_TUTORIAL_COPY=Watch this video for a pro tip:
+REACT_APP_ADD_TRIPLERS_TUTORIAL_LINK=www.blockpower.link/platform_addtriplers
+REACT_APP_PAYMENTS_TUTORIAL_COPY=Watch this video for a pro tip:
+REACT_APP_PAYMENTS_TUTORIAL_LINK=www.blockpower.link/platform_payments
+REACT_APP_PROFILE_TUTORIAL_COPY=Watch this video for a pro tip:
+REACT_APP_PROFILE_TUTORIAL_LINK=www.blockpower.link/platform_editprofile
