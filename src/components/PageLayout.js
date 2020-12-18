@@ -9,7 +9,7 @@ const Tutorial = ({ id }) => {
     const copy = process.env[`REACT_APP_${id}_TUTORIAL_COPY`]
     const link = process.env[`REACT_APP_${id}_TUTORIAL_LINK`]
     if (copy || link) {
-      return <span>{copy} {link && <a href={link}>{link}</a>}</span>;
+      return <span>{copy} {link && <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>}</span>;
     }
   }
   return null;
