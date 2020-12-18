@@ -11,6 +11,11 @@ import { useHistory } from "react-router-dom";
 import Loading from "../Loading";
 import { SearchFilters } from './SearchFilters';
 
+// Set miniumum number of first + last name characters for search from environment
+const minNameChars = Number.isSafeInteger(process.env['REACT_APP_TRIPLER_SEARCH_MIN_CHARS']) ?
+  process.env['REACT_APP_TRIPLER_SEARCH_MIN_CHARS'] :
+  3;
+
 // Gets the normalized first line of an address.
 export function normalizeAddress1(address) {
   const { address1, address2, city, state, zip } = address || {};
@@ -48,11 +53,21 @@ function coalesceValue(object, paths) {
   return get(object, validPath);
 }
 
+function validateSearchInputs(searchInputs) {
+  const oneOtherFilter = Object.keys(searchInputs)
+    .filter(k => k !== 'distance' && k !== 'firstName' && k !== 'lastName')
+    .filter(k => searchInputs[k])
+    .length > 0;
+  return oneOtherFilter ||
+    (searchInputs.firstName || '').length + (searchInputs.lastName || '').length >= minNameChars;
+}
+
 export default () => {
   const history = useHistory();
   const [triplers, setTriplers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [searchResults, setSearchResults] = useState(null);
+  const [error, setError] = useState(null);
   // Setting default form input values
   const [searchInputs, setSearchInputs] = useState({
     firstName: "",
@@ -70,6 +85,12 @@ export default () => {
   };
 
   const search = async () => {
+    if (!validateSearchInputs(searchInputs)) {
+      setError("Please enter more characters or select a filter below");
+      return;
+    } else {
+      setError(null);
+    }
     setIsLoading(true);
     const { data } = await api.searchTriplers(searchInputs) || {};
     const triplersWithAddress = normalizeTriplers(data);
@@ -123,6 +144,7 @@ export default () => {
       searchResults={searchResults}
       searchInputs={searchInputs}
       onSearchInputChange={onSearchInputChange}
+      error={error}
     />
   ) : (
     <Loading />
@@ -158,6 +180,7 @@ export const AddTriplersPage = ({
   searchResults,
   searchInputs,
   onSearchInputChange,
+  error,
 }) => {
   return (
     <PageLayout
@@ -182,6 +205,7 @@ export const AddTriplersPage = ({
         loading={loading}
         searchInputs={searchInputs}
         onSearchInputChange={onSearchInputChange}
+        error={error}
       />
       {searchResults && (
         <>
