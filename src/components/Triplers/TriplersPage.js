@@ -34,12 +34,13 @@ const Paragraph = styled.p`
 
 const TriplerRowStyled = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  padding: ${spacing[4]};
+  padding: ${spacing[3]} ${spacing[4]};
   background-color: ${colors.gray[10]};
   border-top: 1px solid ${colors.gray[20]};
   @media (min-width: ${breakpoints.lg.width}) {
-    max-width: 30vw;
+    max-width: calc(22rem - 16px);
   }
   &:hover {
     background-color: #e5e5e5;
@@ -51,7 +52,7 @@ const TriplerRowName = styled.h6`
   font-weight: normal;
 `;
 
-const TriplerColumnTruncate = styled.div`
+const TriplerRowNameAndAddress = styled.div`
   white-space: nowrap;
   overflow: hidden;
   margin-right: ${spacing[2]};
@@ -59,13 +60,13 @@ const TriplerColumnTruncate = styled.div`
 
 const TriplerRowAddress = styled.p`
   font-size: 12px;
+  margin: 2px 0 0 0;
 `;
 
-const TriplerColumn = styled.div`
+const TriplerRowButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  flex: 1;
 `;
 
 const OverflowMenuStyled = styled(OverflowMenu)`
@@ -138,11 +139,11 @@ const TriplerRow = ({
   initiate1099DataEntryFlow
 }) => (
   <TriplerRowStyled>
-    <TriplerColumnTruncate>
+    <TriplerRowNameAndAddress>
       <TriplerRowName>{name}</TriplerRowName>
       <TriplerRowAddress>{address}</TriplerRowAddress>
-    </TriplerColumnTruncate>
-    <TriplerColumn>
+    </TriplerRowNameAndAddress>
+    <TriplerRowButtons>
       {unconfirmed && (
         <>
           <TriplerMoreMenuHack />
@@ -176,12 +177,16 @@ const TriplerRow = ({
         with Boolean rather than "true" and empty .env field
       */}
       {REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE && confirmed && (
-        <Tag type="green">${REACT_APP_TRIPLER_PAYMENT_AMT} Earned</Tag>
+        <Tag type="green" style={{ margin: 0, wordBreak: 'normal' }}>
+          ${REACT_APP_TRIPLER_PAYMENT_AMT}&nbsp;Earned
+        </Tag>
       )}
       {REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE && ambassadorConfirmed && (
-        <Tag type="green">${REACT_APP_AMBASSADOR_PAYMENT_AMT} Earned</Tag>
+        <Tag type="green" style={{ margin: 0, wordBreak: 'normal' }}>
+          ${REACT_APP_AMBASSADOR_PAYMENT_AMT}&nbsp;Earned
+        </Tag>
       )}
-    </TriplerColumn>
+    </TriplerRowButtons>
   </TriplerRowStyled>
 );
 
@@ -281,10 +286,10 @@ const AllTriplers = ({
         <GridThreeUp>
           <GridRowSpanOne>
             <SectionTitle>Your possible Vote Triplers</SectionTitle>
-            <Paragraph>
+            <ParagraphMinHeight48>
               Add information for a Vote Tripler. We’ll send them a text message
               to confirm.
-            </Paragraph>
+            </ParagraphMinHeight48>
             <Triplers
               unconfirmed
               triplers={unconfirmed}
@@ -295,10 +300,10 @@ const AllTriplers = ({
 
           <GridRowSpanOne>
             <SectionTitle>Your unconfirmed Vote Triplers</SectionTitle>
-            <Paragraph>
+            <ParagraphMinHeight48>
               These possible Vote Triplers have not yet confirmed their
               identity.
-            </Paragraph>
+            </ParagraphMinHeight48>
             <Triplers
               pending
               triplers={pending}
