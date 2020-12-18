@@ -34,8 +34,9 @@ const Paragraph = styled.p`
 
 const TriplerRowStyled = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  padding: ${spacing[4]};
+  padding: ${spacing[3]} ${spacing[4]};
   background-color: ${colors.gray[10]};
   border-top: 1px solid ${colors.gray[20]};
   @media (min-width: ${breakpoints.lg.width}) {
@@ -51,22 +52,21 @@ const TriplerRowName = styled.h6`
   font-weight: normal;
 `;
 
-const TriplerColumnTruncate = styled.div`
+const TriplerRowNameAndAddress = styled.div`
   white-space: nowrap;
   overflow: hidden;
   margin-right: ${spacing[2]};
-  flex: 0 1 auto;
 `;
 
 const TriplerRowAddress = styled.p`
   font-size: 12px;
+  margin: 2px 0 0 0;
 `;
 
-const TriplerColumn = styled.div`
+const TriplerRowButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  flex: 1 0 auto;
 `;
 
 const OverflowMenuStyled = styled(OverflowMenu)`
@@ -139,11 +139,11 @@ const TriplerRow = ({
   initiate1099DataEntryFlow
 }) => (
   <TriplerRowStyled>
-    <TriplerColumnTruncate>
+    <TriplerRowNameAndAddress>
       <TriplerRowName>{name}</TriplerRowName>
       <TriplerRowAddress>{address}</TriplerRowAddress>
-    </TriplerColumnTruncate>
-    <TriplerColumn>
+    </TriplerRowNameAndAddress>
+    <TriplerRowButtons>
       {unconfirmed && (
         <>
           <TriplerMoreMenuHack />
@@ -186,7 +186,7 @@ const TriplerRow = ({
           ${REACT_APP_AMBASSADOR_PAYMENT_AMT}&nbsp;Earned
         </Tag>
       )}
-    </TriplerColumn>
+    </TriplerRowButtons>
   </TriplerRowStyled>
 );
 
