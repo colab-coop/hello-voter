@@ -94,155 +94,54 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
 
 ### Environment Variables
 
-Legacy code for Our Voice codebase. No adjustment needed for BlockPower.
-
-REACT_APP_ORGID=VT6WX8A
-
-Refers to associated WordPress on boarding site. No adjustment needed for BlockPower.
-
-REACT_APP_AUDIANCE=blockpower.us
-
-The URL path to the app root on this server.
-
-REACT_APP_APP_PATH=/
-
-oauth server. No adjustment needed for BlockPower.
-
-REACT_APP_API_DOMAIN=gotv-vt.ourvoiceusa.org
-
-Defines if we pass SSL to oauth server. No adjustment needed for BlockPower.
-
-REACT_APP_API_SSL=true
-
-Defines which header we take the token from. No adjustment needed for BlockPower.
-
-REACT_APP_OAUTH_HEADER=x-sm-oauth-url
-
-Defines which localStorage item the token is. No adjustment needed for BlockPower.
-
-REACT_APP_TOKEN_KEY=token
-
-No adjustment needed for BlockPower.
-
-REACT_APP_KEY=auth
-
-Defines if the app is in development mode. No adjustment needed for BlockPower.
-
-REACT_APP_DEVELOPMENT=true
-
-If set, targets the local mock data instead of REACT_APP_API_URL. Note: to disable, leave this value empty or commented out, do not set to "false".
-
-REACT_APP_FORCE_MOCK_DATA=
-
-REACT_APP_API_URL=https://blockpower.stage2.api.blockpower.vote
-
-Defines the organization for each instance.
-
-REACT_APP_ORG="BlockPower"
-
-Defines the color of the header where ‘dark’ is black and ‘light’ is white
-
-REACT_APP_HEADER=dark
-
-Defines the logo to use for the header. Logos can be found per organization in /src/assets/logos/
-
-REACT_APP_LOGO=block-power
-
-Defines whether Payments page should appear in each instance. If Payments page should not be visible to Ambassadors, remove this env var.
-
-REACT_APP_PAYMENT_FEATURE=true
-
-Defines the payment amount that should display for Ambassador’s upgraded Tripler bonus payments for each instance. 
-
-Related env var in backend env vars 
-
-REACT_APP_TRIPLER_PAYMENT_AMT="30"
-
-Defines the payment amount that should display for Ambassador’s confirmed Tripler payments for each instance.
-
-Related env var in backend env vars 
-
-REACT_APP_AMBASSADOR_PAYMENT_AMT="25"
-
-Sets google analytics property for tracking. Do not change.
-
-REACT_APP_GA_TRACKING_ID=UA-172693622-1
-
-Sets Plaid key to be used for production or dev/QA purposes. Keep ‘fake’ for development.
-
-REACT_APP_PLAID_KEY=fake
-
-Sets the URL that appears on the /help page for each instance.
-
-REACT_APP_HELP_URL="https://www.blockpower.vote/faq-blockpower""
-
-Sets the URL that appears on the /help page for each instance.
-
-REACT_APP_HELP_TITLE="BlockPower Support"
-
-Sets the help email address that appears on the /help page for each instance.
-
-REACT_APP_HELP_EMAIL="support+bp@blockpower.vote"
-
-Defines whether any reference to payment for confirmed Triplers or Tripler upgrade bonuses should appear at all. If Volunteers instance with no payment for Ambassadors, remove this env var
-
-REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE=true
-
-To disable the components of the UI that are for tripler upgrades to ambassador accounts
-
-REACT_APP_DISABLE_TRIPLER_UPGRADE_UI=true
-
-To disallow signups set this to true:
-
-REACT_APP_NO_NEW_SIGNUPS=
-
-Activates embedded HubSpot chat if true
-
-REACT_APP_ENABLE_HUBSPOT=false
-
-Sets metro area strings in triplers search filter dropdown:
-
-REACT_APP_METRO_AREAS: "Atlanta;Augusta;Savannah;Columbus;Macon;Athens;Albany;Gainesville;Brunswick;Waldosta;Warner Robbins;Dalton;Hinesville;Rome;GA other"
-
-Sets HubSpot Chat URL:
-
-REACT_APP_HUBSPOT_CHAT_SCRIPT_URL: "https://js.hs-scripts.com/8868419.js"
-
-Sets the URL for the link on the Account Locked page:
-
-REACT_APP_ACCOUNT_LOCKED_REVIEW_URL: "https://blockpower.link/manualreview"
-
-Sets the URL for the link on the Account Unapproved page:
-
-REACT_APP_ACCOUNT_UNAPPROVED_REVIEW_URL: "https://blockpower.link/manualreview"
-
-Sets the URL for the link on the /chime page:
-
-REACT_APP_CHIME_URL: "https://chime.com"
-
-Sets the URL for the redirect after an ambassador is approved following signup:
-
-REACT_APP_TRAINING_URL: "https://www.blockpower.vote/ambassadors/civics"
-
-Sets the plaid environment:
-
-REACT_APP_PLAID_ENVIRONMENT: "production"
-
-Sets introductory text and links for tutorial videos that show below page titles:
-
-REACT_APP_SIGNUP_TUTORIAL_COPY=Watch this video for a pro tip:
-REACT_APP_SIGNUP_TUTORIAL_LINK=www.blockpower.link/platform_signup
-REACT_APP_HOME_TUTORIAL_COPY=Watch this video for a pro tip:
-REACT_APP_HOME_TUTORIAL_LINK=www.blockpower.link/platform_home
-REACT_APP_TRIPLERS_TUTORIAL_COPY=Watch this video for a pro tip:
-REACT_APP_TRIPLERS_TUTORIAL_LINK=www.blockpower.link/platform_myvotetriplers
-REACT_APP_ADD_TRIPLERS_TUTORIAL_COPY=Watch this video for a pro tip:
-REACT_APP_ADD_TRIPLERS_TUTORIAL_LINK=www.blockpower.link/platform_addtriplers
-REACT_APP_PAYMENTS_TUTORIAL_COPY=Watch this video for a pro tip:
-REACT_APP_PAYMENTS_TUTORIAL_LINK=www.blockpower.link/platform_payments
-REACT_APP_PROFILE_TUTORIAL_COPY=Watch this video for a pro tip:
-REACT_APP_PROFILE_TUTORIAL_LINK=www.blockpower.link/platform_editprofile
-
-Minimum number of characters in combined tripler first and last name for search:
-
-REACT_APP_TRIPLER_SEARCH_MIN_CHARS=3
+`REACT_APP_ORGID=VT6WX8A` = Legacy code for Our Voice codebase. No adjustment needed for BlockPower.
+`REACT_APP_AUDIANCE=blockpower.us` = Refers to associated WordPress on boarding site. No adjustment needed for BlockPower.
+`REACT_APP_APP_PATH=/` = The URL path to the app root on this server.
+`REACT_APP_API_DOMAIN=gotv-vt.ourvoiceusa.org` = oauth server. No adjustment needed for BlockPower.
+`REACT_APP_API_SSL=true` = Defines if we pass SSL to oauth server. No adjustment needed for BlockPower.
+`REACT_APP_OAUTH_HEADER=x-sm-oauth-url` = Defines which header we take the token from. No adjustment needed for BlockPower.
+`REACT_APP_TOKEN_KEY=token` = Defines which localStorage item the token is. No adjustment needed for BlockPower.
+`REACT_APP_KEY=auth` = No adjustment needed for BlockPower.
+`REACT_APP_DEVELOPMENT=true` = Defines if the app is in development mode. No adjustment needed for BlockPower.
+`REACT_APP_FORCE_MOCK_DATA=` = If set, targets the local mock data instead of REACT_APP_API_URL. Note: to disable, leave this value empty or commented out, do not set to "false".
+`REACT_APP_API_URL=https://blockpower.stage2.api.blockpower.vote` = targets the stage2 API for testing if the above `REACT_APP_FORCE_MOCK_DATA=` is not set =true
+`REACT_APP_ORG="BlockPower"` = Defines the organization for each instance.
+`REACT_APP_HEADER=dark` = Defines the color of the header where ‘dark’ is black and ‘light’ is white
+`REACT_APP_LOGO=block-power` = Defines the logo to use for the header. Logos can be found per organization in /src/assets/logos/
+`REACT_APP_PAYMENT_FEATURE=true` = Defines whether Payments page should appear in each instance. If Payments page should not be visible to Ambassadors, remove this env var.
+`REACT_APP_TRIPLER_PAYMENT_AMT="25"`Defines the payment amount that should display for Ambassador’s upgraded Tripler bonus payments for each instance. In dollars. Related env var in backend env vars =  `FIRST_REWARD_PAYOUT` which is in cents 
+`REACT_APP_AMBASSADOR_PAYMENT_AMT="25"` = Defines the payment amount that should display for Ambassador’s confirmed Tripler payments for each instance. In dollars. Related env var in backend env vars = `PAYOUT_PER_TRIPLER` which is in cents
+`REACT_APP_GA_TRACKING_ID=UA-172693622-1` = Sets google analytics property for tracking. Do not change.
+`REACT_APP_PLAID_KEY=fake` = Sets Plaid key to be used for production or dev/QA purposes. Keep ‘fake’ for development.
+`REACT_APP_HELP_URL="https://www.blockpower.vote/faq-blockpower"` = Sets the URL that appears on the /help page for each instance.
+`REACT_APP_HELP_TITLE="BlockPower Support"` = Sets the title copy that appears on the /help page support button for each instance.
+`REACT_APP_HELP_EMAIL="support+bp@blockpower.vote"` = Sets the help email address that appears on the /help page for each instance.
+`REACT_APP_NONVOLUNTEER_PAYMENT_FEATURE=true` = Defines whether any reference to payment for confirmed Triplers or Tripler upgrade bonuses should appear at all. If Volunteers instance with no payment for Ambassadors, remove this env var
+`REACT_APP_DISABLE_TRIPLER_UPGRADE_UI=true` = To disable the components of the UI that are for tripler upgrades to ambassador accounts
+`REACT_APP_NO_NEW_SIGNUPS=` = To disallow signups set this to true
+`REACT_APP_ENABLE_HUBSPOT=false` = Activates embedded HubSpot chat if true
+`REACT_APP_METRO_AREAS: "Atlanta;Augusta;Savannah;Columbus;Macon;Athens;Albany;Gainesville;Brunswick;Waldosta;Warner Robbins;Dalton;Hinesville;Rome;GA other"` = Sets metro area strings in triplers search filter dropdown
+`REACT_APP_HUBSPOT_CHAT_SCRIPT_URL: "https://js.hs-scripts.com/8868419.js"` = Sets HubSpot Chat URL
+`REACT_APP_ACCOUNT_LOCKED_REVIEW_URL: "https://blockpower.link/manualreview"` Sets the URL for the link on the Account Locked page
+`REACT_APP_ACCOUNT_UNAPPROVED_REVIEW_URL: "https://blockpower.link/manualreview"` = Sets the URL for the link on the Account Unapproved page
+`REACT_APP_CHIME_URL: "https://chime.com"` = Sets the URL for the link on the /chime page
+`REACT_APP_TRAINING_URL: "https://www.blockpower.vote/ambassadors/civics"` = Sets the URL for the redirect after an ambassador is approved following signup
+`REACT_APP_PLAID_ENVIRONMENT: "sandbox"`= Sets the plaid environment
+
+
+Use these to set introductory text and links for tutorial videos that show below page titles:
+
+`REACT_APP_SIGNUP_TUTORIAL_COPY=`
+`REACT_APP_SIGNUP_TUTORIAL_LINK=www.blockpower.link/platform_signup`
+`REACT_APP_HOME_TUTORIAL_COPY=`
+`REACT_APP_HOME_TUTORIAL_LINK=www.blockpower.link/platform_home`
+`REACT_APP_TRIPLERS_TUTORIAL_COPY=`
+`REACT_APP_TRIPLERS_TUTORIAL_LINK=www.blockpower.link/platform_myvotetriplers`
+`REACT_APP_ADD_TRIPLERS_TUTORIAL_COPY=`
+`REACT_APP_ADD_TRIPLERS_TUTORIAL_LINK=www.blockpower.link/platform_addtriplers`
+`REACT_APP_PAYMENTS_TUTORIAL_COPY=`
+`REACT_APP_PAYMENTS_TUTORIAL_LINK=www.blockpower.link/platform_payments`
+`REACT_APP_PROFILE_TUTORIAL_COPY=`
+`REACT_APP_PROFILE_TUTORIAL_LINK=www.blockpower.link/platform_editprofile`
+
+`REACT_APP_TRIPLER_SEARCH_MIN_CHARS=3`= Minimum number of characters in combined tripler first and last name for sear
