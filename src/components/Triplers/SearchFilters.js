@@ -51,7 +51,11 @@ const SearchButtonStyled = styled(Button)`
   }
 `;
 
-export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChange }) => {
+const ErrorMessage = styled.p`
+  color: red;
+`
+
+export const SearchFilters = ({ search, loading, error, searchInputs, onSearchInputChange }) => {
   return (
     <Form
       onSubmit={(e) => {
@@ -77,6 +81,7 @@ export const SearchFilters = ({ search, loading, searchInputs, onSearchInputChan
           labelText=""
         />
       </SearchFilterGrid>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       <Accordion>
         <AccordionItem title="See more search filters">
           <SearchFilterGrid style={{ marginTop: 0 }}>
