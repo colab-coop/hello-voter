@@ -94,14 +94,14 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
 
 ### Environment Variables
 
-`REACT_APP_ORGID=VT6WX8A` = Legacy code for Our Voice codebase. No adjustment needed for BlockPower.
-`REACT_APP_AUDIANCE=blockpower.us` = Refers to associated WordPress on boarding site. No adjustment needed for BlockPower.
-`REACT_APP_APP_PATH=/` = The URL path to the app root on this server.
-`REACT_APP_API_DOMAIN=gotv-vt.ourvoiceusa.org` = oauth server. No adjustment needed for BlockPower.
-`REACT_APP_API_SSL=true` = Defines if we pass SSL to oauth server. No adjustment needed for BlockPower.
-`REACT_APP_OAUTH_HEADER=x-sm-oauth-url` = Defines which header we take the token from. No adjustment needed for BlockPower.
-`REACT_APP_TOKEN_KEY=token` = Defines which localStorage item the token is. No adjustment needed for BlockPower.
-`REACT_APP_KEY=auth` = No adjustment needed for BlockPower.
+* `REACT_APP_ORGID=VT6WX8A` = Legacy code for Our Voice codebase. No adjustment needed for BlockPower.
+* `REACT_APP_AUDIANCE=blockpower.us` = Refers to associated WordPress on boarding site. No adjustment needed for BlockPower.
+* `REACT_APP_APP_PATH=/` = The URL path to the app root on this server.
+* `REACT_APP_API_DOMAIN=gotv-vt.ourvoiceusa.org` = oauth server. No adjustment needed for BlockPower.
+* `REACT_APP_API_SSL=true` = Defines if we pass SSL to oauth server. No adjustment needed for BlockPower.
+* `REACT_APP_OAUTH_HEADER=x-sm-oauth-url` = Defines which header we take the token from. No adjustment needed for BlockPower.
+* `REACT_APP_TOKEN_KEY=token` = Defines which localStorage item the token is. No adjustment needed for BlockPower.
+* `REACT_APP_KEY=auth` = No adjustment needed for BlockPower.
 `REACT_APP_DEVELOPMENT=true` = Defines if the app is in development mode. No adjustment needed for BlockPower.
 `REACT_APP_FORCE_MOCK_DATA=` = If set, targets the local mock data instead of REACT_APP_API_URL. Note: to disable, leave this value empty or commented out, do not set to "false".
 `REACT_APP_API_URL=https://blockpower.stage2.api.blockpower.vote` = targets the stage2 API for testing if the above `REACT_APP_FORCE_MOCK_DATA=` is not set =true
