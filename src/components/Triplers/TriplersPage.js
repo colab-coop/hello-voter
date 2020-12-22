@@ -230,7 +230,7 @@ const AllTriplers = ({
   const ambassadorConfirmed = filter(ambassadors, { is_ambassador_and_has_confirmed: true });
   const atTriplerLimit = unconfirmed.length + confirmed.length + pending.length >= limit;
   const needsAdditional1099Data = ambassador && ambassador['needs_additional_1099_data'];
-  const needsPaymentAccountSetup = ambassador && ambassador['needs_primary_account_setup'];
+  // const needsPaymentAccountSetup = ambassador && ambassador['needs_primary_account_setup'];
 
   return (
     <>
@@ -251,7 +251,7 @@ const AllTriplers = ({
           )}
         </GridRowSpanTwo>
         <GridRowSpanOne>
-          {(atTriplerLimit || needsPaymentAccountSetup || !needsAdditional1099Data) &&
+          {(!needsAdditional1099Data) &&
           <Button
             style={{ marginTop: 0 }}
             href="/triplers/add"
@@ -259,15 +259,14 @@ const AllTriplers = ({
               action: "FindNewVoteTriplers",
               label: "Find new Vote Triplers",
             }}
-            disabled={atTriplerLimit || needsPaymentAccountSetup}
+            disabled={atTriplerLimit}
           >
             Find new Vote Triplers
             <Add16 />
           </Button>}
-          {atTriplerLimit && "You have claimed the maximum number of Vote Triplers."}
-          {!atTriplerLimit && needsPaymentAccountSetup && "You need to set up a payments account before you can claim further Vote Triplers."}
+          {atTriplerLimit && !needsAdditional1099Data && "You have claimed the maximum number of Vote Triplers."}
 
-          {!atTriplerLimit && !needsPaymentAccountSetup && needsAdditional1099Data &&
+          {needsAdditional1099Data &&
           <Button
               style={{ marginTop: 0 }}
               onClick={() => {initiate1099DataEntryFlow()}}
@@ -278,7 +277,7 @@ const AllTriplers = ({
           >
             Provide more information
           </Button>}
-          {!atTriplerLimit && !needsPaymentAccountSetup && needsAdditional1099Data && "You need to provide more information before you can claim further Vote Triplers."}
+          {needsAdditional1099Data && "You need to provide more information before you can claim further Vote Triplers."}
         </GridRowSpanOne>
       </GridThreeUp>
       <Divider />
