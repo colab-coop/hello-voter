@@ -264,7 +264,7 @@ const AllTriplers = ({
             Find new Vote Triplers
             <Add16 />
           </Button>}
-          {atTriplerLimit && !needsAdditional1099Data && "You have claimed the maximum number of Vote Triplers."}
+          {atTriplerLimit && !needsAdditional1099Data && "Please contact support@blockpower.vote to request more Vote Triplers."}
 
           {needsAdditional1099Data &&
           <Button
