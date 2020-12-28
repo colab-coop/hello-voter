@@ -127,7 +127,8 @@ In terms of styling, we use [styled-components](https://github.com/styled-compon
 * `REACT_APP_CHIME_URL: "https://chime.com"` = Sets the URL for the link on the /chime page
 * `REACT_APP_TRAINING_URL: "https://www.blockpower.vote/ambassadors/civics"` = Sets the URL for the redirect after an ambassador is approved following signup
 * `REACT_APP_PLAID_ENVIRONMENT: "sandbox"`= Sets the plaid environment
-
+* `REACT_APP_LOCKED_PAGE_TITLE` = Sets the page title for the /locked page
+* `REACT_APP_LOCKED_PAGE_HTML` = Sets the page content for the /locked page (this can be any HTML; use with care)
 
 Use these to set introductory text and links for tutorial videos that show below page titles:
 
